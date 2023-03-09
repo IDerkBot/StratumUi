@@ -20,7 +20,7 @@
         <file src="StratumUi/bin/Debug/StratumUi.dll" target="lib/net48" />
         <file src="StratumUi/bin/Debug/StratumUi.pdb" target="lib/net48" />
         <file src="StratumUi/bin/Debug/StratumUi.dll" target="lib/net461" />
-        <file src="StratumUi/bin/Debug/Arion.Theme.pdb" target="lib/net461" />
+        <file src="StratumUi/bin/Debug/StratumUi.pdb" target="lib/net461" />
         <file src="Logo.png" target="images\" />
         <file src="Readme.md" target="docs\" />
     </files>
