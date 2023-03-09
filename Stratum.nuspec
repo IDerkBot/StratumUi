@@ -2,7 +2,7 @@
 <package  xmlns="http://schemas.microsoft.com/packaging/2013/05/nuspec.xsd">
     <metadata>
         <id>StratumUi</id>
-        <version>0.0.1</version>
+        <version>0.0.2</version>
         <title>Stratum UI</title>
         <authors>Ivan Budanov</authors>
         <owners>Ivan Budanov</owners>
@@ -17,10 +17,10 @@
 <!--        <summary></summary>-->
     </metadata>
     <files>
-        <file src="StratumUi/bin/Debug/StratumUi.dll" target="lib/net48" />
-        <file src="StratumUi/bin/Debug/StratumUi.pdb" target="lib/net48" />
-        <file src="StratumUi/bin/Debug/StratumUi.dll" target="lib/net461" />
-        <file src="StratumUi/bin/Debug/StratumUi.pdb" target="lib/net461" />
+        <file src="StratumUi.Wpf.Framework/bin/Debug/StratumUi.Wpf.Framework.dll" target="lib/net48" />
+        <file src="StratumUi.Wpf.Framework/bin/Debug/StratumUi.Wpf.Framework.pdb" target="lib/net48" />
+        <file src="StratumUi.Wpf.Framework/bin/Debug/StratumUi.Wpf.Framework.dll" target="lib/net461" />
+        <file src="StratumUi.Wpf.Framework/bin/Debug/StratumUi.Wpf.Framework.pdb" target="lib/net461" />
         <file src="Logo.png" target="images\" />
         <file src="Readme.md" target="docs\" />
     </files>
