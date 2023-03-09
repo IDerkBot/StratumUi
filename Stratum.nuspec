@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<package  xmlns="http://schemas.microsoft.com/packaging/2013/05/nuspec.xsd">
+    <metadata>
+        <id>StratumUi</id>
+        <version>0.0.1</version>
+        <title>Stratum UI</title>
+        <authors>Ivan Budanov</authors>
+        <owners>Ivan Budanov</owners>
+        <icon>images\Logo.png</icon>
+        <requireLicenseAcceptance>false</requireLicenseAcceptance>
+        <description>Дизайн для элементов</description>
+<!--        <copyright></copyright>-->
+        <tags>stratum, stratum-ui, ui, design, theme</tags>
+<!--        <dependencies>-->
+<!--            <dependency id="" />-->
+<!--        </dependencies>-->
+<!--        <summary></summary>-->
+    </metadata>
+    <files>
+        <file src="StratumUi/bin/Debug/StratumUi.dll" target="lib/net48" />
+        <file src="StratumUi/bin/Debug/StratumUi.pdb" target="lib/net48" />
+        <file src="StratumUi/bin/Debug/StratumUi.dll" target="lib/net461" />
+        <file src="StratumUi/bin/Debug/Arion.Theme.pdb" target="lib/net461" />
+        <file src="Logo.png" target="images\" />
+        <file src="Readme.md" target="docs\" />
+    </files>
+</package>
