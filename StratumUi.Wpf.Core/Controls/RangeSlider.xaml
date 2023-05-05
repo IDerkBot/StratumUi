@@ -1,0 +1,135 @@
+﻿<UserControl
+    Background="Transparent"
+    Loaded="RangeSlider_OnLoaded"
+    MouseEnter="RangeSlider_OnMouseEnter"
+    MouseLeave="RangeSlider_OnMouseLeave"
+    MouseMove="UIElement_OnMouseMove"
+    MouseUp="RangeSlider_OnMouseUp"
+    Name="Root"
+    Width="Auto"
+    d:DesignHeight="40"
+    d:DesignWidth="300"
+    mc:Ignorable="d"
+    x:Class="StratumUi.Wpf.Core.Controls.RangeSlider"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Grid Margin="0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Border
+            Background="Gray"
+            Grid.Row="1"
+            Height="2"
+            Margin="0,0,0,0"
+            Name="Track"
+            VerticalAlignment="Center"
+            Width="{Binding ElementName=Root, Path=Width}" />
+
+        <!--  Background="CornflowerBlue"  -->
+        <Border
+            Background="CornflowerBlue"
+            Grid.Row="1"
+            Height="4"
+            Margin="{Binding ElementName=Root, Path=CenterMargin}"
+            VerticalAlignment="Center" />
+
+        <Border
+            Background="{StaticResource Lg5}"
+            BorderBrush="{StaticResource Mg5}"
+            BorderThickness="{Binding ElementName=Root, Path=LeftThumbBorder}"
+            CornerRadius="4,0,0,4"
+            Grid.Row="1"
+            Height="{Binding ElementName=Root, Path=LeftThumbHeight}"
+            HorizontalAlignment="Left"
+            Margin="{Binding ElementName=Root, Path=LeftThumbMargin}"
+            MouseDown="LeftSlider_OnMouseDown"
+            MouseEnter="Thumb1_OnMouseEnter"
+            MouseLeave="Thumb1_OnMouseLeave"
+            MouseUp="LeftSlider_OnMouseUp"
+            Name="Thumb1"
+            Width="{Binding ElementName=Root, Path=LeftThumbWidth}" />
+        <Border
+            Background="{StaticResource Lg5}"
+            BorderBrush="{StaticResource Mg5}"
+            BorderThickness="{Binding ElementName=Root, Path=RightThumbBorder}"
+            CornerRadius="0,4,4,0"
+            Grid.Row="1"
+            Height="{Binding ElementName=Root, Path=RightThumbHeight}"
+            HorizontalAlignment="Right"
+            Margin="{Binding ElementName=Root, Path=RightThumbMargin}"
+            MouseDown="RightSlider_OnMouseDown"
+            MouseEnter="Thumb2_OnMouseEnter"
+            MouseLeave="Thumb2_OnMouseLeave"
+            MouseUp="RightSlider_OnMouseUp"
+            Name="Thumb2"
+            Width="{Binding ElementName=Root, Path=RightThumbWidth}" />
+
+        <Border
+            Background="{Binding ElementName=Root, Path=CenterThumbBackground}"
+            BorderBrush="{Binding ElementName=Root, Path=CenterThumbBorderBrush}"
+            BorderThickness="{Binding ElementName=Root, Path=CenterThumbBorder}"
+            CornerRadius="3"
+            Grid.Row="1"
+            Height="12"
+            HorizontalAlignment="Stretch"
+            MouseDown="Center_OnMouseDown"
+            MouseUp="Center_OnMouseUp"
+            Name="CenterThumb"
+            Opacity="{Binding ElementName=Root, Path=CenterThumbOpacity}"
+            VerticalAlignment="Center"
+            Visibility="{Binding ElementName=Root, Path=CenterThumbVisibility}"
+            Width="{Binding ElementName=Root, Path=CenterThumbWidth}" />
+
+        <Border
+            Grid.Row="0"
+            HorizontalAlignment="Left"
+            Margin="{Binding ElementName=Root, Path=LeftThumbMargin}"
+            Name="Brd1"
+            Visibility="Hidden">
+            <Grid>
+                <Path
+                    Data="M 10 25 C 6.6667 20 0 16 0 10 C 0 4 4 0 10 0 C 16 0 20 4 20 10 C 20 16 13.3333 20 10 25 Z"
+                    Fill="White"
+                    HorizontalAlignment="Left"
+                    Stroke="Black"
+                    StrokeThickness="1" />
+                <TextBlock
+                    FontSize="8"
+                    HorizontalAlignment="Center"
+                    Margin="0,0,0,5"
+                    Text="{Binding ElementName=Root, Path=LowerValue}"
+                    TextAlignment="Center"
+                    VerticalAlignment="Center"
+                    Visibility="Visible" />
+            </Grid>
+        </Border>
+        <Border
+            Grid.Row="0"
+            HorizontalAlignment="Right"
+            Margin="{Binding ElementName=Root, Path=RightThumbMargin}"
+            Name="Brd2"
+            Visibility="Hidden">
+            <Grid>
+                <Path
+                    Data="M 10 25 C 6.6667 20 0 16 0 10 C 0 4 4 0 10 0 C 16 0 20 4 20 10 C 20 16 13.3333 20 10 25 Z"
+                    Fill="White"
+                    HorizontalAlignment="Right"
+                    Stroke="Black"
+                    StrokeThickness="1" />
+                <TextBlock
+                    FontSize="8"
+                    HorizontalAlignment="Center"
+                    Margin="0,0,0,5"
+                    Text="{Binding ElementName=Root, Path=UpperValue}"
+                    TextAlignment="Center"
+                    VerticalAlignment="Center"
+                    Visibility="Visible" />
+            </Grid>
+        </Border>
+    </Grid>
+</UserControl>

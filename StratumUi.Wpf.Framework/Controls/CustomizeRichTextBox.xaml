@@ -1,0 +1,140 @@
+﻿<UserControl
+    MinHeight="100"
+    d:DesignHeight="300"
+    d:DesignWidth="700"
+    mc:Ignorable="d"
+    x:Class="StratumUi.Wpf.Controls.CustomizeRichTextBox"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:attachedProperties="clr-namespace:StratumUi.Wpf.AttachedProperties"
+    xmlns:attachedProperties1="clr-namespace:StratumUi.Wpf.AttachedProperties"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:StratumUi.Wpf.Controls"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Arion.Style;component/ArionUiTheme.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Grid>
+        <DockPanel Name="MainPanel">
+
+            <!--  This tool bar contains all the editing buttons.  -->
+            <ToolBar
+                DockPanel.Dock="Top"
+                Height="30"
+                Name="MainToolBar">
+
+                <Button
+                    Command="ApplicationCommands.Cut"
+                    Style="{StaticResource BtnText}"
+                    ToolTip="Cut"
+                    attachedProperties1:Button.Icon="ContentCut" />
+                <Button
+                    Command="ApplicationCommands.Copy"
+                    Style="{StaticResource BtnText}"
+                    ToolTip="Copy"
+                    attachedProperties1:Button.Icon="ContentCopy" />
+                <Button
+                    Command="ApplicationCommands.Paste"
+                    Style="{StaticResource BtnText}"
+                    ToolTip="Paste"
+                    attachedProperties1:Button.Icon="ContentPaste" />
+                <Button
+                    Command="ApplicationCommands.Undo"
+                    Style="{StaticResource BtnText}"
+                    ToolTip="Undo"
+                    attachedProperties1:Button.Icon="Undo" />
+                <Button
+                    Command="ApplicationCommands.Redo"
+                    Style="{StaticResource BtnText}"
+                    ToolTip="Redo"
+                    attachedProperties1:Button.Icon="Redo" />
+
+                <ToggleButton
+                    Command="EditingCommands.ToggleBold"
+                    Padding="0"
+                    Style="{StaticResource TglText}"
+                    ToolTip="Bold"
+                    Width="40">
+                    <TextBlock FontWeight="Bold">B</TextBlock>
+                </ToggleButton>
+                <ToggleButton
+                    Command="EditingCommands.ToggleItalic"
+                    Padding="0"
+                    Style="{StaticResource TglText}"
+                    ToolTip="Italic"
+                    Width="40">
+                    <TextBlock FontStyle="Italic" FontWeight="Bold">I</TextBlock>
+                </ToggleButton>
+                <ToggleButton
+                    Command="EditingCommands.ToggleUnderline"
+                    Padding="0"
+                    Style="{StaticResource TglText}"
+                    ToolTip="Underline"
+                    Width="40">
+                    <TextBlock FontWeight="Bold" TextDecorations="Underline">U</TextBlock>
+                </ToggleButton>
+                <Button
+                    Command="EditingCommands.IncreaseFontSize"
+                    Style="{StaticResource BtnText}"
+                    ToolTip="Grow Font"
+                    attachedProperties1:Button.Icon="FormatFontSizeIncrease" />
+                <Button
+                    Command="EditingCommands.DecreaseFontSize"
+                    Style="{StaticResource BtnText}"
+                    ToolTip="Shrink Font"
+                    attachedProperties1:Button.Icon="FormatFontSizeDecrease" />
+
+                <Button
+                    Command="EditingCommands.ToggleBullets"
+                    Style="{StaticResource BtnText}"
+                    ToolTip="Bullets"
+                    attachedProperties1:Button.Icon="FormatListBulleted" />
+                <Button
+                    Command="EditingCommands.ToggleNumbering"
+                    Style="{StaticResource BtnText}"
+                    ToolTip="Numbering"
+                    attachedProperties1:Button.Icon="FormatListNumbers" />
+                <Button
+                    Command="EditingCommands.AlignLeft"
+                    Style="{StaticResource BtnText}"
+                    ToolTip="Align Left"
+                    attachedProperties1:Button.Icon="FormatAlignLeft" />
+                <Button
+                    Command="EditingCommands.AlignCenter"
+                    Style="{StaticResource BtnText}"
+                    ToolTip="Align Center"
+                    attachedProperties1:Button.Icon="FormatAlignCenter" />
+                <Button
+                    Command="EditingCommands.AlignRight"
+                    Style="{StaticResource BtnText}"
+                    ToolTip="Align Right"
+                    attachedProperties1:Button.Icon="FormatAlignRight" />
+                <Button
+                    Command="EditingCommands.AlignJustify"
+                    Style="{StaticResource BtnText}"
+                    ToolTip="Align Justify"
+                    attachedProperties1:Button.Icon="FormatAlignJustify" />
+                <Button
+                    Command="EditingCommands.IncreaseIndentation"
+                    Style="{StaticResource BtnText}"
+                    ToolTip="Increase Indent"
+                    attachedProperties1:Button.Icon="FormatIndentIncrease" />
+                <Button
+                    Command="EditingCommands.DecreaseIndentation"
+                    Style="{StaticResource BtnText}"
+                    ToolTip="Decrease Indent"
+                    attachedProperties1:Button.Icon="FormatIndentDecrease" />
+            </ToolBar>
+
+            <!--
+                By default pressing tab moves focus to the next control. Setting AcceptsTab to true allows the
+                RichTextBox to accept tab characters.
+            -->
+            <RichTextBox AcceptsTab="True" Name="mainRTB" />
+        </DockPanel>
+    </Grid>
+</UserControl>

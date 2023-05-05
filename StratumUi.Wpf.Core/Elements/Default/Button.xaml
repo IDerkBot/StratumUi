@@ -1,0 +1,553 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:attachedProperties="clr-namespace:StratumUi.Wpf.Core.AttachedProperties"
+    xmlns:controls="clr-namespace:StratumUi.Wpf.Core.Controls"
+    xmlns:converters="clr-namespace:StratumUi.Wpf.Core.Converters"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="FontFamily.xaml" />
+        <ResourceDictionary Source="Colors.xaml" />
+        <ResourceDictionary Source="ProgressBar.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+
+    <converters:ButtonProgressBarWidthConverter x:Key="ProgressBarWidthConverter" />
+    <converters:ButtonIconVisibilityConverter x:Key="IconConverter" />
+    <converters:BooleanToVisibilityConverter x:Key="VisibilityConverter" />
+
+    <Style x:Key="BtnFocusVisual">
+        <Setter Property="Control.Template">
+            <Setter.Value>
+                <ControlTemplate>
+                    <Border
+                        BorderBrush="{StaticResource Pr300}"
+                        BorderThickness="4"
+                        CornerRadius="6"
+                        Margin="-3"
+                        Name="Focus" />
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <ControlTemplate TargetType="{x:Type Button}" x:Key="FilledTemplate">
+        <Border
+            Background="{TemplateBinding Background}"
+            BorderBrush="{TemplateBinding BorderBrush}"
+            BorderThickness="{TemplateBinding BorderThickness}"
+            CornerRadius="{TemplateBinding attachedProperties:Hint.CornerRadius}"
+            Name="Border">
+            <Grid Margin="{TemplateBinding Padding}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <controls:Icon
+                    Fill="{TemplateBinding Foreground}"
+                    Grid.Column="0"
+                    Height="{TemplateBinding attachedProperties:Button.IconHeight}"
+                    Kind="{TemplateBinding attachedProperties:Button.LeftIcon}"
+                    Margin="0,0,8,0"
+                    Stroke="{TemplateBinding attachedProperties:Button.IconStrokeThickness}"
+                    StrokeColor="{TemplateBinding attachedProperties:Button.IconStrokeColor}"
+                    Visibility="{TemplateBinding attachedProperties:Button.LeftIcon,
+                                                 Converter={StaticResource IconConverter}}"
+                    Width="{TemplateBinding attachedProperties:Button.IconWidth}" />
+                <ContentPresenter
+                    Content="{TemplateBinding Content}"
+                    Grid.Column="1"
+                    HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                    TextElement.Foreground="{TemplateBinding Foreground}"
+                    VerticalAlignment="Center" />
+                <controls:Icon
+                    Fill="{TemplateBinding Foreground}"
+                    Grid.Column="1"
+                    Height="{TemplateBinding attachedProperties:Button.IconHeight}"
+                    HorizontalAlignment="Center"
+                    Kind="{TemplateBinding attachedProperties:Button.Icon}"
+                    Stroke="{TemplateBinding attachedProperties:Button.IconStrokeThickness}"
+                    StrokeColor="{TemplateBinding attachedProperties:Button.IconStrokeColor}"
+                    VerticalAlignment="Center"
+                    Visibility="{TemplateBinding attachedProperties:Button.Icon,
+                                                 Converter={StaticResource IconConverter}}"
+                    Width="{TemplateBinding attachedProperties:Button.IconWidth}"
+                    x:Name="Icon" />
+                <controls:Icon
+                    Fill="{TemplateBinding Foreground}"
+                    Grid.Column="2"
+                    Height="{TemplateBinding attachedProperties:Button.IconHeight}"
+                    Kind="{TemplateBinding attachedProperties:Button.RightIcon}"
+                    Margin="8,0,0,0"
+                    Stroke="{TemplateBinding attachedProperties:Button.IconStrokeThickness}"
+                    StrokeColor="{TemplateBinding attachedProperties:Button.IconStrokeColor}"
+                    Visibility="{TemplateBinding attachedProperties:Button.RightIcon,
+                                                 Converter={StaticResource IconConverter}}"
+                    Width="{TemplateBinding attachedProperties:Button.IconWidth}" />
+                <ProgressBar
+                    Grid.Column="0"
+                    Grid.ColumnSpan="3"
+                    Maximum="{TemplateBinding attachedProperties:Button.ProgressBarMaximum}"
+                    Minimum="{TemplateBinding attachedProperties:Button.ProgressBarMinimum}"
+                    Style="{StaticResource BtnCircleProgressBar}"
+                    Value="{TemplateBinding attachedProperties:Button.ProgressBarValue}"
+                    Visibility="{TemplateBinding attachedProperties:Button.ProgressBarShow,
+                                                 Converter={StaticResource VisibilityConverter}}"
+                    Width="{TemplateBinding Width,
+                                            Converter={StaticResource ProgressBarWidthConverter}}"
+                    x:Name="ProgressBar" />
+            </Grid>
+        </Border>
+        <ControlTemplate.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="BorderBrush" Value="{StaticResource Pr600}" />
+                <Setter Property="Background" Value="{StaticResource Pr600}" />
+                <Setter Property="Cursor" Value="Hand" />
+            </Trigger>
+            <Trigger Property="IsPressed" Value="True">
+                <Setter Property="Background" Value="{StaticResource Pr700}" />
+                <Setter Property="BorderBrush" Value="{StaticResource Pr700}" />
+            </Trigger>
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter Property="Opacity" Value=".5" />
+            </Trigger>
+            <Trigger Property="attachedProperties:Button.ProgressBarShow" Value="True">
+                <Setter Property="Background" Value="{StaticResource Pr100}" />
+                <Setter Property="Padding" Value="12" />
+                <Setter Property="MinWidth" Value="40" />
+            </Trigger>
+            <Trigger Property="attachedProperties:Button.ProgressBarType" Value="Circle">
+                <Setter Property="Style" TargetName="ProgressBar" Value="{StaticResource BtnCircleProgressBar}" />
+                <Setter Property="Width" TargetName="ProgressBar" Value="16" />
+                <Setter Property="Height" TargetName="ProgressBar" Value="16" />
+                <Setter Property="Padding" Value="5" />
+            </Trigger>
+            <Trigger Property="attachedProperties:Button.ProgressBarType" Value="Linear">
+                <Setter Property="Style" TargetName="ProgressBar" Value="{StaticResource BtnProgressBar}" />
+            </Trigger>
+            <Trigger Property="attachedProperties:Button.Position" Value="First">
+                <Setter Property="attachedProperties:Hint.CornerRadius" Value="6,0,0,6" />
+            </Trigger>
+            <Trigger Property="attachedProperties:Button.Position" Value="Middle">
+                <Setter Property="attachedProperties:Hint.CornerRadius" Value="0" />
+            </Trigger>
+            <Trigger Property="attachedProperties:Button.Position" Value="Last">
+                <Setter Property="attachedProperties:Hint.CornerRadius" Value="0,6,6,0" />
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+    <ControlTemplate TargetType="{x:Type Button}" x:Key="OutlineTemplate">
+        <Border
+            Background="{TemplateBinding Background}"
+            BorderBrush="{TemplateBinding BorderBrush}"
+            BorderThickness="{TemplateBinding BorderThickness}"
+            CornerRadius="{TemplateBinding attachedProperties:Hint.CornerRadius}"
+            Name="Border"
+            Padding="{TemplateBinding Padding}">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <controls:Icon
+                    Fill="{TemplateBinding Foreground}"
+                    Grid.Column="0"
+                    Height="{TemplateBinding attachedProperties:Button.IconHeight}"
+                    Kind="{TemplateBinding attachedProperties:Button.LeftIcon}"
+                    Margin="0,0,8,0"
+                    Visibility="{TemplateBinding attachedProperties:Button.LeftIcon,
+                                                 Converter={StaticResource IconConverter}}"
+                    Width="{TemplateBinding attachedProperties:Button.IconWidth}" />
+                <ContentPresenter
+                    Content="{TemplateBinding Content}"
+                    Grid.Column="1"
+                    HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                    TextElement.Foreground="{TemplateBinding Foreground}"
+                    VerticalAlignment="Center" />
+                <controls:Icon
+                    Fill="{TemplateBinding Foreground}"
+                    Grid.Column="1"
+                    Height="{TemplateBinding attachedProperties:Button.IconHeight}"
+                    HorizontalAlignment="Center"
+                    Kind="{TemplateBinding attachedProperties:Button.Icon}"
+                    VerticalAlignment="Center"
+                    Visibility="{TemplateBinding attachedProperties:Button.Icon,
+                                                 Converter={StaticResource IconConverter}}"
+                    Width="{TemplateBinding attachedProperties:Button.IconWidth}"
+                    x:Name="Icon" />
+                <controls:Icon
+                    Fill="{TemplateBinding Foreground}"
+                    Grid.Column="2"
+                    Height="{TemplateBinding attachedProperties:Button.IconHeight}"
+                    Kind="{TemplateBinding attachedProperties:Button.RightIcon}"
+                    Margin="8,0,0,0"
+                    Visibility="{TemplateBinding attachedProperties:Button.RightIcon,
+                                                 Converter={StaticResource IconConverter}}"
+                    Width="{TemplateBinding attachedProperties:Button.IconWidth}" />
+                <ProgressBar
+                    Grid.Column="0"
+                    Grid.ColumnSpan="3"
+                    Maximum="{TemplateBinding attachedProperties:Button.ProgressBarMaximum}"
+                    Minimum="{TemplateBinding attachedProperties:Button.ProgressBarMinimum}"
+                    Style="{StaticResource BtnCircleProgressBar}"
+                    Value="{TemplateBinding attachedProperties:Button.ProgressBarValue}"
+                    Visibility="{TemplateBinding attachedProperties:Button.ProgressBarShow,
+                                                 Converter={StaticResource VisibilityConverter}}"
+                    Width="{TemplateBinding Width,
+                                            Converter={StaticResource ProgressBarWidthConverter}}"
+                    x:Name="ProgressBar" />
+            </Grid>
+        </Border>
+        <ControlTemplate.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="BorderBrush" Value="{StaticResource Lg2}" />
+                <Setter Property="Background" Value="{StaticResource Lg5}" />
+                <Setter Property="Cursor" Value="Hand" />
+            </Trigger>
+            <Trigger Property="IsPressed" Value="True">
+                <Setter Property="Background" Value="{StaticResource Lg3}" />
+                <Setter Property="BorderBrush" Value="{StaticResource Lg3}" />
+            </Trigger>
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter Property="Opacity" Value=".5" />
+            </Trigger>
+            <Trigger Property="attachedProperties:Button.ProgressBarShow" Value="True">
+                <Setter Property="Padding" Value="12" />
+                <Setter Property="MinWidth" Value="40" />
+            </Trigger>
+            <Trigger Property="attachedProperties:Button.ProgressBarType" Value="Circle">
+                <Setter Property="Style" TargetName="ProgressBar" Value="{StaticResource BtnCircleProgressBar}" />
+                <Setter Property="Width" TargetName="ProgressBar" Value="16" />
+                <Setter Property="Height" TargetName="ProgressBar" Value="16" />
+                <Setter Property="Padding" Value="5" />
+            </Trigger>
+            <Trigger Property="attachedProperties:Button.ProgressBarType" Value="Linear">
+                <Setter Property="Style" TargetName="ProgressBar" Value="{StaticResource BtnProgressBar}" />
+            </Trigger>
+            <Trigger Property="attachedProperties:Button.Position" Value="First">
+                <Setter Property="attachedProperties:Hint.CornerRadius" Value="6,0,0,6" />
+            </Trigger>
+            <Trigger Property="attachedProperties:Button.Position" Value="Middle">
+                <Setter Property="attachedProperties:Hint.CornerRadius" Value="0" />
+            </Trigger>
+            <Trigger Property="attachedProperties:Button.Position" Value="Last">
+                <Setter Property="attachedProperties:Hint.CornerRadius" Value="0,6,6,0" />
+            </Trigger>
+
+            <!-- <Trigger Property="IsFocused" Value="True"> -->
+            <!--     <Setter Property="Visibility" TargetName="Focus" Value="Visible" /> -->
+            <!-- </Trigger> -->
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+    <ControlTemplate TargetType="{x:Type Button}" x:Key="TextTemplate">
+        <Grid>
+            <Border
+                Background="{TemplateBinding Background}"
+                BorderBrush="{TemplateBinding BorderBrush}"
+                BorderThickness="{TemplateBinding BorderThickness}"
+                CornerRadius="{TemplateBinding attachedProperties:Hint.CornerRadius}"
+                Name="Border"
+                Opacity="0"
+                Padding="{TemplateBinding Padding}" />
+            <Grid Margin="{TemplateBinding Padding}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <controls:Icon
+                    Fill="{TemplateBinding Foreground}"
+                    Grid.Column="0"
+                    Height="{TemplateBinding attachedProperties:Button.IconHeight}"
+                    Kind="{TemplateBinding attachedProperties:Button.LeftIcon}"
+                    Margin="0,0,8,0"
+                    Visibility="{TemplateBinding attachedProperties:Button.LeftIcon,
+                                                 Converter={StaticResource IconConverter}}"
+                    Width="{TemplateBinding attachedProperties:Button.IconWidth}" />
+                <ContentPresenter
+                    Content="{TemplateBinding Content}"
+                    Grid.Column="1"
+                    HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                    TextElement.Foreground="{TemplateBinding Foreground}"
+                    VerticalAlignment="Center" />
+                <controls:Icon
+                    Fill="{TemplateBinding Foreground}"
+                    Grid.Column="1"
+                    Height="{TemplateBinding attachedProperties:Button.IconHeight}"
+                    HorizontalAlignment="Center"
+                    Kind="{TemplateBinding attachedProperties:Button.Icon}"
+                    VerticalAlignment="Center"
+                    Visibility="{TemplateBinding attachedProperties:Button.Icon,
+                                                 Converter={StaticResource IconConverter}}"
+                    Width="{TemplateBinding attachedProperties:Button.IconWidth}"
+                    x:Name="Icon" />
+                <controls:Icon
+                    Fill="{TemplateBinding Foreground}"
+                    Grid.Column="2"
+                    Height="{TemplateBinding attachedProperties:Button.IconHeight}"
+                    Kind="{TemplateBinding attachedProperties:Button.RightIcon}"
+                    Margin="8,0,0,0"
+                    Visibility="{TemplateBinding attachedProperties:Button.RightIcon,
+                                                 Converter={StaticResource IconConverter}}"
+                    Width="{TemplateBinding attachedProperties:Button.IconWidth}" />
+                <ProgressBar
+                    Grid.Column="0"
+                    Grid.ColumnSpan="3"
+                    Maximum="{TemplateBinding attachedProperties:Button.ProgressBarMaximum}"
+                    Minimum="{TemplateBinding attachedProperties:Button.ProgressBarMinimum}"
+                    Style="{StaticResource BtnCircleProgressBar}"
+                    Value="{TemplateBinding attachedProperties:Button.ProgressBarValue}"
+                    Visibility="{TemplateBinding attachedProperties:Button.ProgressBarShow,
+                                                 Converter={StaticResource VisibilityConverter}}"
+                    Width="{TemplateBinding Width,
+                                            Converter={StaticResource ProgressBarWidthConverter}}"
+                    x:Name="ProgressBar" />
+            </Grid>
+        </Grid>
+        <ControlTemplate.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Opacity" TargetName="Border" Value=".04" />
+                <Setter Property="Cursor" Value="Hand" />
+            </Trigger>
+            <Trigger Property="IsPressed" Value="True">
+                <Setter Property="Opacity" TargetName="Border" Value=".1" />
+            </Trigger>
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter Property="Opacity" Value=".5" />
+            </Trigger>
+            <Trigger Property="attachedProperties:Button.ProgressBarShow" Value="True">
+                <Setter Property="Padding" Value="12" />
+                <Setter Property="MinWidth" Value="40" />
+            </Trigger>
+            <Trigger Property="attachedProperties:Button.ProgressBarType" Value="Circle">
+                <Setter Property="Style" TargetName="ProgressBar" Value="{StaticResource BtnCircleProgressBar}" />
+                <Setter Property="Width" TargetName="ProgressBar" Value="16" />
+                <Setter Property="Height" TargetName="ProgressBar" Value="16" />
+            </Trigger>
+            <Trigger Property="attachedProperties:Button.ProgressBarType" Value="Linear">
+                <Setter Property="Style" TargetName="ProgressBar" Value="{StaticResource BtnProgressBar}" />
+            </Trigger>
+            <Trigger Property="attachedProperties:Button.Position" Value="First">
+                <Setter Property="attachedProperties:Hint.CornerRadius" Value="6,0,0,6" />
+            </Trigger>
+            <Trigger Property="attachedProperties:Button.Position" Value="Middle">
+                <Setter Property="attachedProperties:Hint.CornerRadius" Value="0" />
+            </Trigger>
+            <Trigger Property="attachedProperties:Button.Position" Value="Last">
+                <Setter Property="attachedProperties:Hint.CornerRadius" Value="0,6,6,0" />
+            </Trigger>
+
+            <!-- <Trigger Property="IsFocused" Value="True"> -->
+            <!--     <Setter Property="Visibility" TargetName="Focus" Value="Visible" /> -->
+            <!-- </Trigger> -->
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+    <Style TargetType="{x:Type Button}" x:Key="BtnBase">
+        <Setter Property="FontSize" Value="14" />
+        <Setter Property="FontFamily" Value="{StaticResource BaseFont}" />
+        <Setter Property="MinWidth" Value="20" />
+        <Setter Property="MinHeight" Value="20" />
+        <Setter Property="Height" Value="40" />
+        <Setter Property="FontWeight" Value="Medium" />
+        <Setter Property="Padding" Value="16,8" />
+        <Setter Property="attachedProperties:Button.IconHeight" Value="15" />
+        <Setter Property="attachedProperties:Button.IconWidth" Value="15" />
+        <Setter Property="attachedProperties:Hint.CornerRadius" Value="6" />
+        <Setter Property="FocusVisualStyle" Value="{StaticResource BtnFocusVisual}" />
+        <Setter Property="HorizontalContentAlignment" Value="Center" />
+        <Setter Property="BorderThickness" Value="0" />
+    </Style>
+
+    <Style
+        BasedOn="{StaticResource BtnBase}"
+        TargetType="{x:Type Button}"
+        x:Key="BtnFilled">
+        <Setter Property="Foreground" Value="White" />
+        <Setter Property="Background" Value="{StaticResource Pr500}" />
+        <Setter Property="BorderBrush" Value="{StaticResource Pr500}" />
+        <Setter Property="Template" Value="{StaticResource FilledTemplate}" />
+    </Style>
+    <Style
+        BasedOn="{StaticResource BtnBase}"
+        TargetType="{x:Type Button}"
+        x:Key="BtnOutline">
+        <Setter Property="Foreground" Value="{StaticResource Dg2}" />
+        <Setter Property="Background" Value="{StaticResource CleanW}" />
+        <Setter Property="BorderBrush" Value="{StaticResource Lg2}" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="Template" Value="{StaticResource OutlineTemplate}" />
+    </Style>
+    <Style
+        BasedOn="{StaticResource BtnBase}"
+        TargetType="{x:Type Button}"
+        x:Key="BtnText">
+        <Setter Property="Foreground" Value="{StaticResource Dg2}" />
+        <Setter Property="Background" Value="#002D46" />
+        <Setter Property="BorderBrush" Value="#002D46" />
+        <Setter Property="Template" Value="{StaticResource TextTemplate}" />
+    </Style>
+
+    <!--  Inline alert buttons  -->
+
+    <Style
+        BasedOn="{StaticResource BtnBase}"
+        TargetType="{x:Type Button}"
+        x:Key="InlineAlertInfoPrimary">
+        <Setter Property="Foreground" Value="White" />
+        <Setter Property="Background" Value="{StaticResource Pr500}" />
+        <Setter Property="BorderBrush" Value="{StaticResource Pr500}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        CornerRadius="6"
+                        Name="Border"
+                        Padding="{TemplateBinding Padding}">
+                        <ContentPresenter
+                            Content="{TemplateBinding Content}"
+                            HorizontalAlignment="Center"
+                            TextElement.Foreground="{TemplateBinding Foreground}"
+                            VerticalAlignment="Center" />
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="BorderBrush" Value="{StaticResource Pr600}" />
+                            <Setter Property="Background" Value="{StaticResource Pr600}" />
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter Property="Background" Value="{StaticResource Pr700}" />
+                            <Setter Property="BorderBrush" Value="{StaticResource Pr700}" />
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Opacity" Value=".5" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style
+        BasedOn="{StaticResource BtnBase}"
+        TargetType="{x:Type Button}"
+        x:Key="InlineAlertDangerPrimary">
+        <Setter Property="Foreground" Value="White" />
+        <Setter Property="Background" Value="{StaticResource R500}" />
+        <Setter Property="BorderBrush" Value="{StaticResource R500}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        CornerRadius="6"
+                        Name="Border"
+                        Padding="{TemplateBinding Padding}">
+                        <ContentPresenter
+                            Content="{TemplateBinding Content}"
+                            HorizontalAlignment="Center"
+                            TextElement.Foreground="{TemplateBinding Foreground}"
+                            VerticalAlignment="Center" />
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="BorderBrush" Value="{StaticResource R600}" />
+                            <Setter Property="Background" Value="{StaticResource R600}" />
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter Property="Background" Value="{StaticResource R700}" />
+                            <Setter Property="BorderBrush" Value="{StaticResource R700}" />
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Opacity" Value=".5" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style
+        BasedOn="{StaticResource BtnBase}"
+        TargetType="{x:Type Button}"
+        x:Key="InlineAlertWarningPrimary">
+        <Setter Property="Foreground" Value="White" />
+        <Setter Property="Background" Value="{StaticResource Y500}" />
+        <Setter Property="BorderBrush" Value="{StaticResource Y500}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        CornerRadius="6"
+                        Name="Border"
+                        Padding="{TemplateBinding Padding}">
+                        <ContentPresenter
+                            Content="{TemplateBinding Content}"
+                            HorizontalAlignment="Center"
+                            TextElement.Foreground="{TemplateBinding Foreground}"
+                            VerticalAlignment="Center" />
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="BorderBrush" Value="{StaticResource Y600}" />
+                            <Setter Property="Background" Value="{StaticResource Y600}" />
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter Property="Background" Value="{StaticResource Y700}" />
+                            <Setter Property="BorderBrush" Value="{StaticResource Y700}" />
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Opacity" Value=".5" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style
+        BasedOn="{StaticResource BtnBase}"
+        TargetType="{x:Type Button}"
+        x:Key="InlineAlertSuccessPrimary">
+        <Setter Property="Foreground" Value="White" />
+        <Setter Property="Background" Value="{StaticResource G500}" />
+        <Setter Property="BorderBrush" Value="{StaticResource G500}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        CornerRadius="6"
+                        Name="Border"
+                        Padding="{TemplateBinding Padding}">
+                        <ContentPresenter
+                            Content="{TemplateBinding Content}"
+                            HorizontalAlignment="Center"
+                            TextElement.Foreground="{TemplateBinding Foreground}"
+                            VerticalAlignment="Center" />
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="BorderBrush" Value="{StaticResource G600}" />
+                            <Setter Property="Background" Value="{StaticResource G600}" />
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter Property="Background" Value="{StaticResource G700}" />
+                            <Setter Property="BorderBrush" Value="{StaticResource G700}" />
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Opacity" Value=".5" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>

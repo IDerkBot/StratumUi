@@ -1,0 +1,430 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:attachedProperties="clr-namespace:StratumUi.Wpf.Core.AttachedProperties"
+    xmlns:controls="clr-namespace:StratumUi.Wpf.Core.Controls"
+    xmlns:converters="clr-namespace:StratumUi.Wpf.Core.Converters"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="Colors.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+
+    <converters:ButtonIconVisibilityConverter x:Key="IconConverter" />
+
+    <Style TargetType="{x:Type RadioButton}" x:Key="SwitcherBase">
+        <Setter Property="Background" Value="{StaticResource CleanW}" />
+        <Setter Property="BorderBrush" Value="{StaticResource Lg2}" />
+        <Setter Property="Foreground" Value="{StaticResource Dg2}" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="HorizontalContentAlignment" Value="Center" />
+        <Setter Property="Height" Value="40" />
+        <Setter Property="Padding" Value="12,4" />
+        <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+        <Setter Property="FontSize" Value="14" />
+        <Setter Property="attachedProperties:Switcher.IconHeight" Value="15" />
+        <Setter Property="attachedProperties:Switcher.IconWidth" Value="15" />
+    </Style>
+
+    <ControlTemplate TargetType="{x:Type RadioButton}" x:Key="SwitcherFilledTemplate">
+        <Grid>
+            <Border
+                Background="{StaticResource Pr300}"
+                BorderBrush="{StaticResource Pr300}"
+                BorderThickness="3"
+                CornerRadius="{TemplateBinding attachedProperties:Hint.CornerRadius}"
+                Margin="-3"
+                Name="Focus"
+                Visibility="Collapsed" />
+            <Border
+                Background="{TemplateBinding Background}"
+                BorderBrush="{TemplateBinding BorderBrush}"
+                BorderThickness="{TemplateBinding BorderThickness}"
+                CornerRadius="{TemplateBinding attachedProperties:Hint.CornerRadius}"
+                Focusable="False"
+                Height="{TemplateBinding Height}"
+                HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                Margin="0"
+                Padding="{TemplateBinding Padding}"
+                VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                Width="{TemplateBinding Width}"
+                x:Name="radioButtonBorder">
+                <Grid Focusable="False" x:Name="markGrid">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <controls:Icon
+                        Fill="{TemplateBinding Foreground}"
+                        Focusable="False"
+                        Grid.Column="0"
+                        Height="{TemplateBinding attachedProperties:Switcher.IconHeight}"
+                        Kind="{TemplateBinding attachedProperties:Switcher.LeftIcon}"
+                        Margin="0,0,8,0"
+                        Stroke="{TemplateBinding attachedProperties:Switcher.IconStrokeThickness}"
+                        StrokeColor="{TemplateBinding attachedProperties:Switcher.IconStrokeColor}"
+                        Visibility="{TemplateBinding attachedProperties:Switcher.LeftIcon,
+                                                     Converter={StaticResource IconConverter}}"
+                        Width="{TemplateBinding attachedProperties:Switcher.IconWidth}" />
+                    <ContentPresenter
+                        Focusable="False"
+                        Grid.Column="1"
+                        HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                        Margin="{TemplateBinding Padding}"
+                        RecognizesAccessKey="True"
+                        SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                        TextElement.FontSize="{TemplateBinding FontSize}"
+                        TextElement.Foreground="{TemplateBinding Foreground}"
+                        VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                        x:Name="contentPresenter" />
+                    <controls:Icon
+                        Fill="{TemplateBinding Foreground}"
+                        Focusable="False"
+                        Grid.Column="1"
+                        Height="{TemplateBinding attachedProperties:Switcher.IconHeight}"
+                        HorizontalAlignment="Center"
+                        Kind="{TemplateBinding attachedProperties:Switcher.Icon}"
+                        Stroke="{TemplateBinding attachedProperties:Switcher.IconStrokeThickness}"
+                        StrokeColor="{TemplateBinding attachedProperties:Switcher.IconStrokeColor}"
+                        VerticalAlignment="Center"
+                        Visibility="{TemplateBinding attachedProperties:Switcher.Icon,
+                                                     Converter={StaticResource IconConverter}}"
+                        Width="{TemplateBinding attachedProperties:Switcher.IconWidth}"
+                        x:Name="Icon" />
+                    <controls:Icon
+                        Fill="{TemplateBinding Foreground}"
+                        Focusable="False"
+                        Grid.Column="2"
+                        Height="{TemplateBinding attachedProperties:Switcher.IconHeight}"
+                        Kind="{TemplateBinding attachedProperties:Switcher.RightIcon}"
+                        Margin="8,0,0,0"
+                        Stroke="{TemplateBinding attachedProperties:Switcher.IconStrokeThickness}"
+                        StrokeColor="{TemplateBinding attachedProperties:Switcher.IconStrokeColor}"
+                        Visibility="{TemplateBinding attachedProperties:Switcher.RightIcon,
+                                                     Converter={StaticResource IconConverter}}"
+                        Width="{TemplateBinding attachedProperties:Switcher.IconWidth}" />
+                </Grid>
+            </Border>
+        </Grid>
+        <ControlTemplate.Triggers>
+            <!--  CHECKED - TRUE | Hover  -->
+            <MultiTrigger>
+                <MultiTrigger.Conditions>
+                    <Condition Property="IsChecked" Value="True" />
+                    <Condition Property="IsEnabled" Value="True" />
+                    <Condition Property="IsMouseOver" Value="True" />
+                    <Condition Property="IsPressed" Value="False" />
+                </MultiTrigger.Conditions>
+
+                <Setter Property="Background" TargetName="radioButtonBorder" Value="{StaticResource Pr600}" />
+                <Setter Property="BorderBrush" TargetName="radioButtonBorder" Value="{StaticResource Pr600}" />
+                <Setter Property="Foreground" Value="#F6FCFF" />
+            </MultiTrigger>
+            <!--  CHECKED - TRUE | Pressed  -->
+            <MultiTrigger>
+                <MultiTrigger.Conditions>
+                    <Condition Property="IsChecked" Value="True" />
+                    <Condition Property="IsMouseOver" Value="True" />
+                    <Condition Property="IsPressed" Value="True" />
+                    <Condition Property="IsEnabled" Value="True" />
+                </MultiTrigger.Conditions>
+
+                <Setter Property="Background" TargetName="radioButtonBorder" Value="{StaticResource Pr700}" />
+                <Setter Property="BorderBrush" TargetName="radioButtonBorder" Value="{StaticResource Pr700}" />
+                <Setter Property="Foreground" Value="#F6FCFF" />
+            </MultiTrigger>
+            <!--  CHECKED - TRUE | Default  -->
+            <MultiTrigger>
+                <MultiTrigger.Conditions>
+                    <Condition Property="IsChecked" Value="True" />
+                    <Condition Property="IsMouseOver" Value="False" />
+                    <Condition Property="IsPressed" Value="False" />
+                    <Condition Property="IsEnabled" Value="True" />
+                </MultiTrigger.Conditions>
+
+                <Setter Property="Background" TargetName="radioButtonBorder" Value="{StaticResource Pr500}" />
+                <Setter Property="BorderBrush" TargetName="radioButtonBorder" Value="{StaticResource Pr500}" />
+                <Setter Property="Foreground" Value="{StaticResource Pr50}" />
+            </MultiTrigger>
+
+            <!--  CHECKED - FALSE | Hover  -->
+            <MultiTrigger>
+                <MultiTrigger.Conditions>
+                    <Condition Property="IsChecked" Value="False" />
+                    <Condition Property="IsMouseOver" Value="True" />
+                    <Condition Property="IsPressed" Value="False" />
+                    <Condition Property="IsEnabled" Value="True" />
+                </MultiTrigger.Conditions>
+
+                <Setter Property="Background" TargetName="radioButtonBorder" Value="#EEF0F2" />
+                <Setter Property="BorderBrush" TargetName="radioButtonBorder" Value="#9AA6AC" />
+            </MultiTrigger>
+            <!--  CHECKED - FALSE | Pressed  -->
+            <MultiTrigger>
+                <MultiTrigger.Conditions>
+                    <Condition Property="IsChecked" Value="False" />
+                    <Condition Property="IsMouseOver" Value="False" />
+                    <Condition Property="IsPressed" Value="True" />
+                    <Condition Property="IsEnabled" Value="True" />
+                </MultiTrigger.Conditions>
+
+                <Setter Property="Background" TargetName="radioButtonBorder" Value="#E5E9EB" />
+                <Setter Property="BorderBrush" TargetName="radioButtonBorder" Value="#84919A" />
+            </MultiTrigger>
+            <!--  CHECKED - FALSE | Default  -->
+            <MultiTrigger>
+                <MultiTrigger.Conditions>
+                    <Condition Property="IsChecked" Value="False" />
+                    <Condition Property="IsMouseOver" Value="False" />
+                    <Condition Property="IsPressed" Value="False" />
+                    <Condition Property="IsEnabled" Value="True" />
+                </MultiTrigger.Conditions>
+
+                <Setter Property="Background" TargetName="radioButtonBorder" Value="#F6F8F9" />
+                <Setter Property="BorderBrush" TargetName="radioButtonBorder" Value="#B0BABF" />
+            </MultiTrigger>
+            <!--  CHECKED - FALSE | Disabled  -->
+            <MultiTrigger>
+                <MultiTrigger.Conditions>
+                    <Condition Property="IsChecked" Value="False" />
+                    <Condition Property="IsMouseOver" Value="False" />
+                    <Condition Property="IsPressed" Value="False" />
+                    <Condition Property="IsEnabled" Value="False" />
+                </MultiTrigger.Conditions>
+
+                <Setter Property="Background" TargetName="radioButtonBorder" Value="#F6F8F9" />
+                <Setter Property="BorderBrush" TargetName="radioButtonBorder" Value="#B0BABF" />
+                <Setter Property="Opacity" Value="0.5" />
+            </MultiTrigger>
+            <Trigger Property="attachedProperties:Switcher.Position" Value="First">
+                <Setter Property="attachedProperties:Hint.CornerRadius" Value="6,0,0,6" />
+                <Setter Property="BorderThickness" Value="1,1,0,1" />
+            </Trigger>
+            <Trigger Property="attachedProperties:Switcher.Position" Value="Middle">
+                <Setter Property="attachedProperties:Hint.CornerRadius" Value="0" />
+                <Setter Property="BorderThickness" Value="1,1,0,1" />
+            </Trigger>
+            <Trigger Property="attachedProperties:Switcher.Position" Value="Last">
+                <Setter Property="attachedProperties:Hint.CornerRadius" Value="0,6,6,0" />
+            </Trigger>
+            <!-- <Trigger Property="IsKeyboardFocusWithin" Value="True"> -->
+            <!--     <Setter Property="Visibility" TargetName="Focus" Value="Visible" /> -->
+            <!-- </Trigger> -->
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+    <ControlTemplate TargetType="{x:Type RadioButton}" x:Key="SwitcherOutlineTemplate">
+        <Grid>
+            <Border
+                Background="{StaticResource Pr300}"
+                BorderBrush="{StaticResource Pr300}"
+                BorderThickness="3"
+                CornerRadius="{TemplateBinding attachedProperties:Hint.CornerRadius}"
+                Margin="-3"
+                Name="Focus"
+                Visibility="Collapsed" />
+            <Border
+                Background="{TemplateBinding Background}"
+                BorderBrush="{TemplateBinding BorderBrush}"
+                BorderThickness="{TemplateBinding BorderThickness}"
+                CornerRadius="{TemplateBinding attachedProperties:Hint.CornerRadius}"
+                Focusable="False"
+                Height="{TemplateBinding Height}"
+                HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                Margin="0"
+                Padding="{TemplateBinding Padding}"
+                VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                Width="{TemplateBinding Width}"
+                x:Name="radioButtonBorder">
+                <Grid Focusable="False" x:Name="markGrid">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <controls:Icon
+                        Fill="{TemplateBinding Foreground}"
+                        Focusable="False"
+                        Grid.Column="0"
+                        Height="{TemplateBinding attachedProperties:Switcher.IconHeight}"
+                        Kind="{TemplateBinding attachedProperties:Switcher.LeftIcon}"
+                        Margin="0,0,8,0"
+                        Stroke="{TemplateBinding attachedProperties:Switcher.IconStrokeThickness}"
+                        StrokeColor="{TemplateBinding attachedProperties:Switcher.IconStrokeColor}"
+                        Visibility="{TemplateBinding attachedProperties:Switcher.LeftIcon,
+                                                     Converter={StaticResource IconConverter}}"
+                        Width="{TemplateBinding attachedProperties:Switcher.IconWidth}" />
+                    <ContentPresenter
+                        Focusable="False"
+                        Grid.Column="1"
+                        HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                        Margin="{TemplateBinding Padding}"
+                        RecognizesAccessKey="True"
+                        SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                        TextElement.FontSize="{TemplateBinding FontSize}"
+                        TextElement.Foreground="{TemplateBinding Foreground}"
+                        VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                        x:Name="contentPresenter" />
+                    <controls:Icon
+                        Fill="{TemplateBinding Foreground}"
+                        Focusable="False"
+                        Grid.Column="1"
+                        Height="{TemplateBinding attachedProperties:Switcher.IconHeight}"
+                        HorizontalAlignment="Center"
+                        Kind="{TemplateBinding attachedProperties:Switcher.Icon}"
+                        Stroke="{TemplateBinding attachedProperties:Switcher.IconStrokeThickness}"
+                        StrokeColor="{TemplateBinding attachedProperties:Switcher.IconStrokeColor}"
+                        VerticalAlignment="Center"
+                        Visibility="{TemplateBinding attachedProperties:Switcher.Icon,
+                                                     Converter={StaticResource IconConverter}}"
+                        Width="{TemplateBinding attachedProperties:Switcher.IconWidth}"
+                        x:Name="Icon" />
+                    <controls:Icon
+                        Fill="{TemplateBinding Foreground}"
+                        Focusable="False"
+                        Grid.Column="2"
+                        Height="{TemplateBinding attachedProperties:Switcher.IconHeight}"
+                        Kind="{TemplateBinding attachedProperties:Switcher.RightIcon}"
+                        Margin="8,0,0,0"
+                        Stroke="{TemplateBinding attachedProperties:Switcher.IconStrokeThickness}"
+                        StrokeColor="{TemplateBinding attachedProperties:Switcher.IconStrokeColor}"
+                        Visibility="{TemplateBinding attachedProperties:Switcher.RightIcon,
+                                                     Converter={StaticResource IconConverter}}"
+                        Width="{TemplateBinding attachedProperties:Switcher.IconWidth}" />
+                </Grid>
+            </Border>
+        </Grid>
+        <ControlTemplate.Triggers>
+            <!--  CHECKED - TRUE | Hover  -->
+            <MultiTrigger>
+                <MultiTrigger.Conditions>
+                    <Condition Property="IsChecked" Value="True" />
+                    <Condition Property="IsEnabled" Value="True" />
+                    <Condition Property="IsMouseOver" Value="True" />
+                    <Condition Property="IsPressed" Value="False" />
+                </MultiTrigger.Conditions>
+
+                <Setter Property="Background" TargetName="radioButtonBorder" Value="{StaticResource Pr100}" />
+                <Setter Property="BorderBrush" TargetName="radioButtonBorder" Value="{StaticResource Pr600}" />
+                <Setter Property="Foreground" Value="{StaticResource Pr800}" />
+                <Setter Property="BorderThickness" Value="2" />
+            </MultiTrigger>
+            <!--  CHECKED - TRUE | Pressed  -->
+            <MultiTrigger>
+                <MultiTrigger.Conditions>
+                    <Condition Property="IsChecked" Value="True" />
+                    <Condition Property="IsMouseOver" Value="True" />
+                    <Condition Property="IsPressed" Value="True" />
+                    <Condition Property="IsEnabled" Value="True" />
+                </MultiTrigger.Conditions>
+
+                <Setter Property="Background" TargetName="radioButtonBorder" Value="{StaticResource Pr100}" />
+                <Setter Property="BorderBrush" TargetName="radioButtonBorder" Value="{StaticResource Pr700}" />
+                <Setter Property="Foreground" Value="{StaticResource Pr900}" />
+                <Setter Property="BorderThickness" Value="2" />
+            </MultiTrigger>
+            <!--  CHECKED - TRUE | Default  -->
+            <MultiTrigger>
+                <MultiTrigger.Conditions>
+                    <Condition Property="IsChecked" Value="True" />
+                    <Condition Property="IsMouseOver" Value="False" />
+                    <Condition Property="IsPressed" Value="False" />
+                    <Condition Property="IsEnabled" Value="True" />
+                </MultiTrigger.Conditions>
+
+                <Setter Property="Background" TargetName="radioButtonBorder" Value="{StaticResource Pr100}" />
+                <Setter Property="BorderBrush" TargetName="radioButtonBorder" Value="{StaticResource Pr500}" />
+                <Setter Property="Foreground" Value="{StaticResource Pr700}" />
+                <Setter Property="BorderThickness" Value="2" />
+            </MultiTrigger>
+
+            <!--  CHECKED - FALSE | Hover  -->
+            <MultiTrigger>
+                <MultiTrigger.Conditions>
+                    <Condition Property="IsChecked" Value="False" />
+                    <Condition Property="IsMouseOver" Value="True" />
+                    <Condition Property="IsPressed" Value="False" />
+                    <Condition Property="IsEnabled" Value="True" />
+                </MultiTrigger.Conditions>
+
+                <Setter Property="Background" TargetName="radioButtonBorder" Value="#EEF0F2" />
+                <Setter Property="BorderBrush" TargetName="radioButtonBorder" Value="#9AA6AC" />
+            </MultiTrigger>
+            <!--  CHECKED - FALSE | Pressed  -->
+            <MultiTrigger>
+                <MultiTrigger.Conditions>
+                    <Condition Property="IsChecked" Value="False" />
+                    <Condition Property="IsMouseOver" Value="False" />
+                    <Condition Property="IsPressed" Value="True" />
+                    <Condition Property="IsEnabled" Value="True" />
+                </MultiTrigger.Conditions>
+
+                <Setter Property="Background" TargetName="radioButtonBorder" Value="#E5E9EB" />
+                <Setter Property="BorderBrush" TargetName="radioButtonBorder" Value="#84919A" />
+            </MultiTrigger>
+            <!--  CHECKED - FALSE | Default  -->
+            <MultiTrigger>
+                <MultiTrigger.Conditions>
+                    <Condition Property="IsChecked" Value="False" />
+                    <Condition Property="IsMouseOver" Value="False" />
+                    <Condition Property="IsPressed" Value="False" />
+                    <Condition Property="IsEnabled" Value="True" />
+                </MultiTrigger.Conditions>
+
+                <Setter Property="Background" TargetName="radioButtonBorder" Value="#F6F8F9" />
+                <Setter Property="BorderBrush" TargetName="radioButtonBorder" Value="#B0BABF" />
+            </MultiTrigger>
+            <!--  CHECKED - FALSE | Disabled  -->
+            <MultiTrigger>
+                <MultiTrigger.Conditions>
+                    <Condition Property="IsChecked" Value="False" />
+                    <Condition Property="IsMouseOver" Value="False" />
+                    <Condition Property="IsPressed" Value="False" />
+                    <Condition Property="IsEnabled" Value="False" />
+                </MultiTrigger.Conditions>
+
+                <Setter Property="Background" TargetName="radioButtonBorder" Value="#F6F8F9" />
+                <Setter Property="BorderBrush" TargetName="radioButtonBorder" Value="#B0BABF" />
+                <Setter Property="Opacity" Value="0.5" />
+            </MultiTrigger>
+            <MultiTrigger>
+                <MultiTrigger.Conditions>
+                    <Condition Property="IsChecked" Value="False" />
+                    <Condition Property="attachedProperties:Switcher.Position" Value="First" />
+                </MultiTrigger.Conditions>
+                <Setter Property="BorderThickness" Value="1,1,0,1" />
+            </MultiTrigger>
+            <MultiTrigger>
+                <MultiTrigger.Conditions>
+                    <Condition Property="IsChecked" Value="False" />
+                    <Condition Property="attachedProperties:Switcher.Position" Value="Middle" />
+                </MultiTrigger.Conditions>
+                <Setter Property="BorderThickness" Value="1,1,0,1" />
+            </MultiTrigger>
+            <Trigger Property="attachedProperties:Switcher.Position" Value="First">
+                <Setter Property="attachedProperties:Hint.CornerRadius" Value="6,0,0,6" />
+            </Trigger>
+            <Trigger Property="attachedProperties:Switcher.Position" Value="Middle">
+                <Setter Property="attachedProperties:Hint.CornerRadius" Value="0" />
+            </Trigger>
+            <Trigger Property="attachedProperties:Switcher.Position" Value="Last">
+                <Setter Property="attachedProperties:Hint.CornerRadius" Value="0,6,6,0" />
+            </Trigger>
+            <!-- <Trigger Property="IsKeyboardFocused" Value="True"> -->
+            <!--     <Setter Property="Visibility" TargetName="Focus" Value="Visible" /> -->
+            <!-- </Trigger> -->
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+    <Style
+        BasedOn="{StaticResource SwitcherBase}"
+        TargetType="{x:Type RadioButton}"
+        x:Key="SwitcherFilled">
+        <Setter Property="Template" Value="{StaticResource SwitcherFilledTemplate}" />
+    </Style>
+    <Style
+        BasedOn="{StaticResource SwitcherBase}"
+        TargetType="{x:Type RadioButton}"
+        x:Key="SwitcherOutline">
+        <Setter Property="Template" Value="{StaticResource SwitcherOutlineTemplate}" />
+    </Style>
+</ResourceDictionary>
