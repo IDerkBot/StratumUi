@@ -34,13 +34,26 @@
         <WarningLevel>4</WarningLevel>
     </PropertyGroup>
     <ItemGroup>
+        <Reference Include="ICSharpCode.AvalonEdit, Version=6.0.1.278, Culture=neutral, PublicKeyToken=9cc39be672370310, processorArchitecture=MSIL">
+          <HintPath>..\packages\AvalonEdit.6.0.1\lib\net45\ICSharpCode.AvalonEdit.dll</HintPath>
+        </Reference>
+        <Reference Include="mscorlib" />
+        <Reference Include="ShowMeTheXAML, Version=2.0.0.62, Culture=neutral, processorArchitecture=MSIL">
+          <HintPath>..\packages\ShowMeTheXAML.2.0.0\lib\net472\ShowMeTheXAML.dll</HintPath>
+        </Reference>
+        <Reference Include="ShowMeTheXAML.AvalonEdit, Version=2.0.0.62, Culture=neutral, processorArchitecture=MSIL">
+          <HintPath>..\packages\ShowMeTheXAML.AvalonEdit.2.0.0\lib\net472\ShowMeTheXAML.AvalonEdit.dll</HintPath>
+        </Reference>
         <Reference Include="System" />
         <Reference Include="System.Core" />
         <Reference Include="System.Data" />
+        <Reference Include="System.Numerics" />
+        <Reference Include="System.Windows.Forms" />
         <Reference Include="System.Xml" />
         <Reference Include="System.Xaml">
             <RequiredTargetFramework>4.0</RequiredTargetFramework>
         </Reference>
+        <Reference Include="System.Xml.Linq" />
         <Reference Include="WindowsBase" />
         <Reference Include="PresentationCore" />
         <Reference Include="PresentationFramework" />
@@ -50,6 +63,52 @@
             <Generator>MSBuild:Compile</Generator>
             <SubType>Designer</SubType>
         </ApplicationDefinition>
+        <Compile Include="Models\Person.cs" />
+        <Compile Include="ViewModel\Base\BaseViewModel.cs" />
+        <Compile Include="ViewModel\ButtonsViewModel.cs" />
+        <Compile Include="ViewModel\CheckBoxViewModel.cs" />
+        <Compile Include="ViewModel\ColorViewModel.cs" />
+        <Compile Include="ViewModel\IconPackViewModel.cs" />
+        <Compile Include="ViewModel\MainViewModel.cs" />
+        <Compile Include="ViewModel\TableViewModel.cs" />
+        <Compile Include="ViewModel\TextBoxViewModel.cs" />
+        <Compile Include="Views\Badges.xaml.cs" />
+        <Compile Include="Views\Breadcrumbs.xaml.cs" />
+        <Compile Include="Views\Buttons.xaml.cs" />
+        <Compile Include="Views\CheckBoxes.xaml.cs" />
+        <Compile Include="Views\ColorPicker.xaml.cs" />
+        <Compile Include="Views\Colors.xaml.cs" />
+        <Compile Include="Views\ComboBoxes.xaml.cs" />
+        <Compile Include="Views\DatePicker.xaml.cs" />
+        <Compile Include="Views\DisplayControls.xaml.cs" />
+        <Compile Include="Views\DocumentViewer.xaml.cs" />
+        <Compile Include="Views\Expanders.xaml.cs" />
+        <Compile Include="Views\Home.xaml.cs" />
+        <Compile Include="Views\IconPack.xaml.cs" />
+        <Compile Include="Views\InlineAlerts.xaml.cs" />
+        <Compile Include="Views\Labels.xaml.cs" />
+        <Compile Include="Views\ListViews.xaml.cs" />
+        <Compile Include="Views\PasswordBox.xaml.cs" />
+        <Compile Include="Views\ProgressBars.xaml.cs" />
+        <Compile Include="Views\RadioButtons.xaml.cs" />
+        <Compile Include="Views\Rangers.xaml.cs" />
+        <Compile Include="Views\RichTextBoxes.xaml.cs" />
+        <Compile Include="Views\ScrollBars.xaml.cs" />
+        <Compile Include="Views\Shadows.xaml.cs" />
+        <Compile Include="Views\Sliders.xaml.cs" />
+        <Compile Include="Views\Steppers.xaml.cs" />
+        <Compile Include="Views\Switchers.xaml.cs" />
+        <Compile Include="Views\Tables.xaml.cs" />
+        <Compile Include="Views\Tabs.xaml.cs" />
+        <Compile Include="Views\TextBox.xaml.cs" />
+        <Compile Include="Views\TimeInputs.xaml.cs" />
+        <Compile Include="Views\ToggleButtons.xaml.cs" />
+        <Compile Include="Views\ToolBar.xaml.cs" />
+        <Compile Include="Views\Tooltips.xaml.cs" />
+        <Compile Include="XamlDisplayEx.cs" />
+        <Page Include="Dark.xaml" />
+        <Page Include="English.xaml" />
+        <Page Include="Default.xaml" />
         <Page Include="MainWindow.xaml">
             <Generator>MSBuild:Compile</Generator>
             <SubType>Designer</SubType>
@@ -62,6 +121,40 @@
             <DependentUpon>MainWindow.xaml</DependentUpon>
             <SubType>Code</SubType>
         </Compile>
+        <Page Include="Russian.xaml" />
+        <Page Include="Views\Badges.xaml" />
+        <Page Include="Views\Breadcrumbs.xaml" />
+        <Page Include="Views\Buttons.xaml" />
+        <Page Include="Views\CheckBoxes.xaml" />
+        <Page Include="Views\ColorPicker.xaml" />
+        <Page Include="Views\Colors.xaml" />
+        <Page Include="Views\ComboBoxes.xaml" />
+        <Page Include="Views\DatePicker.xaml" />
+        <Page Include="Views\DisplayControls.xaml" />
+        <Page Include="Views\DocumentViewer.xaml" />
+        <Page Include="Views\Expanders.xaml" />
+        <Page Include="Views\Home.xaml" />
+        <Page Include="Views\IconPack.xaml" />
+        <Page Include="Views\InlineAlerts.xaml" />
+        <Page Include="Views\Labels.xaml" />
+        <Page Include="Views\ListViews.xaml" />
+        <Page Include="Views\PasswordBox.xaml" />
+        <Page Include="Views\ProgressBars.xaml" />
+        <Page Include="Views\RadioButtons.xaml" />
+        <Page Include="Views\Rangers.xaml" />
+        <Page Include="Views\RichTextBoxes.xaml" />
+        <Page Include="Views\ScrollBars.xaml" />
+        <Page Include="Views\Shadows.xaml" />
+        <Page Include="Views\Sliders.xaml" />
+        <Page Include="Views\Steppers.xaml" />
+        <Page Include="Views\Switchers.xaml" />
+        <Page Include="Views\Tables.xaml" />
+        <Page Include="Views\Tabs.xaml" />
+        <Page Include="Views\TextBox.xaml" />
+        <Page Include="Views\TimeInputs.xaml" />
+        <Page Include="Views\ToggleButtons.xaml" />
+        <Page Include="Views\ToolBar.xaml" />
+        <Page Include="Views\Tooltips.xaml" />
     </ItemGroup>
     <ItemGroup>
         <Compile Include="Properties\AssemblyInfo.cs">
@@ -79,9 +172,23 @@
     </ItemGroup>
     <ItemGroup>
         <None Include="App.config" />
+        <None Include="packages.config" />
     </ItemGroup>
     <ItemGroup>
       <Folder Include="obj\Debug" />
     </ItemGroup>
+    <ItemGroup>
+      <ProjectReference Include="..\StratumUi.Wpf.Framework\StratumUi.Wpf.Framework.csproj">
+        <Project>{6c2faec1-b2d4-4c00-bd89-dd7122c5f43a}</Project>
+        <Name>StratumUi.Wpf.Framework</Name>
+      </ProjectReference>
+    </ItemGroup>
     <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+    <Import Project="..\packages\Uno.SourceGenerationTasks.4.0.2\build\netstandard1.0\Uno.SourceGenerationTasks.targets" Condition="Exists('..\packages\Uno.SourceGenerationTasks.4.0.2\build\netstandard1.0\Uno.SourceGenerationTasks.targets')" />
+    <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+      <PropertyGroup>
+        <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105.The missing file is {0}.</ErrorText>
+      </PropertyGroup>
+      <Error Condition="!Exists('..\packages\Uno.SourceGenerationTasks.4.0.2\build\netstandard1.0\Uno.SourceGenerationTasks.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Uno.SourceGenerationTasks.4.0.2\build\netstandard1.0\Uno.SourceGenerationTasks.targets'))" />
+    </Target>
 </Project>

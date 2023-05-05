@@ -1,0 +1,77 @@
+﻿<UserControl
+    d:DesignHeight="1000"
+    d:DesignWidth="1000"
+    mc:Ignorable="d"
+    x:Class="Arion.Theme.Test.Views.DisplayControls"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:controls="clr-namespace:StratumUi.Wpf.Controls;assembly=StratumUi.Wpf.Framework"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:Arion.Theme.Test.Views"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:smtx="clr-namespace:ShowMeTheXAML;assembly=ShowMeTheXAML"
+    xmlns:wpf="clr-namespace:StratumUi.Wpf.AttachedProperties;assembly=StratumUi.Wpf.Framework"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <Label
+            Content="Display control"
+            FontSize="32"
+            Grid.Column="0"
+            Grid.Row="0"
+            HorizontalAlignment="Left"
+            Margin="10"
+            Padding="0"
+            Style="{DynamicResource Lbl}"
+            VerticalAlignment="Top"
+            Width="Auto" />
+
+        <smtx:XamlDisplay
+            Grid.Column="0"
+            Grid.Row="1"
+            UniqueKey="DisplayControl1">
+            <controls:DisplayControl
+                Height="90"
+                Text="кВ"
+                Width="170" />
+        </smtx:XamlDisplay>
+
+        <smtx:XamlDisplay
+            Grid.Column="0"
+            Grid.Row="2"
+            UniqueKey="DisplayControl2">
+            <controls:DisplayControlFull
+                Label="кВ"
+                Margin="5"
+                Maximum="320"
+                Minimum="0"
+                QuickChange="True"
+                Step="1"
+                TargetValueChange="DisplayControlFull_OnTargetValueChange" />
+        </smtx:XamlDisplay>
+
+        <smtx:XamlDisplay
+            Grid.Column="0"
+            Grid.Row="3"
+            UniqueKey="DisplayControl3">
+            <controls:DisplayControlFull
+                Label="мА"
+                Margin="5"
+                Maximum="22.5"
+                Minimum="0"
+                QuickChange="True"
+                Round="1"
+                Step=".1"
+                TargetValueChange="DisplayControlFull_OnTargetValueChange" />
+        </smtx:XamlDisplay>
+    </Grid>
+</UserControl>
