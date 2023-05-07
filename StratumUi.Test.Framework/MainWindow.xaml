@@ -1,43 +1,42 @@
 ﻿<Window
-    Height="1080"
-    Left="600"
-    Title="MainWindow"
-    Top="0"
-    Width="1920"
-    WindowState="Maximized"
-    mc:Ignorable="d"
     x:Class="Arion.Theme.Test.MainWindow"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:controls="clr-namespace:StratumUi.Wpf.Controls;assembly=StratumUi.Wpf.Framework"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:views="clr-namespace:Arion.Theme.Test.Views"
     xmlns:views1="clr-namespace:StratumUi.Test.Framework.Views"
     xmlns:vm="clr-namespace:StratumUi.Test.Framework.ViewModel"
     xmlns:wpf="clr-namespace:StratumUi.Wpf.AttachedProperties;assembly=StratumUi.Wpf.Framework"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    Title="MainWindow"
+    Width="1920"
+    Height="1080"
+    Left="600"
+    Top="0"
+    WindowState="Maximized"
+    mc:Ignorable="d">
     <Window.DataContext>
         <vm:MainViewModel />
     </Window.DataContext>
     <Grid>
         <TabControl
-            Background="{StaticResource Pr200}"
             Name="TbMain"
+            Background="{StaticResource Pr200}"
             TabStripPlacement="Left">
             <TabItem Header="Home">
-                <views:Home />
+                <views1:Home />
             </TabItem>
             <!--  BREADCRUMB  -->
             <TabItem Header="{DynamicResource Breadcrumbs}">
-                <views:Breadcrumbs />
+                <views1:Breadcrumbs />
             </TabItem>
             <!--  BUTTONS  -->
             <TabItem Header="{DynamicResource Buttons}">
-                <views:Buttons />
+                <views1:Buttons />
             </TabItem>
             <!--  CHECK BOXES  -->
             <TabItem Header="{DynamicResource CheckBoxes}">
-                <views:CheckBoxes />
+                <views1:CheckBoxes />
             </TabItem>
             <!--  COLORS  -->
             <TabItem Header="{DynamicResource Colors}">
@@ -45,89 +44,89 @@
             </TabItem>
             <!--  COMBO BOXES  -->
             <TabItem Header="{DynamicResource ComboBoxes}">
-                <views:ComboBoxes />
+                <views1:ComboBoxes />
             </TabItem>
             <TabItem Header="{DynamicResource DocumentViewer}">
                 <views1:DocumentViewer />
             </TabItem>
             <!--  DISPLAY CONTROLS  -->
             <TabItem Header="{DynamicResource DisplayControls}">
-                <views:DisplayControls />
+                <views1:DisplayControls />
             </TabItem>
             <!--  EXPANDERS  -->
             <TabItem Header="{DynamicResource Expanders}">
-                <views:Expanders />
+                <views1:Expanders />
             </TabItem>
             <!--  INLINE ALERTS  -->
             <TabItem Header="{DynamicResource InlineAlerts}">
-                <views:InlineAlerts />
+                <views1:InlineAlerts />
             </TabItem>
             <!--  LABELS  -->
             <TabItem Header="{DynamicResource Labels}">
-                <views:Labels />
+                <views1:Labels />
             </TabItem>
             <!--  LISTVIEW  -->
             <TabItem Header="ListView">
-                <views:ListViews />
+                <views1:ListViews />
             </TabItem>
             <!--  Pack Icon  -->
             <TabItem Header="{DynamicResource IconPack}">
-                <views:IconPack />
+                <views1:IconPack />
             </TabItem>
             <!--  PROGRESS BAR  -->
             <TabItem Header="{DynamicResource ProgressBars}">
-                <views:ProgressBars />
+                <views1:ProgressBars />
             </TabItem>
             <!--  RADIO BUTTONS  -->
             <TabItem Header="{DynamicResource RadioButtons}">
-                <views:RadioButtons />
+                <views1:RadioButtons />
             </TabItem>
             <!--  RANGERS  -->
             <TabItem Header="{DynamicResource Rangers}">
-                <views:Rangers />
+                <views1:Rangers />
             </TabItem>
             <!--  SCROLL BARS  -->
             <TabItem Header="{DynamicResource Scrollbars}">
-                <views:ScrollBars />
+                <views1:ScrollBars />
             </TabItem>
             <!--  SHADOWS  -->
             <TabItem Header="{DynamicResource Shadows}">
-                <views:Shadows />
+                <views1:Shadows />
             </TabItem>
             <!--  SLIDERS  -->
             <TabItem Header="Slider">
-                <views:Sliders />
+                <views1:Sliders />
             </TabItem>
             <!--  STEPPERS  -->
             <TabItem Header="{DynamicResource Steppers}">
-                <views:Steppers />
+                <views1:Steppers />
             </TabItem>
             <!--  TABS  -->
             <TabItem Header="{DynamicResource Tabs}">
-                <views:Tabs />
+                <views1:Tabs />
             </TabItem>
             <!--  TABLES  -->
             <TabItem Header="{DynamicResource Tables}">
-                <views:Tables />
+                <views1:Tables />
             </TabItem>
             <!--  TEXT BOXES  -->
             <TabItem Header="{DynamicResource TextBoxes}">
-                <views:TextBox />
+                <views1:TextBox />
             </TabItem>
             <!--  TIME INPUT  -->
             <TabItem Header="{DynamicResource TimeInputs}">
-                <views:TimeInputs />
+                <views1:TimeInputs />
             </TabItem>
             <!--  TOGGLE BUTTONS  -->
             <TabItem Header="{DynamicResource ToggleButtons}">
-                <views:ToggleButtons />
+                <views1:ToggleButtons />
             </TabItem>
             <!--  TOOLTIPS  -->
             <TabItem Header="{DynamicResource Tooltips}">
-                <views:Tooltips />
+                <views1:Tooltips />
             </TabItem>
             <TabItem Header="Badges" IsSelected="True">
-                <views:Badges />
+                <views1:Badges />
             </TabItem>
 
             <TabItem Header="Modal">
@@ -146,74 +145,74 @@
                         <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
                     <Label
-                        Content="Modal"
-                        FontSize="32"
+                        Grid.Row="0"
                         Grid.Column="0"
                         Grid.ColumnSpan="2"
-                        Grid.Row="0"
-                        HorizontalAlignment="Left"
+                        Width="Auto"
                         Margin="10"
                         Padding="0"
-                        Style="{StaticResource Lbl}"
+                        HorizontalAlignment="Left"
                         VerticalAlignment="Top"
-                        Width="Auto" />
+                        Content="Modal"
+                        FontSize="32"
+                        Style="{StaticResource Lbl}" />
 
                     <Label
+                        Grid.Row="1"
+                        Grid.Column="0"
+                        VerticalAlignment="Center"
                         Content="Info"
-                        FontSize="18"
-                        Grid.Column="0"
-                        Grid.Row="1"
-                        VerticalAlignment="Center" />
+                        FontSize="18" />
                     <Label
-                        Content="Danger"
-                        FontSize="18"
-                        Grid.Column="0"
                         Grid.Row="2"
-                        VerticalAlignment="Center" />
-                    <Label
-                        Content="Warning"
-                        FontSize="18"
                         Grid.Column="0"
+                        VerticalAlignment="Center"
+                        Content="Danger"
+                        FontSize="18" />
+                    <Label
                         Grid.Row="3"
-                        VerticalAlignment="Center" />
-                    <Label
-                        Content="Success"
-                        FontSize="18"
                         Grid.Column="0"
+                        VerticalAlignment="Center"
+                        Content="Warning"
+                        FontSize="18" />
+                    <Label
                         Grid.Row="4"
-                        VerticalAlignment="Center" />
-                    <Label
-                        Content="NoIcon"
-                        FontSize="18"
                         Grid.Column="0"
+                        VerticalAlignment="Center"
+                        Content="Success"
+                        FontSize="18" />
+                    <Label
                         Grid.Row="5"
-                        VerticalAlignment="Center" />
+                        Grid.Column="0"
+                        VerticalAlignment="Center"
+                        Content="NoIcon"
+                        FontSize="18" />
 
                     <Button
-                        Content="Click to open ModalDialog"
-                        Grid.Column="1"
                         Grid.Row="1"
-                        Margin="5" />
-                    <Button
-                        Content="Click to open ModalDialog"
                         Grid.Column="1"
+                        Margin="5"
+                        Content="Click to open ModalDialog" />
+                    <Button
                         Grid.Row="2"
-                        Margin="5" />
-                    <Button
-                        Content="Click to open ModalDialog"
                         Grid.Column="1"
+                        Margin="5"
+                        Content="Click to open ModalDialog" />
+                    <Button
                         Grid.Row="3"
-                        Margin="5" />
-                    <Button
-                        Content="Click to open ModalDialog"
                         Grid.Column="1"
+                        Margin="5"
+                        Content="Click to open ModalDialog" />
+                    <Button
                         Grid.Row="4"
-                        Margin="5" />
-                    <Button
-                        Content="Click to open ModalDialog"
                         Grid.Column="1"
+                        Margin="5"
+                        Content="Click to open ModalDialog" />
+                    <Button
                         Grid.Row="5"
-                        Margin="5" />
+                        Grid.Column="1"
+                        Margin="5"
+                        Content="Click to open ModalDialog" />
                 </Grid>
             </TabItem>
 
@@ -255,41 +254,41 @@
                     </Menu>
 
                     <Label
-                        Content="Menu"
-                        FontSize="32"
+                        Grid.Row="0"
                         Grid.Column="0"
                         Grid.ColumnSpan="2"
-                        Grid.Row="0"
-                        HorizontalAlignment="Left"
+                        Width="Auto"
                         Margin="10"
                         Padding="0"
-                        Style="{StaticResource Lbl}"
+                        HorizontalAlignment="Left"
                         VerticalAlignment="Top"
-                        Width="Auto" />
+                        Content="Menu"
+                        FontSize="32"
+                        Style="{StaticResource Lbl}" />
 
                 </Grid>
             </TabItem>
 
             <TabItem Header="Date picker">
-                <views:DatePicker />
+                <views1:DatePicker />
             </TabItem>
             <TabItem Header="Rich Text box">
-                <views:RichTextBoxes />
+                <views1:RichTextBoxes />
             </TabItem>
             <TabItem Header="ToolBars">
-                <views:ToolBar />
+                <views1:ToolBar />
             </TabItem>
         </TabControl>
         <Button
             HorizontalAlignment="Left"
-            Style="{StaticResource BtnOutline}"
             VerticalAlignment="Bottom"
-            wpf:Button.Icon="ThemeLightDark" />
+            wpf:Button.Icon="ThemeLightDark"
+            Style="{StaticResource BtnOutline}" />
         <Button
-            HorizontalAlignment="Left"
             Margin="50,0,0,0"
-            Style="{StaticResource BtnOutline}"
+            HorizontalAlignment="Left"
             VerticalAlignment="Bottom"
-            wpf:Button.Icon="Language" />
+            wpf:Button.Icon="Language"
+            Style="{StaticResource BtnOutline}" />
     </Grid>
 </Window>

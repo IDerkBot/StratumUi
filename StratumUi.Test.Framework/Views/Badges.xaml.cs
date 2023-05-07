@@ -2,7 +2,7 @@
 using System.Windows;
 using System.Windows.Controls;
 
-namespace Arion.Theme.Test.Views
+namespace StratumUi.Test.Framework.Views
 {
     public partial class Badges : UserControl
     {

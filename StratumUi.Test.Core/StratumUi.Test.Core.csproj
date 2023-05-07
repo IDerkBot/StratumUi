@@ -11,4 +11,20 @@
       <Folder Include="obj\Debug\net6.0-windows" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Compile Remove="obj\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <EmbeddedResource Remove="obj\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Remove="obj\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Page Remove="obj\**" />
+    </ItemGroup>
+
 </Project>

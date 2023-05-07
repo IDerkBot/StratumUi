@@ -1,12 +1,13 @@
 ﻿using System.Windows.Controls;
 
-namespace Arion.Theme.Test.Views
+namespace StratumUi.Test.Framework.Views
 {
     public partial class DatePicker : UserControl
     {
         public DatePicker()
         {
             InitializeComponent();
+            DpDatePicker.BlackoutDates.AddDatesInPast();
         }
     }
 }

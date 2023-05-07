@@ -7,7 +7,32 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <Folder Include="Extensions" />
       <Folder Include="obj\Debug\net6.0-windows" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Page Remove="Themes\Elements\DataGrid.xaml" />
+      <Page Remove="Themes\Light.xaml" />
+      <Page Remove="Themes\Elements\Shadow.xaml" />
+      <Page Remove="Themes\Elements\TextBox.xaml" />
+      <Page Update="Controls\ModalDialog.xaml">
+        <Generator>MSBuild:Compile</Generator>
+        <XamlRuntime>Wpf</XamlRuntime>
+        <SubType>Designer</SubType>
+      </Page>
+    </ItemGroup>
+
+    <ItemGroup>
+      <Compile Remove="Extensions\IHintProxy.cs" />
+      <Compile Remove="Extensions\HintProxyFabric.TextBox.cs" />
+      <Compile Remove="Converters\FloatingHintOffsetCalculationConverter.cs" />
+      <Compile Remove="Converters\FallbackBrushConverter.cs" />
+      <Compile Remove="Converters\DoubleToCornerRadiusConverter.cs" />
+      <Compile Remove="Converters\ComboBoxClearButtonMarginConverter.cs" />
+      <Compile Remove="Extensions\SmartHint.cs" />
+      <Compile Remove="Extensions\ScrollViewerAssist.cs" />
+      <Compile Remove="Extensions\TextFieldAssist.cs" />
     </ItemGroup>
 
     <ItemGroup>
@@ -215,7 +240,6 @@
 
     <ItemGroup>
       <Content Include="Readme.md" />
-      <Content Include="StratumUi.Wpf.Core.nuspec" />
     </ItemGroup>
 
 </Project>

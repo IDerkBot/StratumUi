@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Windows.Controls;
-using Arion.Style.Controls;
+using StratumUi.Wpf.Controls;
 
-namespace Arion.Theme.Test.Views
+namespace StratumUi.Test.Framework.Views
 {
     public partial class InlineAlerts : UserControl
     {

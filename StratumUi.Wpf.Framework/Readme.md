@@ -1,7 +1,7 @@
 # Arion style
 
-[![nuget](https://img.shields.io/nuget/v/Arion.Style)](https://www.nuget.org/packages/Arion.Style)
-[![nuget(download)](https://img.shields.io/nuget/dt/Arion.Style)](https://www.nuget.org/packages/Arion.Style)
+[![nuget](https://img.shields.io/nuget/v/StratumUi)](https://www.nuget.org/packages/StratumUi)
+[![nuget(download)](https://img.shields.io/nuget/dt/StratumUi)](https://www.nuget.org/packages/StratumUi)
 
 ## Библиотека стилей
 
@@ -9,16 +9,16 @@ ___
 
 ## Подключение
 
-В менеджере пакетов Nuget находите пакет `Arion.Style` и устанавливаете его
+В менеджере пакетов Nuget находите пакет `StratumUi` и устанавливаете его
 
-![Arion.Style в менеджере пакетов nuget](https://raw.githubusercontent.com/IDerkBot/Arion.Style/master/FilesForReadme/Files/Artion.Style.Images/Arion.Style.png "Arion.Style в менеджере пакетов nuget")
+![StratumUi в менеджере пакетов nuget](https://raw.githubusercontent.com/IDerkBot/Arion.Style/master/FilesForReadme/Files/Artion.Style.Images/Arion.Style.png "Arion.Style в менеджере пакетов nuget")
 
 В документ ```App.xaml``` добавляете словарь
 
 ```xaml
 <ResourceDictionary>
     <ResourceDictionary.MergedDictionaries>
-        <ResourceDictionary Source="/Arion.Style;component/ArionUiTheme.xaml" />
+        <ResourceDictionary Source="/StratumUi.Wpf.Framework;component/Default.xaml" />
     </ResourceDictionary.MergedDictionaries>
 </ResourceDictionary>
 ```
@@ -56,7 +56,7 @@ ___
 
 ### Button
 
-Есть несколько типов стилей кнопок `Filled`, `Outline`, `Text`
+Есть несколько типов стилей кнопок `BtnFilled`, `BtnOutline`, `BtnText`
 
 Filled - Закрашенные без рамок
 Outline - Белые кнопки с рамками
@@ -66,7 +66,7 @@ Text - Белые кнопки без рамок, на белом фоне по�
 
 Доступные стили для версии 0.3.0
 
-| Default             | Filled                                                                                                                                                                    | Outline                                                                                                                                                                     | Text                                                                                                                                                          |
+| Default             | BtnFilled                                                                                                                                                                 | BtnOutline                                                                                                                                                                  | BtnText                                                                                                                                                       |
 |---------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Standard            | ![Кнопка со стилем FilledLg](https://raw.githubusercontent.com/IDerkBot/Arion.Style/master/FilesForReadme/Files/Artion.Style.Images/Button/Filled/Default/Button.png)     | ![Кнопка со стилем OutlineLg](https://raw.githubusercontent.com/IDerkBot/Arion.Style/master/FilesForReadme/Files/Artion.Style.Images/Button/Outline/Default/Button.png)     | ![Кнопка со стилем TextLg](https://raw.githubusercontent.com/IDerkBot/Arion.Style/master/FilesForReadme/Files/Artion.Style.Images/Button/Text/Button.png)     |
 | Left icon           | ![Кнопка со стилем FilledLg](https://raw.githubusercontent.com/IDerkBot/Arion.Style/master/FilesForReadme/Files/Artion.Style.Images/Button/Filled/Default/LeftIcon.png)   | ![Кнопка со стилем OutlineLg](https://raw.githubusercontent.com/IDerkBot/Arion.Style/master/FilesForReadme/Files/Artion.Style.Images/Button/Outline/Default/LeftIcon.png)   | ![Кнопка со стилем TextLg](https://raw.githubusercontent.com/IDerkBot/Arion.Style/master/FilesForReadme/Files/Artion.Style.Images/Button/Text/LeftIcon.png)   |
@@ -74,10 +74,6 @@ Text - Белые кнопки без рамок, на белом фоне по�
 | Center icon         | ![Кнопка со стилем FilledLg](https://raw.githubusercontent.com/IDerkBot/Arion.Style/master/FilesForReadme/Files/Artion.Style.Images/Button/Filled/Default/Icon.png)       | ![Кнопка со стилем OutlineLg](https://raw.githubusercontent.com/IDerkBot/Arion.Style/master/FilesForReadme/Files/Artion.Style.Images/Button/Outline/Default/Icon.png)       | ![Кнопка со стилем TextLg](https://raw.githubusercontent.com/IDerkBot/Arion.Style/master/FilesForReadme/Files/Artion.Style.Images/Button/Text/Icon.png)       |
 | Linear progress bar | ![Кнопка со стилем FilledLg](https://raw.githubusercontent.com/IDerkBot/Arion.Style/master/FilesForReadme/Files/Artion.Style.Images/Button/Filled/Default/LinearLoad.png) | ![Кнопка со стилем OutlineLg](https://raw.githubusercontent.com/IDerkBot/Arion.Style/master/FilesForReadme/Files/Artion.Style.Images/Button/Outline/Default/LinearLoad.png) | ![Кнопка со стилем TextLg](https://raw.githubusercontent.com/IDerkBot/Arion.Style/master/FilesForReadme/Files/Artion.Style.Images/Button/Text/LinearLoad.png) |
 | Circle progress bar | ![Кнопка со стилем FilledLg](https://raw.githubusercontent.com/IDerkBot/Arion.Style/master/FilesForReadme/Files/Artion.Style.Images/Button/Filled/Default/CircleLoad.png) | ![Кнопка со стилем OutlineLg](https://raw.githubusercontent.com/IDerkBot/Arion.Style/master/FilesForReadme/Files/Artion.Style.Images/Button/Outline/Default/CircleLoad.png) | ![Кнопка со стилем TextLg](https://raw.githubusercontent.com/IDerkBot/Arion.Style/master/FilesForReadme/Files/Artion.Style.Images/Button/Text/CircleLoad.png) |
-
-`BtnFilled`,
-`BtnOutline`,
-`BtnText`,
 
 ___
 
@@ -214,8 +210,6 @@ ToggleButton имеет два стиля
 ---
 
 ### Controllers
-
-[Arion.Style.Controls](https://github.com/IDerkBot/Arion.Style/tree/master/Arion.Style.Controls)
 
 ### Attached
 

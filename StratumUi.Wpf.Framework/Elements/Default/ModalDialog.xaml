@@ -1,0 +1,68 @@
+<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="clr-namespace:StratumUi.Wpf.Controls">
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="FontFamily.xaml" />
+        <ResourceDictionary Source="Colors.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+
+    <Style TargetType="{x:Type controls:ModalDialog}">
+        <Style.Triggers>
+            <Trigger Property="Type" Value="Info">
+                <Setter Property="ModalIcon" Value="InfoCircle" />
+                <Setter Property="ModalIconColor" Value="{StaticResource Pr500}" />
+            </Trigger>
+            <Trigger Property="Type" Value="Danger">
+                <Setter Property="ModalIcon" Value="Alert" />
+                <Setter Property="ModalIconColor" Value="{StaticResource R500}" />
+            </Trigger>
+            <Trigger Property="Type" Value="Warning">
+                <Setter Property="ModalIcon" Value="Alert" />
+                <Setter Property="ModalIconColor" Value="{StaticResource Y600}" />
+            </Trigger>
+            <Trigger Property="Type" Value="Success">
+                <Setter Property="ModalIcon" Value="SuccessCircle" />
+                <Setter Property="ModalIconColor" Value="{StaticResource G500}" />
+            </Trigger>
+            <Trigger Property="Type" Value="NoIcon" />
+
+            <Trigger Property="Buttons" Value="Ok">
+                <Setter Property="VisibleOk" Value="Visible" />
+                <Setter Property="VisibleYes" Value="Collapsed" />
+                <Setter Property="VisibleNo" Value="Collapsed" />
+                <Setter Property="VisibleCancel" Value="Collapsed" />
+            </Trigger>
+            <Trigger Property="Buttons" Value="Yes">
+                <Setter Property="VisibleOk" Value="Collapsed" />
+                <Setter Property="VisibleYes" Value="Visible" />
+                <Setter Property="VisibleNo" Value="Collapsed" />
+                <Setter Property="VisibleCancel" Value="Collapsed" />
+            </Trigger>
+            <Trigger Property="Buttons" Value="No">
+                <Setter Property="VisibleOk" Value="Collapsed" />
+                <Setter Property="VisibleYes" Value="Collapsed" />
+                <Setter Property="VisibleNo" Value="Visible" />
+                <Setter Property="VisibleCancel" Value="Collapsed" />
+            </Trigger>
+            <Trigger Property="Buttons" Value="Cancel">
+                <Setter Property="VisibleOk" Value="Collapsed" />
+                <Setter Property="VisibleYes" Value="Collapsed" />
+                <Setter Property="VisibleNo" Value="Collapsed" />
+                <Setter Property="VisibleCancel" Value="Visible" />
+            </Trigger>
+            <Trigger Property="Buttons" Value="YesNo">
+                <Setter Property="VisibleOk" Value="Collapsed" />
+                <Setter Property="VisibleYes" Value="Visible" />
+                <Setter Property="VisibleNo" Value="Visible" />
+                <Setter Property="VisibleCancel" Value="Collapsed" />
+            </Trigger>
+            <Trigger Property="Buttons" Value="OkCancel">
+                <Setter Property="VisibleOk" Value="Visible" />
+                <Setter Property="VisibleYes" Value="Collapsed" />
+                <Setter Property="VisibleNo" Value="Collapsed" />
+                <Setter Property="VisibleCancel" Value="Visible" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+</ResourceDictionary>

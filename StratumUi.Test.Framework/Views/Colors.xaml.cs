@@ -1,6 +1,7 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using StratumUi.Wpf.Controls;
 
 namespace StratumUi.Test.Framework.Views
 {

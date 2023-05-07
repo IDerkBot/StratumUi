@@ -17,111 +17,9 @@ namespace StratumUi.Wpf.Controls
             Caption = caption;
             Buttons = buttons;
             Type = type;
-            
-            switch(Buttons)
-            {
-                case ModalDialogButtons.Ok:
-                {
-                    BtnOk.Visibility = Visibility.Visible;
-                    BtnYes.Visibility = Visibility.Collapsed;
-                    BtnNo.Visibility = Visibility.Collapsed;
-                    BtnCancel.Visibility = Visibility.Collapsed;
-                    break;
-                }
-                case ModalDialogButtons.Yes:
-                {
-                    BtnOk.Visibility = Visibility.Collapsed;
-                    BtnYes.Visibility = Visibility.Visible;
-                    BtnNo.Visibility = Visibility.Collapsed;
-                    BtnCancel.Visibility = Visibility.Collapsed;
-                    break;
-                }
-                case ModalDialogButtons.YesNo:
-                {
-                    BtnOk.Visibility = Visibility.Collapsed;
-                    BtnYes.Visibility = Visibility.Visible;
-                    BtnNo.Visibility = Visibility.Visible;
-                    BtnCancel.Visibility = Visibility.Collapsed;
-                    break;
-                }
-                case ModalDialogButtons.No:
-                {
-                    BtnOk.Visibility = Visibility.Collapsed;
-                    BtnYes.Visibility = Visibility.Collapsed;
-                    BtnNo.Visibility = Visibility.Visible;
-                    BtnCancel.Visibility = Visibility.Collapsed;
-                    break;
-                }
-                case ModalDialogButtons.Cancel:
-                {
-                    BtnOk.Visibility = Visibility.Collapsed;
-                    BtnYes.Visibility = Visibility.Collapsed;
-                    BtnNo.Visibility = Visibility.Collapsed;
-                    BtnCancel.Visibility = Visibility.Visible;
-                    break;
-                }
-                case ModalDialogButtons.OkCancel:
-                {
-                    BtnOk.Visibility = Visibility.Visible;
-                    BtnYes.Visibility = Visibility.Collapsed;
-                    BtnNo.Visibility = Visibility.Collapsed;
-                    BtnCancel.Visibility = Visibility.Visible;
-                    break;
-                }
-            }
-
-            switch (Type)
-            {
-                case ModalDialogType.Info:
-                {
-                    ModalIcon = EIcons.InfoCircle;
-                    ModalIconColor = new SolidColorBrush(Color.FromRgb(0x40, 0x94, 0xF7));
-                    break;
-                }
-                case ModalDialogType.Danger:
-                {
-                    ModalIcon = EIcons.Alert;
-                    ModalIconColor = new SolidColorBrush(Color.FromRgb(0xF7, 0x66, 0x59));
-                    break;
-                }
-                case ModalDialogType.Warning:
-                {
-                    ModalIcon = EIcons.Alert;
-                    ModalIconColor = new SolidColorBrush(Color.FromRgb(0xF8, 0xC5, 0x1B));
-                    break;
-                }
-                case ModalDialogType.Success:
-                {
-                    ModalIcon = EIcons.SuccessCircle;
-                    ModalIconColor = new SolidColorBrush(Color.FromRgb(0x47, 0xD1, 0x6C));
-                    break;
-                }
-                case ModalDialogType.NoIcon:
-                {
-                    ModalIconVisibility = Visibility.Collapsed;
-                    break;
-                }
-            }
         }
 
-        private static bool CheckExist()
-        {
-            return _modalDialog != null;
-        }
-
-        public static ModalDialogResult Show( string caption, string message = "", ModalDialogButtons buttons = ModalDialogButtons.Ok, ModalDialogType type = ModalDialogType.Info,
-            Window windowForBlur = null)
-        {
-            if (CheckExist()) return ModalDialogResult.Cancel;
-            System.Windows.Threading.Dispatcher.CurrentDispatcher.Invoke(() =>
-            {
-                _modalDialog = new ModalDialog(message, caption, buttons, type);
-                if (windowForBlur != null) windowForBlur.Effect = new BlurEffect { Radius = 3 };
-                _modalDialog.ShowDialog();
-                if (windowForBlur != null) windowForBlur.Effect = new BlurEffect { Radius = 0 };
-            });
-            return _modalDialog._result;
-        }
+        #region Variables
 
         public EIcons ModalIcon
         {
@@ -186,6 +84,107 @@ namespace StratumUi.Wpf.Controls
         public static readonly DependencyProperty ButtonsProperty =
             DependencyProperty.Register(nameof(Buttons), typeof(ModalDialogButtons), typeof(ModalDialog), new PropertyMetadata());
 
+        public static readonly DependencyProperty VisibleOkProperty = DependencyProperty.Register(
+            nameof(VisibleOk), typeof(Visibility), typeof(ModalDialog), new PropertyMetadata(default(Visibility)));
+
+        public Visibility VisibleOk
+        {
+            get => (Visibility)GetValue(VisibleOkProperty);
+            set => SetValue(VisibleOkProperty, value);
+        }
+
+        public static readonly DependencyProperty VisibleYesProperty = DependencyProperty.Register(
+            nameof(VisibleYes), typeof(Visibility), typeof(ModalDialog), new PropertyMetadata(default(Visibility)));
+
+        public Visibility VisibleYes
+        {
+            get => (Visibility)GetValue(VisibleYesProperty);
+            set => SetValue(VisibleYesProperty, value);
+        }
+
+        public static readonly DependencyProperty VisibleNoProperty = DependencyProperty.Register(
+            nameof(VisibleNo), typeof(Visibility), typeof(ModalDialog), new PropertyMetadata(default(Visibility)));
+
+        public Visibility VisibleNo
+        {
+            get => (Visibility)GetValue(VisibleNoProperty);
+            set => SetValue(VisibleNoProperty, value);
+        }
+
+        public static readonly DependencyProperty VisibleCancelProperty = DependencyProperty.Register(
+            nameof(VisibleCancel), typeof(Visibility), typeof(ModalDialog), new PropertyMetadata(default(Visibility)));
+
+        public Visibility VisibleCancel
+        {
+            get => (Visibility)GetValue(VisibleCancelProperty);
+            set => SetValue(VisibleCancelProperty, value);
+        }
+
+        #endregion
+        
+        private static bool CheckExist() => _modalDialog != null;
+
+        public static ModalDialogResult Show( string caption, string message, ModalDialogButtons buttons, ModalDialogType type,
+            Window windowForBlur = null)
+        {
+            if (CheckExist()) return ModalDialogResult.Cancel;
+            System.Windows.Threading.Dispatcher.CurrentDispatcher.Invoke(() =>
+            {
+                _modalDialog = new ModalDialog(message, caption, buttons, type);
+                if (windowForBlur != null) windowForBlur.Effect = new BlurEffect { Radius = 3 };
+                _modalDialog.ShowDialog();
+                if (windowForBlur != null) windowForBlur.Effect = new BlurEffect { Radius = 0 };
+            });
+
+            var result = _modalDialog._result;
+            _modalDialog = null;
+            return result;
+        }
+        
+        public static ModalDialogResult Show(string caption, string message = "")
+        {
+            if (CheckExist()) return ModalDialogResult.Cancel;
+            System.Windows.Threading.Dispatcher.CurrentDispatcher.Invoke(() =>
+            {
+                _modalDialog = new ModalDialog(message, caption, ModalDialogButtons.Ok, ModalDialogType.Info);
+                _modalDialog.ShowDialog();
+            });
+
+            var result = _modalDialog._result;
+            _modalDialog = null;
+            return result;
+        }
+        
+        public static ModalDialogResult Show(string caption, string message, ModalDialogButtons buttons)
+        {
+            if (CheckExist()) return ModalDialogResult.Cancel;
+            System.Windows.Threading.Dispatcher.CurrentDispatcher.Invoke(() =>
+            {
+                _modalDialog = new ModalDialog(message, caption, buttons, ModalDialogType.Info);
+                _modalDialog.ShowDialog();
+            });
+
+            var result = _modalDialog._result;
+            _modalDialog = null;
+            return result;
+        }
+        
+        public static ModalDialogResult Show(string caption, string message, ModalDialogType type)
+        {
+            if (CheckExist()) return ModalDialogResult.Cancel;
+            System.Windows.Threading.Dispatcher.CurrentDispatcher.Invoke(() =>
+            {
+                _modalDialog = new ModalDialog(message, caption, ModalDialogButtons.Ok, type);
+                _modalDialog.ShowDialog();
+            });
+
+            var result = _modalDialog._result;
+            _modalDialog = null;
+            return result;
+        }
+
+        #region Methods
+
         private void BtnClose_OnClick(object sender, RoutedEventArgs e)
         {
             _result = ModalDialogResult.Cancel;
@@ -215,5 +214,16 @@ namespace StratumUi.Wpf.Controls
             _result = ModalDialogResult.Cancel;
             Close();
         }
+
+        public static void Shutdown()
+        {
+            if (_modalDialog != null)
+            {
+                _modalDialog._result = ModalDialogResult.Ok;
+                _modalDialog.Close();
+            }
+        }
+        
+        #endregion
     }
 }
