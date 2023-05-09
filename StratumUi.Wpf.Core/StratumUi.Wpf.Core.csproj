@@ -21,6 +21,7 @@
         <XamlRuntime>Wpf</XamlRuntime>
         <SubType>Designer</SubType>
       </Page>
+      <Page Remove="obj\**" />
     </ItemGroup>
 
     <ItemGroup>
@@ -33,6 +34,7 @@
       <Compile Remove="Extensions\SmartHint.cs" />
       <Compile Remove="Extensions\ScrollViewerAssist.cs" />
       <Compile Remove="Extensions\TextFieldAssist.cs" />
+      <Compile Remove="obj\**" />
     </ItemGroup>
 
     <ItemGroup>
@@ -240,6 +242,14 @@
 
     <ItemGroup>
       <Content Include="Readme.md" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <EmbeddedResource Remove="obj\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Remove="obj\**" />
     </ItemGroup>
 
 </Project>

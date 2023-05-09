@@ -112,14 +112,10 @@
     <Compile Include="Controls\TimeInput.xaml.cs">
       <DependentUpon>TimeInput.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Converters\ActionButtonVisibilityConverter.cs" />
     <Compile Include="Converters\BooleanAllConverter.cs" />
     <Compile Include="Converters\BooleanConverter.cs" />
     <Compile Include="Converters\BooleanToVisibilityConverter.cs" />
     <Compile Include="Converters\BorderClipConverter.cs" />
-    <Compile Include="Converters\BrushOpacityConverter.cs" />
-    <Compile Include="Converters\BrushRoundConverter.cs" />
-    <Compile Include="Converters\BrushToRadialGradientBrushConverter.cs" />
     <Compile Include="Converters\ButtonIconVisibilityConverter.cs" />
     <Compile Include="Converters\ButtonProgressBarWidthConverter.cs" />
     <Compile Include="Converters\CircularProgressBar\ArcEndPointConverter.cs" />
@@ -129,19 +125,8 @@
     <Compile Include="Converters\CircularProgressBar\StartPointConverter.cs" />
     <Compile Include="Converters\ComboBoxVisibilityConverter.cs" />
     <Compile Include="Converters\InvertBooleanConverter.cs" />
-    <Compile Include="Converters\PasswordBoxPlaceholderVisibilityConverter.cs" />
-    <Compile Include="Converters\PointValueConverter.cs" />
-    <Compile Include="Converters\RangeLengthConverter.cs" />
-    <Compile Include="Converters\RemoveAlphaBrushConverter.cs" />
     <Compile Include="Converters\RoundProgressPathConverter.cs" />
-    <Compile Include="Converters\SizeToRectConverter.cs" />
-    <Compile Include="Converters\SliderToolTipConverter.cs" />
-    <Compile Include="Converters\SliderValueLabelPositionConverter.cs" />
-    <Compile Include="Converters\StringLengthValueConverter.cs" />
-    <Compile Include="Converters\TextFieldHintVisibilityConverter.cs" />
-    <Compile Include="Converters\TextFieldPrefixTextVisibilityConverter.cs" />
     <Compile Include="Converters\TextVisibilityConverter.cs" />
-    <Compile Include="Converters\TimeToVisibilityConverter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>

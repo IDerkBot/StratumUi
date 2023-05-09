@@ -27,4 +27,8 @@
       <Page Remove="obj\**" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Content Include="Logo.png" />
+    </ItemGroup>
+
 </Project>
