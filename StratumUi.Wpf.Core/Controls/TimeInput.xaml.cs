@@ -106,7 +106,7 @@ namespace StratumUi.Wpf.Core.Controls
         }
 
         public new static readonly DependencyProperty FontSizeProperty =
-            DependencyProperty.Register(nameof(FontSize), typeof(double), typeof(TimeInput), new PropertyMetadata());
+            DependencyProperty.Register(nameof(FontSize), typeof(double), typeof(TimeInput), new PropertyMetadata(14.0));
 
         public new Thickness Margin
         {

@@ -4,9 +4,11 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:attachedProperties="clr-namespace:StratumUi.Wpf.Core.AttachedProperties"
     xmlns:controls="clr-namespace:StratumUi.Wpf.Core.Controls"
-    xmlns:converters="clr-namespace:StratumUi.Wpf.Core.Converters"
+    xmlns:converters="clr-namespace:Arion.Style.Converters"
+    xmlns:converters1="clr-namespace:StratumUi.Wpf.Core.Converters"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:wpf="clr-namespace:Arion.Style.AttachedProperties"
     Name="Root"
     Title="ModalDialog"
     MaxWidth="420"
@@ -15,15 +17,16 @@
     AllowsTransparency="True"
     Background="Transparent"
     SizeToContent="WidthAndHeight"
+    Topmost="True"
     WindowStartupLocation="CenterScreen"
     WindowStyle="None"
     mc:Ignorable="d">
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="/StratumUi.Wpf.Core;component/Default.xaml" />
+                <ResourceDictionary Source="/Arion.Style;component/ArionUiTheme.xaml" />
             </ResourceDictionary.MergedDictionaries>
-            <converters:TextVisibilityConverter
+            <converters1:TextVisibilityConverter
                 x:Key="TextVisibilityConverter"
                 IsEmptyValue="Collapsed"
                 IsNotEmptyValue="Visible" />
@@ -47,6 +50,7 @@
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
 
+            <!--  Fill="{Binding ElementName=Root, Path=ColorIcon}"  -->
             <controls:Icon
                 Grid.Row="0"
                 Width="20"
@@ -103,27 +107,23 @@
                     Margin="12,0,0,0"
                     Click="BtnOk_OnClick"
                     Content="Ок"
-                    Style="{StaticResource BtnFilled}"
-                    Visibility="{Binding ElementName=Root, Path=VisibleOk}" />
+                    Style="{StaticResource BtnFilled}" />
                 <Button
                     x:Name="BtnYes"
                     Margin="12,0,0,0"
                     Click="BtnYes_OnClick"
                     Content="Да"
-                    Style="{StaticResource BtnFilled}"
-                    Visibility="{Binding ElementName=Root, Path=VisibleYes}" />
+                    Style="{StaticResource BtnFilled}" />
                 <Button
                     x:Name="BtnNo"
                     Margin="12,0,0,0"
                     Click="BtnNo_OnClick"
-                    Content="Нет"
-                    Visibility="{Binding ElementName=Root, Path=VisibleNo}" />
+                    Content="Нет" />
                 <Button
                     x:Name="BtnCancel"
                     Margin="12,0,0,0"
                     Click="BtnCancel_OnClick"
-                    Content="Отмена"
-                    Visibility="{Binding ElementName=Root, Path=VisibleCancel}" />
+                    Content="Отмена" />
             </StackPanel>
         </Grid>
     </Border>

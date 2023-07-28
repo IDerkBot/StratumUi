@@ -33,6 +33,7 @@
         <ResourceDictionary Source="Elements/Default/Badges.xaml" />
         <ResourceDictionary Source="Elements/Default/RichTextBox.xaml" />
         <ResourceDictionary Source="Elements/Default/Toolbar.xaml" />
+        <ResourceDictionary Source="Elements/Default/GroupBox.xaml" />
     </ResourceDictionary.MergedDictionaries>
     <!--  DEFAULT  -->
     <Style BasedOn="{StaticResource BtnOutline}" TargetType="{x:Type Button}" />

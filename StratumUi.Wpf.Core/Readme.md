@@ -1,24 +1,22 @@
-# Arion style
+![StratumUi](https://raw.githubusercontent.com/IDerkBot/StratumUi/master/Logo.png)
+# StratumUi
+#### Библиотека стилей
+[![nuget](https://img.shields.io/nuget/v/StratumUi)](https://www.nuget.org/packages/StratumUi)
+[![nuget(download)](https://img.shields.io/nuget/dt/StratumUi)](https://www.nuget.org/packages/StratumUi)
 
-[![nuget](https://img.shields.io/nuget/v/Arion.Style)](https://www.nuget.org/packages/Arion.Style)
-[![nuget(download)](https://img.shields.io/nuget/dt/Arion.Style)](https://www.nuget.org/packages/Arion.Style)
-
-## Библиотека стилей
-
-___
 
 ## Подключение
 
-В менеджере пакетов Nuget находите пакет `Arion.Style` и устанавливаете его
+В менеджере пакетов Nuget находите пакет `StratumUi` и устанавливаете его
 
-![Arion.Style в менеджере пакетов nuget](https://raw.githubusercontent.com/IDerkBot/Arion.Style/master/FilesForReadme/Files/Artion.Style.Images/Arion.Style.png "Arion.Style в менеджере пакетов nuget")
+![StratumUi в менеджере пакетов nuget](https://raw.githubusercontent.com/IDerkBot/Arion.Style/master/FilesForReadme/Files/Artion.Style.Images/Arion.Style.png "Arion.Style в менеджере пакетов nuget")
 
 В документ ```App.xaml``` добавляете словарь
 
 ```xaml
 <ResourceDictionary>
     <ResourceDictionary.MergedDictionaries>
-        <ResourceDictionary Source="/Arion.Style;component/ArionUiTheme.xaml" />
+        <ResourceDictionary Source="/StratumUi;component/Default.xaml" />
     </ResourceDictionary.MergedDictionaries>
 </ResourceDictionary>
 ```
@@ -29,30 +27,28 @@ ___
 
 1. [Button](#Button)
 2. [TextBox](#TextBox)
-3. PasswordBox
+3. [PasswordBox](#PasswordBox)
 4. [CheckBox](#CheckBox)
 5. [ToggleButton](#ToggleButton)
-6. [RadionButton](#RadioButton)
+6. [RadioButton](#RadioButton)
 7. [Switcher](#Switcher)
 8. [Slider](#Slider)
 9. [ListView](#ListView)
 10. [Tab](#Tab)
 11. [Tooltip](#Tooltip)
 12. [Colors](#Colors)
-13. Таблицы
-14. ProgressBar
-15. Breadcrumb
-16. ComboBox
-17. DisplayControl
-18. Expander
-19. InlineAlert
-20. Label
-21. RangeSlider
+13. [Tables](#Tables)
+14. [ProgressBar](#ProgressBar)
+15. [Breadcrumb](#Breadcrumb)
+16. [ComboBox](#ComboBox)
+17. [DisplayControl](#DisplayControl)
+18. [Expander](#expander)
+19. [InlineAlert](#InlineAlert)
+20. [Label](#Label)
+21. [RangeSlider](#RangeSlider)
 22. [Shadow](#Shadow)
-23. [Controllers](#Controllers)
-24. [Attached свойства](#Attached)
 
-___
+---
 
 ### Button
 
@@ -86,6 +82,8 @@ ___
 Стиль текстового поля задан по умолчанию, поэтому какой то определенный стиль применять не требуется.
 
 ![Элемент TextBox](https://raw.githubusercontent.com/IDerkBot/Arion.Style/master/FilesForReadme/Files/Artion.Style.Images/TextBox/Default.png)
+
+
 
 ----
 
@@ -213,9 +211,38 @@ ToggleButton имеет два стиля
 
 ---
 
-### Controllers
+### Tables
 
-[Arion.Style.Controls](https://github.com/IDerkBot/Arion.Style/tree/master/Arion.Style.Controls)
+---
 
-### Attached
+### ProgressBar
 
+---
+
+### Breadcrumb
+
+---
+
+### ComboBox
+
+---
+
+### DisplayControl
+
+---
+
+### Expander
+
+---
+
+### InlineAlert
+
+---
+
+### Label
+
+---
+
+### RangeSlider
+
+---

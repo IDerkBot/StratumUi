@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace StratumUi.Wpf.Core.Converters.CircularProgressBar
+namespace Arion.Style.Converters.CircularProgressBar
 {
     internal static class LocalEx
     {

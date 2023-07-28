@@ -1,14 +1,24 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFramework>net6.0-windows</TargetFramework>
         <Nullable>enable</Nullable>
         <UseWPF>true</UseWPF>
+        <TargetFramework>net6.0-windows</TargetFramework>
+        <PackageId>StratumUi</PackageId>
+        <PackageVersion>1.1.0</PackageVersion>
+        <Title>Stratum UI</Title>
+        <Authors>Ivan Budanov</Authors>
+        <Copyright>@IvanBudanov</Copyright>
+        <PackageIcon>Logo.png</PackageIcon>
+        <Description>Дизайн для элементов</Description>
+        <PackageProjectUrl>https://github.com/IDerkBot/StratumUi</PackageProjectUrl>
+        <RepositoryUrl>https://github.com/IDerkBot/StratumUi</RepositoryUrl>
+        <Product>StratumUi</Product>
     </PropertyGroup>
 
     <ItemGroup>
-      <Folder Include="Extensions" />
       <Folder Include="obj\Debug\net6.0-windows" />
+      <Folder Include="Styles\ArionUi" />
     </ItemGroup>
 
     <ItemGroup>
@@ -22,27 +32,6 @@
         <SubType>Designer</SubType>
       </Page>
       <Page Remove="obj\**" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <Compile Remove="Extensions\IHintProxy.cs" />
-      <Compile Remove="Extensions\HintProxyFabric.TextBox.cs" />
-      <Compile Remove="Converters\FloatingHintOffsetCalculationConverter.cs" />
-      <Compile Remove="Converters\FallbackBrushConverter.cs" />
-      <Compile Remove="Converters\DoubleToCornerRadiusConverter.cs" />
-      <Compile Remove="Converters\ComboBoxClearButtonMarginConverter.cs" />
-      <Compile Remove="Extensions\SmartHint.cs" />
-      <Compile Remove="Extensions\ScrollViewerAssist.cs" />
-      <Compile Remove="Extensions\TextFieldAssist.cs" />
-      <Compile Remove="obj\**" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <Page Update="Default.xaml">
-        <Generator>MSBuild:Compile</Generator>
-        <XamlRuntime>Wpf</XamlRuntime>
-        <SubType>Designer</SubType>
-      </Page>
       <Page Update="Elements\Default\Badges.xaml">
         <Generator>MSBuild:Compile</Generator>
         <XamlRuntime>Wpf</XamlRuntime>
@@ -124,6 +113,11 @@
         <SubType>Designer</SubType>
       </Page>
       <Page Update="Elements\Default\Label.xaml">
+        <Generator>MSBuild:Compile</Generator>
+        <XamlRuntime>Wpf</XamlRuntime>
+        <SubType>Designer</SubType>
+      </Page>
+      <Page Update="Elements\Default\LabelDark.xaml">
         <Generator>MSBuild:Compile</Generator>
         <XamlRuntime>Wpf</XamlRuntime>
         <SubType>Designer</SubType>
@@ -213,6 +207,11 @@
         <XamlRuntime>Wpf</XamlRuntime>
         <SubType>Designer</SubType>
       </Page>
+      <Page Update="Elements\Default\ToggleButtonDark.xaml">
+        <Generator>MSBuild:Compile</Generator>
+        <XamlRuntime>Wpf</XamlRuntime>
+        <SubType>Designer</SubType>
+      </Page>
       <Page Update="Elements\Default\Toolbar.xaml">
         <Generator>MSBuild:Compile</Generator>
         <XamlRuntime>Wpf</XamlRuntime>
@@ -224,6 +223,18 @@
         <SubType>Designer</SubType>
       </Page>
       <Page Update="Elements\Default\Window.xaml">
+        <Generator>MSBuild:Compile</Generator>
+        <XamlRuntime>Wpf</XamlRuntime>
+        <SubType>Designer</SubType>
+      </Page>
+    </ItemGroup>
+
+    <ItemGroup>
+      <Compile Remove="obj\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Page Update="Default.xaml">
         <Generator>MSBuild:Compile</Generator>
         <XamlRuntime>Wpf</XamlRuntime>
         <SubType>Designer</SubType>
@@ -250,6 +261,10 @@
 
     <ItemGroup>
       <None Remove="obj\**" />
+      <None Update="Logo.png">
+        <Pack>True</Pack>
+        <PackagePath></PackagePath>
+      </None>
     </ItemGroup>
 
 </Project>

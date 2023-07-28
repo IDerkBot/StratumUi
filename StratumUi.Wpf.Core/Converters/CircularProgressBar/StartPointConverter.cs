@@ -3,7 +3,7 @@ using System.Globalization;
 using System.Windows;
 using System.Windows.Data;
 
-namespace StratumUi.Wpf.Core.Converters.CircularProgressBar
+namespace Arion.Style.Converters.CircularProgressBar
 {
     public class StartPointConverter : IValueConverter
     {

@@ -22,7 +22,7 @@ namespace StratumUi.Test.Core
     {
         public MainWindow()
         {
-            InitializeComponent();
+            
         }
     }
 }
