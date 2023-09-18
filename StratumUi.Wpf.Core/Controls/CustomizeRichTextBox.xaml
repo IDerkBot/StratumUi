@@ -5,7 +5,6 @@
     xmlns:attachedProperties="clr-namespace:StratumUi.Wpf.Core.AttachedProperties"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:wpf="clr-namespace:Arion.Style.AttachedProperties"
     MinHeight="100"
     d:DesignHeight="300"
     d:DesignWidth="700"

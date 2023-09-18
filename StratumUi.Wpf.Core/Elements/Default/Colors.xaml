@@ -87,9 +87,7 @@
     <Color x:Key="ColorLg4">#EEF0F2</Color>
     <Color x:Key="ColorLg5">#F6F8F9</Color>
 
-
-
-
+    
     <SolidColorBrush Color="{StaticResource ColorPr900}" x:Key="Pr900" />
     <SolidColorBrush Color="{StaticResource ColorPr800}" x:Key="Pr800" />
     <SolidColorBrush Color="{StaticResource ColorPr700}" x:Key="Pr700" />

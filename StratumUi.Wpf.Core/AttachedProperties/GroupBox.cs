@@ -1,7 +1,7 @@
 ﻿using System.Windows;
 using System.Windows.Media;
 
-namespace Arion.Style.AttachedProperties
+namespace StratumUi.Wpf.Core.AttachedProperties
 {
     public class GroupBox
     {

@@ -1,8 +1,7 @@
 ﻿<ResourceDictionary
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:attachedProperties="clr-namespace:StratumUi.Wpf.Core.AttachedProperties"
-    xmlns:wpf="clr-namespace:Arion.Style.AttachedProperties">
+    xmlns:attach="clr-namespace:StratumUi.Wpf.Core.AttachedProperties">
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="Colors.xaml" />
         <ResourceDictionary Source="FontFamily.xaml" />
@@ -356,9 +355,9 @@
                     Width="15"
                     Height="15"
                     Padding="0"
-                    attachedProperties:Button.Icon="ChevronLeft"
-                    attachedProperties:Button.IconHeight="10"
-                    attachedProperties:Button.IconWidth="10"
+                    attach:Button.Icon="ChevronLeft"
+                    attach:Button.IconHeight="10"
+                    attach:Button.IconWidth="10"
                     Style="{StaticResource BtnText}" />
             </Grid>
         </Grid>
@@ -373,9 +372,9 @@
                     Width="15"
                     Height="15"
                     Padding="0"
-                    attachedProperties:Button.Icon="ChevronRight"
-                    attachedProperties:Button.IconHeight="10"
-                    attachedProperties:Button.IconWidth="10"
+                    attach:Button.Icon="ChevronRight"
+                    attach:Button.IconHeight="10"
+                    attach:Button.IconWidth="10"
                     Style="{StaticResource BtnText}" />
             </Grid>
         </Grid>

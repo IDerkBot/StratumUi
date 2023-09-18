@@ -1,9 +1,7 @@
 ﻿<ResourceDictionary
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:attachedProperties="clr-namespace:StratumUi.Wpf.Core.AttachedProperties"
-    xmlns:converters="clr-namespace:Arion.Style.Converters"
-    xmlns:wpf="clr-namespace:Arion.Style.AttachedProperties">
+    xmlns:attach="clr-namespace:StratumUi.Wpf.Core.AttachedProperties">
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="Colors.xaml" />
     </ResourceDictionary.MergedDictionaries>
@@ -240,8 +238,8 @@
                     Width="20"
                     Height="20"
                     Margin="0,0,5,0"
-                    attachedProperties:CheckBox.MarkHeight="8"
-                    attachedProperties:CheckBox.MarkWidth="10"
+                    attach:CheckBox.MarkHeight="8"
+                    attach:CheckBox.MarkWidth="10"
                     Visibility="Collapsed" />
                 <ContentPresenter
                     x:Name="HeaderHost"

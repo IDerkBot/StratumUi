@@ -5,8 +5,7 @@
     xmlns:commands1="clr-namespace:StratumUi.Wpf.Core.Commands"
     xmlns:controls1="clr-namespace:StratumUi.Wpf.Core.Controls"
     xmlns:converters="clr-namespace:Arion.Style.Converters"
-    xmlns:converters1="clr-namespace:StratumUi.Wpf.Core.Converters"
-    xmlns:wpf="clr-namespace:Arion.Style.AttachedProperties">
+    xmlns:converters1="clr-namespace:StratumUi.Wpf.Core.Converters">
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="Colors.xaml" />
         <ResourceDictionary Source="FontFamily.xaml" />
