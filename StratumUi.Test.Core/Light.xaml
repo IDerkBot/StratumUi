@@ -6,7 +6,7 @@
     xmlns:smtxAe="clr-namespace:ShowMeTheXAML.AvalonEdit;assembly=ShowMeTheXAML.AvalonEdit"
     xmlns:wpf="clr-namespace:StratumUi.Wpf.Core.AttachedProperties;assembly=StratumUi.Wpf.Core">
     <ResourceDictionary.MergedDictionaries>
-        <ResourceDictionary Source="/Arion.Style;component/ArionUiTheme.xaml" />
+        <ResourceDictionary Source="/StratumUi.Wpf.Core;component/Styles/Default.xaml" />
         <!-- <ResourceDictionary Source="/Arion.Style;component/ArionUiDark.xaml" /> -->
         <ResourceDictionary Source="pack://application:,,,/ShowMeTheXAML.AvalonEdit;component/Themes/xamldisplayer.xaml" />
         <ResourceDictionary>
