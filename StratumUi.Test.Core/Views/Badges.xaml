@@ -30,7 +30,6 @@
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             Content="Colors"
-            FontSize="32"
             Style="{DynamicResource Lbl}" />
 
         <Label
@@ -53,6 +52,12 @@
             Grid.Row="2"
             Grid.Column="0"
             Orientation="Horizontal">
+            <StackPanel.Resources>
+                <Style TargetType="controls:Badge" BasedOn="{StaticResource {x:Type controls:Badge}}">
+                    <Setter Property="Margin" Value="5" />
+                    <Setter Property="Type" Value="Filled" />
+                </Style>
+            </StackPanel.Resources>
             <WrapPanel Orientation="Vertical">
                 <controls:Badge Margin="5" />
                 <controls:Badge Margin="5" Color="Red" />
@@ -64,67 +69,34 @@
                 <controls:Badge Margin="5" Color="Gray" />
             </WrapPanel>
             <WrapPanel Orientation="Vertical">
-                <controls:Badge Margin="5" ShowIcon="True" />
-                <controls:Badge
-                    Margin="5"
-                    ShowIcon="True"
-                    Color="Red" />
-                <controls:Badge
-                    Margin="5"
-                    ShowIcon="True"
-                    Color="Blue" />
-                <controls:Badge
-                    Margin="5"
-                    ShowIcon="True"
-                    Color="Green" />
-                <controls:Badge
-                    Margin="5"
-                    ShowIcon="True"
-                    Color="Yellow" />
-                <controls:Badge
-                    Margin="5"
-                    ShowIcon="True"
-                    Color="Purple" />
-                <controls:Badge
-                    Margin="5"
-                    ShowIcon="True"
-                    Color="Teal" />
-                <controls:Badge
-                    Margin="5"
-                    ShowIcon="True"
-                    Color="Gray" />
+                <WrapPanel.Resources>
+                    <Style TargetType="{x:Type controls:Badge}" BasedOn="{StaticResource {x:Type controls:Badge}}">
+                        <Setter Property="ShowIcon" Value="True" />
+                    </Style>
+                </WrapPanel.Resources>
+                <controls:Badge />
+                <controls:Badge Color="Red" />
+                <controls:Badge Color="Blue" />
+                <controls:Badge Color="Green" />
+                <controls:Badge Color="Yellow" />
+                <controls:Badge Color="Purple" />
+                <controls:Badge Color="Teal" />
+                <controls:Badge Color="Gray" />
             </WrapPanel>
             <WrapPanel Orientation="Vertical">
-                <controls:Badge Margin="5" ShowButton="True" />
-                <controls:Badge
-                    Margin="5"
-                    Click="Badge_OnClick"
-                    ShowButton="True"
-                    Color="Red" />
-                <controls:Badge
-                    Margin="5"
-                    ShowButton="True"
-                    Color="Blue" />
-                <controls:Badge
-                    Margin="5"
-                    ShowButton="True"
-                    Color="Green" />
-                <controls:Badge
-                    Margin="5"
-                    ShowButton="True"
-                    Color="Yellow" />
-                <controls:Badge
-                    Margin="5"
-                    ShowButton="True"
-                    Color="Purple" />
-                <controls:Badge
-                    Margin="5"
-                    ShowButton="True"
-                    Color="Teal" />
-                <controls:Badge
-                    Margin="5"
-                    ShowButton="True"
-                    Color="Gray" />
+                <WrapPanel.Resources>
+                    <Style TargetType="{x:Type controls:Badge}" BasedOn="{StaticResource {x:Type controls:Badge}}">
+                        <Setter Property="ShowButton" Value="True" />
+                    </Style>
+                </WrapPanel.Resources>
+                <controls:Badge />
+                <controls:Badge Color="Red" />
+                <controls:Badge Color="Blue" />
+                <controls:Badge Color="Green" />
+                <controls:Badge Color="Yellow" />
+                <controls:Badge Color="Purple" />
+                <controls:Badge Color="Teal" />
+                <controls:Badge Color="Gray" />
             </WrapPanel>
         </StackPanel>
 
@@ -132,115 +104,51 @@
             Grid.Row="2"
             Grid.Column="1"
             Orientation="Horizontal">
+            <StackPanel.Resources>
+                <Style TargetType="controls:Badge" BasedOn="{StaticResource {x:Type controls:Badge}}">
+                    <Setter Property="Margin" Value="5" />
+                    <Setter Property="Type" Value="Subtle" />
+                </Style>
+            </StackPanel.Resources>
             <WrapPanel Orientation="Vertical">
-                <controls:Badge Margin="5" Type="Subtle" />
-                <controls:Badge
-                    Margin="5"
-                    Type="Subtle"
-                    Color="Red" />
-                <controls:Badge
-                    Margin="5"
-                    Type="Subtle"
-                    Color="Blue" />
-                <controls:Badge
-                    Margin="5"
-                    Type="Subtle"
-                    Color="Green" />
-                <controls:Badge
-                    Margin="5"
-                    Type="Subtle"
-                    Color="Yellow" />
-                <controls:Badge
-                    Margin="5"
-                    Type="Subtle"
-                    Color="Purple" />
-                <controls:Badge
-                    Margin="5"
-                    Type="Subtle"
-                    Color="Teal" />
-                <controls:Badge
-                    Margin="5"
-                    Type="Subtle"
-                    Color="Gray" />
+                <controls:Badge Color="White" />
+                <controls:Badge Color="Red" />
+                <controls:Badge Color="Blue" />
+                <controls:Badge Color="Green" />
+                <controls:Badge Color="Yellow" />
+                <controls:Badge Color="Purple" />
+                <controls:Badge Color="Teal" />
+                <controls:Badge Color="Gray" />
             </WrapPanel>
             <WrapPanel Orientation="Vertical">
-                <controls:Badge Margin="5" ShowIcon="True" />
-                <controls:Badge
-                    Margin="5"
-                    ShowIcon="True"
-                    Type="Subtle"
-                    Color="Red" />
-                <controls:Badge
-                    Margin="5"
-                    ShowIcon="True"
-                    Type="Subtle"
-                    Color="Blue" />
-                <controls:Badge
-                    Margin="5"
-                    ShowIcon="True"
-                    Type="Subtle"
-                    Color="Green" />
-                <controls:Badge
-                    Margin="5"
-                    ShowIcon="True"
-                    Type="Subtle"
-                    Color="Yellow" />
-                <controls:Badge
-                    Margin="5"
-                    ShowIcon="True"
-                    Type="Subtle"
-                    Color="Purple" />
-                <controls:Badge
-                    Margin="5"
-                    ShowIcon="True"
-                    Type="Subtle"
-                    Color="Teal" />
-                <controls:Badge
-                    Margin="5"
-                    ShowIcon="True"
-                    Type="Subtle"
-                    Color="Gray" />
+                <WrapPanel.Resources>
+                    <Style TargetType="{x:Type controls:Badge}" BasedOn="{StaticResource {x:Type controls:Badge}}">
+                        <Setter Property="ShowIcon" Value="True" />
+                    </Style>
+                </WrapPanel.Resources>
+                <controls:Badge Color="White" />
+                <controls:Badge Color="Red" />
+                <controls:Badge Color="Blue" />
+                <controls:Badge Color="Green" />
+                <controls:Badge Color="Yellow" />
+                <controls:Badge Color="Purple" />
+                <controls:Badge Color="Teal" />
+                <controls:Badge Color="Gray" />
             </WrapPanel>
             <WrapPanel Orientation="Vertical">
-                <controls:Badge
-                    Margin="5"
-                    ShowButton="True"
-                    Type="Subtle" />
-                <controls:Badge
-                    Margin="5"
-                    Click="Badge_OnClick"
-                    ShowButton="True"
-                    Type="Subtle"
-                    Color="Red" />
-                <controls:Badge
-                    Margin="5"
-                    ShowButton="True"
-                    Type="Subtle"
-                    Color="Blue" />
-                <controls:Badge
-                    Margin="5"
-                    ShowButton="True"
-                    Type="Subtle"
-                    Color="Green" />
-                <controls:Badge
-                    Margin="5"
-                    ShowButton="True"
-                    Color="Yellow" />
-                <controls:Badge
-                    Margin="5"
-                    ShowButton="True"
-                    Type="Subtle"
-                    Color="Purple" />
-                <controls:Badge
-                    Margin="5"
-                    ShowButton="True"
-                    Type="Subtle"
-                    Color="Teal" />
-                <controls:Badge
-                    Margin="5"
-                    ShowButton="True"
-                    Type="Subtle"
-                    Color="Gray" />
+                <WrapPanel.Resources>
+                    <Style TargetType="{x:Type controls:Badge}" BasedOn="{StaticResource {x:Type controls:Badge}}">
+                        <Setter Property="ShowButton" Value="True" />
+                    </Style>
+                </WrapPanel.Resources>
+                <controls:Badge Color="White" />
+                <controls:Badge Color="Red" />
+                <controls:Badge Color="Blue" />
+                <controls:Badge Color="Green" />
+                <controls:Badge Color="Yellow" />
+                <controls:Badge Color="Purple" />
+                <controls:Badge Color="Teal" />
+                <controls:Badge Color="Gray" />
             </WrapPanel>
         </StackPanel>
 
@@ -248,113 +156,51 @@
             Grid.Row="2"
             Grid.Column="2"
             Orientation="Horizontal">
+            <StackPanel.Resources>
+                <Style TargetType="controls:Badge" BasedOn="{StaticResource {x:Type controls:Badge}}">
+                    <Setter Property="Margin" Value="5" />
+                    <Setter Property="Type" Value="Outline" />
+                </Style>
+            </StackPanel.Resources>
             <WrapPanel Orientation="Vertical">
-                <controls:Badge Margin="5" Type="Outline" />
-                <controls:Badge
-                    Margin="5"
-                    Type="Outline"
-                    Color="Red" />
-                <controls:Badge
-                    Margin="5"
-                    Type="Outline"
-                    Color="Blue" />
-                <controls:Badge
-                    Margin="5"
-                    Type="Outline"
-                    Color="Green" />
-                <controls:Badge
-                    Margin="5"
-                    Type="Outline"
-                    Color="Yellow" />
-                <controls:Badge
-                    Margin="5"
-                    Type="Outline"
-                    Color="Purple" />
-                <controls:Badge
-                    Margin="5"
-                    Type="Outline"
-                    Color="Teal" />
-                <controls:Badge
-                    Margin="5"
-                    Type="Outline"
-                    Color="Gray" />
+                <controls:Badge Color="White" />
+                <controls:Badge Color="Red" />
+                <controls:Badge Color="Blue" />
+                <controls:Badge Color="Green" />
+                <controls:Badge Color="Yellow" />
+                <controls:Badge Color="Purple" />
+                <controls:Badge Color="Teal" />
+                <controls:Badge Color="Gray" />
             </WrapPanel>
             <WrapPanel Orientation="Vertical">
-                <controls:Badge Margin="5" ShowIcon="True" />
-                <controls:Badge
-                    Margin="5"
-                    ShowIcon="True"
-                    Type="Outline"
-                    Color="Red" />
-                <controls:Badge
-                    Margin="5"
-                    ShowIcon="True"
-                    Type="Outline"
-                    Color="Blue" />
-                <controls:Badge
-                    Margin="5"
-                    ShowIcon="True"
-                    Type="Outline"
-                    Color="Green" />
-                <controls:Badge
-                    Margin="5"
-                    ShowIcon="True"
-                    Type="Outline"
-                    Color="Yellow" />
-                <controls:Badge
-                    Margin="5"
-                    ShowIcon="True"
-                    Type="Outline"
-                    Color="Purple" />
-                <controls:Badge
-                    Margin="5"
-                    ShowIcon="True"
-                    Type="Outline"
-                    Color="Teal" />
-                <controls:Badge
-                    Margin="5"
-                    ShowIcon="True"
-                    Type="Outline"
-                    Color="Gray" />
+                <WrapPanel.Resources>
+                    <Style TargetType="{x:Type controls:Badge}" BasedOn="{StaticResource {x:Type controls:Badge}}">
+                        <Setter Property="ShowIcon" Value="True" />
+                    </Style>
+                </WrapPanel.Resources>
+                <controls:Badge Color="White" />
+                <controls:Badge Color="Red" />
+                <controls:Badge Color="Blue" />
+                <controls:Badge Color="Green" />
+                <controls:Badge Color="Yellow" />
+                <controls:Badge Color="Purple" />
+                <controls:Badge Color="Teal" />
+                <controls:Badge Color="Gray" />
             </WrapPanel>
             <WrapPanel Orientation="Vertical">
-                <controls:Badge Margin="5" ShowButton="True" />
-                <controls:Badge
-                    Margin="5"
-                    Click="Badge_OnClick"
-                    ShowButton="True"
-                    Type="Outline"
-                    Color="Red" />
-                <controls:Badge
-                    Margin="5"
-                    ShowButton="True"
-                    Type="Outline"
-                    Color="Blue" />
-                <controls:Badge
-                    Margin="5"
-                    ShowButton="True"
-                    Type="Outline"
-                    Color="Green" />
-                <controls:Badge
-                    Margin="5"
-                    ShowButton="True"
-                    Type="Outline"
-                    Color="Yellow" />
-                <controls:Badge
-                    Margin="5"
-                    ShowButton="True"
-                    Type="Outline"
-                    Color="Purple" />
-                <controls:Badge
-                    Margin="5"
-                    ShowButton="True"
-                    Type="Outline"
-                    Color="Teal" />
-                <controls:Badge
-                    Margin="5"
-                    ShowButton="True"
-                    Type="Outline"
-                    Color="Gray" />
+                <WrapPanel.Resources>
+                    <Style TargetType="{x:Type controls:Badge}" BasedOn="{StaticResource {x:Type controls:Badge}}">
+                        <Setter Property="ShowButton" Value="True" />
+                    </Style>
+                </WrapPanel.Resources>
+                <controls:Badge Color="White" />
+                <controls:Badge Color="Red" />
+                <controls:Badge Color="Blue" />
+                <controls:Badge Color="Green" />
+                <controls:Badge Color="Yellow" />
+                <controls:Badge Color="Purple" />
+                <controls:Badge Color="Teal" />
+                <controls:Badge Color="Gray" />
             </WrapPanel>
         </StackPanel>
     </Grid>

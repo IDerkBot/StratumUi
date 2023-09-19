@@ -6,15 +6,15 @@
     xmlns:smtxAe="clr-namespace:ShowMeTheXAML.AvalonEdit;assembly=ShowMeTheXAML.AvalonEdit"
     xmlns:wpf="clr-namespace:StratumUi.Wpf.Core.AttachedProperties;assembly=StratumUi.Wpf.Core">
     <ResourceDictionary.MergedDictionaries>
-        <ResourceDictionary Source="/StratumUi.Wpf.Core;component/Styles/Default.xaml" />
-        <!-- <ResourceDictionary Source="/Arion.Style;component/ArionUiDark.xaml" /> -->
+        <!-- <ResourceDictionary Source="/Arion.Style;component/ArionUiTheme.xaml" /> -->
+        <ResourceDictionary Source="/StratumUi.Wpf.Core;component/Styles/Dark.xaml" />
         <ResourceDictionary Source="pack://application:,,,/ShowMeTheXAML.AvalonEdit;component/Themes/xamldisplayer.xaml" />
         <ResourceDictionary>
             <Style x:Key="Brd" TargetType="{x:Type Border}">
                 <Setter Property="Width" Value="40" />
                 <Setter Property="Height" Value="40" />
                 <Setter Property="CornerRadius" Value="20" />
-                <Setter Property="Margin" Value="5" />
+                <Setter Property="Margin" Value="10,6" />
                 <Setter Property="BorderBrush" Value="Black" />
                 <Setter Property="BorderThickness" Value="1" />
                 <Setter Property="Cursor" Value="Hand" />
@@ -35,7 +35,6 @@
 
             <Style TargetType="{x:Type smtx:XamlDisplay}">
                 <Setter Property="MaxWidth" Value="600" />
-                <Setter Property="Focusable" Value="False" />
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="smtx:XamlDisplay">
@@ -93,7 +92,6 @@
                                     HorizontalAlignment="Left"
                                     VerticalAlignment="Bottom"
                                     wpf:Button.Icon="Xml"
-                                    Focusable="False"
                                     IsChecked="False"
                                     Style="{StaticResource TglOutline}" />
                             </Grid>

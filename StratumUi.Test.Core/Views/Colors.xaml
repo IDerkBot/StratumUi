@@ -5,26 +5,57 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:viewModel="clr-namespace:StratumUi.Test.Core.ViewModel"
+    xmlns:converters="clr-namespace:StratumUi.Wpf.Core.Converters;assembly=StratumUi.Wpf.Core"
     d:DesignHeight="1000"
     d:DesignWidth="1900"
     mc:Ignorable="d">
+    <UserControl.Resources>
+        <Style TargetType="TextBlock" BasedOn="{StaticResource {x:Type TextBlock}}">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding RelativeSource={RelativeSource AncestorType=UserControl}, Path=ActualWidth, Converter={x:Static converters:IsGreaterThanConverter.Instance}, ConverterParameter=700}" Value="True">
+                    <Setter Property="FontSize" Value="18" />
+                </DataTrigger>
+                <DataTrigger Binding="{Binding RelativeSource={RelativeSource AncestorType=UserControl}, Path=ActualWidth, Converter={x:Static converters:IsGreaterThanConverter.Instance}, ConverterParameter=1800}" Value="True">
+                    <Setter Property="FontSize" Value="24" />
+                </DataTrigger>
+            </Style.Triggers>
+            <Setter Property="FontSize" Value="14" />
+        </Style>
+        <Style
+            x:Key="Brd"
+            TargetType="Border"
+            BasedOn="{StaticResource Brd}">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding RelativeSource={RelativeSource AncestorType=UserControl}, Path=ActualWidth, Converter={x:Static converters:IsGreaterThanConverter.Instance}, ConverterParameter=700}" Value="True">
+                    <Setter Property="Width" Value="60" />
+                    <Setter Property="Height" Value="60" />
+                    <Setter Property="CornerRadius" Value="40" />
+                </DataTrigger>
+                <DataTrigger Binding="{Binding RelativeSource={RelativeSource AncestorType=UserControl}, Path=ActualWidth, Converter={x:Static converters:IsGreaterThanConverter.Instance}, ConverterParameter=1800}" Value="True">
+                    <Setter Property="Width" Value="80" />
+                    <Setter Property="Height" Value="80" />
+                    <Setter Property="CornerRadius" Value="80" />
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+    </UserControl.Resources>
     <UserControl.DataContext>
         <viewModel:ColorViewModel />
     </UserControl.DataContext>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="*" />
-            <RowDefinition Height="*" />
-            <RowDefinition Height="*" />
-            <RowDefinition Height="*" />
-            <RowDefinition Height="*" />
-            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="100" />
-            <RowDefinition Height="*" />
-            <RowDefinition Height="*" />
-            <RowDefinition Height="*" />
-            <RowDefinition Height="*" />
-            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
         <Label
@@ -36,7 +67,6 @@
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             Content="Colors"
-            FontSize="32"
             Style="{DynamicResource Lbl}" />
 
         <WrapPanel Grid.Row="1" Orientation="Horizontal">

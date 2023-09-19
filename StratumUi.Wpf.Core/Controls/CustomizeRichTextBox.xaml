@@ -9,13 +9,13 @@
     d:DesignHeight="300"
     d:DesignWidth="700"
     mc:Ignorable="d">
-    <UserControl.Resources>
-        <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="/Arion.Style;component/ArionUiTheme.xaml" />
-            </ResourceDictionary.MergedDictionaries>
-        </ResourceDictionary>
-    </UserControl.Resources>
+    <!-- <UserControl.Resources> -->
+    <!--     <ResourceDictionary> -->
+    <!--         <ResourceDictionary.MergedDictionaries> -->
+    <!--             <ResourceDictionary Source="/StratumUi.Wpf.Core;component/Styles/Default.xaml" /> -->
+    <!--         </ResourceDictionary.MergedDictionaries> -->
+    <!--     </ResourceDictionary> -->
+    <!-- </UserControl.Resources> -->
     <Border
         BorderBrush="{StaticResource Lg1}"
         BorderThickness="1"

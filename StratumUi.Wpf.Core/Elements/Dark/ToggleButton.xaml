@@ -1,0 +1,1201 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:attach="clr-namespace:StratumUi.Wpf.Core.AttachedProperties"
+    xmlns:controls="clr-namespace:StratumUi.Wpf.Core.Controls"
+    xmlns:converters="clr-namespace:StratumUi.Wpf.Core.Converters">
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="Colors.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+
+    <converters:ButtonProgressBarWidthConverter x:Key="ProgressBarWidthConverter" />
+    <converters:ButtonIconVisibilityConverter x:Key="IconConverter" />
+    <converters:BooleanToVisibilityConverter x:Key="VisibilityConverter" />
+
+    <Style TargetType="ToggleButton">
+        <Setter Property="HorizontalContentAlignment" Value="Center" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="BorderBrush" Value="#B0BABF" />
+        <Setter Property="Background" Value="#B0BABF" />
+        <Setter Property="attach:ToggleButton.Angle" Value="0" />
+        <Setter Property="Padding" Value="0" />
+        <Setter Property="attach:Hint.CornerRadius" Value="10" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ToggleButton">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="32" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+
+                        <Border
+                            x:Name="Border"
+                            Width="32"
+                            Height="20"
+                            Padding="{TemplateBinding Padding}"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            CornerRadius="{TemplateBinding attach:Hint.CornerRadius}">
+                            <Border
+                                x:Name="TgButton"
+                                Width="16"
+                                Height="16"
+                                Margin="2,0,0,0"
+                                Padding="0"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Center"
+                                Background="White"
+                                CornerRadius="8" />
+                        </Border>
+                        <ContentPresenter
+                            x:Name="PART_ContentHost"
+                            Grid.Column="1"
+                            VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                            Content="{TemplateBinding Content}"
+                            TextElement.FontSize="{TemplateBinding FontSize}"
+                            TextElement.Foreground="{TemplateBinding Foreground}"
+                            Visibility="Collapsed" />
+
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup x:Name="CommonStates">
+                                <VisualState x:Name="Normal" />
+                                <VisualState x:Name="MouseOver" />
+                                <VisualState x:Name="Pressed" />
+                                <VisualState x:Name="Disabled" />
+                            </VisualStateGroup>
+                            <VisualStateGroup x:Name="CheckStates">
+                                <VisualState x:Name="Checked">
+                                    <Storyboard>
+                                        <ThicknessAnimation
+                                            Storyboard.TargetName="TgButton"
+                                            Storyboard.TargetProperty="Margin"
+                                            To="14 0 0 0"
+                                            Duration="0:0:.25" />
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="Unchecked">
+                                    <Storyboard>
+                                        <ThicknessAnimation
+                                            Storyboard.TargetName="TgButton"
+                                            Storyboard.TargetProperty="Margin"
+                                            To="2 0 0 0"
+                                            Duration="0:0:.25" />
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="Indeterminate">
+                                    <Storyboard>
+                                        <ThicknessAnimation
+                                            Storyboard.TargetName="TgButton"
+                                            Storyboard.TargetProperty="Margin"
+                                            To="5 0 0 0"
+                                            Duration="0:0:.25" />
+                                    </Storyboard>
+                                </VisualState>
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+                    </Grid>
+
+                    <ControlTemplate.Triggers>
+
+                        <!--  CHECKED - TRUE | Hover  -->
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsChecked" Value="True" />
+                                <Condition Property="IsMouseOver" Value="True" />
+                                <Condition Property="IsPressed" Value="False" />
+                                <Condition Property="IsEnabled" Value="True" />
+                            </MultiTrigger.Conditions>
+
+                            <Setter Property="Background" Value="#0E73F6" />
+                            <Setter Property="BorderBrush" Value="#0E73F6" />
+                        </MultiTrigger>
+                        <!--  CHECKED - TRUE | Pressed  -->
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsChecked" Value="True" />
+                                <Condition Property="IsMouseOver" Value="True" />
+                                <Condition Property="IsPressed" Value="True" />
+                                <Condition Property="IsEnabled" Value="True" />
+                            </MultiTrigger.Conditions>
+
+                            <Setter Property="Background" Value="#0452C8" />
+                            <Setter Property="BorderBrush" Value="#0452C8" />
+                        </MultiTrigger>
+                        <!--  CHECKED - TRUE | Default  -->
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsChecked" Value="True" />
+                                <Condition Property="IsMouseOver" Value="False" />
+                                <Condition Property="IsPressed" Value="False" />
+                                <Condition Property="IsEnabled" Value="True" />
+                            </MultiTrigger.Conditions>
+
+                            <Setter Property="Background" Value="#4094F7" />
+                            <Setter Property="BorderBrush" Value="#4094F7" />
+                        </MultiTrigger>
+                        <!--  CHECKED - TRUE | Disabled  -->
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsChecked" Value="True" />
+                                <Condition Property="IsMouseOver" Value="False" />
+                                <Condition Property="IsPressed" Value="False" />
+                                <Condition Property="IsEnabled" Value="False" />
+                            </MultiTrigger.Conditions>
+
+                            <Setter Property="Background" Value="#0E73F6" />
+                            <Setter Property="BorderBrush" Value="#0E73F6" />
+                            <Setter Property="Opacity" Value="0.5" />
+                        </MultiTrigger>
+
+
+                        <!--  CHECKED - FALSE | Hover  -->
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsChecked" Value="False" />
+                                <Condition Property="IsMouseOver" Value="True" />
+                                <Condition Property="IsPressed" Value="False" />
+                                <Condition Property="IsEnabled" Value="True" />
+                            </MultiTrigger.Conditions>
+
+                            <Setter Property="Background" Value="#9AA6AC" />
+                            <Setter Property="BorderBrush" Value="#9AA6AC" />
+                        </MultiTrigger>
+                        <!--  CHECKED - FALSE | Pressed  -->
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsChecked" Value="False" />
+                                <Condition Property="IsMouseOver" Value="True" />
+                                <Condition Property="IsPressed" Value="True" />
+                                <Condition Property="IsEnabled" Value="True" />
+                            </MultiTrigger.Conditions>
+
+                            <Setter Property="Background" Value="#84919A" />
+                            <Setter Property="BorderBrush" Value="#84919A" />
+                        </MultiTrigger>
+                        <!--  CHECKED - FALSE | Default  -->
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsChecked" Value="False" />
+                                <Condition Property="IsMouseOver" Value="False" />
+                                <Condition Property="IsPressed" Value="False" />
+                                <Condition Property="IsEnabled" Value="True" />
+                            </MultiTrigger.Conditions>
+
+                            <Setter Property="Background" Value="#B0BABF" />
+                            <Setter Property="BorderBrush" Value="#B0BABF" />
+                        </MultiTrigger>
+                        <!--  CHECKED - FALSE | Disabled  -->
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsChecked" Value="False" />
+                                <Condition Property="IsMouseOver" Value="False" />
+                                <Condition Property="IsPressed" Value="False" />
+                                <Condition Property="IsEnabled" Value="False" />
+                            </MultiTrigger.Conditions>
+
+                            <Setter Property="Opacity" Value="0.5" />
+                        </MultiTrigger>
+
+
+                        <!--  CHECKED - NULL | Hover  -->
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsChecked" Value="{x:Null}" />
+                                <Condition Property="IsMouseOver" Value="True" />
+                                <Condition Property="IsPressed" Value="False" />
+                                <Condition Property="IsEnabled" Value="True" />
+                            </MultiTrigger.Conditions>
+
+                            <Setter Property="Background" Value="#9AA6AC" />
+                            <Setter Property="BorderBrush" Value="#9AA6AC" />
+                            <Setter TargetName="TgButton" Property="Height" Value="2" />
+                            <Setter TargetName="TgButton" Property="Width" Value="12" />
+                            <Setter TargetName="TgButton" Property="CornerRadius" Value="1" />
+                        </MultiTrigger>
+                        <!--  CHECKED - NULL | Pressed  -->
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsChecked" Value="{x:Null}" />
+                                <Condition Property="IsMouseOver" Value="True" />
+                                <Condition Property="IsPressed" Value="True" />
+                                <Condition Property="IsEnabled" Value="True" />
+                            </MultiTrigger.Conditions>
+
+                            <Setter Property="Background" Value="#84919A" />
+                            <Setter Property="BorderBrush" Value="#84919A" />
+                            <Setter TargetName="TgButton" Property="Height" Value="2" />
+                            <Setter TargetName="TgButton" Property="Width" Value="12" />
+                            <Setter TargetName="TgButton" Property="CornerRadius" Value="1" />
+                        </MultiTrigger>
+                        <!--  CHECKED - NULL | Default  -->
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsChecked" Value="{x:Null}" />
+                                <Condition Property="IsMouseOver" Value="False" />
+                                <Condition Property="IsPressed" Value="False" />
+                                <Condition Property="IsEnabled" Value="True" />
+                            </MultiTrigger.Conditions>
+
+                            <Setter Property="Background" Value="#B0BABF" />
+                            <Setter Property="BorderBrush" Value="#B0BABF" />
+                            <Setter TargetName="TgButton" Property="Height" Value="2" />
+                            <Setter TargetName="TgButton" Property="Width" Value="12" />
+                            <Setter TargetName="TgButton" Property="CornerRadius" Value="1" />
+                        </MultiTrigger>
+                        <!--  CHECKED - NULL | Disabled  -->
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsChecked" Value="{x:Null}" />
+                                <Condition Property="IsMouseOver" Value="False" />
+                                <Condition Property="IsPressed" Value="False" />
+                                <Condition Property="IsEnabled" Value="False" />
+                            </MultiTrigger.Conditions>
+
+                            <Setter Property="Background" Value="#DDE2E4" />
+                            <Setter Property="BorderBrush" Value="#DDE2E4" />
+                            <Setter TargetName="TgButton" Property="Height" Value="2" />
+                            <Setter TargetName="TgButton" Property="Width" Value="12" />
+                            <Setter TargetName="TgButton" Property="CornerRadius" Value="1" />
+                        </MultiTrigger>
+
+                        <Trigger Property="HasContent" Value="true">
+                            <Setter TargetName="PART_ContentHost" Property="Margin" Value="5,0,0,0" />
+                            <Setter TargetName="PART_ContentHost" Property="Visibility" Value="Visible" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="TglVertical" TargetType="ToggleButton">
+        <Setter Property="HorizontalContentAlignment" Value="Center" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="BorderBrush" Value="#B0BABF" />
+        <Setter Property="Background" Value="#B0BABF" />
+        <Setter Property="attach:ToggleButton.Angle" Value="0" />
+        <Setter Property="Padding" Value="0" />
+        <Setter Property="attach:ToggleButton.HeightCheckBorder" Value="16" />
+        <Setter Property="attach:ToggleButton.WidthCheckBorder" Value="16" />
+        <Setter Property="attach:ToggleButton.HeightMainBorder" Value="32" />
+        <Setter Property="attach:ToggleButton.WidthMainBorder" Value="20" />
+        <Setter Property="attach:ToggleButton.ValueMove" Value="0 0 0 2" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ToggleButton">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="32" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <Border
+                            x:Name="Border"
+                            Width="{TemplateBinding attach:ToggleButton.WidthMainBorder}"
+                            Height="{TemplateBinding attach:ToggleButton.HeightMainBorder}"
+                            Padding="{TemplateBinding Padding}"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            CornerRadius="{TemplateBinding attach:Hint.CornerRadius}">
+                            <Border
+                                x:Name="TgButton"
+                                Width="{TemplateBinding attach:ToggleButton.WidthCheckBorder}"
+                                Height="{TemplateBinding attach:ToggleButton.HeightCheckBorder}"
+                                Margin="{TemplateBinding attach:ToggleButton.ValueMove}"
+                                Padding="0"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Bottom"
+                                Background="White"
+                                CornerRadius="8" />
+                        </Border>
+                        <ContentPresenter
+                            x:Name="PART_ContentHost"
+                            Grid.Column="1"
+                            VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                            Content="{TemplateBinding Content}"
+                            TextElement.FontSize="{TemplateBinding FontSize}"
+                            TextElement.Foreground="{TemplateBinding Foreground}"
+                            Visibility="Collapsed" />
+                    </Grid>
+
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsChecked" Value="False">
+                            <Trigger.EnterActions>
+                                <BeginStoryboard>
+                                    <Storyboard FillBehavior="Stop">
+                                        <ThicknessAnimation
+                                            Storyboard.TargetProperty="(attach:ToggleButton.ValueMove)"
+                                            From="0 0 0 14"
+                                            To="0 0 0 2"
+                                            Duration="0:0:.25" />
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </Trigger.EnterActions>
+                        </Trigger>
+                        <Trigger Property="IsChecked" Value="True">
+                            <Trigger.EnterActions>
+                                <BeginStoryboard>
+                                    <Storyboard FillBehavior="Stop">
+                                        <ThicknessAnimation
+                                            Storyboard.TargetProperty="(attach:ToggleButton.ValueMove)"
+                                            From="0 0 0 2"
+                                            To="0 0 0 14"
+                                            Duration="0:0:.25" />
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </Trigger.EnterActions>
+                        </Trigger>
+                        <Trigger Property="IsChecked" Value="{x:Null}">
+                            <Trigger.EnterActions>
+                                <BeginStoryboard>
+                                    <Storyboard FillBehavior="Stop">
+                                        <ThicknessAnimation
+                                            Storyboard.TargetProperty="(attach:ToggleButton.ValueMove)"
+                                            From="0 0 0 14"
+                                            To="0 0 0 10"
+                                            Duration="0:0:.25" />
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </Trigger.EnterActions>
+                        </Trigger>
+
+                        <!--  CHECKED - TRUE | Hover  -->
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsChecked" Value="True" />
+                                <Condition Property="IsMouseOver" Value="True" />
+                                <Condition Property="IsPressed" Value="False" />
+                                <Condition Property="IsEnabled" Value="True" />
+                            </MultiTrigger.Conditions>
+
+                            <Setter Property="attach:ToggleButton.ValueMove" Value="0,0,0,14" />
+                            <Setter Property="Background" Value="#0E73F6" />
+                            <Setter Property="BorderBrush" Value="#0E73F6" />
+                            <!-- <Setter Property="HorizontalAlignment" TargetName="TgButton" Value="Right" /> -->
+                        </MultiTrigger>
+                        <!--  CHECKED - TRUE | Pressed  -->
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsChecked" Value="True" />
+                                <Condition Property="IsMouseOver" Value="True" />
+                                <Condition Property="IsPressed" Value="True" />
+                                <Condition Property="IsEnabled" Value="True" />
+                            </MultiTrigger.Conditions>
+
+                            <Setter Property="attach:ToggleButton.ValueMove" Value="0,0,0,14" />
+                            <Setter Property="Background" Value="#0452C8" />
+                            <Setter Property="BorderBrush" Value="#0452C8" />
+                            <!-- <Setter Property="HorizontalAlignment" TargetName="TgButton" Value="Right" /> -->
+                        </MultiTrigger>
+                        <!--  CHECKED - TRUE | Default  -->
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsChecked" Value="True" />
+                                <Condition Property="IsMouseOver" Value="False" />
+                                <Condition Property="IsPressed" Value="False" />
+                                <Condition Property="IsEnabled" Value="True" />
+                            </MultiTrigger.Conditions>
+
+                            <Setter Property="attach:ToggleButton.ValueMove" Value="0,0,0,14" />
+                            <Setter Property="Background" Value="#4094F7" />
+                            <Setter Property="BorderBrush" Value="#4094F7" />
+                            <!-- <Setter Property="HorizontalAlignment" TargetName="TgButton" Value="Right" /> -->
+                        </MultiTrigger>
+                        <!--  CHECKED - TRUE | Disabled  -->
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsChecked" Value="True" />
+                                <Condition Property="IsMouseOver" Value="False" />
+                                <Condition Property="IsPressed" Value="False" />
+                                <Condition Property="IsEnabled" Value="False" />
+                            </MultiTrigger.Conditions>
+
+                            <Setter Property="attach:ToggleButton.ValueMove" Value="0,0,0,14" />
+                            <Setter Property="Background" Value="#DDE2E4" />
+                            <Setter Property="BorderBrush" Value="#DDE2E4" />
+                            <!-- <Setter Property="HorizontalAlignment" TargetName="TgButton" Value="Right" /> -->
+                        </MultiTrigger>
+
+
+                        <!--  CHECKED - FALSE | Hover  -->
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsChecked" Value="False" />
+                                <Condition Property="IsMouseOver" Value="True" />
+                                <Condition Property="IsPressed" Value="False" />
+                                <Condition Property="IsEnabled" Value="True" />
+                            </MultiTrigger.Conditions>
+
+                            <Setter Property="attach:ToggleButton.ValueMove" Value="0,0,0,2" />
+                            <Setter Property="Background" Value="#9AA6AC" />
+                            <Setter Property="BorderBrush" Value="#9AA6AC" />
+                        </MultiTrigger>
+                        <!--  CHECKED - FALSE | Pressed  -->
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsChecked" Value="False" />
+                                <Condition Property="IsMouseOver" Value="True" />
+                                <Condition Property="IsPressed" Value="True" />
+                                <Condition Property="IsEnabled" Value="True" />
+                            </MultiTrigger.Conditions>
+
+                            <Setter Property="attach:ToggleButton.ValueMove" Value="0,0,0,2" />
+                            <Setter Property="Background" Value="#84919A" />
+                            <Setter Property="BorderBrush" Value="#84919A" />
+                        </MultiTrigger>
+                        <!--  CHECKED - FALSE | Default  -->
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsChecked" Value="False" />
+                                <Condition Property="IsMouseOver" Value="False" />
+                                <Condition Property="IsPressed" Value="False" />
+                                <Condition Property="IsEnabled" Value="True" />
+                            </MultiTrigger.Conditions>
+
+                            <Setter Property="attach:ToggleButton.ValueMove" Value="0,0,0,2" />
+                            <Setter Property="Background" Value="#B0BABF" />
+                            <Setter Property="BorderBrush" Value="#B0BABF" />
+                        </MultiTrigger>
+                        <!--  CHECKED - FALSE | Disabled  -->
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsChecked" Value="False" />
+                                <Condition Property="IsMouseOver" Value="False" />
+                                <Condition Property="IsPressed" Value="False" />
+                                <Condition Property="IsEnabled" Value="False" />
+                            </MultiTrigger.Conditions>
+
+                            <Setter Property="attach:ToggleButton.ValueMove" Value="0,0,0,2" />
+                            <Setter Property="Background" Value="#DDE2E4" />
+                            <Setter Property="BorderBrush" Value="#DDE2E4" />
+                        </MultiTrigger>
+
+
+                        <!--  CHECKED - NULL | Hover  -->
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsChecked" Value="{x:Null}" />
+                                <Condition Property="IsMouseOver" Value="True" />
+                                <Condition Property="IsPressed" Value="False" />
+                                <Condition Property="IsEnabled" Value="True" />
+                            </MultiTrigger.Conditions>
+
+                            <Setter Property="Background" Value="#9AA6AC" />
+                            <Setter Property="BorderBrush" Value="#9AA6AC" />
+                            <Setter TargetName="TgButton" Property="Height" Value="12" />
+                            <Setter TargetName="TgButton" Property="Width" Value="2" />
+                            <Setter Property="attach:ToggleButton.ValueMove" Value="0,0,0,10" />
+                            <Setter TargetName="TgButton" Property="HorizontalAlignment" Value="Center" />
+                            <Setter TargetName="TgButton" Property="CornerRadius" Value="1" />
+                        </MultiTrigger>
+                        <!--  CHECKED - NULL | Pressed  -->
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsChecked" Value="{x:Null}" />
+                                <Condition Property="IsMouseOver" Value="True" />
+                                <Condition Property="IsPressed" Value="True" />
+                                <Condition Property="IsEnabled" Value="True" />
+                            </MultiTrigger.Conditions>
+
+                            <Setter Property="Background" Value="#84919A" />
+                            <Setter Property="BorderBrush" Value="#84919A" />
+                            <Setter Property="attach:ToggleButton.ValueMove" Value="0,0,0,10" />
+                            <Setter TargetName="TgButton" Property="Height" Value="12" />
+                            <Setter TargetName="TgButton" Property="Width" Value="2" />
+                            <Setter TargetName="TgButton" Property="HorizontalAlignment" Value="Center" />
+                            <Setter TargetName="TgButton" Property="CornerRadius" Value="1" />
+                        </MultiTrigger>
+                        <!--  CHECKED - NULL | Default  -->
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsChecked" Value="{x:Null}" />
+                                <Condition Property="IsMouseOver" Value="False" />
+                                <Condition Property="IsPressed" Value="False" />
+                                <Condition Property="IsEnabled" Value="True" />
+                            </MultiTrigger.Conditions>
+
+                            <Setter Property="Background" Value="#B0BABF" />
+                            <Setter Property="BorderBrush" Value="#B0BABF" />
+                            <Setter Property="attach:ToggleButton.ValueMove" Value="0,0,0,10" />
+                            <Setter TargetName="TgButton" Property="Height" Value="12" />
+                            <Setter TargetName="TgButton" Property="Width" Value="2" />
+                            <Setter TargetName="TgButton" Property="HorizontalAlignment" Value="Center" />
+                            <Setter TargetName="TgButton" Property="CornerRadius" Value="1" />
+                        </MultiTrigger>
+                        <!--  CHECKED - NULL | Disabled  -->
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsChecked" Value="{x:Null}" />
+                                <Condition Property="IsMouseOver" Value="False" />
+                                <Condition Property="IsPressed" Value="False" />
+                                <Condition Property="IsEnabled" Value="False" />
+                            </MultiTrigger.Conditions>
+
+                            <Setter Property="Background" Value="#DDE2E4" />
+                            <Setter Property="attach:ToggleButton.ValueMove" Value="0,0,0,10" />
+                            <Setter Property="BorderBrush" Value="#DDE2E4" />
+                            <Setter TargetName="TgButton" Property="Height" Value="12" />
+                            <Setter TargetName="TgButton" Property="Width" Value="2" />
+                            <Setter TargetName="TgButton" Property="HorizontalAlignment" Value="Center" />
+                            <Setter TargetName="TgButton" Property="CornerRadius" Value="1" />
+                        </MultiTrigger>
+
+                        <Trigger Property="HasContent" Value="true">
+                            <Setter TargetName="PART_ContentHost" Property="Margin" Value="5,0,0,0" />
+                            <Setter TargetName="PART_ContentHost" Property="Visibility" Value="Visible" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="OnOffToggle" TargetType="ToggleButton">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ToggleButton">
+                    <Border
+                        Width="80"
+                        Height="38"
+                        Background="{StaticResource Lg2}"
+                        BorderBrush="{StaticResource Lg2}"
+                        BorderThickness="1"
+                        CornerRadius="3">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="5" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Border
+                                Name="Border"
+                                Grid.Column="0"
+                                Width="36"
+                                Height="36"
+                                Background="Red"
+                                CornerRadius="3">
+                                <TextBlock
+                                    Name="TbTitle"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"
+                                    Foreground="White"
+                                    Text="Выкл" />
+                            </Border>
+                        </Grid>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsChecked" Value="True">
+                            <Setter TargetName="Border" Property="Grid.Column" Value="2" />
+                            <Setter TargetName="Border" Property="Background" Value="Green" />
+                            <Setter TargetName="TbTitle" Property="Text" Value="Вкл" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style x:Key="ActiveUser" TargetType="ToggleButton">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ToggleButton">
+                    <Border
+                        Height="35"
+                        MaxWidth="300"
+                        Background="{StaticResource Lg2}"
+                        BorderBrush="{StaticResource Lg2}"
+                        BorderThickness="1"
+                        CornerRadius="3">
+                        <Border
+                            Name="Border"
+                            Height="33"
+                            MaxWidth="298"
+                            Padding="20,0">
+                            <TextBlock
+                                Name="TbTitle"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                Foreground="White"
+                                Text="Выключенный пользователь" />
+                        </Border>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsChecked" Value="True">
+                            <Setter TargetName="Border" Property="Background" Value="Green" />
+                            <Setter TargetName="TbTitle" Property="Text" Value="Активный пользователь" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style x:Key="TglFocalSpot" TargetType="ToggleButton">
+        <Setter Property="Width" Value="48" />
+        <Setter Property="Height" Value="48" />
+        <Setter Property="Cursor" Value="Hand" />
+        <Setter Property="Background" Value="{StaticResource CleanW}" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="BorderBrush" Value="{StaticResource Lg2}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ToggleButton">
+                    <Border
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        CornerRadius="3">
+                        <Ellipse
+                            x:Name="FocalSpot"
+                            Width="15"
+                            Height="15"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            Fill="{StaticResource Dg2}" />
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsChecked" Value="True">
+                            <Setter TargetName="FocalSpot" Property="Width" Value="25" />
+                            <Setter TargetName="FocalSpot" Property="Height" Value="25" />
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="{StaticResource Lg4}" />
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter Property="Background" Value="{StaticResource Lg2}" />
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Opacity" Value="0.7" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="ToggleButtonBaseLg" TargetType="{x:Type ToggleButton}">
+        <Setter Property="FontSize" Value="14" />
+        <Setter Property="FontFamily" Value="Golos UI VF" />
+        <Setter Property="MinWidth" Value="20" />
+        <Setter Property="MinHeight" Value="20" />
+        <Setter Property="Height" Value="40" />
+        <Setter Property="FontWeight" Value="Medium" />
+        <Setter Property="Padding" Value="16,8" />
+    </Style>
+    <Style
+        x:Key="TglOutline"
+        BasedOn="{StaticResource ToggleButtonBaseLg}"
+        TargetType="{x:Type ToggleButton}">
+        <Setter Property="Foreground" Value="{StaticResource Dg2}" />
+        <Setter Property="Background" Value="#FFFFFF" />
+        <Setter Property="BorderBrush" Value="{StaticResource Lg2}" />
+        <Setter Property="BorderThickness" Value="2" />
+        <Setter Property="attach:Button.IconHeight" Value="15" />
+        <Setter Property="attach:Button.IconWidth" Value="15" />
+        <Setter Property="attach:Hint.CornerRadius" Value="6" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ToggleButton}">
+                    <Grid>
+                        <Grid>
+                            <Grid.OpacityMask>
+                                <VisualBrush Stretch="None" Visual="{Binding ElementName=Border}" />
+                            </Grid.OpacityMask>
+                            <Border
+                                Name="Border"
+                                Margin=".5"
+                                Background="{TemplateBinding Background}"
+                                CornerRadius="{TemplateBinding attach:Hint.CornerRadius}" />
+                            <Border
+                                Name="Shadow"
+                                BorderBrush="{StaticResource Dg4}"
+                                BorderThickness="5"
+                                Visibility="Collapsed">
+                                <Border.Effect>
+                                    <BlurEffect Radius="15" />
+                                </Border.Effect>
+                            </Border>
+                        </Grid>
+                        <Border
+                            x:Name="BorderMain"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            CornerRadius="{TemplateBinding attach:Hint.CornerRadius}" />
+                        <Grid Margin="{TemplateBinding Padding}" ZIndex="999">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+
+                            <controls:Icon
+                                Grid.Column="0"
+                                Width="{TemplateBinding attach:Button.IconWidth}"
+                                Height="{TemplateBinding attach:Button.IconHeight}"
+                                Margin="0,0,8,0"
+                                Fill="{TemplateBinding Foreground}"
+                                Kind="{TemplateBinding attach:Button.LeftIcon}"
+                                Stroke="{TemplateBinding attach:Button.IconStrokeThickness}"
+                                StrokeColor="{TemplateBinding attach:Button.IconStrokeColor}"
+                                Visibility="{TemplateBinding attach:Button.LeftIcon,
+                                                             Converter={StaticResource IconConverter}}" />
+
+                            <ContentPresenter
+                                Name="Presenter"
+                                Grid.Column="1"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                Content="{TemplateBinding Content}"
+                                Effect="{TemplateBinding Effect}" />
+
+                            <controls:Icon
+                                x:Name="Icon"
+                                Grid.Column="1"
+                                Width="{TemplateBinding attach:Button.IconWidth}"
+                                Height="{TemplateBinding attach:Button.IconHeight}"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                Fill="{TemplateBinding Foreground}"
+                                Kind="{TemplateBinding attach:Button.Icon}"
+                                Stroke="{TemplateBinding attach:Button.IconStrokeThickness}"
+                                StrokeColor="{TemplateBinding attach:Button.IconStrokeColor}"
+                                Visibility="{TemplateBinding attach:Button.Icon,
+                                                             Converter={StaticResource IconConverter}}" />
+
+                            <controls:Icon
+                                Grid.Column="2"
+                                Width="{TemplateBinding attach:Button.IconWidth}"
+                                Height="{TemplateBinding attach:Button.IconHeight}"
+                                Margin="8,0,0,0"
+                                Fill="{TemplateBinding Foreground}"
+                                Kind="{TemplateBinding attach:Button.RightIcon}"
+                                Stroke="{TemplateBinding attach:Button.IconStrokeThickness}"
+                                StrokeColor="{TemplateBinding attach:Button.IconStrokeColor}"
+                                Visibility="{TemplateBinding attach:Button.RightIcon,
+                                                             Converter={StaticResource IconConverter}}" />
+                        </Grid>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="{StaticResource Lg5}" />
+                            <Setter Property="BorderBrush" Value="{StaticResource Lg2}" />
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter Property="Background" Value="{StaticResource Lg3}" />
+                            <Setter Property="BorderBrush" Value="{StaticResource Lg3}" />
+                        </Trigger>
+                        <Trigger Property="IsChecked" Value="True">
+                            <!--  #E5E9EB  -->
+                            <Setter Property="Background" Value="{StaticResource CleanW}" />
+                            <Setter Property="BorderBrush" Value="{StaticResource Lg3}" />
+                            <Setter TargetName="Shadow" Property="Visibility" Value="Visible" />
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Opacity" Value=".5" />
+                        </Trigger>
+                        <Trigger Property="attach:Button.Position" Value="First">
+                            <Setter Property="attach:Hint.CornerRadius" Value="6" />
+                        </Trigger>
+                        <Trigger Property="attach:Button.Position" Value="First">
+                            <Setter Property="attach:Hint.CornerRadius" Value="6,0,0,6" />
+                        </Trigger>
+                        <Trigger Property="attach:Button.Position" Value="Middle">
+                            <Setter Property="attach:Hint.CornerRadius" Value="0" />
+                        </Trigger>
+                        <Trigger Property="attach:Button.Position" Value="Last">
+                            <Setter Property="attach:Hint.CornerRadius" Value="0,6,6,0" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style
+        x:Key="TglText"
+        BasedOn="{StaticResource ToggleButtonBaseLg}"
+        TargetType="{x:Type ToggleButton}">
+        <Setter Property="Foreground" Value="{StaticResource Dg2}" />
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="BorderBrush" Value="Transparent" />
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="attach:Button.IconHeight" Value="15" />
+        <Setter Property="attach:Button.IconWidth" Value="15" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ToggleButton}">
+                    <Grid>
+                        <Border
+                            Name="Border"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            ClipToBounds="True"
+                            CornerRadius="6" />
+                        <Border
+                            Name="BrdEffect"
+                            Background="#002D46"
+                            CornerRadius="6"
+                            Opacity="0" />
+                        <Grid Margin="{TemplateBinding Padding}" ZIndex="999">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+
+                            <controls:Icon
+                                Grid.Column="0"
+                                Width="{TemplateBinding attach:Button.IconWidth}"
+                                Height="{TemplateBinding attach:Button.IconHeight}"
+                                Margin="0,0,8,0"
+                                Fill="{TemplateBinding Foreground}"
+                                Kind="{TemplateBinding attach:Button.LeftIcon}"
+                                Stroke="{TemplateBinding attach:Button.IconStrokeThickness}"
+                                StrokeColor="{TemplateBinding attach:Button.IconStrokeColor}"
+                                Visibility="{TemplateBinding attach:Button.LeftIcon,
+                                                             Converter={StaticResource IconConverter}}" />
+
+                            <ContentPresenter
+                                Name="Presenter"
+                                Grid.Column="1"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                Content="{TemplateBinding Content}"
+                                Effect="{TemplateBinding Effect}" />
+
+                            <controls:Icon
+                                x:Name="Icon"
+                                Grid.Column="1"
+                                Width="{TemplateBinding attach:Button.IconWidth}"
+                                Height="{TemplateBinding attach:Button.IconHeight}"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                Fill="{TemplateBinding Foreground}"
+                                Kind="{TemplateBinding attach:Button.Icon}"
+                                Stroke="{TemplateBinding attach:Button.IconStrokeThickness}"
+                                StrokeColor="{TemplateBinding attach:Button.IconStrokeColor}"
+                                Visibility="{TemplateBinding attach:Button.Icon,
+                                                             Converter={StaticResource IconConverter}}" />
+
+                            <controls:Icon
+                                Grid.Column="2"
+                                Width="{TemplateBinding attach:Button.IconWidth}"
+                                Height="{TemplateBinding attach:Button.IconHeight}"
+                                Margin="8,0,0,0"
+                                Fill="{TemplateBinding Foreground}"
+                                Kind="{TemplateBinding attach:Button.RightIcon}"
+                                Stroke="{TemplateBinding attach:Button.IconStrokeThickness}"
+                                StrokeColor="{TemplateBinding attach:Button.IconStrokeColor}"
+                                Visibility="{TemplateBinding attach:Button.RightIcon,
+                                                             Converter={StaticResource IconConverter}}" />
+                        </Grid>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="BrdEffect" Property="Opacity" Value=".04" />
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter TargetName="BrdEffect" Property="Opacity" Value=".1" />
+                        </Trigger>
+                        <Trigger Property="IsChecked" Value="True">
+                            <Setter TargetName="BrdEffect" Property="Opacity" Value=".2" />
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Opacity" Value=".5" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!--  LIST CONTROL SELECT  -->
+
+    <Style x:Key="ListControlSelectMode" TargetType="ToggleButton">
+        <Setter Property="HorizontalContentAlignment" Value="Center" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="BorderBrush" Value="#B0BABF" />
+        <Setter Property="Background" Value="#B0BABF" />
+        <Setter Property="Padding" Value="0" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ToggleButton">
+                    <Grid>
+                        <Border
+                            x:Name="Border"
+                            Width="156"
+                            Height="32"
+                            Padding="{TemplateBinding Padding}"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            CornerRadius="16">
+                            <Grid Margin="3">
+                                <Border
+                                    x:Name="TgButton"
+                                    Width="68"
+                                    Height="25"
+                                    Margin="0,0,0,0"
+                                    Padding="0"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Center"
+                                    Background="White"
+                                    CornerRadius="13" />
+
+                                <TextBlock
+                                    x:Name="Text1"
+                                    Width="68"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Center"
+                                    FontSize="11"
+                                    FontWeight="Normal"
+                                    Foreground="{StaticResource Dg2}"
+                                    Text="Один"
+                                    TextAlignment="Center" />
+
+                                <TextBlock
+                                    x:Name="Text2"
+                                    Width="80"
+                                    HorizontalAlignment="Right"
+                                    VerticalAlignment="Center"
+                                    FontSize="11"
+                                    FontWeight="Normal"
+                                    Foreground="{StaticResource Mg1}"
+                                    Opacity=".4"
+                                    Text="Несколько"
+                                    TextAlignment="Center" />
+
+                            </Grid>
+                        </Border>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <!--  CHECKED - TRUE | Hover  -->
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsChecked" Value="True" />
+                                <Condition Property="IsMouseOver" Value="True" />
+                                <Condition Property="IsPressed" Value="False" />
+                                <Condition Property="IsEnabled" Value="True" />
+                            </MultiTrigger.Conditions>
+
+                            <Setter Property="Background" Value="{StaticResource Mg4}" />
+                            <Setter Property="BorderBrush" Value="{StaticResource Mg4}" />
+                            <!-- <Setter Property="HorizontalAlignment" TargetName="TgButton" Value="Right" /> -->
+                            <Setter TargetName="TgButton" Property="Width" Value="80" />
+                            <Setter TargetName="Text1" Property="Foreground" Value="{StaticResource Mg1}" />
+                            <Setter TargetName="Text2" Property="Foreground" Value="{StaticResource Dg2}" />
+                            <Setter TargetName="Text1" Property="Opacity" Value=".4" />
+                            <Setter TargetName="Text2" Property="Opacity" Value="1" />
+                        </MultiTrigger>
+                        <!--  CHECKED - TRUE | Pressed  -->
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsChecked" Value="True" />
+                                <Condition Property="IsMouseOver" Value="True" />
+                                <Condition Property="IsPressed" Value="True" />
+                                <Condition Property="IsEnabled" Value="True" />
+                            </MultiTrigger.Conditions>
+
+                            <Setter Property="Background" Value="{StaticResource Mg3}" />
+                            <Setter Property="BorderBrush" Value="{StaticResource Mg3}" />
+                            <!-- <Setter Property="HorizontalAlignment" TargetName="TgButton" Value="Right" /> -->
+                            <Setter TargetName="Text1" Property="Foreground" Value="{StaticResource Mg1}" />
+                            <Setter TargetName="Text2" Property="Foreground" Value="{StaticResource Dg2}" />
+                            <Setter TargetName="Text1" Property="Opacity" Value=".4" />
+                            <Setter TargetName="Text2" Property="Opacity" Value="1" />
+                            <Setter TargetName="TgButton" Property="Width" Value="80" />
+                        </MultiTrigger>
+                        <!--  CHECKED - TRUE | Default  -->
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsChecked" Value="True" />
+                                <Condition Property="IsMouseOver" Value="False" />
+                                <Condition Property="IsPressed" Value="False" />
+                                <Condition Property="IsEnabled" Value="True" />
+                            </MultiTrigger.Conditions>
+                            <!-- <Setter Property="HorizontalAlignment" TargetName="TgButton" Value="Right" /> -->
+                            <Setter TargetName="TgButton" Property="Width" Value="80" />
+                            <Setter TargetName="Text1" Property="Foreground" Value="{StaticResource Mg1}" />
+                            <Setter TargetName="Text2" Property="Foreground" Value="{StaticResource Dg2}" />
+                            <Setter TargetName="Text1" Property="Opacity" Value=".4" />
+                            <Setter TargetName="Text2" Property="Opacity" Value="1" />
+                        </MultiTrigger>
+                        <!--  CHECKED - TRUE | Disabled  -->
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsChecked" Value="True" />
+                                <Condition Property="IsMouseOver" Value="False" />
+                                <Condition Property="IsPressed" Value="False" />
+                                <Condition Property="IsEnabled" Value="False" />
+                            </MultiTrigger.Conditions>
+
+                            <Setter Property="Background" Value="{StaticResource Lg2}" />
+                            <Setter Property="BorderBrush" Value="{StaticResource Lg2}" />
+                            <!-- <Setter Property="HorizontalAlignment" TargetName="TgButton" Value="Right" /> -->
+                            <Setter TargetName="TgButton" Property="Width" Value="80" />
+                            <Setter TargetName="Text1" Property="Foreground" Value="{StaticResource Mg1}" />
+                            <Setter TargetName="Text2" Property="Foreground" Value="{StaticResource Dg2}" />
+                            <Setter TargetName="Text1" Property="Opacity" Value=".4" />
+                            <Setter TargetName="Text2" Property="Opacity" Value="1" />
+                        </MultiTrigger>
+
+
+                        <!--  CHECKED - FALSE | Hover  -->
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsChecked" Value="False" />
+                                <Condition Property="IsMouseOver" Value="True" />
+                                <Condition Property="IsPressed" Value="False" />
+                                <Condition Property="IsEnabled" Value="True" />
+                            </MultiTrigger.Conditions>
+
+                            <Setter Property="Background" Value="{StaticResource Mg4}" />
+                            <Setter Property="BorderBrush" Value="{StaticResource Mg4}" />
+                        </MultiTrigger>
+                        <!--  CHECKED - FALSE | Pressed  -->
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsChecked" Value="False" />
+                                <Condition Property="IsMouseOver" Value="True" />
+                                <Condition Property="IsPressed" Value="True" />
+                                <Condition Property="IsEnabled" Value="True" />
+                            </MultiTrigger.Conditions>
+
+                            <Setter Property="Background" Value="{StaticResource Mg3}" />
+                            <Setter Property="BorderBrush" Value="{StaticResource Mg3}" />
+                        </MultiTrigger>
+
+                        <EventTrigger RoutedEvent="Checked">
+                            <EventTrigger.Actions>
+                                <BeginStoryboard>
+                                    <Storyboard TargetName="TgButton">
+                                        <DoubleAnimation
+                                            AutoReverse="False"
+                                            Storyboard.TargetProperty="Width"
+                                            From="68"
+                                            To="80"
+                                            Duration="0:0:.2" />
+                                        <ThicknessAnimation
+                                            AutoReverse="False"
+                                            Storyboard.TargetProperty="Margin"
+                                            From="0,0,0,0"
+                                            To="70,0,0,0"
+                                            Duration="0:0:.2" />
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger.Actions>
+                        </EventTrigger>
+                        <EventTrigger RoutedEvent="Unchecked">
+                            <EventTrigger.Actions>
+                                <BeginStoryboard>
+                                    <Storyboard TargetName="TgButton">
+                                        <DoubleAnimation
+                                            AutoReverse="False"
+                                            Storyboard.TargetProperty="Width"
+                                            From="80"
+                                            To="68"
+                                            Duration="0:0:.2" />
+                                        <ThicknessAnimation
+                                            AutoReverse="False"
+                                            Storyboard.TargetProperty="Margin"
+                                            From="70,0,0,0"
+                                            To="0,0,0,0"
+                                            Duration="0:0:.2" />
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger.Actions>
+                        </EventTrigger>
+                        <!--  CHECKED - FALSE | Default  -->
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsChecked" Value="False" />
+                                <Condition Property="IsMouseOver" Value="False" />
+                                <Condition Property="IsPressed" Value="False" />
+                                <Condition Property="IsEnabled" Value="True" />
+                            </MultiTrigger.Conditions>
+
+                            <Setter Property="Background" Value="{StaticResource Mg5}" />
+                            <Setter Property="BorderBrush" Value="{StaticResource Mg5}" />
+                        </MultiTrigger>
+                        <!--  CHECKED - FALSE | Disabled  -->
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsChecked" Value="False" />
+                                <Condition Property="IsMouseOver" Value="False" />
+                                <Condition Property="IsPressed" Value="False" />
+                                <Condition Property="IsEnabled" Value="False" />
+                            </MultiTrigger.Conditions>
+
+                            <Setter Property="Background" Value="{StaticResource Lg2}" />
+                            <Setter Property="BorderBrush" Value="{StaticResource Lg2}" />
+                        </MultiTrigger>
+
+
+                        <!--  CHECKED - NULL | Hover  -->
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsChecked" Value="{x:Null}" />
+                                <Condition Property="IsMouseOver" Value="True" />
+                                <Condition Property="IsPressed" Value="False" />
+                                <Condition Property="IsEnabled" Value="True" />
+                            </MultiTrigger.Conditions>
+
+                            <Setter Property="Background" Value="{StaticResource Mg4}" />
+                            <Setter Property="BorderBrush" Value="{StaticResource Mg4}" />
+                            <Setter TargetName="TgButton" Property="Height" Value="2" />
+                            <Setter TargetName="TgButton" Property="Width" Value="12" />
+                            <Setter TargetName="TgButton" Property="HorizontalAlignment" Value="Center" />
+                            <Setter TargetName="TgButton" Property="CornerRadius" Value="1" />
+                        </MultiTrigger>
+                        <!--  CHECKED - NULL | Pressed  -->
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsChecked" Value="{x:Null}" />
+                                <Condition Property="IsMouseOver" Value="True" />
+                                <Condition Property="IsPressed" Value="True" />
+                                <Condition Property="IsEnabled" Value="True" />
+                            </MultiTrigger.Conditions>
+
+                            <Setter Property="Background" Value="{StaticResource Mg3}" />
+                            <Setter Property="BorderBrush" Value="{StaticResource Mg3}" />
+                            <Setter TargetName="TgButton" Property="Height" Value="2" />
+                            <Setter TargetName="TgButton" Property="Width" Value="12" />
+                            <Setter TargetName="TgButton" Property="HorizontalAlignment" Value="Center" />
+                            <Setter TargetName="TgButton" Property="CornerRadius" Value="1" />
+                        </MultiTrigger>
+                        <!--  CHECKED - NULL | Default  -->
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsChecked" Value="{x:Null}" />
+                                <Condition Property="IsMouseOver" Value="False" />
+                                <Condition Property="IsPressed" Value="False" />
+                                <Condition Property="IsEnabled" Value="True" />
+                            </MultiTrigger.Conditions>
+
+                            <Setter Property="Background" Value="{StaticResource Mg5}" />
+                            <Setter Property="BorderBrush" Value="{StaticResource Mg5}" />
+                            <Setter TargetName="TgButton" Property="Height" Value="2" />
+                            <Setter TargetName="TgButton" Property="Width" Value="12" />
+                            <Setter TargetName="TgButton" Property="HorizontalAlignment" Value="Center" />
+                            <Setter TargetName="TgButton" Property="CornerRadius" Value="1" />
+                        </MultiTrigger>
+                        <!--  CHECKED - NULL | Disabled  -->
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsChecked" Value="{x:Null}" />
+                                <Condition Property="IsMouseOver" Value="False" />
+                                <Condition Property="IsPressed" Value="False" />
+                                <Condition Property="IsEnabled" Value="False" />
+                            </MultiTrigger.Conditions>
+
+                            <Setter Property="Background" Value="{StaticResource Lg2}" />
+                            <Setter Property="BorderBrush" Value="{StaticResource Lg2}" />
+                            <Setter TargetName="TgButton" Property="Height" Value="2" />
+                            <Setter TargetName="TgButton" Property="Width" Value="12" />
+                            <Setter TargetName="TgButton" Property="HorizontalAlignment" Value="Center" />
+                            <Setter TargetName="TgButton" Property="CornerRadius" Value="1" />
+                        </MultiTrigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+</ResourceDictionary>

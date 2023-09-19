@@ -21,9 +21,6 @@
     mc:Ignorable="d">
     <Window.Resources>
         <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="/Arion.Style;component/ArionUiTheme.xaml" />
-            </ResourceDictionary.MergedDictionaries>
             <converters:TextVisibilityConverter
                 x:Key="TextVisibilityConverter"
                 IsEmptyValue="Collapsed"

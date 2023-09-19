@@ -73,12 +73,8 @@ public partial class Icon
     public static readonly DependencyProperty StrokeColorProperty =
         DependencyProperty.Register(nameof(StrokeColor), typeof(SolidColorBrush), typeof(Icon), new PropertyMetadata());
         
-    public Icon()
-    {
-        InitializeComponent();
-    }
-        
-        
+    public Icon() => InitializeComponent();
+
 
     private void Icon_OnLoaded(object sender, RoutedEventArgs e)
     {

@@ -12,6 +12,7 @@
     Height="1080"
     Left="600"
     Top="0"
+    Background="{StaticResource Lg5}"
     WindowState="Maximized"
     mc:Ignorable="d">
     <Window.DataContext>

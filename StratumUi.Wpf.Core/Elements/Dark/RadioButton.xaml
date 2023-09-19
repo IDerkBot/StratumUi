@@ -83,7 +83,6 @@
                             Grid.Column="1"
                             MaxWidth="252"
                             Margin="8,0,0,0"
-                            HorizontalAlignment="Left"
                             FontSize="12"
                             FontWeight="Regular"
                             Foreground="{StaticResource Mg4}"
@@ -103,8 +102,8 @@
                                 <Condition Property="IsPressed" Value="False" />
                             </MultiTrigger.Conditions>
 
-                            <Setter TargetName="radioButtonBorder" Property="Background" Value="{StaticResource Pr600}" />
-                            <Setter TargetName="radioButtonBorder" Property="BorderBrush" Value="{StaticResource Pr600}" />
+                            <Setter TargetName="radioButtonBorder" Property="Background" Value="#0E73F6" />
+                            <Setter TargetName="radioButtonBorder" Property="BorderBrush" Value="#0E73F6" />
                             <Setter TargetName="radioButtonBorder" Property="BorderThickness" Value="0" />
                             <Setter TargetName="optionMark" Property="Fill" Value="{StaticResource CleanW}" />
                             <Setter TargetName="optionMark" Property="Opacity" Value="1" />
@@ -118,8 +117,8 @@
                                 <Condition Property="IsEnabled" Value="True" />
                             </MultiTrigger.Conditions>
 
-                            <Setter TargetName="radioButtonBorder" Property="Background" Value="{StaticResource Pr700}" />
-                            <Setter TargetName="radioButtonBorder" Property="BorderBrush" Value="{StaticResource Pr700}" />
+                            <Setter TargetName="radioButtonBorder" Property="Background" Value="#0452C8" />
+                            <Setter TargetName="radioButtonBorder" Property="BorderBrush" Value="#0452C8" />
                             <Setter TargetName="radioButtonBorder" Property="BorderThickness" Value="0" />
                             <Setter TargetName="optionMark" Property="Fill" Value="{StaticResource CleanW}" />
                             <Setter TargetName="optionMark" Property="Opacity" Value="1" />
@@ -133,8 +132,8 @@
                                 <Condition Property="IsEnabled" Value="True" />
                             </MultiTrigger.Conditions>
 
-                            <Setter TargetName="radioButtonBorder" Property="Background" Value="{StaticResource Pr500}" />
-                            <Setter TargetName="radioButtonBorder" Property="BorderBrush" Value="{StaticResource Pr500}" />
+                            <Setter TargetName="radioButtonBorder" Property="Background" Value="#4094F7" />
+                            <Setter TargetName="radioButtonBorder" Property="BorderBrush" Value="#4094F7" />
                             <Setter TargetName="radioButtonBorder" Property="BorderThickness" Value="0" />
                             <Setter TargetName="optionMark" Property="Fill" Value="{StaticResource CleanW}" />
                             <Setter TargetName="optionMark" Property="Opacity" Value="1" />
@@ -148,8 +147,8 @@
                                 <Condition Property="IsEnabled" Value="False" />
                             </MultiTrigger.Conditions>
 
-                            <Setter TargetName="radioButtonBorder" Property="Background" Value="{StaticResource Lg1}" />
-                            <Setter TargetName="radioButtonBorder" Property="BorderBrush" Value="{StaticResource Lg1}" />
+                            <Setter TargetName="radioButtonBorder" Property="Background" Value="#D5DADD" />
+                            <Setter TargetName="radioButtonBorder" Property="BorderBrush" Value="#D5DADD" />
                             <Setter TargetName="radioButtonBorder" Property="BorderThickness" Value="0" />
                             <Setter TargetName="optionMark" Property="Fill" Value="{StaticResource CleanW}" />
                             <Setter TargetName="optionMark" Property="Opacity" Value="0" />
@@ -166,8 +165,8 @@
                                 <Condition Property="IsEnabled" Value="True" />
                             </MultiTrigger.Conditions>
 
-                            <Setter TargetName="radioButtonBorder" Property="Background" Value="{StaticResource Lg4}" />
-                            <Setter TargetName="radioButtonBorder" Property="BorderBrush" Value="{StaticResource Mg4}" />
+                            <Setter TargetName="radioButtonBorder" Property="Background" Value="#EEF0F2" />
+                            <Setter TargetName="radioButtonBorder" Property="BorderBrush" Value="#9AA6AC" />
                             <Setter TargetName="optionMark" Property="Fill" Value="Transparent" />
                             <Setter TargetName="optionMark" Property="Opacity" Value="0" />
                         </MultiTrigger>
@@ -180,8 +179,8 @@
                                 <Condition Property="IsEnabled" Value="True" />
                             </MultiTrigger.Conditions>
 
-                            <Setter TargetName="radioButtonBorder" Property="Background" Value="{StaticResource Lg3}" />
-                            <Setter TargetName="radioButtonBorder" Property="BorderBrush" Value="{StaticResource Mg3}" />
+                            <Setter TargetName="radioButtonBorder" Property="Background" Value="#E5E9EB" />
+                            <Setter TargetName="radioButtonBorder" Property="BorderBrush" Value="#84919A" />
                             <Setter TargetName="optionMark" Property="Fill" Value="Transparent" />
                             <Setter TargetName="optionMark" Property="Opacity" Value="0" />
                         </MultiTrigger>
@@ -194,8 +193,8 @@
                                 <Condition Property="IsEnabled" Value="True" />
                             </MultiTrigger.Conditions>
 
-                            <Setter TargetName="radioButtonBorder" Property="Background" Value="{StaticResource Lg5}" />
-                            <Setter TargetName="radioButtonBorder" Property="BorderBrush" Value="{StaticResource Mg5}" />
+                            <Setter TargetName="radioButtonBorder" Property="Background" Value="#F6F8F9" />
+                            <Setter TargetName="radioButtonBorder" Property="BorderBrush" Value="#B0BABF" />
                             <Setter TargetName="optionMark" Property="Fill" Value="Transparent" />
                             <Setter TargetName="optionMark" Property="Opacity" Value="0" />
                         </MultiTrigger>
@@ -208,8 +207,8 @@
                                 <Condition Property="IsEnabled" Value="False" />
                             </MultiTrigger.Conditions>
 
-                            <Setter TargetName="radioButtonBorder" Property="Background" Value="{StaticResource Lg5}" />
-                            <Setter TargetName="radioButtonBorder" Property="BorderBrush" Value="{StaticResource Mg5}" />
+                            <Setter TargetName="radioButtonBorder" Property="Background" Value="#F6F8F9" />
+                            <Setter TargetName="radioButtonBorder" Property="BorderBrush" Value="#B0BABF" />
                             <Setter TargetName="optionMark" Property="Fill" Value="Transparent" />
                             <Setter TargetName="optionMark" Property="Opacity" Value="0" />
                             <Setter Property="Opacity" Value="0.5" />

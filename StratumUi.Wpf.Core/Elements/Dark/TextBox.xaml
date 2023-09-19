@@ -1,0 +1,255 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:attach="clr-namespace:StratumUi.Wpf.Core.AttachedProperties"
+    xmlns:commands="clr-namespace:StratumUi.Wpf.Core.Commands"
+    xmlns:controls="clr-namespace:StratumUi.Wpf.Core.Controls"
+    xmlns:converters="clr-namespace:StratumUi.Wpf.Core.Converters">
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="Colors.xaml" />
+        <ResourceDictionary Source="FontFamily.xaml" />
+        <ResourceDictionary Source="Button.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+
+    <converters:TextVisibilityConverter
+        x:Key="TextVisibilityConverter"
+        IsEmptyValue="Collapsed"
+        IsNotEmptyValue="Visible" />
+    <converters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+
+    <Style x:Key="{x:Type TextBox}" TargetType="{x:Type TextBox}">
+        <Setter Property="Height" Value="40" />
+        <Setter Property="Foreground" Value="{StaticResource Dg2}" />
+        <Setter Property="FontWeight" Value="Regular" />
+        <Setter Property="FontSize" Value="14" />
+        <Setter Property="BorderBrush" Value="{StaticResource Lg2}" />
+        <Setter Property="Padding" Value="5,0" />
+        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+        <Setter Property="Background" Value="{StaticResource CleanW}" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="commands:ClearText.HandlesClearCommand" Value="True" />
+        <Setter Property="commands:NumberCommand.HandlesUpCommand" Value="True" />
+        <Setter Property="commands:NumberCommand.HandlesDownCommand" Value="True" />
+        <Setter Property="attach:TextBox.IconHeight" Value="15" />
+        <Setter Property="attach:TextBox.IconWidth" Value="15" />
+        <Setter Property="attach:Hint.CornerRadius" Value="6" />
+        <Setter Property="Validation.ErrorTemplate">
+            <Setter.Value>
+                <ControlTemplate>
+                    <Border
+                        Margin="0"
+                        Padding="0"
+                        BorderBrush="{StaticResource R500}"
+                        BorderThickness="1"
+                        CornerRadius="8">
+                        <AdornedElementPlaceholder />
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type TextBox}">
+                    <!--  MAIN TEXT  -->
+                    <Border
+                        x:Name="Border"
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        CornerRadius="{TemplateBinding attach:Hint.CornerRadius}">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+
+                            <!--  PREFIX  -->
+                            <Border
+                                x:Name="BorderPrefix"
+                                Grid.Column="0"
+                                Padding="16,8"
+                                Background="{StaticResource Lg5}"
+                                CornerRadius="5.6,0,0,5.6"
+                                Visibility="{TemplateBinding attach:TextBox.Prefix,
+                                                             Converter={StaticResource TextVisibilityConverter}}">
+                                <TextBlock
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"
+                                    Foreground="{StaticResource Mg2}"
+                                    Text="{TemplateBinding attach:TextBox.Prefix}" />
+                            </Border>
+
+                            <controls:Icon
+                                Grid.Column="1"
+                                Width="{TemplateBinding attach:TextBox.IconWidth}"
+                                Height="{TemplateBinding attach:TextBox.IconHeight}"
+                                Margin="8,0,8,0"
+                                Fill="{TemplateBinding Foreground}"
+                                Kind="{TemplateBinding attach:TextBox.LeftIcon}"
+                                Visibility="{TemplateBinding attach:TextBox.LeftIcon,
+                                                             Converter={StaticResource IconConverter}}" />
+
+                            <ScrollViewer
+                                x:Name="PART_ContentHost"
+                                Grid.Column="2"
+                                Width="{TemplateBinding Width}"
+                                Padding="{TemplateBinding Padding}"
+                                HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                VerticalAlignment="Center"
+                                FontWeight="Medium"
+                                IsTabStop="False"
+                                TextElement.Foreground="{TemplateBinding Foreground}" />
+
+                            <!--  PLACE HOLDER  -->
+                            <TextBlock
+                                x:Name="Placeholder"
+                                Grid.Column="2"
+                                Padding="10,0"
+                                HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                VerticalAlignment="Center"
+                                FontSize="{TemplateBinding FontSize}"
+                                Foreground="{StaticResource Mg4}"
+                                IsHitTestVisible="False"
+                                Text="{TemplateBinding attach:Hint.Placeholder}">
+                                <TextBlock.Style>
+                                    <Style TargetType="{x:Type TextBlock}">
+                                        <Setter Property="Visibility" Value="Collapsed" />
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding Text, RelativeSource={RelativeSource TemplatedParent}}" Value="">
+                                                <Setter Property="Visibility" Value="Visible" />
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBlock.Style>
+                            </TextBlock>
+
+                            <controls:Icon
+                                Grid.Column="3"
+                                Width="{TemplateBinding attach:TextBox.IconWidth}"
+                                Height="{TemplateBinding attach:TextBox.IconHeight}"
+                                Margin="8,0,8,0"
+                                Fill="{TemplateBinding Foreground}"
+                                Kind="{TemplateBinding attach:TextBox.RightIcon}"
+                                Visibility="{TemplateBinding attach:TextBox.RightIcon,
+                                                             Converter={StaticResource IconConverter}}" />
+
+                            <StackPanel Grid.Column="4" Visibility="{TemplateBinding attach:TextBox.IsNumber, Converter={StaticResource BooleanToVisibilityConverter}}">
+                                <Button
+                                    Width="32"
+                                    Height="20"
+                                    Padding="0"
+                                    attach:Button.Icon="ChevronUp"
+                                    attach:Hint.CornerRadius="0,6,0,0"
+                                    Command="{x:Static commands:NumberCommand.UpCommand}" />
+                                <Button
+                                    Width="32"
+                                    Height="20"
+                                    Padding="0"
+                                    attach:Button.Icon="ChevronDown"
+                                    attach:Hint.CornerRadius="0,0,6,0"
+                                    Command="{x:Static commands:NumberCommand.DownCommand}" />
+                            </StackPanel>
+
+                            <Button
+                                Grid.Column="4"
+                                Width="30"
+                                Height="30"
+                                Margin="5"
+                                Padding="5"
+                                attach:Button.Icon="Close"
+                                Command="{x:Static commands:ClearText.ClearCommand}"
+                                Opacity=".4"
+                                Style="{StaticResource BtnText}"
+                                Visibility="{TemplateBinding attach:TextBox.CanClear,
+                                                             Converter={StaticResource BooleanToVisibilityConverter}}">
+                                <!-- <Button.Triggers> -->
+                                <!--     <MultiTrigger> -->
+                                <!--         <MultiTrigger.Conditions> -->
+                                <!--             <Condition Binding="{Binding RelativeSource={RelativeSource TemplatedParent}, Path={TemplateBinding wpf:TextBox.CanClear}}" Value="True" /> -->
+                                <!--             <Condition Binding="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Text, Converter={StaticResource TextVisibilityConverter}}" Value="Visible" /> -->
+                                <!--         </MultiTrigger.Conditions> -->
+                                <!--    -->
+                                <!--         <Setter Property="Visibility" Value="Visible" /> -->
+                                <!--     </MultiTrigger> -->
+                                <!-- </Button.Triggers> -->
+                            </Button>
+
+                            <!--  SUFFIX  -->
+                            <Border
+                                x:Name="BorderSuffix"
+                                Grid.Column="5"
+                                Padding="16,8"
+                                Background="{StaticResource Lg5}"
+                                CornerRadius="0,5.6,5.6,0"
+                                Visibility="{TemplateBinding attach:TextBox.Suffix,
+                                                             Converter={StaticResource TextVisibilityConverter}}">
+                                <TextBlock
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"
+                                    Foreground="{StaticResource Mg2}"
+                                    Text="{TemplateBinding attach:TextBox.Suffix}" />
+                            </Border>
+                        </Grid>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="{StaticResource CleanW}" />
+                            <Setter Property="BorderBrush" Value="{StaticResource Mg5}" />
+                        </Trigger>
+                        <Trigger Property="IsFocused" Value="True">
+                            <Setter Property="Background" Value="{StaticResource CleanW}" />
+                            <Setter Property="BorderBrush" Value="{StaticResource Mg1}" />
+                        </Trigger>
+                        <Trigger Property="IsReadOnly" Value="True">
+                            <Setter Property="Cursor" Value="No" />
+                            <Setter Property="Background" Value="{StaticResource CleanW}" />
+                            <Setter Property="Foreground" Value="{StaticResource Mg4}" />
+                            <Setter Property="BorderBrush" Value="{StaticResource Lg4}" />
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Cursor" Value="No" />
+                            <Setter Property="Background" Value="{StaticResource Lg5}" />
+                            <Setter Property="Foreground" Value="{StaticResource Mg5}" />
+                            <Setter Property="BorderBrush" Value="{StaticResource Lg4}" />
+                        </Trigger>
+                        <Trigger Property="Validation.HasError" Value="True">
+                            <Setter Property="Background" Value="{StaticResource CleanW}" />
+                            <Setter Property="Foreground" Value="{StaticResource Dg2}" />
+                            <Setter Property="BorderBrush" Value="{StaticResource R500}" />
+                        </Trigger>
+                        <Trigger SourceName="BorderPrefix" Property="Visibility" Value="Visible">
+                            <Setter TargetName="PART_ContentHost" Property="MinWidth" Value="100" />
+                        </Trigger>
+                        <Trigger SourceName="BorderSuffix" Property="Visibility" Value="Visible">
+                            <Setter TargetName="PART_ContentHost" Property="MinWidth" Value="100" />
+                        </Trigger>
+
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition SourceName="BorderPrefix" Property="Visibility" Value="Visible" />
+                                <Condition Property="IsEnabled" Value="False" />
+                            </MultiTrigger.Conditions>
+
+                            <Setter TargetName="BorderPrefix" Property="Background" Value="{StaticResource Lg4}" />
+                            <Setter TargetName="BorderSuffix" Property="Background" Value="{StaticResource Lg4}" />
+                        </MultiTrigger>
+
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition SourceName="BorderSuffix" Property="Visibility" Value="Visible" />
+                                <Condition Property="IsEnabled" Value="False" />
+                            </MultiTrigger.Conditions>
+
+                            <Setter TargetName="BorderPrefix" Property="Background" Value="{StaticResource Lg4}" />
+                            <Setter TargetName="BorderSuffix" Property="Background" Value="{StaticResource Lg4}" />
+                        </MultiTrigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>

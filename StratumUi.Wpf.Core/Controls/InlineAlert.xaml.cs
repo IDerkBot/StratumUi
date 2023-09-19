@@ -13,7 +13,7 @@ public partial class InlineAlert
         InitializeComponent();
         _styles = new ResourceDictionary
         {
-            Source = new Uri("/Arion.Style;component/ArionUiTheme.xaml",
+            Source = new Uri("/StratumUI.Wpf.Core;component/Styles/Default.xaml",
                 UriKind.RelativeOrAbsolute)
         };
     }

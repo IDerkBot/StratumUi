@@ -10,7 +10,7 @@
         <Setter Property="BorderThickness" Value="1" />
         <Setter Property="attach:GroupBox.BackgroundHeader" Value="{StaticResource CleanW}" />
         <Setter Property="VerticalAlignment" Value="Top" />
-        <Setter Property="HorizontalAlignment" Value="Stretch" />
+        <Setter Property="HorizontalAlignment" Value="Left" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="GroupBox">

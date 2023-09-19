@@ -9,8 +9,8 @@
     xmlns:viewModel="clr-namespace:StratumUi.Test.Core.ViewModel"
     d:DesignHeight="1000"
     d:DesignWidth="1900"
+    Background="{DynamicResource CleanW}"
     mc:Ignorable="d">
-    <UserControl.Resources />
     <UserControl.DataContext>
         <viewModel:ButtonsViewModel />
     </UserControl.DataContext>
@@ -64,7 +64,6 @@
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             Content="{DynamicResource Filled}"
-            FontSize="32"
             Style="{DynamicResource Lbl}" />
         <Label
             Grid.Row="1"
@@ -74,7 +73,6 @@
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             Content="{DynamicResource Outline}"
-            FontSize="32"
             Style="{DynamicResource Lbl}" />
         <Label
             Grid.Row="1"
@@ -84,7 +82,6 @@
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             Content="{DynamicResource Text}"
-            FontSize="32"
             Style="{DynamicResource Lbl}" />
 
         <Label
@@ -235,34 +232,45 @@
                 <RowDefinition Height="*" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
-            <Grid.Resources>
-                <Style BasedOn="{StaticResource BtnOutline}" TargetType="Button">
-                    <Setter Property="Content" Value="{DynamicResource Button}" />
-                </Style>
-            </Grid.Resources>
-
             <StackPanel Grid.Row="0" Orientation="Horizontal">
                 <smtx:XamlDisplay UniqueKey="BtnOutline1">
-                    <Button />
+                    <Button Content="{DynamicResource Button}" Style="{DynamicResource BtnOutline}" />
                 </smtx:XamlDisplay>
                 <smtx:XamlDisplay UniqueKey="BtnOutline2">
-                    <Button IsEnabled="False" />
+                    <Button
+                        Content="{DynamicResource Button}"
+                        IsEnabled="False"
+                        Style="{DynamicResource BtnOutline}" />
                 </smtx:XamlDisplay>
             </StackPanel>
             <StackPanel Grid.Row="1" Orientation="Horizontal">
                 <smtx:XamlDisplay UniqueKey="BtnOutline3">
-                    <Button wpf:Button.LeftIcon="User" />
+                    <Button
+                        wpf:Button.LeftIcon="User"
+                        Content="{DynamicResource Button}"
+                        Style="{DynamicResource BtnOutline}" />
                 </smtx:XamlDisplay>
                 <smtx:XamlDisplay UniqueKey="BtnOutline4">
-                    <Button wpf:Button.LeftIcon="User" IsEnabled="False" />
+                    <Button
+                        wpf:Button.LeftIcon="User"
+                        Content="{DynamicResource Button}"
+                        Style="{DynamicResource BtnOutline}"
+                        IsEnabled="False" />
                 </smtx:XamlDisplay>
             </StackPanel>
             <StackPanel Grid.Row="2" Orientation="Horizontal">
                 <smtx:XamlDisplay UniqueKey="BtnOutline5">
-                    <Button wpf:Button.RightIcon="User" />
+                    <Button
+                        wpf:Button.RightIcon="User"
+                        Content="{DynamicResource Button}"
+                        Style="{DynamicResource BtnOutline}" />
                 </smtx:XamlDisplay>
                 <smtx:XamlDisplay UniqueKey="BtnOutline6">
-                    <Button wpf:Button.RightIcon="User" IsEnabled="False" />
+                    <Button
+                        wpf:Button.RightIcon="User"
+                        Content="{DynamicResource Button}"
+                        Style="{DynamicResource BtnOutline}"
+                        IsEnabled="False" />
                 </smtx:XamlDisplay>
             </StackPanel>
             <StackPanel Grid.Row="3" Orientation="Horizontal">
