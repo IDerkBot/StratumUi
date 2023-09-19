@@ -1,10 +1,8 @@
-﻿namespace StratumUi.Wpf.Core.Converters
+﻿namespace StratumUi.Wpf.Core.Converters;
+
+public class InvertBooleanConverter : BooleanConverter<bool>
 {
-    public class InvertBooleanConverter : BooleanConverter<bool>
+    public InvertBooleanConverter() : base(false, true)
     {
-        public InvertBooleanConverter()
-            : base(false, true)
-        {
-        }
     }
 }

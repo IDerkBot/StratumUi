@@ -1,12 +1,9 @@
-using System.Windows.Controls;
+namespace StratumUi.Wpf.Core.Controls;
 
-namespace StratumUi.Wpf.Core.Controls
+public partial class TimePicker
 {
-    public partial class TimePicker : UserControl
+    public TimePicker()
     {
-        public TimePicker()
-        {
-            InitializeComponent();
-        }
+        InitializeComponent();
     }
 }

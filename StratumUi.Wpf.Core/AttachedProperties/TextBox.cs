@@ -1,144 +1,143 @@
 ﻿using System.Windows;
 using StratumUi.Wpf.Core.Controls;
 
-namespace StratumUi.Wpf.Core.AttachedProperties
+namespace StratumUi.Wpf.Core.AttachedProperties;
+
+public static class TextBox
 {
-    public static class TextBox
+    #region Prefix
+
+    public static readonly DependencyProperty PrefixProperty = DependencyProperty.RegisterAttached(
+        "Prefix", typeof(string), typeof(TextBox), new PropertyMetadata(default(string)));
+
+    public static void SetPrefix(DependencyObject element, string value)
     {
-        #region Prefix
+        element.SetValue(PrefixProperty, value);
+    }
 
-        public static readonly DependencyProperty PrefixProperty = DependencyProperty.RegisterAttached(
-            "Prefix", typeof(string), typeof(TextBox), new PropertyMetadata(default(string)));
+    public static string GetPrefix(DependencyObject element)
+    {
+        return (string)element.GetValue(PrefixProperty);
+    }
 
-        public static void SetPrefix(DependencyObject element, string value)
-        {
-            element.SetValue(PrefixProperty, value);
-        }
+    #endregion
 
-        public static string GetPrefix(DependencyObject element)
-        {
-            return (string)element.GetValue(PrefixProperty);
-        }
+    #region Suffix
 
-        #endregion
+    public static readonly DependencyProperty SuffixProperty = DependencyProperty.RegisterAttached(
+        "Suffix", typeof(string), typeof(TextBox), new PropertyMetadata(default(string)));
 
-        #region Suffix
+    public static void SetSuffix(DependencyObject element, string value)
+    {
+        element.SetValue(SuffixProperty, value);
+    }
 
-        public static readonly DependencyProperty SuffixProperty = DependencyProperty.RegisterAttached(
-            "Suffix", typeof(string), typeof(TextBox), new PropertyMetadata(default(string)));
+    public static string GetSuffix(DependencyObject element)
+    {
+        return (string)element.GetValue(SuffixProperty);
+    }
 
-        public static void SetSuffix(DependencyObject element, string value)
-        {
-            element.SetValue(SuffixProperty, value);
-        }
+    #endregion
 
-        public static string GetSuffix(DependencyObject element)
-        {
-            return (string)element.GetValue(SuffixProperty);
-        }
+    #region CanClear
 
-        #endregion
+    public static readonly DependencyProperty CanClearProperty = DependencyProperty.RegisterAttached(
+        "CanClear", typeof(bool), typeof(TextBox), new PropertyMetadata(default(bool)));
 
-        #region CanClear
+    public static void SetCanClear(DependencyObject element, bool value)
+    {
+        element.SetValue(CanClearProperty, value);
+    }
 
-        public static readonly DependencyProperty CanClearProperty = DependencyProperty.RegisterAttached(
-            "CanClear", typeof(bool), typeof(TextBox), new PropertyMetadata(default(bool)));
+    public static bool GetCanClear(DependencyObject element)
+    {
+        return (bool)element.GetValue(CanClearProperty);
+    }
 
-        public static void SetCanClear(DependencyObject element, bool value)
-        {
-            element.SetValue(CanClearProperty, value);
-        }
+    #endregion
 
-        public static bool GetCanClear(DependencyObject element)
-        {
-            return (bool)element.GetValue(CanClearProperty);
-        }
+    #region Left Icon
 
-        #endregion
+    public static readonly DependencyProperty LeftIconProperty = DependencyProperty.RegisterAttached(
+        "LeftIcon", typeof(EIcons), typeof(TextBox), new PropertyMetadata(default(EIcons)));
 
-        #region Left Icon
+    public static void SetLeftIcon(DependencyObject element, EIcons value)
+    {
+        element.SetValue(LeftIconProperty, value);
+    }
 
-        public static readonly DependencyProperty LeftIconProperty = DependencyProperty.RegisterAttached(
-            "LeftIcon", typeof(EIcons), typeof(TextBox), new PropertyMetadata(default(EIcons)));
+    public static EIcons GetLeftIcon(DependencyObject element)
+    {
+        return (EIcons)element.GetValue(LeftIconProperty);
+    }
 
-        public static void SetLeftIcon(DependencyObject element, EIcons value)
-        {
-            element.SetValue(LeftIconProperty, value);
-        }
+    #endregion
 
-        public static EIcons GetLeftIcon(DependencyObject element)
-        {
-            return (EIcons)element.GetValue(LeftIconProperty);
-        }
+    #region Right Icon
 
-        #endregion
+    public static readonly DependencyProperty RightIconProperty = DependencyProperty.RegisterAttached(
+        "RightIcon", typeof(EIcons), typeof(TextBox), new PropertyMetadata(default(EIcons)));
 
-        #region Right Icon
+    public static void SetRightIcon(DependencyObject element, EIcons value)
+    {
+        element.SetValue(RightIconProperty, value);
+    }
 
-        public static readonly DependencyProperty RightIconProperty = DependencyProperty.RegisterAttached(
-            "RightIcon", typeof(EIcons), typeof(TextBox), new PropertyMetadata(default(EIcons)));
+    public static EIcons GetRightIcon(DependencyObject element)
+    {
+        return (EIcons)element.GetValue(RightIconProperty);
+    }
 
-        public static void SetRightIcon(DependencyObject element, EIcons value)
-        {
-            element.SetValue(RightIconProperty, value);
-        }
+    #endregion
 
-        public static EIcons GetRightIcon(DependencyObject element)
-        {
-            return (EIcons)element.GetValue(RightIconProperty);
-        }
+    #region Size Icon
 
-        #endregion
+    #region Width
 
-        #region Size Icon
+    public static readonly DependencyProperty IconWidthProperty = DependencyProperty.RegisterAttached(
+        "IconWidth", typeof(double), typeof(TextBox), new PropertyMetadata(default(double)));
 
-        #region Width
+    public static void SetIconWidth(DependencyObject element, double value)
+    {
+        element.SetValue(IconWidthProperty, value);
+    }
 
-        public static readonly DependencyProperty IconWidthProperty = DependencyProperty.RegisterAttached(
-            "IconWidth", typeof(double), typeof(TextBox), new PropertyMetadata(default(double)));
+    public static double GetIconWidth(DependencyObject element)
+    {
+        return (double)element.GetValue(IconWidthProperty);
+    }
 
-        public static void SetIconWidth(DependencyObject element, double value)
-        {
-            element.SetValue(IconWidthProperty, value);
-        }
+    #endregion
 
-        public static double GetIconWidth(DependencyObject element)
-        {
-            return (double)element.GetValue(IconWidthProperty);
-        }
+    #region Height
 
-        #endregion
+    public static readonly DependencyProperty IconHeightProperty = DependencyProperty.RegisterAttached(
+        "IconHeight", typeof(double), typeof(TextBox), new PropertyMetadata(default(double)));
 
-        #region Height
+    public static void SetIconHeight(DependencyObject element, double value)
+    {
+        element.SetValue(IconHeightProperty, value);
+    }
 
-        public static readonly DependencyProperty IconHeightProperty = DependencyProperty.RegisterAttached(
-            "IconHeight", typeof(double), typeof(TextBox), new PropertyMetadata(default(double)));
+    public static double GetIconHeight(DependencyObject element)
+    {
+        return (double)element.GetValue(IconHeightProperty);
+    }
 
-        public static void SetIconHeight(DependencyObject element, double value)
-        {
-            element.SetValue(IconHeightProperty, value);
-        }
+    #endregion
 
-        public static double GetIconHeight(DependencyObject element)
-        {
-            return (double)element.GetValue(IconHeightProperty);
-        }
+    #endregion
 
-        #endregion
+    public static readonly DependencyProperty IsNumberProperty = DependencyProperty.RegisterAttached(
+        "IsNumber", typeof(bool), typeof(TextBox), new PropertyMetadata(default(bool)));
 
-        #endregion
+    public static void SetIsNumber(DependencyObject element, bool value)
+    {
+        element.SetValue(IsNumberProperty, value);
+    }
 
-        public static readonly DependencyProperty IsNumberProperty = DependencyProperty.RegisterAttached(
-            "IsNumber", typeof(bool), typeof(TextBox), new PropertyMetadata(default(bool)));
-
-        public static void SetIsNumber(DependencyObject element, bool value)
-        {
-            element.SetValue(IsNumberProperty, value);
-        }
-
-        public static bool GetIsNumber(DependencyObject element)
-        {
-            return (bool)element.GetValue(IsNumberProperty);
-        }
+    public static bool GetIsNumber(DependencyObject element)
+    {
+        return (bool)element.GetValue(IsNumberProperty);
     }
 }

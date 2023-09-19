@@ -1,0 +1,21 @@
+﻿<UserControl
+    x:Class="StratumUi.Test.Core.Views.GroupBox"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:wpf="clr-namespace:StratumUi.Wpf.Core.AttachedProperties;assembly=StratumUi.Wpf.Core"
+    x:Name="Root"
+    d:DesignHeight="300"
+    d:DesignWidth="300"
+    Background="{StaticResource Pr200}"
+    mc:Ignorable="d">
+    <Grid>
+        <GroupBox
+            wpf:GroupBox.BackgroundHeader="{Binding ElementName=Root, Path=Background}"
+            BorderThickness="2"
+            Header="1234">
+            <Button Content="1234" />
+        </GroupBox>
+    </Grid>
+</UserControl>

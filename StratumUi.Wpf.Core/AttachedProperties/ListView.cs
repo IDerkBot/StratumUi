@@ -1,21 +1,20 @@
 ﻿using System.Windows;
 using System.Windows.Media;
 
-namespace StratumUi.Wpf.Core.AttachedProperties
+namespace StratumUi.Wpf.Core.AttachedProperties;
+
+public class ListView
 {
-    public class ListView
+    public static readonly DependencyProperty SelectColorProperty = DependencyProperty.RegisterAttached(
+        "SelectColor", typeof(Color), typeof(ListView), new PropertyMetadata(default(Color)));
+
+    public static void SetSelectColor(DependencyObject element, Color value)
     {
-        public static readonly DependencyProperty SelectColorProperty = DependencyProperty.RegisterAttached(
-            "SelectColor", typeof(Color), typeof(ListView), new PropertyMetadata(default(Color)));
+        element.SetValue(SelectColorProperty, value);
+    }
 
-        public static void SetSelectColor(DependencyObject element, Color value)
-        {
-            element.SetValue(SelectColorProperty, value);
-        }
-
-        public static Color GetSelectColor(DependencyObject element)
-        {
-            return (Color)element.GetValue(SelectColorProperty);
-        }
+    public static Color GetSelectColor(DependencyObject element)
+    {
+        return (Color)element.GetValue(SelectColorProperty);
     }
 }

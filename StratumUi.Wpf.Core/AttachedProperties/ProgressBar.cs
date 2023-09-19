@@ -1,20 +1,19 @@
 ﻿using System.Windows;
 
-namespace StratumUi.Wpf.Core.AttachedProperties
+namespace StratumUi.Wpf.Core.AttachedProperties;
+
+public class ProgressBar
 {
-    public class ProgressBar
+    public static readonly DependencyProperty ShowProgressProperty = DependencyProperty.RegisterAttached(
+        "ShowProgress", typeof(bool), typeof(ProgressBar), new PropertyMetadata(default(bool)));
+
+    public static void SetShowProgress(DependencyObject element, bool value)
     {
-        public static readonly DependencyProperty ShowProgressProperty = DependencyProperty.RegisterAttached(
-            "ShowProgress", typeof(bool), typeof(ProgressBar), new PropertyMetadata(default(bool)));
+        element.SetValue(ShowProgressProperty, value);
+    }
 
-        public static void SetShowProgress(DependencyObject element, bool value)
-        {
-            element.SetValue(ShowProgressProperty, value);
-        }
-
-        public static bool GetShowProgress(DependencyObject element)
-        {
-            return (bool)element.GetValue(ShowProgressProperty);
-        }
+    public static bool GetShowProgress(DependencyObject element)
+    {
+        return (bool)element.GetValue(ShowProgressProperty);
     }
 }

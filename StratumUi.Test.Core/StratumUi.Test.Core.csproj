@@ -31,4 +31,13 @@
       <Content Include="Logo.png" />
     </ItemGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\StratumUi.Wpf.Core\StratumUi.Wpf.Core.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="ShowMeTheXAML" Version="2.0.0" />
+      <PackageReference Include="ShowMeTheXAML.AvalonEdit" Version="2.0.0" />
+    </ItemGroup>
+
 </Project>

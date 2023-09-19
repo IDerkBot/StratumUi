@@ -1,22 +1,21 @@
 ﻿<ResourceDictionary
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:attachedProperties="clr-namespace:StratumUi.Wpf.Core.AttachedProperties"
-    xmlns:commands1="clr-namespace:StratumUi.Wpf.Core.Commands"
-    xmlns:controls1="clr-namespace:StratumUi.Wpf.Core.Controls"
-    xmlns:converters="clr-namespace:Arion.Style.Converters"
-    xmlns:converters1="clr-namespace:StratumUi.Wpf.Core.Converters">
+    xmlns:attach="clr-namespace:StratumUi.Wpf.Core.AttachedProperties"
+    xmlns:commands="clr-namespace:StratumUi.Wpf.Core.Commands"
+    xmlns:controls="clr-namespace:StratumUi.Wpf.Core.Controls"
+    xmlns:converters="clr-namespace:StratumUi.Wpf.Core.Converters">
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="Colors.xaml" />
         <ResourceDictionary Source="FontFamily.xaml" />
         <ResourceDictionary Source="Button.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
-    <converters1:TextVisibilityConverter
+    <converters:TextVisibilityConverter
         x:Key="TextVisibilityConverter"
         IsEmptyValue="Collapsed"
         IsNotEmptyValue="Visible" />
-    <converters1:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+    <converters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
 
     <Style x:Key="{x:Type TextBox}" TargetType="{x:Type TextBox}">
         <Setter Property="Height" Value="40" />
@@ -28,12 +27,12 @@
         <Setter Property="HorizontalContentAlignment" Value="Stretch" />
         <Setter Property="Background" Value="{StaticResource CleanW}" />
         <Setter Property="BorderThickness" Value="1" />
-        <Setter Property="commands1:ClearText.HandlesClearCommand" Value="True" />
-        <Setter Property="commands1:NumberCommand.HandlesUpCommand" Value="True" />
-        <Setter Property="commands1:NumberCommand.HandlesDownCommand" Value="True" />
-        <Setter Property="attachedProperties:TextBox.IconHeight" Value="15" />
-        <Setter Property="attachedProperties:TextBox.IconWidth" Value="15" />
-        <Setter Property="attachedProperties:Hint.CornerRadius" Value="6" />
+        <Setter Property="commands:ClearText.HandlesClearCommand" Value="True" />
+        <Setter Property="commands:NumberCommand.HandlesUpCommand" Value="True" />
+        <Setter Property="commands:NumberCommand.HandlesDownCommand" Value="True" />
+        <Setter Property="attach:TextBox.IconHeight" Value="15" />
+        <Setter Property="attach:TextBox.IconWidth" Value="15" />
+        <Setter Property="attach:Hint.CornerRadius" Value="6" />
         <Setter Property="Validation.ErrorTemplate">
             <Setter.Value>
                 <ControlTemplate>
@@ -57,7 +56,7 @@
                         Background="{TemplateBinding Background}"
                         BorderBrush="{TemplateBinding BorderBrush}"
                         BorderThickness="{TemplateBinding BorderThickness}"
-                        CornerRadius="{TemplateBinding attachedProperties:Hint.CornerRadius}">
+                        CornerRadius="{TemplateBinding attach:Hint.CornerRadius}">
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto" />
@@ -75,23 +74,23 @@
                                 Padding="16,8"
                                 Background="{StaticResource Lg5}"
                                 CornerRadius="5.6,0,0,5.6"
-                                Visibility="{TemplateBinding attachedProperties:TextBox.Prefix,
+                                Visibility="{TemplateBinding attach:TextBox.Prefix,
                                                              Converter={StaticResource TextVisibilityConverter}}">
                                 <TextBlock
                                     HorizontalAlignment="Center"
                                     VerticalAlignment="Center"
                                     Foreground="{StaticResource Mg2}"
-                                    Text="{TemplateBinding attachedProperties:TextBox.Prefix}" />
+                                    Text="{TemplateBinding attach:TextBox.Prefix}" />
                             </Border>
 
-                            <controls1:Icon
+                            <controls:Icon
                                 Grid.Column="1"
-                                Width="{TemplateBinding attachedProperties:TextBox.IconWidth}"
-                                Height="{TemplateBinding attachedProperties:TextBox.IconHeight}"
+                                Width="{TemplateBinding attach:TextBox.IconWidth}"
+                                Height="{TemplateBinding attach:TextBox.IconHeight}"
                                 Margin="8,0,8,0"
                                 Fill="{TemplateBinding Foreground}"
-                                Kind="{TemplateBinding attachedProperties:TextBox.LeftIcon}"
-                                Visibility="{TemplateBinding attachedProperties:TextBox.LeftIcon,
+                                Kind="{TemplateBinding attach:TextBox.LeftIcon}"
+                                Visibility="{TemplateBinding attach:TextBox.LeftIcon,
                                                              Converter={StaticResource IconConverter}}" />
 
                             <ScrollViewer
@@ -115,7 +114,7 @@
                                 FontSize="{TemplateBinding FontSize}"
                                 Foreground="{StaticResource Mg4}"
                                 IsHitTestVisible="False"
-                                Text="{TemplateBinding attachedProperties:Hint.Placeholder}">
+                                Text="{TemplateBinding attach:Hint.Placeholder}">
                                 <TextBlock.Style>
                                     <Style TargetType="{x:Type TextBlock}">
                                         <Setter Property="Visibility" Value="Collapsed" />
@@ -128,31 +127,31 @@
                                 </TextBlock.Style>
                             </TextBlock>
 
-                            <controls1:Icon
+                            <controls:Icon
                                 Grid.Column="3"
-                                Width="{TemplateBinding attachedProperties:TextBox.IconWidth}"
-                                Height="{TemplateBinding attachedProperties:TextBox.IconHeight}"
+                                Width="{TemplateBinding attach:TextBox.IconWidth}"
+                                Height="{TemplateBinding attach:TextBox.IconHeight}"
                                 Margin="8,0,8,0"
                                 Fill="{TemplateBinding Foreground}"
-                                Kind="{TemplateBinding attachedProperties:TextBox.RightIcon}"
-                                Visibility="{TemplateBinding attachedProperties:TextBox.RightIcon,
+                                Kind="{TemplateBinding attach:TextBox.RightIcon}"
+                                Visibility="{TemplateBinding attach:TextBox.RightIcon,
                                                              Converter={StaticResource IconConverter}}" />
 
-                            <StackPanel Grid.Column="4" Visibility="{TemplateBinding attachedProperties:TextBox.IsNumber, Converter={StaticResource BooleanToVisibilityConverter}}">
+                            <StackPanel Grid.Column="4" Visibility="{TemplateBinding attach:TextBox.IsNumber, Converter={StaticResource BooleanToVisibilityConverter}}">
                                 <Button
                                     Width="32"
                                     Height="20"
                                     Padding="0"
-                                    attachedProperties:Button.Icon="ChevronUp"
-                                    attachedProperties:Hint.CornerRadius="0,6,0,0"
-                                    Command="{x:Static commands1:NumberCommand.UpCommand}" />
+                                    attach:Button.Icon="ChevronUp"
+                                    attach:Hint.CornerRadius="0,6,0,0"
+                                    Command="{x:Static commands:NumberCommand.UpCommand}" />
                                 <Button
                                     Width="32"
                                     Height="20"
                                     Padding="0"
-                                    attachedProperties:Button.Icon="ChevronDown"
-                                    attachedProperties:Hint.CornerRadius="0,0,6,0"
-                                    Command="{x:Static commands1:NumberCommand.DownCommand}" />
+                                    attach:Button.Icon="ChevronDown"
+                                    attach:Hint.CornerRadius="0,0,6,0"
+                                    Command="{x:Static commands:NumberCommand.DownCommand}" />
                             </StackPanel>
 
                             <Button
@@ -161,11 +160,11 @@
                                 Height="30"
                                 Margin="5"
                                 Padding="5"
-                                attachedProperties:Button.Icon="Close"
-                                Command="{x:Static commands1:ClearText.ClearCommand}"
+                                attach:Button.Icon="Close"
+                                Command="{x:Static commands:ClearText.ClearCommand}"
                                 Opacity=".4"
                                 Style="{StaticResource BtnText}"
-                                Visibility="{TemplateBinding attachedProperties:TextBox.CanClear,
+                                Visibility="{TemplateBinding attach:TextBox.CanClear,
                                                              Converter={StaticResource BooleanToVisibilityConverter}}">
                                 <!-- <Button.Triggers> -->
                                 <!--     <MultiTrigger> -->
@@ -186,13 +185,13 @@
                                 Padding="16,8"
                                 Background="{StaticResource Lg5}"
                                 CornerRadius="0,5.6,5.6,0"
-                                Visibility="{TemplateBinding attachedProperties:TextBox.Suffix,
+                                Visibility="{TemplateBinding attach:TextBox.Suffix,
                                                              Converter={StaticResource TextVisibilityConverter}}">
                                 <TextBlock
                                     HorizontalAlignment="Center"
                                     VerticalAlignment="Center"
                                     Foreground="{StaticResource Mg2}"
-                                    Text="{TemplateBinding attachedProperties:TextBox.Suffix}" />
+                                    Text="{TemplateBinding attach:TextBox.Suffix}" />
                             </Border>
                         </Grid>
                     </Border>

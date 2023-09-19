@@ -1,12 +1,11 @@
 ﻿using System.Windows.Controls;
 
-namespace StratumUi.Wpf.Core.Controls
+namespace StratumUi.Wpf.Core.Controls;
+
+public partial class CustomizeRichTextBox
 {
-    public partial class CustomizeRichTextBox : UserControl
+    public CustomizeRichTextBox()
     {
-        public CustomizeRichTextBox()
-        {
-            InitializeComponent();
-        }
+        InitializeComponent();
     }
 }

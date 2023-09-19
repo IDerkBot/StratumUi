@@ -1,7 +1,6 @@
-﻿namespace StratumUi.Wpf.Core.AttachedProperties.Enum
+﻿namespace StratumUi.Wpf.Core.AttachedProperties.Enum;
+
+public enum Position
 {
-    public enum Position
-    {
-        Default, First, Middle, Last
-    }
+    Default, First, Middle, Last
 }

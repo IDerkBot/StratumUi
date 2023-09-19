@@ -1,26 +1,25 @@
 ﻿<ResourceDictionary
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:attachedProperties="clr-namespace:StratumUi.Wpf.Core.AttachedProperties"
+    xmlns:attach="clr-namespace:StratumUi.Wpf.Core.AttachedProperties"
     xmlns:controls="clr-namespace:StratumUi.Wpf.Core.Controls"
-    xmlns:converters="clr-namespace:Arion.Style.Converters"
-    xmlns:converters1="clr-namespace:StratumUi.Wpf.Core.Converters"
-    xmlns:sys="clr-namespace:System;assembly=mscorlib">
+    xmlns:converters="clr-namespace:StratumUi.Wpf.Core.Converters">
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="Colors.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
-    <converters1:ButtonProgressBarWidthConverter x:Key="ProgressBarWidthConverter" />
-    <converters1:ButtonIconVisibilityConverter x:Key="IconConverter" />
-    <converters1:BooleanToVisibilityConverter x:Key="VisibilityConverter" />
+    <converters:ButtonProgressBarWidthConverter x:Key="ProgressBarWidthConverter" />
+    <converters:ButtonIconVisibilityConverter x:Key="IconConverter" />
+    <converters:BooleanToVisibilityConverter x:Key="VisibilityConverter" />
 
     <Style TargetType="ToggleButton">
         <Setter Property="HorizontalContentAlignment" Value="Center" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
         <Setter Property="BorderBrush" Value="#B0BABF" />
         <Setter Property="Background" Value="#B0BABF" />
-        <Setter Property="attachedProperties:ToggleButton.Angle" Value="0" />
+        <Setter Property="attach:ToggleButton.Angle" Value="0" />
         <Setter Property="Padding" Value="0" />
+        <Setter Property="attach:Hint.CornerRadius" Value="10" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="ToggleButton">
@@ -37,7 +36,7 @@
                             Padding="{TemplateBinding Padding}"
                             Background="{TemplateBinding Background}"
                             BorderBrush="{TemplateBinding BorderBrush}"
-                            CornerRadius="10">
+                            CornerRadius="{TemplateBinding attach:Hint.CornerRadius}">
                             <Border
                                 x:Name="TgButton"
                                 Width="16"
@@ -275,13 +274,13 @@
         <Setter Property="VerticalContentAlignment" Value="Center" />
         <Setter Property="BorderBrush" Value="#B0BABF" />
         <Setter Property="Background" Value="#B0BABF" />
-        <Setter Property="attachedProperties:ToggleButton.Angle" Value="0" />
+        <Setter Property="attach:ToggleButton.Angle" Value="0" />
         <Setter Property="Padding" Value="0" />
-        <Setter Property="attachedProperties:ToggleButton.HeightCheckBorder" Value="16" />
-        <Setter Property="attachedProperties:ToggleButton.WidthCheckBorder" Value="16" />
-        <Setter Property="attachedProperties:ToggleButton.HeightMainBorder" Value="32" />
-        <Setter Property="attachedProperties:ToggleButton.WidthMainBorder" Value="20" />
-        <Setter Property="attachedProperties:ToggleButton.ValueMove" Value="0 0 0 2" />
+        <Setter Property="attach:ToggleButton.HeightCheckBorder" Value="16" />
+        <Setter Property="attach:ToggleButton.WidthCheckBorder" Value="16" />
+        <Setter Property="attach:ToggleButton.HeightMainBorder" Value="32" />
+        <Setter Property="attach:ToggleButton.WidthMainBorder" Value="20" />
+        <Setter Property="attach:ToggleButton.ValueMove" Value="0 0 0 2" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="ToggleButton">
@@ -292,17 +291,17 @@
                         </Grid.ColumnDefinitions>
                         <Border
                             x:Name="Border"
-                            Width="{TemplateBinding attachedProperties:ToggleButton.WidthMainBorder}"
-                            Height="{TemplateBinding attachedProperties:ToggleButton.HeightMainBorder}"
+                            Width="{TemplateBinding attach:ToggleButton.WidthMainBorder}"
+                            Height="{TemplateBinding attach:ToggleButton.HeightMainBorder}"
                             Padding="{TemplateBinding Padding}"
                             Background="{TemplateBinding Background}"
                             BorderBrush="{TemplateBinding BorderBrush}"
-                            CornerRadius="10">
+                            CornerRadius="{TemplateBinding attach:Hint.CornerRadius}">
                             <Border
                                 x:Name="TgButton"
-                                Width="{TemplateBinding attachedProperties:ToggleButton.WidthCheckBorder}"
-                                Height="{TemplateBinding attachedProperties:ToggleButton.HeightCheckBorder}"
-                                Margin="{TemplateBinding attachedProperties:ToggleButton.ValueMove}"
+                                Width="{TemplateBinding attach:ToggleButton.WidthCheckBorder}"
+                                Height="{TemplateBinding attach:ToggleButton.HeightCheckBorder}"
+                                Margin="{TemplateBinding attach:ToggleButton.ValueMove}"
                                 Padding="0"
                                 HorizontalAlignment="Center"
                                 VerticalAlignment="Bottom"
@@ -325,7 +324,7 @@
                                 <BeginStoryboard>
                                     <Storyboard FillBehavior="Stop">
                                         <ThicknessAnimation
-                                            Storyboard.TargetProperty="(attachedProperties:ToggleButton.ValueMove)"
+                                            Storyboard.TargetProperty="(attach:ToggleButton.ValueMove)"
                                             From="0 0 0 14"
                                             To="0 0 0 2"
                                             Duration="0:0:.25" />
@@ -338,7 +337,7 @@
                                 <BeginStoryboard>
                                     <Storyboard FillBehavior="Stop">
                                         <ThicknessAnimation
-                                            Storyboard.TargetProperty="(attachedProperties:ToggleButton.ValueMove)"
+                                            Storyboard.TargetProperty="(attach:ToggleButton.ValueMove)"
                                             From="0 0 0 2"
                                             To="0 0 0 14"
                                             Duration="0:0:.25" />
@@ -351,7 +350,7 @@
                                 <BeginStoryboard>
                                     <Storyboard FillBehavior="Stop">
                                         <ThicknessAnimation
-                                            Storyboard.TargetProperty="(attachedProperties:ToggleButton.ValueMove)"
+                                            Storyboard.TargetProperty="(attach:ToggleButton.ValueMove)"
                                             From="0 0 0 14"
                                             To="0 0 0 10"
                                             Duration="0:0:.25" />
@@ -369,7 +368,7 @@
                                 <Condition Property="IsEnabled" Value="True" />
                             </MultiTrigger.Conditions>
 
-                            <Setter Property="attachedProperties:ToggleButton.ValueMove" Value="0,0,0,14" />
+                            <Setter Property="attach:ToggleButton.ValueMove" Value="0,0,0,14" />
                             <Setter Property="Background" Value="#0E73F6" />
                             <Setter Property="BorderBrush" Value="#0E73F6" />
                             <!-- <Setter Property="HorizontalAlignment" TargetName="TgButton" Value="Right" /> -->
@@ -383,7 +382,7 @@
                                 <Condition Property="IsEnabled" Value="True" />
                             </MultiTrigger.Conditions>
 
-                            <Setter Property="attachedProperties:ToggleButton.ValueMove" Value="0,0,0,14" />
+                            <Setter Property="attach:ToggleButton.ValueMove" Value="0,0,0,14" />
                             <Setter Property="Background" Value="#0452C8" />
                             <Setter Property="BorderBrush" Value="#0452C8" />
                             <!-- <Setter Property="HorizontalAlignment" TargetName="TgButton" Value="Right" /> -->
@@ -397,7 +396,7 @@
                                 <Condition Property="IsEnabled" Value="True" />
                             </MultiTrigger.Conditions>
 
-                            <Setter Property="attachedProperties:ToggleButton.ValueMove" Value="0,0,0,14" />
+                            <Setter Property="attach:ToggleButton.ValueMove" Value="0,0,0,14" />
                             <Setter Property="Background" Value="#4094F7" />
                             <Setter Property="BorderBrush" Value="#4094F7" />
                             <!-- <Setter Property="HorizontalAlignment" TargetName="TgButton" Value="Right" /> -->
@@ -411,7 +410,7 @@
                                 <Condition Property="IsEnabled" Value="False" />
                             </MultiTrigger.Conditions>
 
-                            <Setter Property="attachedProperties:ToggleButton.ValueMove" Value="0,0,0,14" />
+                            <Setter Property="attach:ToggleButton.ValueMove" Value="0,0,0,14" />
                             <Setter Property="Background" Value="#DDE2E4" />
                             <Setter Property="BorderBrush" Value="#DDE2E4" />
                             <!-- <Setter Property="HorizontalAlignment" TargetName="TgButton" Value="Right" /> -->
@@ -427,7 +426,7 @@
                                 <Condition Property="IsEnabled" Value="True" />
                             </MultiTrigger.Conditions>
 
-                            <Setter Property="attachedProperties:ToggleButton.ValueMove" Value="0,0,0,2" />
+                            <Setter Property="attach:ToggleButton.ValueMove" Value="0,0,0,2" />
                             <Setter Property="Background" Value="#9AA6AC" />
                             <Setter Property="BorderBrush" Value="#9AA6AC" />
                         </MultiTrigger>
@@ -440,7 +439,7 @@
                                 <Condition Property="IsEnabled" Value="True" />
                             </MultiTrigger.Conditions>
 
-                            <Setter Property="attachedProperties:ToggleButton.ValueMove" Value="0,0,0,2" />
+                            <Setter Property="attach:ToggleButton.ValueMove" Value="0,0,0,2" />
                             <Setter Property="Background" Value="#84919A" />
                             <Setter Property="BorderBrush" Value="#84919A" />
                         </MultiTrigger>
@@ -453,7 +452,7 @@
                                 <Condition Property="IsEnabled" Value="True" />
                             </MultiTrigger.Conditions>
 
-                            <Setter Property="attachedProperties:ToggleButton.ValueMove" Value="0,0,0,2" />
+                            <Setter Property="attach:ToggleButton.ValueMove" Value="0,0,0,2" />
                             <Setter Property="Background" Value="#B0BABF" />
                             <Setter Property="BorderBrush" Value="#B0BABF" />
                         </MultiTrigger>
@@ -466,7 +465,7 @@
                                 <Condition Property="IsEnabled" Value="False" />
                             </MultiTrigger.Conditions>
 
-                            <Setter Property="attachedProperties:ToggleButton.ValueMove" Value="0,0,0,2" />
+                            <Setter Property="attach:ToggleButton.ValueMove" Value="0,0,0,2" />
                             <Setter Property="Background" Value="#DDE2E4" />
                             <Setter Property="BorderBrush" Value="#DDE2E4" />
                         </MultiTrigger>
@@ -485,7 +484,7 @@
                             <Setter Property="BorderBrush" Value="#9AA6AC" />
                             <Setter TargetName="TgButton" Property="Height" Value="12" />
                             <Setter TargetName="TgButton" Property="Width" Value="2" />
-                            <Setter Property="attachedProperties:ToggleButton.ValueMove" Value="0,0,0,10" />
+                            <Setter Property="attach:ToggleButton.ValueMove" Value="0,0,0,10" />
                             <Setter TargetName="TgButton" Property="HorizontalAlignment" Value="Center" />
                             <Setter TargetName="TgButton" Property="CornerRadius" Value="1" />
                         </MultiTrigger>
@@ -500,7 +499,7 @@
 
                             <Setter Property="Background" Value="#84919A" />
                             <Setter Property="BorderBrush" Value="#84919A" />
-                            <Setter Property="attachedProperties:ToggleButton.ValueMove" Value="0,0,0,10" />
+                            <Setter Property="attach:ToggleButton.ValueMove" Value="0,0,0,10" />
                             <Setter TargetName="TgButton" Property="Height" Value="12" />
                             <Setter TargetName="TgButton" Property="Width" Value="2" />
                             <Setter TargetName="TgButton" Property="HorizontalAlignment" Value="Center" />
@@ -517,7 +516,7 @@
 
                             <Setter Property="Background" Value="#B0BABF" />
                             <Setter Property="BorderBrush" Value="#B0BABF" />
-                            <Setter Property="attachedProperties:ToggleButton.ValueMove" Value="0,0,0,10" />
+                            <Setter Property="attach:ToggleButton.ValueMove" Value="0,0,0,10" />
                             <Setter TargetName="TgButton" Property="Height" Value="12" />
                             <Setter TargetName="TgButton" Property="Width" Value="2" />
                             <Setter TargetName="TgButton" Property="HorizontalAlignment" Value="Center" />
@@ -533,7 +532,7 @@
                             </MultiTrigger.Conditions>
 
                             <Setter Property="Background" Value="#DDE2E4" />
-                            <Setter Property="attachedProperties:ToggleButton.ValueMove" Value="0,0,0,10" />
+                            <Setter Property="attach:ToggleButton.ValueMove" Value="0,0,0,10" />
                             <Setter Property="BorderBrush" Value="#DDE2E4" />
                             <Setter TargetName="TgButton" Property="Height" Value="12" />
                             <Setter TargetName="TgButton" Property="Width" Value="2" />
@@ -689,8 +688,9 @@
         <Setter Property="Background" Value="#FFFFFF" />
         <Setter Property="BorderBrush" Value="{StaticResource Lg2}" />
         <Setter Property="BorderThickness" Value="2" />
-        <Setter Property="attachedProperties:Button.IconHeight" Value="15" />
-        <Setter Property="attachedProperties:Button.IconWidth" Value="15" />
+        <Setter Property="attach:Button.IconHeight" Value="15" />
+        <Setter Property="attach:Button.IconWidth" Value="15" />
+        <Setter Property="attach:Hint.CornerRadius" Value="6" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ToggleButton}">
@@ -703,7 +703,7 @@
                                 Name="Border"
                                 Margin=".5"
                                 Background="{TemplateBinding Background}"
-                                CornerRadius="6" />
+                                CornerRadius="{TemplateBinding attach:Hint.CornerRadius}" />
                             <Border
                                 Name="Shadow"
                                 BorderBrush="{StaticResource Dg4}"
@@ -718,7 +718,7 @@
                             x:Name="BorderMain"
                             BorderBrush="{TemplateBinding BorderBrush}"
                             BorderThickness="{TemplateBinding BorderThickness}"
-                            CornerRadius="6" />
+                            CornerRadius="{TemplateBinding attach:Hint.CornerRadius}" />
                         <Grid Margin="{TemplateBinding Padding}" ZIndex="999">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto" />
@@ -728,14 +728,14 @@
 
                             <controls:Icon
                                 Grid.Column="0"
-                                Width="{TemplateBinding attachedProperties:Button.IconWidth}"
-                                Height="{TemplateBinding attachedProperties:Button.IconHeight}"
+                                Width="{TemplateBinding attach:Button.IconWidth}"
+                                Height="{TemplateBinding attach:Button.IconHeight}"
                                 Margin="0,0,8,0"
                                 Fill="{TemplateBinding Foreground}"
-                                Kind="{TemplateBinding attachedProperties:Button.LeftIcon}"
-                                Stroke="{TemplateBinding attachedProperties:Button.IconStrokeThickness}"
-                                StrokeColor="{TemplateBinding attachedProperties:Button.IconStrokeColor}"
-                                Visibility="{TemplateBinding attachedProperties:Button.LeftIcon,
+                                Kind="{TemplateBinding attach:Button.LeftIcon}"
+                                Stroke="{TemplateBinding attach:Button.IconStrokeThickness}"
+                                StrokeColor="{TemplateBinding attach:Button.IconStrokeColor}"
+                                Visibility="{TemplateBinding attach:Button.LeftIcon,
                                                              Converter={StaticResource IconConverter}}" />
 
                             <ContentPresenter
@@ -749,27 +749,27 @@
                             <controls:Icon
                                 x:Name="Icon"
                                 Grid.Column="1"
-                                Width="{TemplateBinding attachedProperties:Button.IconWidth}"
-                                Height="{TemplateBinding attachedProperties:Button.IconHeight}"
+                                Width="{TemplateBinding attach:Button.IconWidth}"
+                                Height="{TemplateBinding attach:Button.IconHeight}"
                                 HorizontalAlignment="Center"
                                 VerticalAlignment="Center"
                                 Fill="{TemplateBinding Foreground}"
-                                Kind="{TemplateBinding attachedProperties:Button.Icon}"
-                                Stroke="{TemplateBinding attachedProperties:Button.IconStrokeThickness}"
-                                StrokeColor="{TemplateBinding attachedProperties:Button.IconStrokeColor}"
-                                Visibility="{TemplateBinding attachedProperties:Button.Icon,
+                                Kind="{TemplateBinding attach:Button.Icon}"
+                                Stroke="{TemplateBinding attach:Button.IconStrokeThickness}"
+                                StrokeColor="{TemplateBinding attach:Button.IconStrokeColor}"
+                                Visibility="{TemplateBinding attach:Button.Icon,
                                                              Converter={StaticResource IconConverter}}" />
 
                             <controls:Icon
                                 Grid.Column="2"
-                                Width="{TemplateBinding attachedProperties:Button.IconWidth}"
-                                Height="{TemplateBinding attachedProperties:Button.IconHeight}"
+                                Width="{TemplateBinding attach:Button.IconWidth}"
+                                Height="{TemplateBinding attach:Button.IconHeight}"
                                 Margin="8,0,0,0"
                                 Fill="{TemplateBinding Foreground}"
-                                Kind="{TemplateBinding attachedProperties:Button.RightIcon}"
-                                Stroke="{TemplateBinding attachedProperties:Button.IconStrokeThickness}"
-                                StrokeColor="{TemplateBinding attachedProperties:Button.IconStrokeColor}"
-                                Visibility="{TemplateBinding attachedProperties:Button.RightIcon,
+                                Kind="{TemplateBinding attach:Button.RightIcon}"
+                                Stroke="{TemplateBinding attach:Button.IconStrokeThickness}"
+                                StrokeColor="{TemplateBinding attach:Button.IconStrokeColor}"
+                                Visibility="{TemplateBinding attach:Button.RightIcon,
                                                              Converter={StaticResource IconConverter}}" />
                         </Grid>
                     </Grid>
@@ -791,6 +791,18 @@
                         <Trigger Property="IsEnabled" Value="False">
                             <Setter Property="Opacity" Value=".5" />
                         </Trigger>
+                        <Trigger Property="attach:Button.Position" Value="First">
+                            <Setter Property="attach:Hint.CornerRadius" Value="6" />
+                        </Trigger>
+                        <Trigger Property="attach:Button.Position" Value="First">
+                            <Setter Property="attach:Hint.CornerRadius" Value="6,0,0,6" />
+                        </Trigger>
+                        <Trigger Property="attach:Button.Position" Value="Middle">
+                            <Setter Property="attach:Hint.CornerRadius" Value="0" />
+                        </Trigger>
+                        <Trigger Property="attach:Button.Position" Value="Last">
+                            <Setter Property="attach:Hint.CornerRadius" Value="0,6,6,0" />
+                        </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
@@ -804,8 +816,8 @@
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="BorderBrush" Value="Transparent" />
         <Setter Property="BorderThickness" Value="0" />
-        <Setter Property="attachedProperties:Button.IconHeight" Value="15" />
-        <Setter Property="attachedProperties:Button.IconWidth" Value="15" />
+        <Setter Property="attach:Button.IconHeight" Value="15" />
+        <Setter Property="attach:Button.IconWidth" Value="15" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ToggleButton}">
@@ -831,14 +843,14 @@
 
                             <controls:Icon
                                 Grid.Column="0"
-                                Width="{TemplateBinding attachedProperties:Button.IconWidth}"
-                                Height="{TemplateBinding attachedProperties:Button.IconHeight}"
+                                Width="{TemplateBinding attach:Button.IconWidth}"
+                                Height="{TemplateBinding attach:Button.IconHeight}"
                                 Margin="0,0,8,0"
                                 Fill="{TemplateBinding Foreground}"
-                                Kind="{TemplateBinding attachedProperties:Button.LeftIcon}"
-                                Stroke="{TemplateBinding attachedProperties:Button.IconStrokeThickness}"
-                                StrokeColor="{TemplateBinding attachedProperties:Button.IconStrokeColor}"
-                                Visibility="{TemplateBinding attachedProperties:Button.LeftIcon,
+                                Kind="{TemplateBinding attach:Button.LeftIcon}"
+                                Stroke="{TemplateBinding attach:Button.IconStrokeThickness}"
+                                StrokeColor="{TemplateBinding attach:Button.IconStrokeColor}"
+                                Visibility="{TemplateBinding attach:Button.LeftIcon,
                                                              Converter={StaticResource IconConverter}}" />
 
                             <ContentPresenter
@@ -852,27 +864,27 @@
                             <controls:Icon
                                 x:Name="Icon"
                                 Grid.Column="1"
-                                Width="{TemplateBinding attachedProperties:Button.IconWidth}"
-                                Height="{TemplateBinding attachedProperties:Button.IconHeight}"
+                                Width="{TemplateBinding attach:Button.IconWidth}"
+                                Height="{TemplateBinding attach:Button.IconHeight}"
                                 HorizontalAlignment="Center"
                                 VerticalAlignment="Center"
                                 Fill="{TemplateBinding Foreground}"
-                                Kind="{TemplateBinding attachedProperties:Button.Icon}"
-                                Stroke="{TemplateBinding attachedProperties:Button.IconStrokeThickness}"
-                                StrokeColor="{TemplateBinding attachedProperties:Button.IconStrokeColor}"
-                                Visibility="{TemplateBinding attachedProperties:Button.Icon,
+                                Kind="{TemplateBinding attach:Button.Icon}"
+                                Stroke="{TemplateBinding attach:Button.IconStrokeThickness}"
+                                StrokeColor="{TemplateBinding attach:Button.IconStrokeColor}"
+                                Visibility="{TemplateBinding attach:Button.Icon,
                                                              Converter={StaticResource IconConverter}}" />
 
                             <controls:Icon
                                 Grid.Column="2"
-                                Width="{TemplateBinding attachedProperties:Button.IconWidth}"
-                                Height="{TemplateBinding attachedProperties:Button.IconHeight}"
+                                Width="{TemplateBinding attach:Button.IconWidth}"
+                                Height="{TemplateBinding attach:Button.IconHeight}"
                                 Margin="8,0,0,0"
                                 Fill="{TemplateBinding Foreground}"
-                                Kind="{TemplateBinding attachedProperties:Button.RightIcon}"
-                                Stroke="{TemplateBinding attachedProperties:Button.IconStrokeThickness}"
-                                StrokeColor="{TemplateBinding attachedProperties:Button.IconStrokeColor}"
-                                Visibility="{TemplateBinding attachedProperties:Button.RightIcon,
+                                Kind="{TemplateBinding attach:Button.RightIcon}"
+                                Stroke="{TemplateBinding attach:Button.IconStrokeThickness}"
+                                StrokeColor="{TemplateBinding attach:Button.IconStrokeColor}"
+                                Visibility="{TemplateBinding attach:Button.RightIcon,
                                                              Converter={StaticResource IconConverter}}" />
                         </Grid>
                     </Grid>
@@ -886,222 +898,6 @@
                         <Trigger Property="IsChecked" Value="True">
                             <Setter TargetName="BrdEffect" Property="Opacity" Value=".2" />
                         </Trigger>
-                        <Trigger Property="IsEnabled" Value="False">
-                            <Setter Property="Opacity" Value=".5" />
-                        </Trigger>
-                    </ControlTemplate.Triggers>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
-
-    <!--  GROUPED  -->
-
-    <Style
-        x:Key="TglOutlineFirst"
-        BasedOn="{StaticResource ToggleButtonBaseLg}"
-        TargetType="{x:Type ToggleButton}">
-        <Setter Property="Foreground" Value="{StaticResource Dg2}" />
-        <Setter Property="Background" Value="#FFFFFF" />
-        <Setter Property="BorderBrush" Value="#FFFFFF" />
-        <Setter Property="BorderThickness" Value="1" />
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="{x:Type ToggleButton}">
-                    <Border
-                        Name="Border"
-                        Background="{TemplateBinding Background}"
-                        BorderBrush="#DDE2E4"
-                        BorderThickness="{TemplateBinding BorderThickness}"
-                        ClipToBounds="True"
-                        CornerRadius="6,0,0,6">
-                        <Grid>
-                            <ContentPresenter
-                                Name="Presenter"
-                                Margin="{TemplateBinding Padding}"
-                                HorizontalAlignment="Center"
-                                VerticalAlignment="Center"
-                                Content="{TemplateBinding Content}"
-                                Effect="{TemplateBinding Effect}" />
-                            <Border
-                                Name="Shadow"
-                                Margin="-4"
-                                HorizontalAlignment="Stretch"
-                                VerticalAlignment="Stretch"
-                                Background="Transparent"
-                                BorderBrush="{TemplateBinding BorderBrush}"
-                                BorderThickness="3"
-                                CornerRadius="6,0,0,6"
-                                Opacity="1"
-                                Visibility="Collapsed">
-                                <Border.Effect>
-                                    <DropShadowEffect
-                                        BlurRadius="15"
-                                        Direction="270"
-                                        ShadowDepth="0"
-                                        Color="#B2000000" />
-                                </Border.Effect>
-                            </Border>
-                        </Grid>
-                    </Border>
-                    <ControlTemplate.Triggers>
-                        <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="Background" Value="#F6F8F9" />
-                            <Setter TargetName="Border" Property="BorderBrush" Value="#DDE2E4" />
-                        </Trigger>
-                        <Trigger Property="IsPressed" Value="True">
-                            <Setter Property="Background" Value="#E5E9EB" />
-                            <Setter TargetName="Border" Property="BorderBrush" Value="#E5E9EB" />
-                        </Trigger>
-
-                        <Trigger Property="IsChecked" Value="True">
-                            <Setter Property="Background" Value="#E5E9EB" />
-                            <Setter TargetName="Border" Property="BorderBrush" Value="#E5E9EB" />
-                            <Setter TargetName="Shadow" Property="Visibility" Value="Visible" />
-                        </Trigger>
-
-                        <Trigger Property="IsEnabled" Value="False">
-                            <Setter Property="Opacity" Value=".5" />
-                        </Trigger>
-                    </ControlTemplate.Triggers>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
-    <Style
-        x:Key="TglOutlineMiddle"
-        BasedOn="{StaticResource ToggleButtonBaseLg}"
-        TargetType="{x:Type ToggleButton}">
-        <Setter Property="Foreground" Value="{StaticResource Dg2}" />
-        <Setter Property="Background" Value="#FFFFFF" />
-        <Setter Property="BorderBrush" Value="#FFFFFF" />
-        <Setter Property="BorderThickness" Value="0,1" />
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="{x:Type ToggleButton}">
-                    <Border
-                        Name="Border"
-                        Background="{TemplateBinding Background}"
-                        BorderBrush="#DDE2E4"
-                        BorderThickness="{TemplateBinding BorderThickness}"
-                        ClipToBounds="True"
-                        CornerRadius="0">
-                        <Grid>
-                            <ContentPresenter
-                                Name="Presenter"
-                                Margin="{TemplateBinding Padding}"
-                                HorizontalAlignment="Center"
-                                VerticalAlignment="Center"
-                                Content="{TemplateBinding Content}"
-                                Effect="{TemplateBinding Effect}" />
-                            <Border
-                                Name="Shadow"
-                                Margin="-4"
-                                HorizontalAlignment="Stretch"
-                                VerticalAlignment="Stretch"
-                                Background="Transparent"
-                                BorderBrush="{TemplateBinding BorderBrush}"
-                                BorderThickness="3"
-                                CornerRadius="0"
-                                Opacity="1"
-                                Visibility="Collapsed">
-                                <Border.Effect>
-                                    <DropShadowEffect
-                                        BlurRadius="15"
-                                        Direction="270"
-                                        ShadowDepth="0"
-                                        Color="#B2000000" />
-                                </Border.Effect>
-                            </Border>
-                        </Grid>
-                    </Border>
-                    <ControlTemplate.Triggers>
-                        <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="Background" Value="#F6F8F9" />
-                            <Setter TargetName="Border" Property="BorderBrush" Value="#DDE2E4" />
-                        </Trigger>
-                        <Trigger Property="IsPressed" Value="True">
-                            <Setter Property="Background" Value="#E5E9EB" />
-                            <Setter TargetName="Border" Property="BorderBrush" Value="#E5E9EB" />
-                        </Trigger>
-
-                        <Trigger Property="IsChecked" Value="True">
-                            <Setter Property="Background" Value="#E5E9EB" />
-                            <Setter TargetName="Border" Property="BorderBrush" Value="#E5E9EB" />
-                            <Setter TargetName="Shadow" Property="Visibility" Value="Visible" />
-                        </Trigger>
-
-                        <Trigger Property="IsEnabled" Value="False">
-                            <Setter Property="Opacity" Value=".5" />
-                        </Trigger>
-                    </ControlTemplate.Triggers>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
-    <Style
-        x:Key="TglOutlineLast"
-        BasedOn="{StaticResource ToggleButtonBaseLg}"
-        TargetType="{x:Type ToggleButton}">
-        <Setter Property="Foreground" Value="{StaticResource Dg2}" />
-        <Setter Property="Background" Value="#FFFFFF" />
-        <Setter Property="BorderBrush" Value="#FFFFFF" />
-        <Setter Property="BorderThickness" Value="1" />
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="{x:Type ToggleButton}">
-                    <Border
-                        Name="Border"
-                        Background="{TemplateBinding Background}"
-                        BorderBrush="#DDE2E4"
-                        BorderThickness="{TemplateBinding BorderThickness}"
-                        ClipToBounds="True"
-                        CornerRadius="0,6,6,0">
-                        <Grid>
-                            <ContentPresenter
-                                Name="Presenter"
-                                Margin="{TemplateBinding Padding}"
-                                HorizontalAlignment="Center"
-                                VerticalAlignment="Center"
-                                Content="{TemplateBinding Content}"
-                                Effect="{TemplateBinding Effect}" />
-                            <Border
-                                Name="Shadow"
-                                Margin="-4"
-                                HorizontalAlignment="Stretch"
-                                VerticalAlignment="Stretch"
-                                Background="Transparent"
-                                BorderBrush="{TemplateBinding BorderBrush}"
-                                BorderThickness="3"
-                                CornerRadius="0,6,6,0"
-                                Opacity="1"
-                                Visibility="Collapsed">
-                                <Border.Effect>
-                                    <DropShadowEffect
-                                        BlurRadius="15"
-                                        Direction="270"
-                                        ShadowDepth="0"
-                                        Color="#B2000000" />
-                                </Border.Effect>
-                            </Border>
-                        </Grid>
-                    </Border>
-                    <ControlTemplate.Triggers>
-                        <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="Background" Value="#F6F8F9" />
-                            <Setter TargetName="Border" Property="BorderBrush" Value="#DDE2E4" />
-                        </Trigger>
-                        <Trigger Property="IsPressed" Value="True">
-                            <Setter Property="Background" Value="#E5E9EB" />
-                            <Setter TargetName="Border" Property="BorderBrush" Value="#E5E9EB" />
-                        </Trigger>
-
-                        <Trigger Property="IsChecked" Value="True">
-                            <Setter Property="Background" Value="#E5E9EB" />
-                            <Setter TargetName="Border" Property="BorderBrush" Value="#E5E9EB" />
-                            <Setter TargetName="Shadow" Property="Visibility" Value="Visible" />
-                        </Trigger>
-
                         <Trigger Property="IsEnabled" Value="False">
                             <Setter Property="Opacity" Value=".5" />
                         </Trigger>

@@ -74,7 +74,7 @@
                                     attach:Button.Icon="{TemplateBinding ButtonIcon}"
                                     attach:Button.IconHeight="12"
                                     attach:Button.IconWidth="12"
-                                    Command="{TemplateBinding controls:Badge.CommandClose}"
+                                    Command="{TemplateBinding attach:Badge.CommandClose}"
                                     Foreground="{TemplateBinding Foreground}"
                                     Style="{StaticResource BtnText}"
                                     Visibility="{TemplateBinding ShowButton,

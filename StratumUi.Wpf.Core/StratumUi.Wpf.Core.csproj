@@ -3,7 +3,6 @@
     <PropertyGroup>
         <Nullable>enable</Nullable>
         <UseWPF>true</UseWPF>
-        <TargetFramework>net6.0-windows</TargetFramework>
         <PackageId>StratumUi</PackageId>
         <PackageVersion>1.1.0</PackageVersion>
         <Title>Stratum UI</Title>
@@ -14,11 +13,11 @@
         <PackageProjectUrl>https://github.com/IDerkBot/StratumUi</PackageProjectUrl>
         <RepositoryUrl>https://github.com/IDerkBot/StratumUi</RepositoryUrl>
         <Product>StratumUi</Product>
+        <TargetFrameworks>net6.0-windows;net7.0-windows</TargetFrameworks>
     </PropertyGroup>
 
     <ItemGroup>
       <Folder Include="obj\Debug\net6.0-windows" />
-      <Folder Include="Styles\ArionUi" />
     </ItemGroup>
 
     <ItemGroup>
@@ -202,11 +201,6 @@
         <XamlRuntime>Wpf</XamlRuntime>
         <SubType>Designer</SubType>
       </Page>
-      <Page Update="Elements\Default\ToggleButtonDark.xaml">
-        <Generator>MSBuild:Compile</Generator>
-        <XamlRuntime>Wpf</XamlRuntime>
-        <SubType>Designer</SubType>
-      </Page>
       <Page Update="Elements\Default\Toolbar.xaml">
         <Generator>MSBuild:Compile</Generator>
         <XamlRuntime>Wpf</XamlRuntime>
@@ -222,6 +216,11 @@
         <XamlRuntime>Wpf</XamlRuntime>
         <SubType>Designer</SubType>
       </Page>
+      <Page Update="Styles\Default.xaml">
+        <Generator>MSBuild:Compile</Generator>
+        <XamlRuntime>Wpf</XamlRuntime>
+        <SubType>Designer</SubType>
+      </Page>
     </ItemGroup>
 
     <ItemGroup>
@@ -229,11 +228,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Page Update="Default.xaml">
-        <Generator>MSBuild:Compile</Generator>
-        <XamlRuntime>Wpf</XamlRuntime>
-        <SubType>Designer</SubType>
-      </Page>
       <Page Update="Elements\Dark\ToggleButtonDark.xaml">
         <Generator>MSBuild:Compile</Generator>
         <XamlRuntime>Wpf</XamlRuntime>

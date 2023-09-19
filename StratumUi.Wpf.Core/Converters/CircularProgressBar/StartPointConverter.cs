@@ -3,26 +3,16 @@ using System.Globalization;
 using System.Windows;
 using System.Windows.Data;
 
-namespace Arion.Style.Converters.CircularProgressBar
+namespace StratumUi.Wpf.Core.Converters.CircularProgressBar;
+
+public class StartPointConverter : IValueConverter
 {
-    public class StartPointConverter : IValueConverter
+    [Obsolete]
+    public object Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
     {
-        [Obsolete]
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            if (value is double && ((double)value > 0.0))
-            {
-                return new Point((double)value / 2, 0);
-            }
-
-            return new Point();
-        }
-
-        [Obsolete]
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            return Binding.DoNothing;
-        }
-
+        return value is double doubleValue and > 0.0 ? new Point(doubleValue / 2, 0) : new Point();
     }
+
+    [Obsolete]
+    public object ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture) => Binding.DoNothing;
 }

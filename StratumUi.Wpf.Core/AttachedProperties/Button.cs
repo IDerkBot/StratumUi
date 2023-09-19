@@ -3,196 +3,195 @@ using System.Windows.Media;
 using StratumUi.Wpf.Core.AttachedProperties.Enum;
 using StratumUi.Wpf.Core.Controls;
 
-namespace StratumUi.Wpf.Core.AttachedProperties
+namespace StratumUi.Wpf.Core.AttachedProperties;
+
+public class Button
 {
-    public class Button
+    #region Left Icon
+
+    public static readonly DependencyProperty LeftIconProperty = DependencyProperty.RegisterAttached(
+        "LeftIcon", typeof(EIcons), typeof(Button), new PropertyMetadata(default(EIcons)));
+
+    public static void SetLeftIcon(DependencyObject element, EIcons value)
     {
-        #region Left Icon
+        element.SetValue(LeftIconProperty, value);
+    }
 
-        public static readonly DependencyProperty LeftIconProperty = DependencyProperty.RegisterAttached(
-            "LeftIcon", typeof(EIcons), typeof(Button), new PropertyMetadata(default(EIcons)));
+    public static EIcons GetLeftIcon(DependencyObject element)
+    {
+        return (EIcons)element.GetValue(LeftIconProperty);
+    }
 
-        public static void SetLeftIcon(DependencyObject element, EIcons value)
-        {
-            element.SetValue(LeftIconProperty, value);
-        }
+    #endregion
 
-        public static EIcons GetLeftIcon(DependencyObject element)
-        {
-            return (EIcons)element.GetValue(LeftIconProperty);
-        }
+    #region Right Icon
 
-        #endregion
+    public static readonly DependencyProperty RightIconProperty = DependencyProperty.RegisterAttached(
+        "RightIcon", typeof(EIcons), typeof(Button), new PropertyMetadata(default(EIcons)));
 
-        #region Right Icon
+    public static void SetRightIcon(DependencyObject element, EIcons value)
+    {
+        element.SetValue(RightIconProperty, value);
+    }
 
-        public static readonly DependencyProperty RightIconProperty = DependencyProperty.RegisterAttached(
-            "RightIcon", typeof(EIcons), typeof(Button), new PropertyMetadata(default(EIcons)));
+    public static EIcons GetRightIcon(DependencyObject element)
+    {
+        return (EIcons)element.GetValue(RightIconProperty);
+    }
 
-        public static void SetRightIcon(DependencyObject element, EIcons value)
-        {
-            element.SetValue(RightIconProperty, value);
-        }
+    #endregion
 
-        public static EIcons GetRightIcon(DependencyObject element)
-        {
-            return (EIcons)element.GetValue(RightIconProperty);
-        }
+    #region Center Icon
 
-        #endregion
+    public static readonly DependencyProperty IconProperty = DependencyProperty.RegisterAttached(
+        "Icon", typeof(EIcons), typeof(Button), new PropertyMetadata(default(EIcons)));
 
-        #region Center Icon
+    public static void SetIcon(DependencyObject element, EIcons value)
+    {
+        element.SetValue(IconProperty, value);
+    }
 
-        public static readonly DependencyProperty IconProperty = DependencyProperty.RegisterAttached(
-            "Icon", typeof(EIcons), typeof(Button), new PropertyMetadata(default(EIcons)));
+    public static EIcons GetIcon(DependencyObject element)
+    {
+        return (EIcons)element.GetValue(IconProperty);
+    }
 
-        public static void SetIcon(DependencyObject element, EIcons value)
-        {
-            element.SetValue(IconProperty, value);
-        }
+    #endregion
 
-        public static EIcons GetIcon(DependencyObject element)
-        {
-            return (EIcons)element.GetValue(IconProperty);
-        }
+    public static readonly DependencyProperty IconWidthProperty = DependencyProperty.RegisterAttached(
+        "IconWidth", typeof(double), typeof(Button), new PropertyMetadata(default(double)));
 
-        #endregion
+    public static void SetIconWidth(DependencyObject element, double value)
+    {
+        element.SetValue(IconWidthProperty, value);
+    }
 
-        public static readonly DependencyProperty IconWidthProperty = DependencyProperty.RegisterAttached(
-            "IconWidth", typeof(double), typeof(Button), new PropertyMetadata(default(double)));
+    public static double GetIconWidth(DependencyObject element)
+    {
+        return (double)element.GetValue(IconWidthProperty);
+    }
 
-        public static void SetIconWidth(DependencyObject element, double value)
-        {
-            element.SetValue(IconWidthProperty, value);
-        }
+    public static readonly DependencyProperty IconHeightProperty = DependencyProperty.RegisterAttached(
+        "IconHeight", typeof(double), typeof(Button), new PropertyMetadata(default(double)));
 
-        public static double GetIconWidth(DependencyObject element)
-        {
-            return (double)element.GetValue(IconWidthProperty);
-        }
+    public static void SetIconHeight(DependencyObject element, double value)
+    {
+        element.SetValue(IconHeightProperty, value);
+    }
 
-        public static readonly DependencyProperty IconHeightProperty = DependencyProperty.RegisterAttached(
-            "IconHeight", typeof(double), typeof(Button), new PropertyMetadata(default(double)));
+    public static double GetIconHeight(DependencyObject element)
+    {
+        return (double)element.GetValue(IconHeightProperty);
+    }
 
-        public static void SetIconHeight(DependencyObject element, double value)
-        {
-            element.SetValue(IconHeightProperty, value);
-        }
+    public static readonly DependencyProperty IconStrokeColorProperty = DependencyProperty.RegisterAttached(
+        "IconStrokeColor", typeof(SolidColorBrush), typeof(Button), new PropertyMetadata(default(SolidColorBrush)));
 
-        public static double GetIconHeight(DependencyObject element)
-        {
-            return (double)element.GetValue(IconHeightProperty);
-        }
+    public static void SetIconStrokeColor(DependencyObject element, SolidColorBrush value)
+    {
+        element.SetValue(IconStrokeColorProperty, value);
+    }
 
-        public static readonly DependencyProperty IconStrokeColorProperty = DependencyProperty.RegisterAttached(
-            "IconStrokeColor", typeof(SolidColorBrush), typeof(Button), new PropertyMetadata(default(SolidColorBrush)));
+    public static SolidColorBrush GetIconStrokeColor(DependencyObject element)
+    {
+        return (SolidColorBrush)element.GetValue(IconStrokeColorProperty);
+    }
 
-        public static void SetIconStrokeColor(DependencyObject element, SolidColorBrush value)
-        {
-            element.SetValue(IconStrokeColorProperty, value);
-        }
+    public static readonly DependencyProperty IconStrokeThicknessProperty = DependencyProperty.RegisterAttached(
+        "IconStrokeThickness", typeof(double), typeof(Button), new PropertyMetadata(default(double)));
 
-        public static SolidColorBrush GetIconStrokeColor(DependencyObject element)
-        {
-            return (SolidColorBrush)element.GetValue(IconStrokeColorProperty);
-        }
+    public static void SetIconStrokeThickness(DependencyObject element, double value)
+    {
+        element.SetValue(IconStrokeThicknessProperty, value);
+    }
 
-        public static readonly DependencyProperty IconStrokeThicknessProperty = DependencyProperty.RegisterAttached(
-            "IconStrokeThickness", typeof(double), typeof(Button), new PropertyMetadata(default(double)));
+    public static double GetIconStrokeThickness(DependencyObject element)
+    {
+        return (double)element.GetValue(IconStrokeThicknessProperty);
+    }
 
-        public static void SetIconStrokeThickness(DependencyObject element, double value)
-        {
-            element.SetValue(IconStrokeThicknessProperty, value);
-        }
+    #region ProgressBar
 
-        public static double GetIconStrokeThickness(DependencyObject element)
-        {
-            return (double)element.GetValue(IconStrokeThicknessProperty);
-        }
+    public static readonly DependencyProperty ProgressBarValueProperty = DependencyProperty.RegisterAttached(
+        "ProgressBarValue", typeof(double), typeof(Button), new PropertyMetadata(default(double)));
 
-        #region ProgressBar
+    public static void SetProgressBarValue(DependencyObject element, double value)
+    {
+        element.SetValue(ProgressBarValueProperty, value);
+    }
 
-        public static readonly DependencyProperty ProgressBarValueProperty = DependencyProperty.RegisterAttached(
-            "ProgressBarValue", typeof(double), typeof(Button), new PropertyMetadata(default(double)));
+    public static double GetProgressBarValue(DependencyObject element)
+    {
+        return (double)element.GetValue(ProgressBarValueProperty);
+    }
 
-        public static void SetProgressBarValue(DependencyObject element, double value)
-        {
-            element.SetValue(ProgressBarValueProperty, value);
-        }
+    public static readonly DependencyProperty ProgressBarMaximumProperty = DependencyProperty.RegisterAttached(
+        "ProgressBarMaximum", typeof(double), typeof(Button), new PropertyMetadata(default(double)));
 
-        public static double GetProgressBarValue(DependencyObject element)
-        {
-            return (double)element.GetValue(ProgressBarValueProperty);
-        }
+    public static void SetProgressBarMaximum(DependencyObject element, double value)
+    {
+        element.SetValue(ProgressBarMaximumProperty, value);
+    }
 
-        public static readonly DependencyProperty ProgressBarMaximumProperty = DependencyProperty.RegisterAttached(
-            "ProgressBarMaximum", typeof(double), typeof(Button), new PropertyMetadata(default(double)));
+    public static double GetProgressBarMaximum(DependencyObject element)
+    {
+        return (double)element.GetValue(ProgressBarMaximumProperty);
+    }
 
-        public static void SetProgressBarMaximum(DependencyObject element, double value)
-        {
-            element.SetValue(ProgressBarMaximumProperty, value);
-        }
+    public static readonly DependencyProperty ProgressBarMinimumProperty = DependencyProperty.RegisterAttached(
+        "ProgressBarMinimum", typeof(double), typeof(Button), new PropertyMetadata(default(double)));
 
-        public static double GetProgressBarMaximum(DependencyObject element)
-        {
-            return (double)element.GetValue(ProgressBarMaximumProperty);
-        }
+    public static void SetProgressBarMinimum(DependencyObject element, double value)
+    {
+        element.SetValue(ProgressBarMinimumProperty, value);
+    }
 
-        public static readonly DependencyProperty ProgressBarMinimumProperty = DependencyProperty.RegisterAttached(
-            "ProgressBarMinimum", typeof(double), typeof(Button), new PropertyMetadata(default(double)));
+    public static double GetProgressBarMinimum(DependencyObject element)
+    {
+        return (double)element.GetValue(ProgressBarMinimumProperty);
+    }
 
-        public static void SetProgressBarMinimum(DependencyObject element, double value)
-        {
-            element.SetValue(ProgressBarMinimumProperty, value);
-        }
+    public static readonly DependencyProperty ProgressBarShowProperty = DependencyProperty.RegisterAttached(
+        "ProgressBarShow", typeof(bool), typeof(Button), new PropertyMetadata(default(bool)));
 
-        public static double GetProgressBarMinimum(DependencyObject element)
-        {
-            return (double)element.GetValue(ProgressBarMinimumProperty);
-        }
+    public static void SetProgressBarShow(DependencyObject element, bool value)
+    {
+        element.SetValue(ProgressBarShowProperty, value);
+    }
 
-        public static readonly DependencyProperty ProgressBarShowProperty = DependencyProperty.RegisterAttached(
-            "ProgressBarShow", typeof(bool), typeof(Button), new PropertyMetadata(default(bool)));
+    public static bool GetProgressBarShow(DependencyObject element) => (bool)element.GetValue(ProgressBarShowProperty);
 
-        public static void SetProgressBarShow(DependencyObject element, bool value)
-        {
-            element.SetValue(ProgressBarShowProperty, value);
-        }
+    public static readonly DependencyProperty ProgressBarTypeProperty = DependencyProperty.RegisterAttached(
+        "ProgressBarType", typeof(ProgressBarType), typeof(Button), new PropertyMetadata(default(ProgressBarType)));
 
-        public static bool GetProgressBarShow(DependencyObject element) => (bool)element.GetValue(ProgressBarShowProperty);
+    public static void SetProgressBarType(DependencyObject element, ProgressBarType value)
+    {
+        element.SetValue(ProgressBarTypeProperty, value);
+    }
 
-        public static readonly DependencyProperty ProgressBarTypeProperty = DependencyProperty.RegisterAttached(
-            "ProgressBarType", typeof(ProgressBarType), typeof(Button), new PropertyMetadata(default(ProgressBarType)));
-
-        public static void SetProgressBarType(DependencyObject element, ProgressBarType value)
-        {
-            element.SetValue(ProgressBarTypeProperty, value);
-        }
-
-        public static ProgressBarType GetProgressBarType(DependencyObject element)
-        {
-            return (ProgressBarType)element.GetValue(ProgressBarTypeProperty);
-        }
+    public static ProgressBarType GetProgressBarType(DependencyObject element)
+    {
+        return (ProgressBarType)element.GetValue(ProgressBarTypeProperty);
+    }
         
-        #endregion
+    #endregion
 
-        public static readonly DependencyProperty PositionProperty = DependencyProperty.RegisterAttached(
-            "Position", typeof(Position), typeof(Button), new PropertyMetadata(default(Position)));
+    public static readonly DependencyProperty PositionProperty = DependencyProperty.RegisterAttached(
+        "Position", typeof(Position), typeof(Button), new PropertyMetadata(default(Position)));
 
-        public static void SetPosition(DependencyObject element, Position value)
-        {
-            element.SetValue(PositionProperty, value);
-        }
-
-        public static Position GetPosition(DependencyObject element)
-        {
-            return (Position)element.GetValue(PositionProperty);
-        }
-    }
-
-    public enum ProgressBarType
+    public static void SetPosition(DependencyObject element, Position value)
     {
-        Linear,
-        Circle
+        element.SetValue(PositionProperty, value);
     }
+
+    public static Position GetPosition(DependencyObject element)
+    {
+        return (Position)element.GetValue(PositionProperty);
+    }
+}
+
+public enum ProgressBarType
+{
+    Linear,
+    Circle
 }
