@@ -6,6 +6,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:smtx="clr-namespace:ShowMeTheXAML;assembly=ShowMeTheXAML"
+    Padding="10"
     d:DesignHeight="1000"
     d:DesignWidth="1900"
     mc:Ignorable="d">
@@ -87,11 +88,11 @@
             <TextBox
                 Width="100"
                 HorizontalAlignment="Left"
-                Text="{Binding ElementName=Slider65535, Path=LowerValue, Mode=OneWay}" />
+                Text="{Binding ElementName=Slider65535, Path=LowerValue, Mode=TwoWay}" />
             <TextBox
                 Width="100"
                 HorizontalAlignment="Right"
-                Text="{Binding ElementName=Slider65535, Path=UpperValue, Mode=OneWay}" />
+                Text="{Binding ElementName=Slider65535, Path=UpperValue, Mode=TwoWay}" />
         </Grid>
 
         <smtx:XamlDisplay
@@ -107,5 +108,68 @@
                 ShowValues="True"
                 UpperValue="{Binding ElementName=Slider65535, Path=UpperValue, Mode=TwoWay}" />
         </smtx:XamlDisplay>
+
+        <controls:RangeSlider2
+            Grid.Row="7"
+            Grid.Column="0"
+            Width="400"
+            Margin="0,10"
+            AutoToolTipPlacement="TopLeft"
+            AutoToolTipPrecision="0"
+            Interval="10"
+            Ticks="100"
+            IsSnapToTickEnabled="True"
+            IsMoveToPointEnabled="True"
+            IsSelectionRangeEnabled="True"
+            LowerValue="{Binding ElementName=Slider65535, Path=LowerValue, Mode=TwoWay}"
+            Minimum="0"
+            UpperValue="{Binding ElementName=Slider65535, Path=UpperValue, Mode=TwoWay}"
+            Maximum="65535" />
+        <controls:RangeSlider2
+            Grid.Row="8"
+            Grid.Column="0"
+            Width="400"
+            Margin="0,10"
+            Interval="10"
+            Ticks="100"
+            IsEnabled="False"
+            IsSnapToTickEnabled="True"
+            IsMoveToPointEnabled="True"
+            IsSelectionRangeEnabled="True"
+            LowerValue="{Binding ElementName=Slider65535, Path=LowerValue, Mode=TwoWay}"
+            Minimum="0"
+            UpperValue="{Binding ElementName=Slider65535, Path=UpperValue, Mode=TwoWay}"
+            Maximum="65535" />
+        <Grid Grid.Row="9" Grid.Column="0">
+            <controls:RangeSlider2
+                Height="400"
+                Margin="100,10,0,10"
+                HorizontalAlignment="Left"
+                Interval="10"
+                Orientation="Vertical"
+                Ticks="100"
+                IsSnapToTickEnabled="True"
+                IsMoveToPointEnabled="True"
+                IsSelectionRangeEnabled="True"
+                LowerValue="{Binding ElementName=Slider65535, Path=LowerValue, Mode=TwoWay}"
+                Minimum="0"
+                UpperValue="{Binding ElementName=Slider65535, Path=UpperValue, Mode=TwoWay}"
+                Maximum="65535" />
+            <controls:RangeSlider2
+                Height="400"
+                Margin="0,10,100,10"
+                HorizontalAlignment="Right"
+                Interval="10"
+                Orientation="Vertical"
+                Ticks="100"
+                IsEnabled="False"
+                IsSnapToTickEnabled="True"
+                IsMoveToPointEnabled="True"
+                IsSelectionRangeEnabled="True"
+                LowerValue="{Binding ElementName=Slider65535, Path=LowerValue, Mode=TwoWay}"
+                Minimum="0"
+                UpperValue="{Binding ElementName=Slider65535, Path=UpperValue, Mode=TwoWay}"
+                Maximum="65535" />
+        </Grid>
     </Grid>
 </UserControl>

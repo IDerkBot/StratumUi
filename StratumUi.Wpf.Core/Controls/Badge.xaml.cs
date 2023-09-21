@@ -5,13 +5,9 @@ using StratumUi.Wpf.Core.Controls.Enums;
 
 namespace StratumUi.Wpf.Core.Controls;
 
-public partial class Badge
+[TemplatePart(Name = "PART_Button", Type = typeof(Button))]
+public class Badge : ContentControl
 {
-    public Badge()
-    {
-        InitializeComponent();
-    }
-
     public override void OnApplyTemplate()
     {
         base.OnApplyTemplate();
@@ -19,7 +15,7 @@ public partial class Badge
         if (obj is Button btn) btn.Click += ClickOnBtn_OnClick;
     }
 
-    public event EventHandler Click;
+    public event EventHandler? Click;
 
     public new string Content
     {

@@ -97,25 +97,32 @@ public sealed partial class RangeSlider : INotifyPropertyChanged
     private void OnPropertyChanged(object sender, PropertyChangedEventArgs e)
     {
         Debug.WriteLine($"property changed: {e.PropertyName}");
-        if (e.PropertyName == nameof(LowerValue))
+        switch (e.PropertyName)
         {
-            if (LowerValue < Minimum || LowerValue > Maximum) return;
-            var v1 = (LowerValue - Minimum) * TrackWidth;
-            var v2 = v1 / Maximum;
-            var margin = Math.Round(v2);
-            LeftThumbMargin = new Thickness(margin-5, 0, 10, 0);
-            LowerValueChanged?.Invoke(this, EventArgs.Empty);
-            CenterMargin = new Thickness(margin, 0, CenterMargin.Right, 0);
-        }
-        else if (e.PropertyName == nameof(UpperValue))
-        {
-            if (UpperValue < Minimum || UpperValue > Maximum) return;
-            var v1 = (UpperValue - Minimum) * TrackWidth;
-            var v2 = v1 / (Maximum - Minimum);
-            var margin = Math.Round(v2);
-            RightThumbMargin = new Thickness(margin, 0, -10, 0);
-            UpperValueChanged?.Invoke(this, EventArgs.Empty);
-            CenterMargin = new Thickness(CenterMargin.Left, 0, Math.Abs(margin-TrackWidth), 0);
+            case nameof(LowerValue) when LowerValue < Minimum || LowerValue > Maximum:
+                return;
+            case nameof(LowerValue):
+            {
+                var v1 = (LowerValue - Minimum) * TrackWidth;
+                var v2 = v1 / Maximum;
+                var margin = Math.Round(v2);
+                LeftThumbMargin = new Thickness(margin, 0, 0, 0);
+                LowerValueChanged?.Invoke(this, EventArgs.Empty);
+                CenterMargin = new Thickness(margin, 0, CenterMargin.Right, 0);
+                break;
+            }
+            case nameof(UpperValue) when UpperValue < Minimum || UpperValue > Maximum:
+                return;
+            case nameof(UpperValue):
+            {
+                var v1 = (UpperValue - Maximum) * TrackWidth;
+                var v2 = v1 / (Maximum - Minimum);
+                var margin = Math.Round(v2);
+                RightThumbMargin = new Thickness(0, 0, -margin, 0);
+                UpperValueChanged?.Invoke(this, EventArgs.Empty);
+                CenterMargin = new Thickness(CenterMargin.Left, 0, Math.Abs(margin-TrackWidth), 0);
+                break;
+            }
         }
     }
 
@@ -697,20 +704,20 @@ public sealed partial class RangeSlider : INotifyPropertyChanged
         {
             _leftSliderPoint = Math.Round(e.GetPosition(LeftMarker).X - 5, 0);
             if (_leftSliderPoint < 0 || _leftSliderPoint > Track.Width) return;
-            var calc = Math.Round(_leftSliderPoint / Track.Width * Maximum + Minimum, 0);
+            var calc = Math.Round((_leftSliderPoint + 5) / Track.Width * Maximum + Minimum, 0);
             if(calc > UpperValue || calc < Minimum) return;
             LowerValue = calc;
         }
-            
+        
         if (_rightSliderPressed)
         {
-            _rightSliderPoint = Math.Round(e.GetPosition(RightMarker).X + 5, 0) + Track.Width;
+            _rightSliderPoint = Math.Round(e.GetPosition(RightMarker).X + 5, 0) + (Track.Width - 10);
             if (_rightSliderPoint > Track.Width || _rightSliderPoint < 0) return;
-            var calc = Math.Abs(Math.Round(_rightSliderPoint / Track.Width * Maximum, 0));
+            var calc = Math.Abs(Math.Round((_rightSliderPoint + 0) / Track.Width * Maximum, 0));
             if(calc < LowerValue) return;
             UpperValue = calc;
         }
-            
+        
         // else if (_centerSliderPressed)
         // {
         //     _leftSliderPoint = Math.Round(e.GetPosition(LeftMarker).X - 5, 0);
@@ -743,8 +750,8 @@ public sealed partial class RangeSlider : INotifyPropertyChanged
     {
         _leftSliderPressed = true;
         Mouse.Capture(this, CaptureMode.Element);
-        Panel.SetZIndex(Thumb1, 999);
-        Panel.SetZIndex(Thumb2, 100);
+        Panel.SetZIndex(PART_LowerThumb, 999);
+        Panel.SetZIndex(PART_UpperThumb, 100);
     }
 
     private void LeftSlider_OnMouseUp(object sender, MouseButtonEventArgs e)
@@ -757,8 +764,8 @@ public sealed partial class RangeSlider : INotifyPropertyChanged
     {
         _rightSliderPressed = true;
         Mouse.Capture(this, CaptureMode.Element);
-        Panel.SetZIndex(Thumb1, 100);
-        Panel.SetZIndex(Thumb2, 999);
+        Panel.SetZIndex(PART_LowerThumb, 100);
+        Panel.SetZIndex(PART_UpperThumb, 999);
     }
 
     private void RightSlider_OnMouseUp(object sender, MouseButtonEventArgs e)
