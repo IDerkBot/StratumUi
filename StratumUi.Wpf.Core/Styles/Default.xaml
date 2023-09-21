@@ -1,4 +1,7 @@
-﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mah="clr-namespace:StratumUi.Wpf.Core.Controls">
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="../Elements/Default/Icons.xaml" />
         <ResourceDictionary Source="../Elements/Default/Colors.xaml" />
@@ -39,4 +42,5 @@
     <!--  DEFAULT  -->
     <Style BasedOn="{StaticResource BtnOutline}" TargetType="{x:Type Button}" />
     <Style BasedOn="{StaticResource CalendarStyle}" TargetType="{x:Type Calendar}" />
+    <Style BasedOn="{StaticResource Stratum.Styles.RangeSlider.Win10}" TargetType="{x:Type mah:RangeSlider2}" />
 </ResourceDictionary>
