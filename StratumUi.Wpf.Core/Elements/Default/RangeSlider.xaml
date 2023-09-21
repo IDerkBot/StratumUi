@@ -18,14 +18,14 @@
         <Setter Property="Minimum" Value="0" />
     </Style>
 
-    <Style x:Key="Stratum.Styles.MetroThumb.RangeSlider.Horizontal.Middle" TargetType="{x:Type mah:StratumThumb}">
+    <Style x:Key="Stratum.Styles.MetroThumb.RangeSlider.Horizontal.Middle" TargetType="{x:Type mah:Thumb}">
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="BorderThickness" Value="0" />
         <Setter Property="IsTabStop" Value="True" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="{x:Type mah:StratumThumb}">
+                <ControlTemplate TargetType="{x:Type mah:Thumb}">
                     <Grid Background="{TemplateBinding Background}">
                         <Rectangle Height="5" Fill="{TemplateBinding Foreground}" />
                     </Grid>
@@ -37,10 +37,10 @@
     <Style
         x:Key="Stratum.Styles.MetroThumb.RangeSlider.Vertical.Middle"
         BasedOn="{StaticResource Stratum.Styles.MetroThumb.RangeSlider.Horizontal.Middle}"
-        TargetType="{x:Type mah:StratumThumb}">
+        TargetType="{x:Type mah:Thumb}">
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="{x:Type mah:StratumThumb}">
+                <ControlTemplate TargetType="{x:Type mah:Thumb}">
                     <Grid Background="{TemplateBinding Background}">
                         <Rectangle Width="5" Fill="{TemplateBinding Foreground}" />
                     </Grid>
@@ -99,7 +99,7 @@
                     Foreground="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(mah:SliderHelper.TrackFillBrush)}"
                     Style="{DynamicResource Stratum.Styles.RepeatButton.Slider.HorizontalTrack}" />
 
-                <mah:StratumThumb
+                <mah:Thumb
                     x:Name="PART_LeftThumb"
                     Width="{DynamicResource Stratum.Sizes.Slider.HorizontalThumb.Width}"
                     Height="{DynamicResource Stratum.Sizes.Slider.HorizontalThumb.Height}"
@@ -108,13 +108,13 @@
                     Cursor="Arrow"
                     BorderBrush="Red"
                     Style="{DynamicResource Stratum.Styles.Thumb.Slider}" />
-                <mah:StratumThumb
+                <mah:Thumb
                     x:Name="PART_MiddleThumb"
                     MinWidth="5"
                     Cursor="Hand"
                     Foreground="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(mah:SliderHelper.TrackValueFillBrush)}"
                     Style="{DynamicResource Stratum.Styles.MetroThumb.RangeSlider.Horizontal.Middle}" />
-                <mah:StratumThumb
+                <mah:Thumb
                     x:Name="PART_RightThumb"
                     Width="{DynamicResource Stratum.Sizes.Slider.HorizontalThumb.Width}"
                     Height="{DynamicResource Stratum.Sizes.Slider.HorizontalThumb.Height}"
@@ -230,7 +230,7 @@
                     Foreground="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(mah:SliderHelper.TrackFillBrush)}"
                     Style="{DynamicResource Stratum.Styles.RepeatButton.Slider.VerticalTrack}" />
 
-                <mah:StratumThumb
+                <mah:Thumb
                     x:Name="PART_RightThumb"
                     Width="{DynamicResource Stratum.Sizes.Slider.VerticalThumb.Width}"
                     Height="{DynamicResource Stratum.Sizes.Slider.VerticalThumb.Height}"
@@ -238,13 +238,13 @@
                     BorderThickness="0,1"
                     Cursor="Arrow"
                     Style="{DynamicResource Stratum.Styles.Thumb.Slider}" />
-                <mah:StratumThumb
+                <mah:Thumb
                     x:Name="PART_MiddleThumb"
                     MinHeight="{TemplateBinding MinRangeWidth}"
                     Cursor="Hand"
                     Foreground="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(mah:SliderHelper.TrackValueFillBrush)}"
                     Style="{DynamicResource Stratum.Styles.MetroThumb.RangeSlider.Vertical.Middle}" />
-                <mah:StratumThumb
+                <mah:Thumb
                     x:Name="PART_LeftThumb"
                     Width="{DynamicResource Stratum.Sizes.Slider.VerticalThumb.Width}"
                     Height="{DynamicResource Stratum.Sizes.Slider.VerticalThumb.Height}"
@@ -336,14 +336,14 @@
 
     <!--  Win10 RangeSlider style  -->
 
-    <Style x:Key="Stratum.Styles.MetroThumb.RangeSlider.Horizontal.Middle.Win10" TargetType="{x:Type mah:StratumThumb}">
+    <Style x:Key="Stratum.Styles.MetroThumb.RangeSlider.Horizontal.Middle.Win10" TargetType="{x:Type mah:Thumb}">
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="BorderThickness" Value="0" />
         <Setter Property="IsTabStop" Value="True" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="{x:Type mah:StratumThumb}">
+                <ControlTemplate TargetType="{x:Type mah:Thumb}">
                     <Grid Background="{TemplateBinding Background}">
                         <Rectangle Height="4" Fill="{TemplateBinding Foreground}" />
                     </Grid>
@@ -355,10 +355,10 @@
     <Style
         x:Key="Stratum.Styles.MetroThumb.RangeSlider.Vertical.Middle.Win10"
         BasedOn="{StaticResource Stratum.Styles.MetroThumb.RangeSlider.Horizontal.Middle.Win10}"
-        TargetType="{x:Type mah:StratumThumb}">
+        TargetType="{x:Type mah:Thumb}">
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="{x:Type mah:StratumThumb}">
+                <ControlTemplate TargetType="{x:Type mah:Thumb}">
                     <Grid Background="{TemplateBinding Background}">
                         <Rectangle Width="4" Fill="{TemplateBinding Foreground}" />
                     </Grid>
@@ -418,7 +418,7 @@
                     Foreground="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(mah:SliderHelper.TrackFillBrush)}"
                     Style="{DynamicResource Stratum.Styles.RepeatButton.Slider.HorizontalTrack.Win10}" />
 
-                <mah:StratumThumb
+                <mah:Thumb
                     x:Name="PART_LeftThumb"
                     Width="{DynamicResource Stratum.Sizes.Slider.HorizontalThumb.Width.Win10}"
                     Height="{DynamicResource Stratum.Sizes.Slider.HorizontalThumb.Height.Win10}"
@@ -426,13 +426,13 @@
                     Background="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(mah:SliderHelper.ThumbFillBrush)}"
                     Cursor="Arrow"
                     Style="{DynamicResource Stratum.Styles.Thumb.Slider.Win10}" />
-                <mah:StratumThumb
+                <mah:Thumb
                     x:Name="PART_MiddleThumb"
                     MinWidth="{TemplateBinding MinRangeWidth}"
                     Cursor="Hand"
                     Foreground="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(mah:SliderHelper.TrackValueFillBrush)}"
                     Style="{DynamicResource Stratum.Styles.MetroThumb.RangeSlider.Horizontal.Middle.Win10}" />
-                <mah:StratumThumb
+                <mah:Thumb
                     x:Name="PART_RightThumb"
                     Width="{DynamicResource Stratum.Sizes.Slider.HorizontalThumb.Width.Win10}"
                     Height="{DynamicResource Stratum.Sizes.Slider.HorizontalThumb.Height.Win10}"
@@ -564,7 +564,7 @@
                     Foreground="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(mah:SliderHelper.TrackFillBrush)}"
                     Style="{DynamicResource Stratum.Styles.RepeatButton.Slider.VerticalTrack.Win10}" />
 
-                <mah:StratumThumb
+                <mah:Thumb
                     x:Name="PART_RightThumb"
                     Width="{DynamicResource Stratum.Sizes.Slider.VerticalThumb.Width.Win10}"
                     Height="{DynamicResource Stratum.Sizes.Slider.VerticalThumb.Height.Win10}"
@@ -572,13 +572,13 @@
                     Background="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(mah:SliderHelper.ThumbFillBrush)}"
                     Cursor="Arrow"
                     Style="{DynamicResource Stratum.Styles.Thumb.Slider.Win10}" />
-                <mah:StratumThumb
+                <mah:Thumb
                     x:Name="PART_MiddleThumb"
                     MinHeight="{TemplateBinding MinRangeWidth}"
                     Cursor="Hand"
                     Foreground="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(mah:SliderHelper.TrackValueFillBrush)}"
                     Style="{DynamicResource Stratum.Styles.MetroThumb.RangeSlider.Vertical.Middle.Win10}" />
-                <mah:StratumThumb
+                <mah:Thumb
                     x:Name="PART_LeftThumb"
                     Width="{DynamicResource Stratum.Sizes.Slider.VerticalThumb.Width.Win10}"
                     Height="{DynamicResource Stratum.Sizes.Slider.VerticalThumb.Height.Win10}"

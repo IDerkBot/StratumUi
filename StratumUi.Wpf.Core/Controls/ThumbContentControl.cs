@@ -17,45 +17,45 @@ namespace StratumUi.Wpf.Core.Controls;
 /// <summary>
 /// The MetroThumbContentControl control can be used for titles or something else and enables basic drag movement functionality.
 /// </summary>
-public class StratumThumbContentControl : ContentControl, IStratumThumb
+public class ThumbContentControl : ContentControl, IThumb
 {
-    private TouchDevice? currentDevice = null;
-    private Point startDragPoint;
-    private Point startDragScreenPoint;
-    private Point oldDragScreenPoint;
+    private TouchDevice? _currentDevice;
+    private Point _startDragPoint;
+    private Point _startDragScreenPoint;
+    private Point _oldDragScreenPoint;
 
-    static StratumThumbContentControl()
+    static ThumbContentControl()
     {
-        DefaultStyleKeyProperty.OverrideMetadata(typeof(StratumThumbContentControl), new FrameworkPropertyMetadata(typeof(StratumThumbContentControl)));
-        FocusableProperty.OverrideMetadata(typeof(StratumThumbContentControl), new FrameworkPropertyMetadata(default(bool)));
-        EventManager.RegisterClassHandler(typeof(StratumThumbContentControl), Mouse.LostMouseCaptureEvent, new MouseEventHandler(OnLostMouseCapture));
+        DefaultStyleKeyProperty.OverrideMetadata(typeof(ThumbContentControl), new FrameworkPropertyMetadata(typeof(ThumbContentControl)));
+        FocusableProperty.OverrideMetadata(typeof(ThumbContentControl), new FrameworkPropertyMetadata(default(bool)));
+        EventManager.RegisterClassHandler(typeof(ThumbContentControl), Mouse.LostMouseCaptureEvent, new MouseEventHandler(OnLostMouseCapture));
     }
 
     public static readonly RoutedEvent DragStartedEvent
         = EventManager.RegisterRoutedEvent(nameof(DragStarted),
             RoutingStrategy.Bubble,
             typeof(DragStartedEventHandler),
-            typeof(StratumThumbContentControl));
+            typeof(ThumbContentControl));
 
     public static readonly RoutedEvent DragDeltaEvent
         = EventManager.RegisterRoutedEvent(nameof(DragDelta),
             RoutingStrategy.Bubble,
             typeof(DragDeltaEventHandler),
-            typeof(StratumThumbContentControl));
+            typeof(ThumbContentControl));
 
     public static readonly RoutedEvent DragCompletedEvent
         = EventManager.RegisterRoutedEvent(nameof(DragCompleted),
             RoutingStrategy.Bubble,
             typeof(DragCompletedEventHandler),
-            typeof(StratumThumbContentControl));
+            typeof(ThumbContentControl));
 
     /// <summary>
     /// Adds or remove a DragStartedEvent handler
     /// </summary>
     public event DragStartedEventHandler DragStarted
     {
-        add => this.AddHandler(DragStartedEvent, value);
-        remove => this.RemoveHandler(DragStartedEvent, value);
+        add => AddHandler(DragStartedEvent, value);
+        remove => RemoveHandler(DragStartedEvent, value);
     }
 
     /// <summary>
@@ -63,8 +63,8 @@ public class StratumThumbContentControl : ContentControl, IStratumThumb
     /// </summary>
     public event DragDeltaEventHandler DragDelta
     {
-        add => this.AddHandler(DragDeltaEvent, value);
-        remove => this.RemoveHandler(DragDeltaEvent, value);
+        add => AddHandler(DragDeltaEvent, value);
+        remove => RemoveHandler(DragDeltaEvent, value);
     }
 
     /// <summary>
@@ -72,14 +72,14 @@ public class StratumThumbContentControl : ContentControl, IStratumThumb
     /// </summary>
     public event DragCompletedEventHandler DragCompleted
     {
-        add => this.AddHandler(DragCompletedEvent, value);
-        remove => this.RemoveHandler(DragCompletedEvent, value);
+        add => AddHandler(DragCompletedEvent, value);
+        remove => RemoveHandler(DragCompletedEvent, value);
     }
 
     private static readonly DependencyPropertyKey IsDraggingPropertyKey
         = DependencyProperty.RegisterReadOnly(nameof(IsDragging),
             typeof(bool),
-            typeof(StratumThumbContentControl),
+            typeof(ThumbContentControl),
             new FrameworkPropertyMetadata(BooleanBoxes.FalseBox));
 
     /// <summary>
@@ -92,51 +92,45 @@ public class StratumThumbContentControl : ContentControl, IStratumThumb
     /// </summary>
     public bool IsDragging
     {
-        get => (bool)this.GetValue(IsDraggingProperty);
-        protected set => this.SetValue(IsDraggingPropertyKey, BooleanBoxes.Box(value));
+        get => (bool)GetValue(IsDraggingProperty);
+        protected set => SetValue(IsDraggingPropertyKey, BooleanBoxes.Box(value));
     }
 
     public void CancelDragAction()
     {
-        if (!this.IsDragging)
-        {
-            return;
-        }
+        if (!IsDragging) return;
 
-        if (this.IsMouseCaptured)
-        {
-            this.ReleaseMouseCapture();
-        }
+        if (IsMouseCaptured) ReleaseMouseCapture();
 
-        this.ClearValue(IsDraggingPropertyKey);
-        var horizontalChange = this.oldDragScreenPoint.X - this.startDragScreenPoint.X;
-        var verticalChange = this.oldDragScreenPoint.Y - this.startDragScreenPoint.Y;
-        this.RaiseEvent(new MetroThumbContentControlDragCompletedEventArgs(horizontalChange, verticalChange, true));
+        ClearValue(IsDraggingPropertyKey);
+        var horizontalChange = _oldDragScreenPoint.X - _startDragScreenPoint.X;
+        var verticalChange = _oldDragScreenPoint.Y - _startDragScreenPoint.Y;
+        RaiseEvent(new ThumbContentControlDragCompletedEventArgs(horizontalChange, verticalChange, true));
     }
 
     protected override void OnMouseLeftButtonDown(MouseButtonEventArgs e)
     {
-        if (!this.IsDragging)
+        if (!IsDragging)
         {
             e.Handled = true;
             try
             {
                 // focus me
-                this.Focus();
+                Focus();
                 // now capture the mouse for the drag action
-                this.CaptureMouse();
+                CaptureMouse();
                 // so now we are in dragging mode
-                this.SetValue(IsDraggingPropertyKey, BooleanBoxes.TrueBox);
+                SetValue(IsDraggingPropertyKey, BooleanBoxes.TrueBox);
                 // get the mouse points
-                this.startDragPoint = e.GetPosition(this);
-                this.oldDragScreenPoint = this.startDragScreenPoint = this.PointToScreen(this.startDragPoint);
+                _startDragPoint = e.GetPosition(this);
+                _oldDragScreenPoint = _startDragScreenPoint = PointToScreen(_startDragPoint);
 
-                this.RaiseEvent(new MetroThumbContentControlDragStartedEventArgs(this.startDragPoint.X, this.startDragPoint.Y));
+                RaiseEvent(new ThumbContentControlDragStartedEventArgs(_startDragPoint.X, _startDragPoint.Y));
             }
             catch (Exception exception)
             {
                 Trace.TraceError($"{this}: Something went wrong here: {exception} {Environment.NewLine} {exception.StackTrace}");
-                this.CancelDragAction();
+                CancelDragAction();
             }
         }
 
@@ -154,9 +148,9 @@ public class StratumThumbContentControl : ContentControl, IStratumThumb
             this.ReleaseMouseCapture();
             // get the current mouse position and call the completed event with the horizontal/vertical change
             Point currentMouseScreenPoint = this.PointToScreen(e.MouseDevice.GetPosition(this));
-            var horizontalChange = currentMouseScreenPoint.X - this.startDragScreenPoint.X;
-            var verticalChange = currentMouseScreenPoint.Y - this.startDragScreenPoint.Y;
-            this.RaiseEvent(new MetroThumbContentControlDragCompletedEventArgs(horizontalChange, verticalChange, false));
+            var horizontalChange = currentMouseScreenPoint.X - this._startDragScreenPoint.X;
+            var verticalChange = currentMouseScreenPoint.Y - this._startDragScreenPoint.Y;
+            this.RaiseEvent(new ThumbContentControlDragCompletedEventArgs(horizontalChange, verticalChange, false));
         }
 
         base.OnMouseLeftButtonUp(e);
@@ -165,7 +159,7 @@ public class StratumThumbContentControl : ContentControl, IStratumThumb
     private static void OnLostMouseCapture(object sender, MouseEventArgs e)
     {
         // Cancel the drag action if we lost capture
-        StratumThumbContentControl thumb = (StratumThumbContentControl)sender;
+        ThumbContentControl thumb = (ThumbContentControl)sender;
         if (!ReferenceEquals(Mouse.Captured, thumb))
         {
             thumb.CancelDragAction();
@@ -186,13 +180,13 @@ public class StratumThumbContentControl : ContentControl, IStratumThumb
             Point currentDragPoint = e.GetPosition(this);
             // Get client point and convert it to screen point
             Point currentDragScreenPoint = this.PointToScreen(currentDragPoint);
-            if (currentDragScreenPoint != this.oldDragScreenPoint)
+            if (currentDragScreenPoint != this._oldDragScreenPoint)
             {
-                this.oldDragScreenPoint = currentDragScreenPoint;
+                this._oldDragScreenPoint = currentDragScreenPoint;
                 e.Handled = true;
-                var horizontalChange = currentDragPoint.X - this.startDragPoint.X;
-                var verticalChange = currentDragPoint.Y - this.startDragPoint.Y;
-                this.RaiseEvent(new DragDeltaEventArgs(horizontalChange, verticalChange) { RoutedEvent = StratumThumbContentControl.DragDeltaEvent });
+                var horizontalChange = currentDragPoint.X - this._startDragPoint.X;
+                var verticalChange = currentDragPoint.Y - this._startDragPoint.Y;
+                this.RaiseEvent(new DragDeltaEventArgs(horizontalChange, verticalChange) { RoutedEvent = ThumbContentControl.DragDeltaEvent });
             }
         }
         else
@@ -204,8 +198,8 @@ public class StratumThumbContentControl : ContentControl, IStratumThumb
             }
 
             this.ClearValue(IsDraggingPropertyKey);
-            this.startDragPoint.X = 0;
-            this.startDragPoint.Y = 0;
+            this._startDragPoint.X = 0;
+            this._startDragPoint.Y = 0;
         }
     }
 
@@ -226,7 +220,7 @@ public class StratumThumbContentControl : ContentControl, IStratumThumb
     {
         // Only re-capture if the reference is not null
         // This way we avoid re-capturing after calling ReleaseCurrentDevice()
-        if (this.currentDevice != null)
+        if (this._currentDevice != null)
         {
             this.CaptureCurrentDevice(e);
         }
@@ -234,11 +228,11 @@ public class StratumThumbContentControl : ContentControl, IStratumThumb
 
     private void ReleaseCurrentDevice()
     {
-        if (this.currentDevice != null)
+        if (this._currentDevice != null)
         {
             // Set the reference to null so that we don't re-capture in the OnLostTouchCapture() method
-            var temp = this.currentDevice;
-            this.currentDevice = null;
+            var temp = this._currentDevice;
+            this._currentDevice = null;
             this.ReleaseTouchCapture(temp);
         }
     }
@@ -248,7 +242,7 @@ public class StratumThumbContentControl : ContentControl, IStratumThumb
         bool gotTouch = this.CaptureTouch(e.TouchDevice);
         if (gotTouch)
         {
-            this.currentDevice = e.TouchDevice;
+            this._currentDevice = e.TouchDevice;
         }
     }
 

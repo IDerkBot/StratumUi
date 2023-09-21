@@ -135,7 +135,7 @@
                         Style="{DynamicResource Stratum.Styles.RepeatButton.Slider.HorizontalTrack}" />
                 </Track.IncreaseRepeatButton>
                 <Track.Thumb>
-                    <mah:StratumThumb
+                    <mah:Thumb
                         x:Name="HorizontalThumb"
                         Width="{DynamicResource Stratum.Sizes.Slider.HorizontalThumb.Width}"
                         Height="{DynamicResource Stratum.Sizes.Slider.HorizontalThumb.Height}"
@@ -227,7 +227,7 @@
                         Style="{DynamicResource Stratum.Styles.RepeatButton.Slider.VerticalTrack}" />
                 </Track.IncreaseRepeatButton>
                 <Track.Thumb>
-                    <mah:StratumThumb
+                    <mah:Thumb
                         x:Name="VerticalThumb"
                         Width="{DynamicResource Stratum.Sizes.Slider.VerticalThumb.Width}"
                         Height="{DynamicResource Stratum.Sizes.Slider.VerticalThumb.Height}"
@@ -404,7 +404,7 @@
                         Style="{DynamicResource Stratum.Styles.RepeatButton.Slider.HorizontalTrack.Win10}" />
                 </Track.IncreaseRepeatButton>
                 <Track.Thumb>
-                    <mah:StratumThumb
+                    <mah:Thumb
                         x:Name="HorizontalThumb"
                         Width="{DynamicResource Stratum.Sizes.Slider.HorizontalThumb.Width.Win10}"
                         Height="{DynamicResource Stratum.Sizes.Slider.HorizontalThumb.Height.Win10}"
@@ -498,7 +498,7 @@
                         Style="{DynamicResource Stratum.Styles.RepeatButton.Slider.VerticalTrack.Win10}" />
                 </Track.IncreaseRepeatButton>
                 <Track.Thumb>
-                    <mah:StratumThumb
+                    <mah:Thumb
                         x:Name="VerticalThumb"
                         Width="{DynamicResource Stratum.Sizes.Slider.VerticalThumb.Width.Win10}"
                         Height="{DynamicResource Stratum.Sizes.Slider.VerticalThumb.Height.Win10}"

@@ -8,7 +8,7 @@ using System.Windows.Input;
 
 namespace StratumUi.Wpf.Core.Controls
 {
-    public interface IStratumThumb : IInputElement
+    public interface IThumb : IInputElement
     {
         event DragStartedEventHandler DragStarted;
 

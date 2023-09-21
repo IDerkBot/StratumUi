@@ -20,9 +20,9 @@ namespace StratumUi.Wpf.Core.Controls;
 [TemplatePart(Name = "PART_Container", Type = typeof(FrameworkElement))]
 [TemplatePart(Name = "PART_RangeSliderContainer", Type = typeof(StackPanel))]
 [TemplatePart(Name = "PART_LeftEdge", Type = typeof(RepeatButton))]
-[TemplatePart(Name = "PART_LeftThumb", Type = typeof(Thumb))]
-[TemplatePart(Name = "PART_MiddleThumb", Type = typeof(Thumb))]
-[TemplatePart(Name = "PART_RightThumb", Type = typeof(Thumb))]
+[TemplatePart(Name = "PART_LeftThumb", Type = typeof(System.Windows.Controls.Primitives.Thumb))]
+[TemplatePart(Name = "PART_MiddleThumb", Type = typeof(System.Windows.Controls.Primitives.Thumb))]
+[TemplatePart(Name = "PART_RightThumb", Type = typeof(System.Windows.Controls.Primitives.Thumb))]
 [TemplatePart(Name = "PART_RightEdge", Type = typeof(RepeatButton))]
 public class RangeSlider2 : RangeBase
 {
@@ -236,7 +236,7 @@ public class RangeSlider2 : RangeBase
         if (value < rangeSlider2.LowerValue + rangeSlider2.MinRange)
             return rangeSlider2.LowerValue + rangeSlider2.MinRange;
 
-        return baseValue ?? 0D;
+        return baseValue;
     }
 
     /// <summary>Identifies the <see cref="LowerValue"/> dependency property.</summary>
@@ -287,7 +287,7 @@ public class RangeSlider2 : RangeBase
         if (value > rangeSlider2.UpperValue - rangeSlider2.MinRange)
             return rangeSlider2.UpperValue - rangeSlider2.MinRange;
 
-        return baseValue ?? 0D;
+        return baseValue;
     }
 
     /// <summary>Identifies the <see cref="MinRange"/> dependency property.</summary>
@@ -337,7 +337,7 @@ public class RangeSlider2 : RangeBase
         if (rangeSlider2.LowerValue + value > rangeSlider2.Maximum)
             return rangeSlider2.Maximum - rangeSlider2.LowerValue;
 
-        return baseValue ?? 0D;
+        return baseValue;
     }
 
     /// <summary>Identifies the <see cref="MinRangeWidth"/> dependency property.</summary>
@@ -367,7 +367,7 @@ public class RangeSlider2 : RangeBase
     private static object CoerceMinRangeWidth(DependencyObject d, object? baseValue)
     {
         if (d is not RangeSlider2 slider2 || baseValue is not double value) return baseValue ?? 0D;
-        if (slider2._leftThumb == null || slider2._rightThumb == null) return baseValue ?? 0D;
+        if (slider2._leftThumb == null || slider2._rightThumb == null) return baseValue;
         double width;
         if (slider2.Orientation == Orientation.Horizontal)
             width = slider2.ActualWidth - slider2._leftThumb.ActualWidth - slider2._rightThumb.ActualWidth;
@@ -710,7 +710,7 @@ public class RangeSlider2 : RangeBase
         if (value > maximum)
             return maximum;
 
-        return baseValue ?? 0D;
+        return baseValue;
     }
 
     /// <summary>Identifies the <see cref="SelectionEnd"/> dependency property.</summary>
@@ -753,7 +753,7 @@ public class RangeSlider2 : RangeBase
         if (value > maximum)
             return maximum;
 
-        return baseValue ?? 0D;
+        return baseValue;
     }
 
     protected double MovableRange => Maximum - Minimum - MinRange;
@@ -765,11 +765,11 @@ public class RangeSlider2 : RangeBase
     private const double Epsilon = 0.00000153;
 
     private bool _internalUpdate;
-    private Thumb _centerThumb = null!;
-    private Thumb _leftThumb = null!;
-    private Thumb _rightThumb = null!;
-    private RepeatButton _leftButton = null!;
-    private RepeatButton _rightButton = null!;
+    private System.Windows.Controls.Primitives.Thumb? _centerThumb;
+    private System.Windows.Controls.Primitives.Thumb? _leftThumb;
+    private System.Windows.Controls.Primitives.Thumb? _rightThumb;
+    private RepeatButton? _leftButton;
+    private RepeatButton? _rightButton;
     private StackPanel _visualElementsContainer = null!;
     private FrameworkElement _container = null!;
     private double _movableWidth;
@@ -816,9 +816,9 @@ public class RangeSlider2 : RangeBase
             }
         };
 
-        this._timer = new DispatcherTimer();
-        this._timer.Tick += this.MoveToNextValue;
-        this._timer.Interval = TimeSpan.FromMilliseconds(this.Interval);
+        _timer = new DispatcherTimer();
+        _timer.Tick += MoveToNextValue;
+        _timer.Interval = TimeSpan.FromMilliseconds(Interval);
     }
 
     static RangeSlider2()
@@ -834,8 +834,8 @@ public class RangeSlider2 : RangeBase
     /// <param name="oldMinimum">The old value of the <see cref="P:System.Windows.Controls.Primitives.RangeBase.Minimum"/> property.</param><param name="newMinimum">The new value of the <see cref="P:System.Windows.Controls.Primitives.RangeBase.Minimum"/> property.</param>
     protected override void OnMinimumChanged(double oldMinimum, double newMinimum)
     {
-        this.CoerceValue(SelectionStartProperty);
-        this.ReCalculateSize();
+        CoerceValue(SelectionStartProperty);
+        ReCalculateSize();
     }
 
     /// <summary>
@@ -844,9 +844,9 @@ public class RangeSlider2 : RangeBase
     /// <param name="oldMaximum">The old value of the <see cref="P:System.Windows.Controls.Primitives.RangeBase.Maximum"/> property.</param><param name="newMaximum">The new value of the <see cref="P:System.Windows.Controls.Primitives.RangeBase.Maximum"/> property.</param>
     protected override void OnMaximumChanged(double oldMaximum, double newMaximum)
     {
-        this.CoerceValue(SelectionStartProperty);
-        this.CoerceValue(SelectionEndProperty);
-        this.ReCalculateSize();
+        CoerceValue(SelectionStartProperty);
+        CoerceValue(SelectionEndProperty);
+        ReCalculateSize();
     }
 
     private static void MoveThumb(FrameworkElement x, FrameworkElement y, double change, Orientation orientation)
@@ -997,88 +997,78 @@ public class RangeSlider2 : RangeBase
     //Recalculation of Control Height or Width
     private void ReCalculateSize()
     {
-        if (this._leftButton != null && this._rightButton != null && this._centerThumb != null)
+        if (_leftButton == null || _rightButton == null || _centerThumb == null || _rightThumb == null || _leftThumb == null) return;
+        if (Orientation == Orientation.Horizontal)
         {
-            if (this.Orientation == Orientation.Horizontal)
+            _movableWidth = Math.Max(ActualWidth - _rightThumb.ActualWidth - _leftThumb.ActualWidth - MinRangeWidth, 1);
+            if (MovableRange <= 0)
             {
-                this._movableWidth = Math.Max(this.ActualWidth - this._rightThumb.ActualWidth - this._leftThumb.ActualWidth - this.MinRangeWidth, 1);
-                if (this.MovableRange <= 0)
-                {
-                    this._leftButton.Width = double.NaN;
-                    this._rightButton.Width = double.NaN;
-                }
-                else
-                {
-                    this._leftButton.Width = Math.Max(this._movableWidth * (this.LowerValue - this.Minimum) / this.MovableRange, 0);
-                    this._rightButton.Width = Math.Max(this._movableWidth * (this.Maximum - this.UpperValue) / this.MovableRange, 0);
-                }
-
-                if (IsValidDouble(this._rightButton.Width) && IsValidDouble(this._leftButton.Width))
-                {
-                    this._centerThumb.Width = Math.Max(this.ActualWidth - (this._leftButton.Width + this._rightButton.Width + this._rightThumb.ActualWidth + this._leftThumb.ActualWidth), 0);
-                }
-                else
-                {
-                    this._centerThumb.Width = Math.Max(this.ActualWidth - (this._rightThumb.ActualWidth + this._leftThumb.ActualWidth), 0);
-                }
+                _leftButton.Width = double.NaN;
+                _rightButton.Width = double.NaN;
             }
-            else if (this.Orientation == Orientation.Vertical)
+            else
             {
-                this._movableWidth = Math.Max(this.ActualHeight - this._rightThumb.ActualHeight - this._leftThumb.ActualHeight - this.MinRangeWidth, 1);
-                if (this.MovableRange <= 0)
-                {
-                    this._leftButton.Height = double.NaN;
-                    this._rightButton.Height = double.NaN;
-                }
-                else
-                {
-                    this._leftButton.Height = Math.Max(this._movableWidth * (this.LowerValue - this.Minimum) / this.MovableRange, 0);
-                    this._rightButton.Height = Math.Max(this._movableWidth * (this.Maximum - this.UpperValue) / this.MovableRange, 0);
-                }
-
-                if (IsValidDouble(this._rightButton.Height) && IsValidDouble(this._leftButton.Height))
-                {
-                    this._centerThumb.Height = Math.Max(this.ActualHeight - (this._leftButton.Height + this._rightButton.Height + this._rightThumb.ActualHeight + this._leftThumb.ActualHeight), 0);
-                }
-                else
-                {
-                    this._centerThumb.Height = Math.Max(this.ActualHeight - (this._rightThumb.ActualHeight + this._leftThumb.ActualHeight), 0);
-                }
+                _leftButton.Width = Math.Max(_movableWidth * (LowerValue - Minimum) / MovableRange, 0);
+                _rightButton.Width = Math.Max(_movableWidth * (Maximum - UpperValue) / MovableRange, 0);
             }
 
-            this._density = this._movableWidth / this.MovableRange;
+            if (IsValidDouble(_rightButton.Width) && IsValidDouble(_leftButton.Width))
+                _centerThumb.Width = Math.Max(ActualWidth - (_leftButton.Width + _rightButton.Width + _rightThumb.ActualWidth + _leftThumb.ActualWidth), 0);
+            else
+                _centerThumb.Width = Math.Max(ActualWidth - (_rightThumb.ActualWidth + _leftThumb.ActualWidth), 0);
         }
+        else if (Orientation == Orientation.Vertical)
+        {
+            _movableWidth = Math.Max(ActualHeight - _rightThumb.ActualHeight - _leftThumb.ActualHeight - MinRangeWidth, 1);
+            if (MovableRange <= 0)
+            {
+                _leftButton.Height = double.NaN;
+                _rightButton.Height = double.NaN;
+            }
+            else
+            {
+                _leftButton.Height = Math.Max(_movableWidth * (LowerValue - Minimum) / MovableRange, 0);
+                _rightButton.Height = Math.Max(_movableWidth * (Maximum - UpperValue) / MovableRange, 0);
+            }
+
+            if (IsValidDouble(_rightButton.Height) && IsValidDouble(_leftButton.Height))
+                _centerThumb.Height = Math.Max(ActualHeight - (_leftButton.Height + _rightButton.Height + _rightThumb.ActualHeight + _leftThumb.ActualHeight), 0);
+            else
+                _centerThumb.Height = Math.Max(ActualHeight - (_rightThumb.ActualHeight + _leftThumb.ActualHeight), 0);
+        }
+
+        _density = _movableWidth / MovableRange;
     }
 
     //Method calculates new values when IsSnapToTickEnabled = FALSE
     private void ReCalculateRangeSelected(bool reCalculateLowerValue, bool reCalculateUpperValue, Direction direction)
     {
-        this._internalUpdate = true; //set flag to signal that the properties are being set by the object itself
+        _internalUpdate = true; //set flag to signal that the properties are being set by the object itself
         if (direction == Direction.Increase)
         {
             if (reCalculateUpperValue)
             {
-                this._oldUpper = this.UpperValue;
-                var width = this.Orientation == Orientation.Horizontal ? this._rightButton.Width : this._rightButton.Height;
+                _oldUpper = UpperValue;
+                var width = Orientation == Orientation.Horizontal ? _rightButton!.Width : _rightButton!.Height;
                 //Check first if button width is not Double.NaN
                 if (IsValidDouble(width))
                 {
                     // Make sure to get exactly rangestop if thumb is at the end
-                    var upper = Equals(width, 0.0) ? this.Maximum : Math.Min(this.Maximum, (this.Maximum - this.MovableRange * width / this._movableWidth));
-                    this.UpperValue = this._isMoved ? upper : (this._roundToPrecision ? Math.Round(upper, this._precision) : upper);
+                    var upper = Equals(width, 0.0) ? Maximum : Math.Min(Maximum, Maximum - MovableRange * width / _movableWidth);
+                    UpperValue = _isMoved ? upper : _roundToPrecision ? Math.Round(upper, _precision) : upper;
                 }
             }
 
             if (reCalculateLowerValue)
             {
-                this._oldLower = this.LowerValue;
-                var width = this.Orientation == Orientation.Horizontal ? this._leftButton.Width : this._leftButton.Height;
+                _oldLower = LowerValue;
+                var width = Orientation == Orientation.Horizontal ? _leftButton!.Width : _leftButton!.Height;
                 //Check first if button width is not Double.NaN
                 if (IsValidDouble(width))
                 {
                     // Make sure to get exactly rangestart if thumb is at the start
-                    var lower = Equals(width, 0.0) ? this.Minimum : Math.Max(this.Minimum, (this.Minimum + this.MovableRange * width / this._movableWidth));
-                    this.LowerValue = this._isMoved ? lower : (this._roundToPrecision ? Math.Round(lower, this._precision) : lower);
+                    var lower = Equals(width, 0.0) ? Minimum : Math.Max(Minimum, Minimum + MovableRange * width / _movableWidth);
+                    LowerValue = _isMoved ? lower : _roundToPrecision ? Math.Round(lower, _precision) : lower;
                 }
             }
         }
@@ -1086,33 +1076,33 @@ public class RangeSlider2 : RangeBase
         {
             if (reCalculateLowerValue)
             {
-                this._oldLower = this.LowerValue;
-                var width = this.Orientation == Orientation.Horizontal ? this._leftButton.Width : this._leftButton.Height;
+                _oldLower = LowerValue;
+                var width = Orientation == Orientation.Horizontal ? _leftButton!.Width : _leftButton!.Height;
                 //Check first if button width is not Double.NaN
                 if (IsValidDouble(width))
                 {
                     // Make sure to get exactly rangestart if thumb is at the start
-                    var lower = Equals(width, 0.0) ? this.Minimum : Math.Max(this.Minimum, (this.Minimum + this.MovableRange * width / this._movableWidth));
-                    this.LowerValue = this._isMoved ? lower : (this._roundToPrecision ? Math.Round(lower, this._precision) : lower);
+                    var lower = Equals(width, 0.0) ? Minimum : Math.Max(Minimum, Minimum + MovableRange * width / _movableWidth);
+                    LowerValue = _isMoved ? lower : _roundToPrecision ? Math.Round(lower, _precision) : lower;
                 }
             }
 
             if (reCalculateUpperValue)
             {
-                this._oldUpper = this.UpperValue;
-                var width = this.Orientation == Orientation.Horizontal ? this._rightButton.Width : this._rightButton.Height;
+                _oldUpper = UpperValue;
+                var width = Orientation == Orientation.Horizontal ? _rightButton!.Width : _rightButton!.Height;
                 //Check first if button width is not Double.NaN
                 if (IsValidDouble(width))
                 {
                     // Make sure to get exactly rangestop if thumb is at the end
-                    var upper = Equals(width, 0.0) ? this.Maximum : Math.Min(this.Maximum, (this.Maximum - this.MovableRange * width / this._movableWidth));
-                    this.UpperValue = this._isMoved ? upper : (this._roundToPrecision ? Math.Round(upper, this._precision) : upper);
+                    var upper = Equals(width, 0.0) ? Maximum : Math.Min(Maximum, Maximum - MovableRange * width / _movableWidth);
+                    UpperValue = _isMoved ? upper : _roundToPrecision ? Math.Round(upper, _precision) : upper;
                 }
             }
         }
 
-        this._roundToPrecision = false;
-        this._internalUpdate = false; //set flag to signal that the properties are being set by the object itself
+        _roundToPrecision = false;
+        _internalUpdate = false; //set flag to signal that the properties are being set by the object itself
 
         RaiseValueChangedEvents(this, reCalculateLowerValue, reCalculateUpperValue);
     }
@@ -1120,50 +1110,40 @@ public class RangeSlider2 : RangeBase
     //Method used for checking and setting correct values when IsSnapToTickEnable = TRUE (When thumb moving separately)
     private void ReCalculateRangeSelected(bool reCalculateLowerValue, bool reCalculateUpperValue, double value, Direction direction)
     {
-        this._internalUpdate = true; //set flag to signal that the properties are being set by the object itself
-        var tickFrequency = this.TickFrequency.ToString(CultureInfo.InvariantCulture);
+        _internalUpdate = true; //set flag to signal that the properties are being set by the object itself
+        var tickFrequency = TickFrequency.ToString(CultureInfo.InvariantCulture);
         if (reCalculateLowerValue)
         {
-            this._oldLower = this.LowerValue;
+            _oldLower = LowerValue;
             double lower = 0;
-            if (this.IsSnapToTickEnabled)
-            {
-                lower = direction == Direction.Increase ? Math.Min(this.UpperValue - this.MinRange, value) : Math.Max(this.Minimum, value);
-            }
+            if (IsSnapToTickEnabled) lower = direction == Direction.Increase ? Math.Min(UpperValue - MinRange, value) : Math.Max(Minimum, value);
 
             if (!tickFrequency.ToLower().Contains("e+") && tickFrequency.Contains("."))
             {
                 //decimal part is for cutting value exactly on that number of digits, which has TickFrequency to have correct values
                 var decimalPart = tickFrequency.Split('.');
-                this.LowerValue = Math.Round(lower, decimalPart[1].Length, MidpointRounding.AwayFromZero);
+                LowerValue = Math.Round(lower, decimalPart[1].Length, MidpointRounding.AwayFromZero);
             }
             else
-            {
-                this.LowerValue = lower;
-            }
+                LowerValue = lower;
         }
 
         if (reCalculateUpperValue)
         {
-            this._oldUpper = this.UpperValue;
+            _oldUpper = UpperValue;
             double upper = 0;
-            if (this.IsSnapToTickEnabled)
-            {
-                upper = direction == Direction.Increase ? Math.Min(value, this.Maximum) : Math.Max(this.LowerValue + this.MinRange, value);
-            }
+            if (IsSnapToTickEnabled) upper = direction == Direction.Increase ? Math.Min(value, Maximum) : Math.Max(LowerValue + MinRange, value);
 
-            if (!tickFrequency.ToLower().Contains("e+") && tickFrequency.Contains("."))
+            if (!tickFrequency.ToLower().Contains("e+") && tickFrequency.Contains('.'))
             {
                 var decimalPart = tickFrequency.Split('.');
-                this.UpperValue = Math.Round(upper, decimalPart[1].Length, MidpointRounding.AwayFromZero);
+                UpperValue = Math.Round(upper, decimalPart[1].Length, MidpointRounding.AwayFromZero);
             }
             else
-            {
-                this.UpperValue = upper;
-            }
+                UpperValue = upper;
         }
 
-        this._internalUpdate = false; //set flag to signal that the properties are being set by the object itself
+        _internalUpdate = false; //set flag to signal that the properties are being set by the object itself
 
         RaiseValueChangedEvents(this, reCalculateLowerValue, reCalculateUpperValue);
     }
@@ -1171,42 +1151,42 @@ public class RangeSlider2 : RangeBase
     //Method used for checking and setting correct values when IsSnapToTickEnable = TRUE (When thumb moving together)
     private void ReCalculateRangeSelected(double newLower, double newUpper, Direction direction)
     {
-        this._internalUpdate = true; //set flag to signal that the properties are being set by the object itself
-        this._oldLower = this.LowerValue;
-        this._oldUpper = this.UpperValue;
+        _internalUpdate = true; //set flag to signal that the properties are being set by the object itself
+        _oldLower = LowerValue;
+        _oldUpper = UpperValue;
 
-        if (this.IsSnapToTickEnabled)
+        if (IsSnapToTickEnabled)
         {
             double lower;
             double upper;
 
             if (direction == Direction.Increase)
             {
-                lower = Math.Min(newLower, this.Maximum - (this.UpperValue - this.LowerValue));
-                upper = Math.Min(newUpper, this.Maximum);
+                lower = Math.Min(newLower, Maximum - (UpperValue - LowerValue));
+                upper = Math.Min(newUpper, Maximum);
             }
             else
             {
-                lower = Math.Max(newLower, this.Minimum);
-                upper = Math.Max(this.Minimum + (this.UpperValue - this.LowerValue), newUpper);
+                lower = Math.Max(newLower, Minimum);
+                upper = Math.Max(Minimum + (UpperValue - LowerValue), newUpper);
             }
 
-            var tickFrequency = this.TickFrequency.ToString(CultureInfo.InvariantCulture);
-            if (!tickFrequency.ToLower().Contains("e+") && tickFrequency.Contains("."))
+            var tickFrequency = TickFrequency.ToString(CultureInfo.InvariantCulture);
+            if (!tickFrequency.ToLower().Contains("e+") && tickFrequency.Contains('.'))
             {
                 //decimal part is for cutting value exactly on that number of digits, which has TickFrequency to have correct values
                 var decimalPart = tickFrequency.Split('.');
                 //used when whole range decreasing to have correct updated values (lower first, upper - second)
                 if (direction == Direction.Decrease)
                 {
-                    this.LowerValue = Math.Round(lower, decimalPart[1].Length, MidpointRounding.AwayFromZero);
-                    this.UpperValue = Math.Round(upper, decimalPart[1].Length, MidpointRounding.AwayFromZero);
+                    LowerValue = Math.Round(lower, decimalPart[1].Length, MidpointRounding.AwayFromZero);
+                    UpperValue = Math.Round(upper, decimalPart[1].Length, MidpointRounding.AwayFromZero);
                 }
                 //used when whole range increasing to have correct updated values (upper first, lower - second)
                 else
                 {
-                    this.UpperValue = Math.Round(upper, decimalPart[1].Length, MidpointRounding.AwayFromZero);
-                    this.LowerValue = Math.Round(lower, decimalPart[1].Length, MidpointRounding.AwayFromZero);
+                    UpperValue = Math.Round(upper, decimalPart[1].Length, MidpointRounding.AwayFromZero);
+                    LowerValue = Math.Round(lower, decimalPart[1].Length, MidpointRounding.AwayFromZero);
                 }
             }
             else
@@ -1214,348 +1194,323 @@ public class RangeSlider2 : RangeBase
                 //used when whole range decreasing to have correct updated values (lower first, upper - second)
                 if (direction == Direction.Decrease)
                 {
-                    this.LowerValue = lower;
-                    this.UpperValue = upper;
+                    LowerValue = lower;
+                    UpperValue = upper;
                 }
                 //used when whole range increasing to have correct updated values (upper first, lower - second)
                 else
                 {
-                    this.UpperValue = upper;
-                    this.LowerValue = lower;
+                    UpperValue = upper;
+                    LowerValue = lower;
                 }
             }
         }
 
-        this._internalUpdate = false; //set flag to signal that the properties are being set by the object itself
+        _internalUpdate = false; //set flag to signal that the properties are being set by the object itself
 
         RaiseValueChangedEvents(this);
     }
 
     public void MoveSelection(bool isLeft)
     {
-        var widthChange = this.SmallChange * (this.UpperValue - this.LowerValue) * this._movableWidth / this.MovableRange;
+        var widthChange = SmallChange * (UpperValue - LowerValue) * _movableWidth / MovableRange;
 
         widthChange = isLeft ? -widthChange : widthChange;
-        MoveThumb(this._leftButton, this._rightButton, widthChange, this.Orientation, out this._direction);
-        this.ReCalculateRangeSelected(true, true, this._direction);
-        this.CoerceLowerUpperValues();
+        MoveThumb(_leftButton!, _rightButton!, widthChange, Orientation, out _direction);
+        ReCalculateRangeSelected(true, true, _direction);
+        CoerceLowerUpperValues();
     }
 
     public void ResetSelection(bool isStart)
     {
-        var widthChange = this.Maximum - this.Minimum;
+        var widthChange = Maximum - Minimum;
         widthChange = isStart ? -widthChange : widthChange;
 
-        MoveThumb(this._leftButton, this._rightButton, widthChange, this.Orientation, out this._direction);
-        this.ReCalculateRangeSelected(true, true, this._direction);
-        this.CoerceLowerUpperValues();
+        MoveThumb(_leftButton!, _rightButton!, widthChange, Orientation, out _direction);
+        ReCalculateRangeSelected(true, true, _direction);
+        CoerceLowerUpperValues();
     }
 
     public override void OnApplyTemplate()
     {
         base.OnApplyTemplate();
 
-        this._container = this.GetTemplateChild("PART_Container") as FrameworkElement ?? throw new MissingRequiredTemplatePartException(this, "PART_Container");
-        this._visualElementsContainer = this.GetTemplateChild("PART_RangeSliderContainer") as StackPanel ?? throw new MissingRequiredTemplatePartException(this, "PART_RangeSliderContainer");
-        this._centerThumb = this.GetTemplateChild("PART_MiddleThumb") as Thumb ?? throw new MissingRequiredTemplatePartException(this, "PART_MiddleThumb");
-        this._leftButton = this.GetTemplateChild("PART_LeftEdge") as RepeatButton ?? throw new MissingRequiredTemplatePartException(this, "PART_LeftEdge");
-        this._rightButton = this.GetTemplateChild("PART_RightEdge") as RepeatButton ?? throw new MissingRequiredTemplatePartException(this, "PART_RightEdge");
-        this._leftThumb = this.GetTemplateChild("PART_LeftThumb") as Thumb ?? throw new MissingRequiredTemplatePartException(this, "PART_LeftThumb");
-        this._rightThumb = this.GetTemplateChild("PART_RightThumb") as Thumb ?? throw new MissingRequiredTemplatePartException(this, "PART_RightThumb");
+        _container = GetTemplateChild("PART_Container") as FrameworkElement ?? throw new MissingRequiredTemplatePartException(this, "PART_Container");
+        _visualElementsContainer = GetTemplateChild("PART_RangeSliderContainer") as StackPanel ?? throw new MissingRequiredTemplatePartException(this, "PART_RangeSliderContainer");
+        _centerThumb = GetTemplateChild("PART_MiddleThumb") as System.Windows.Controls.Primitives.Thumb ?? throw new MissingRequiredTemplatePartException(this, "PART_MiddleThumb");
+        _leftButton = GetTemplateChild("PART_LeftEdge") as RepeatButton ?? throw new MissingRequiredTemplatePartException(this, "PART_LeftEdge");
+        _rightButton = GetTemplateChild("PART_RightEdge") as RepeatButton ?? throw new MissingRequiredTemplatePartException(this, "PART_RightEdge");
+        _leftThumb = GetTemplateChild("PART_LeftThumb") as System.Windows.Controls.Primitives.Thumb ?? throw new MissingRequiredTemplatePartException(this, "PART_LeftThumb");
+        _rightThumb = GetTemplateChild("PART_RightThumb") as System.Windows.Controls.Primitives.Thumb ?? throw new MissingRequiredTemplatePartException(this, "PART_RightThumb");
 
-        this.InitializeVisualElementsContainer();
-        this.ReCalculateSize();
+        InitializeVisualElementsContainer();
+        ReCalculateSize();
     }
 
     //adds visual element to the container
     private void InitializeVisualElementsContainer()
     {
-        this._leftThumb.DragCompleted -= this.LeftThumbDragComplete;
-        this._rightThumb.DragCompleted -= this.RightThumbDragComplete;
-        this._leftThumb.DragStarted -= this.LeftThumbDragStart;
-        this._rightThumb.DragStarted -= this.RightThumbDragStart;
-        this._centerThumb.DragStarted -= this.CenterThumbDragStarted;
-        this._centerThumb.DragCompleted -= this.CenterThumbDragCompleted;
+        _leftThumb!.DragCompleted -= LeftThumbDragComplete;
+        _rightThumb!.DragCompleted -= RightThumbDragComplete;
+        _leftThumb.DragStarted -= LeftThumbDragStart;
+        _rightThumb.DragStarted -= RightThumbDragStart;
+        _centerThumb!.DragStarted -= CenterThumbDragStarted;
+        _centerThumb.DragCompleted -= CenterThumbDragCompleted;
 
         //handle the drag delta events
-        this._centerThumb.DragDelta -= this.CenterThumbDragDelta;
-        this._leftThumb.DragDelta -= this.LeftThumbDragDelta;
-        this._rightThumb.DragDelta -= this.RightThumbDragDelta;
+        _centerThumb.DragDelta -= CenterThumbDragDelta;
+        _leftThumb.DragDelta -= LeftThumbDragDelta;
+        _rightThumb.DragDelta -= RightThumbDragDelta;
 
-        this._visualElementsContainer.PreviewMouseDown -= this.VisualElementsContainerPreviewMouseDown;
-        this._visualElementsContainer.PreviewMouseUp -= this.VisualElementsContainerPreviewMouseUp;
-        this._visualElementsContainer.MouseLeave -= this.VisualElementsContainerMouseLeave;
-        this._visualElementsContainer.MouseDown -= this.VisualElementsContainerMouseDown;
+        _visualElementsContainer.PreviewMouseDown -= VisualElementsContainerPreviewMouseDown;
+        _visualElementsContainer.PreviewMouseUp -= VisualElementsContainerPreviewMouseUp;
+        _visualElementsContainer.MouseLeave -= VisualElementsContainerMouseLeave;
+        _visualElementsContainer.MouseDown -= VisualElementsContainerMouseDown;
 
-        this._leftThumb.DragCompleted += this.LeftThumbDragComplete;
-        this._rightThumb.DragCompleted += this.RightThumbDragComplete;
-        this._leftThumb.DragStarted += this.LeftThumbDragStart;
-        this._rightThumb.DragStarted += this.RightThumbDragStart;
-        this._centerThumb.DragStarted += this.CenterThumbDragStarted;
-        this._centerThumb.DragCompleted += this.CenterThumbDragCompleted;
+        _leftThumb.DragCompleted += LeftThumbDragComplete;
+        _rightThumb.DragCompleted += RightThumbDragComplete;
+        _leftThumb.DragStarted += LeftThumbDragStart;
+        _rightThumb.DragStarted += RightThumbDragStart;
+        _centerThumb.DragStarted += CenterThumbDragStarted;
+        _centerThumb.DragCompleted += CenterThumbDragCompleted;
 
         //handle the drag delta events
-        this._centerThumb.DragDelta += this.CenterThumbDragDelta;
-        this._leftThumb.DragDelta += this.LeftThumbDragDelta;
-        this._rightThumb.DragDelta += this.RightThumbDragDelta;
+        _centerThumb.DragDelta += CenterThumbDragDelta;
+        _leftThumb.DragDelta += LeftThumbDragDelta;
+        _rightThumb.DragDelta += RightThumbDragDelta;
 
-        this._visualElementsContainer.PreviewMouseDown += this.VisualElementsContainerPreviewMouseDown;
-        this._visualElementsContainer.PreviewMouseUp += this.VisualElementsContainerPreviewMouseUp;
-        this._visualElementsContainer.MouseLeave += this.VisualElementsContainerMouseLeave;
-        this._visualElementsContainer.MouseDown += this.VisualElementsContainerMouseDown;
+        _visualElementsContainer.PreviewMouseDown += VisualElementsContainerPreviewMouseDown;
+        _visualElementsContainer.PreviewMouseUp += VisualElementsContainerPreviewMouseUp;
+        _visualElementsContainer.MouseLeave += VisualElementsContainerMouseLeave;
+        _visualElementsContainer.MouseDown += VisualElementsContainerMouseDown;
     }
 
     //Handler for preview mouse button down for the whole StackPanel container
     private void VisualElementsContainerPreviewMouseDown(object sender, MouseButtonEventArgs e)
     {
-        var position = Mouse.GetPosition(this._visualElementsContainer);
-        if (this.Orientation == Orientation.Horizontal)
+        if (_leftButton == null || _rightButton == null || _leftThumb == null || _rightThumb == null) return;
+        var position = Mouse.GetPosition(_visualElementsContainer);
+        if (Orientation == Orientation.Horizontal)
         {
-            if (position.X < this._leftButton.ActualWidth)
-            {
-                this.LeftButtonMouseDown();
-            }
-            else if (position.X > this.ActualWidth - this._rightButton.ActualWidth)
-            {
-                this.RightButtonMouseDown();
-            }
-            else if (position.X > (this._leftButton.ActualWidth + this._leftThumb.ActualWidth) &&
-                     position.X < (this.ActualWidth - (this._rightButton.ActualWidth + this._rightThumb.ActualWidth)))
-            {
-                this.CentralThumbMouseDown();
-            }
+            if (position.X < _leftButton.ActualWidth)
+                LeftButtonMouseDown();
+            else if (position.X > ActualWidth - _rightButton.ActualWidth)
+                RightButtonMouseDown();
+            else if (position.X > _leftButton.ActualWidth + _leftThumb.ActualWidth &&
+                     position.X < ActualWidth - (_rightButton.ActualWidth + _rightThumb.ActualWidth)) 
+                CentralThumbMouseDown();
         }
         else
         {
-            if (position.Y > this.ActualHeight - this._leftButton.ActualHeight)
-            {
-                this.LeftButtonMouseDown();
-            }
-            else if (position.Y < this._rightButton.ActualHeight)
-            {
-                this.RightButtonMouseDown();
-            }
-            else if (position.Y > (this._rightButton.ActualHeight + this._rightButton.ActualHeight) &&
-                     position.Y < (this.ActualHeight - (this._leftButton.ActualHeight + this._leftThumb.ActualHeight)))
-            {
-                this.CentralThumbMouseDown();
-            }
+            if (position.Y > ActualHeight - _leftButton.ActualHeight)
+                LeftButtonMouseDown();
+            else if (position.Y < _rightButton.ActualHeight)
+                RightButtonMouseDown();
+            else if (position.Y > _rightButton.ActualHeight + _rightButton.ActualHeight &&
+                     position.Y < ActualHeight - (_leftButton.ActualHeight + _leftThumb.ActualHeight)) 
+                CentralThumbMouseDown();
         }
     }
 
     private void VisualElementsContainerMouseDown(object sender, MouseButtonEventArgs e)
     {
-        if (e.MiddleButton == MouseButtonState.Pressed)
-        {
-            this.MoveWholeRange = this.MoveWholeRange != true;
-        }
+        if (e.MiddleButton == MouseButtonState.Pressed) MoveWholeRange = MoveWholeRange != true;
     }
 
     #region Mouse events
 
     private void VisualElementsContainerMouseLeave(object sender, MouseEventArgs e)
     {
-        this._tickCount = 0;
-        this._timer.Stop();
+        _tickCount = 0;
+        _timer.Stop();
     }
 
     private void VisualElementsContainerPreviewMouseUp(object sender, MouseButtonEventArgs e)
     {
-        this._tickCount = 0;
-        this._timer.Stop();
-        this._centerThumbBlocked = false;
+        _tickCount = 0;
+        _timer.Stop();
+        _centerThumbBlocked = false;
     }
 
     private void LeftButtonMouseDown()
     {
-        if (Mouse.LeftButton == MouseButtonState.Pressed)
+        if (_leftButton == null || _rightButton == null || _leftThumb == null || _rightThumb == null || _centerThumb == null) return;
+        if (Mouse.LeftButton != MouseButtonState.Pressed) return;
+        var p = Mouse.GetPosition(_visualElementsContainer);
+        var change = Orientation == Orientation.Horizontal
+            ? _leftButton.ActualWidth - p.X + _leftThumb.ActualWidth / 2
+            : -(_leftButton.ActualHeight - (ActualHeight - (p.Y + _leftThumb.ActualHeight / 2)));
+        if (!IsSnapToTickEnabled)
         {
-            var p = Mouse.GetPosition(this._visualElementsContainer);
-            var change = this.Orientation == Orientation.Horizontal
-                ? this._leftButton.ActualWidth - p.X + (this._leftThumb.ActualWidth / 2)
-                : -(this._leftButton.ActualHeight - (this.ActualHeight - (p.Y + (this._leftThumb.ActualHeight / 2))));
-            if (!this.IsSnapToTickEnabled)
+            switch (IsMoveToPointEnabled)
             {
-                if (this.IsMoveToPointEnabled && !this.MoveWholeRange)
-                {
-                    MoveThumb(this._leftButton, this._centerThumb, -change, this.Orientation, out this._direction);
-                    this.ReCalculateRangeSelected(true, false, this._direction);
-                    this.CoerceLowerUpperValues();
-                }
-                else if (this.IsMoveToPointEnabled && this.MoveWholeRange)
-                {
-                    MoveThumb(this._leftButton, this._rightButton, -change, this.Orientation, out this._direction);
-                    this.ReCalculateRangeSelected(true, true, this._direction);
-                    this.CoerceLowerUpperValues();
-                }
-            }
-            else
-            {
-                if (this.IsMoveToPointEnabled && !this.MoveWholeRange)
-                {
-                    this.JumpToNextTick(Direction.Decrease, ButtonType.BottomLeft, -change, this.LowerValue, true);
-                }
-                else if (this.IsMoveToPointEnabled && this.MoveWholeRange)
-                {
-                    this.JumpToNextTick(Direction.Decrease, ButtonType.Both, -change, this.LowerValue, true);
-                }
-            }
-
-            if (!this.IsMoveToPointEnabled)
-            {
-                this._position = Mouse.GetPosition(this._visualElementsContainer);
-                this._bType = this.MoveWholeRange ? ButtonType.Both : ButtonType.BottomLeft;
-                this._currentPoint = this.Orientation == Orientation.Horizontal ? this._position.X : this._position.Y;
-                this._currenValue = this.LowerValue;
-                this._isInsideRange = false;
-                this._direction = Direction.Decrease;
-                this._timer.Start();
+                case true when !MoveWholeRange:
+                    MoveThumb(_leftButton, _centerThumb, -change, Orientation, out _direction);
+                    ReCalculateRangeSelected(true, false, _direction);
+                    CoerceLowerUpperValues();
+                    break;
+                case true when MoveWholeRange:
+                    MoveThumb(_leftButton, _rightButton, -change, Orientation, out _direction);
+                    ReCalculateRangeSelected(true, true, _direction);
+                    CoerceLowerUpperValues();
+                    break;
             }
         }
+        else
+        {
+            switch (IsMoveToPointEnabled)
+            {
+                case true when !MoveWholeRange:
+                    JumpToNextTick(Direction.Decrease, ButtonType.BottomLeft, -change, LowerValue, true);
+                    break;
+                case true when MoveWholeRange:
+                    JumpToNextTick(Direction.Decrease, ButtonType.Both, -change, LowerValue, true);
+                    break;
+            }
+        }
+
+        if (IsMoveToPointEnabled) return;
+        _position = Mouse.GetPosition(_visualElementsContainer);
+        _bType = MoveWholeRange ? ButtonType.Both : ButtonType.BottomLeft;
+        _currentPoint = Orientation == Orientation.Horizontal ? _position.X : _position.Y;
+        _currenValue = LowerValue;
+        _isInsideRange = false;
+        _direction = Direction.Decrease;
+        _timer.Start();
     }
 
     private void RightButtonMouseDown()
     {
-        if (Mouse.LeftButton == MouseButtonState.Pressed)
+        if (_leftButton == null || _rightButton == null || _leftThumb == null || _rightThumb == null || _centerThumb == null) return;
+        if (Mouse.LeftButton != MouseButtonState.Pressed) return;
+        var p = Mouse.GetPosition(_visualElementsContainer);
+        var change = Orientation == Orientation.Horizontal
+            ? _rightButton.ActualWidth - (ActualWidth - (p.X + _rightThumb.ActualWidth / 2))
+            : -(_rightButton.ActualHeight - (p.Y - _rightThumb.ActualHeight / 2));
+        if (!IsSnapToTickEnabled)
         {
-            var p = Mouse.GetPosition(this._visualElementsContainer);
-            var change = this.Orientation == Orientation.Horizontal
-                ? this._rightButton.ActualWidth - (this.ActualWidth - (p.X + (this._rightThumb.ActualWidth / 2)))
-                : -(this._rightButton.ActualHeight - (p.Y - (this._rightThumb.ActualHeight / 2)));
-            if (!this.IsSnapToTickEnabled)
+            switch (IsMoveToPointEnabled)
             {
-                if (this.IsMoveToPointEnabled && !this.MoveWholeRange)
-                {
-                    MoveThumb(this._centerThumb, this._rightButton, change, this.Orientation, out this._direction);
-                    this.ReCalculateRangeSelected(false, true, this._direction);
-                    this.CoerceLowerUpperValues();
-                }
-                else if (this.IsMoveToPointEnabled && this.MoveWholeRange)
-                {
-                    MoveThumb(this._leftButton, this._rightButton, change, this.Orientation, out this._direction);
-                    this.ReCalculateRangeSelected(true, true, this._direction);
-                    this.CoerceLowerUpperValues();
-                }
-            }
-            else
-            {
-                if (this.IsMoveToPointEnabled && !this.MoveWholeRange)
-                {
-                    this.JumpToNextTick(Direction.Increase, ButtonType.TopRight, change, this.UpperValue, true);
-                }
-                else if (this.IsMoveToPointEnabled && this.MoveWholeRange)
-                {
-                    this.JumpToNextTick(Direction.Increase, ButtonType.Both, change, this.UpperValue, true);
-                }
-            }
-
-            if (!this.IsMoveToPointEnabled)
-            {
-                this._position = Mouse.GetPosition(this._visualElementsContainer);
-                this._bType = this.MoveWholeRange ? ButtonType.Both : ButtonType.TopRight;
-                this._currentPoint = this.Orientation == Orientation.Horizontal ? this._position.X : this._position.Y;
-                this._currenValue = this.UpperValue;
-                this._direction = Direction.Increase;
-                this._isInsideRange = false;
-                this._timer.Start();
+                case true when !MoveWholeRange:
+                    MoveThumb(_centerThumb, _rightButton, change, Orientation, out _direction);
+                    ReCalculateRangeSelected(false, true, _direction);
+                    CoerceLowerUpperValues();
+                    break;
+                case true when MoveWholeRange:
+                    MoveThumb(_leftButton, _rightButton, change, Orientation, out _direction);
+                    ReCalculateRangeSelected(true, true, _direction);
+                    CoerceLowerUpperValues();
+                    break;
             }
         }
+        else
+        {
+            switch (IsMoveToPointEnabled)
+            {
+                case true when !MoveWholeRange:
+                    JumpToNextTick(Direction.Increase, ButtonType.TopRight, change, UpperValue, true);
+                    break;
+                case true when MoveWholeRange:
+                    JumpToNextTick(Direction.Increase, ButtonType.Both, change, UpperValue, true);
+                    break;
+            }
+        }
+
+        if (IsMoveToPointEnabled) return;
+        _position = Mouse.GetPosition(_visualElementsContainer);
+        _bType = MoveWholeRange ? ButtonType.Both : ButtonType.TopRight;
+        _currentPoint = Orientation == Orientation.Horizontal ? _position.X : _position.Y;
+        _currenValue = UpperValue;
+        _direction = Direction.Increase;
+        _isInsideRange = false;
+        _timer.Start();
     }
 
     private void CentralThumbMouseDown()
     {
-        if (this.ExtendedMode)
+        if (_leftButton == null || _rightButton == null || _leftThumb == null || _rightThumb == null || _centerThumb == null) return;
+        if (!ExtendedMode) return;
+        if (Mouse.LeftButton == MouseButtonState.Pressed && (Keyboard.IsKeyDown(Key.LeftCtrl) || Keyboard.IsKeyDown(Key.RightCtrl)))
         {
-            if (Mouse.LeftButton == MouseButtonState.Pressed && (Keyboard.IsKeyDown(Key.LeftCtrl) || Keyboard.IsKeyDown(Key.RightCtrl)))
-            {
-                this._centerThumbBlocked = true;
-                var p = Mouse.GetPosition(this._visualElementsContainer);
-                var change = this.Orientation == Orientation.Horizontal
-                    ? (p.X + (this._leftThumb.ActualWidth / 2) - (this._leftButton.ActualWidth + this._leftThumb.ActualWidth))
-                    : -(this.ActualHeight - ((p.Y + (this._leftThumb.ActualHeight / 2)) + this._leftButton.ActualHeight));
-                if (!this.IsSnapToTickEnabled)
+            _centerThumbBlocked = true;
+            var p = Mouse.GetPosition(_visualElementsContainer);
+            var change = Orientation == Orientation.Horizontal
+                ? p.X + _leftThumb.ActualWidth / 2 - (_leftButton.ActualWidth + _leftThumb.ActualWidth)
+                : -(ActualHeight - (p.Y + _leftThumb.ActualHeight / 2 + _leftButton.ActualHeight));
+            if (!IsSnapToTickEnabled)
+                switch (IsMoveToPointEnabled)
                 {
-                    if (this.IsMoveToPointEnabled && !this.MoveWholeRange)
-                    {
-                        MoveThumb(this._leftButton, this._centerThumb, change, this.Orientation, out this._direction);
-                        this.ReCalculateRangeSelected(true, false, this._direction);
-                        this.CoerceLowerUpperValues();
-                    }
-                    else if (this.IsMoveToPointEnabled && this.MoveWholeRange)
-                    {
-                        MoveThumb(this._leftButton, this._rightButton, change, this.Orientation, out this._direction);
-                        this.ReCalculateRangeSelected(true, true, this._direction);
-                        this.CoerceLowerUpperValues();
-                    }
+                    case true when !MoveWholeRange:
+                        MoveThumb(_leftButton, _centerThumb, change, Orientation, out _direction);
+                        ReCalculateRangeSelected(true, false, _direction);
+                        CoerceLowerUpperValues();
+                        break;
+                    case true when MoveWholeRange:
+                        MoveThumb(_leftButton, _rightButton, change, Orientation, out _direction);
+                        ReCalculateRangeSelected(true, true, _direction);
+                        CoerceLowerUpperValues();
+                        break;
                 }
-                else
+            else
+                switch (IsMoveToPointEnabled)
                 {
-                    if (this.IsMoveToPointEnabled && !this.MoveWholeRange)
-                    {
-                        this.JumpToNextTick(Direction.Increase, ButtonType.BottomLeft, change, this.LowerValue, true);
-                    }
-                    else if (this.IsMoveToPointEnabled && this.MoveWholeRange)
-                    {
-                        this.JumpToNextTick(Direction.Increase, ButtonType.Both, change, this.LowerValue, true);
-                    }
+                    case true when !MoveWholeRange:
+                        JumpToNextTick(Direction.Increase, ButtonType.BottomLeft, change, LowerValue, true);
+                        break;
+                    case true when MoveWholeRange:
+                        JumpToNextTick(Direction.Increase, ButtonType.Both, change, LowerValue, true);
+                        break;
                 }
 
-                if (!this.IsMoveToPointEnabled)
+            if (IsMoveToPointEnabled) return;
+            _position = Mouse.GetPosition(_visualElementsContainer);
+            _bType = MoveWholeRange ? ButtonType.Both : ButtonType.BottomLeft;
+            _currentPoint = Orientation == Orientation.Horizontal ? _position.X : _position.Y;
+            _currenValue = LowerValue;
+            _direction = Direction.Increase;
+            _isInsideRange = true;
+            _timer.Start();
+        }
+        else if (Mouse.RightButton == MouseButtonState.Pressed && (Keyboard.IsKeyDown(Key.LeftCtrl) || Keyboard.IsKeyDown(Key.RightCtrl)))
+        {
+            _centerThumbBlocked = true;
+            var p = Mouse.GetPosition(_visualElementsContainer);
+            var change = Orientation == Orientation.Horizontal
+                ? ActualWidth - (p.X + _rightThumb.ActualWidth / 2 + _rightButton.ActualWidth)
+                : -(p.Y + _rightThumb.ActualHeight / 2 - (_rightButton.ActualHeight + _rightThumb.ActualHeight));
+            if (!IsSnapToTickEnabled)
+                switch (IsMoveToPointEnabled)
                 {
-                    this._position = Mouse.GetPosition(this._visualElementsContainer);
-                    this._bType = this.MoveWholeRange ? ButtonType.Both : ButtonType.BottomLeft;
-                    this._currentPoint = this.Orientation == Orientation.Horizontal ? this._position.X : this._position.Y;
-                    this._currenValue = this.LowerValue;
-                    this._direction = Direction.Increase;
-                    this._isInsideRange = true;
-                    this._timer.Start();
+                    case true when !MoveWholeRange:
+                        MoveThumb(_centerThumb, _rightButton, -change, Orientation, out _direction);
+                        ReCalculateRangeSelected(false, true, _direction);
+                        CoerceLowerUpperValues();
+                        break;
+                    case true when MoveWholeRange:
+                        MoveThumb(_leftButton, _rightButton, -change, Orientation, out _direction);
+                        ReCalculateRangeSelected(true, true, _direction);
+                        CoerceLowerUpperValues();
+                        break;
                 }
-            }
-            else if (Mouse.RightButton == MouseButtonState.Pressed && (Keyboard.IsKeyDown(Key.LeftCtrl) || Keyboard.IsKeyDown(Key.RightCtrl)))
-            {
-                this._centerThumbBlocked = true;
-                var p = Mouse.GetPosition(this._visualElementsContainer);
-                var change = this.Orientation == Orientation.Horizontal
-                    ? this.ActualWidth - (p.X + (this._rightThumb.ActualWidth / 2) + this._rightButton.ActualWidth)
-                    : -(p.Y + (this._rightThumb.ActualHeight / 2) - (this._rightButton.ActualHeight + this._rightThumb.ActualHeight));
-                if (!this.IsSnapToTickEnabled)
+            else
+                switch (IsMoveToPointEnabled)
                 {
-                    if (this.IsMoveToPointEnabled && !this.MoveWholeRange)
-                    {
-                        MoveThumb(this._centerThumb, this._rightButton, -change, this.Orientation, out this._direction);
-                        this.ReCalculateRangeSelected(false, true, this._direction);
-                        this.CoerceLowerUpperValues();
-                    }
-                    else if (this.IsMoveToPointEnabled && this.MoveWholeRange)
-                    {
-                        MoveThumb(this._leftButton, this._rightButton, -change, this.Orientation, out this._direction);
-                        this.ReCalculateRangeSelected(true, true, this._direction);
-                        this.CoerceLowerUpperValues();
-                    }
-                }
-                else
-                {
-                    if (this.IsMoveToPointEnabled && !this.MoveWholeRange)
-                    {
-                        this.JumpToNextTick(Direction.Decrease, ButtonType.TopRight, -change, this.UpperValue, true);
-                    }
-                    else if (this.IsMoveToPointEnabled && this.MoveWholeRange)
-                    {
-                        this.JumpToNextTick(Direction.Decrease, ButtonType.Both, -change, this.UpperValue, true);
-                    }
+                    case true when !MoveWholeRange:
+                        JumpToNextTick(Direction.Decrease, ButtonType.TopRight, -change, UpperValue, true);
+                        break;
+                    case true when MoveWholeRange:
+                        JumpToNextTick(Direction.Decrease, ButtonType.Both, -change, UpperValue, true);
+                        break;
                 }
 
-                if (!this.IsMoveToPointEnabled)
-                {
-                    this._position = Mouse.GetPosition(this._visualElementsContainer);
-                    this._bType = this.MoveWholeRange ? ButtonType.Both : ButtonType.TopRight;
-                    this._currentPoint = this.Orientation == Orientation.Horizontal ? this._position.X : this._position.Y;
-                    this._currenValue = this.UpperValue;
-                    this._direction = Direction.Decrease;
-                    this._isInsideRange = true;
-                    this._timer.Start();
-                }
-            }
+            if (IsMoveToPointEnabled) return;
+            _position = Mouse.GetPosition(_visualElementsContainer);
+            _bType = MoveWholeRange ? ButtonType.Both : ButtonType.TopRight;
+            _currentPoint = Orientation == Orientation.Horizontal ? _position.X : _position.Y;
+            _currenValue = UpperValue;
+            _direction = Direction.Decrease;
+            _isInsideRange = true;
+            _timer.Start();
         }
     }
 
@@ -1565,283 +1520,276 @@ public class RangeSlider2 : RangeBase
 
     private void LeftThumbDragStart(object sender, DragStartedEventArgs e)
     {
-        this._isMoved = true;
-        if (this.AutoToolTipPlacement != AutoToolTipPlacement.None)
+        _isMoved = true;
+        if (AutoToolTipPlacement != AutoToolTipPlacement.None)
         {
-            this._autoToolTip ??= new ToolTip { Placement = PlacementMode.Custom, CustomPopupPlacementCallback = this.PopupPlacementCallback };
+            _autoToolTip ??= new ToolTip { Placement = PlacementMode.Custom, CustomPopupPlacementCallback = PopupPlacementCallback };
 
-            this._autoToolTip.SetValue(ContentControl.ContentTemplateProperty, this.AutoToolTipLowerValueTemplate);
-            this._autoToolTip.Content = this.GetToolTipNumber(this.LowerValue);
-            this._autoToolTip.PlacementTarget = this._leftThumb;
-            this._autoToolTip.IsOpen = true;
+            _autoToolTip.SetValue(ContentControl.ContentTemplateProperty, AutoToolTipLowerValueTemplate);
+            _autoToolTip.Content = GetToolTipNumber(LowerValue);
+            _autoToolTip.PlacementTarget = _leftThumb;
+            _autoToolTip.IsOpen = true;
         }
 
-        this._basePoint = Mouse.GetPosition(this._container);
+        _basePoint = Mouse.GetPosition(_container);
         e.RoutedEvent = LowerThumbDragStartedEvent;
-        this.RaiseEvent(e);
+        RaiseEvent(e);
     }
 
     private void LeftThumbDragDelta(object sender, DragDeltaEventArgs e)
     {
-        var change = this.Orientation == Orientation.Horizontal ? e.HorizontalChange : e.VerticalChange;
-        if (!this.IsSnapToTickEnabled)
+        if (_leftButton == null || _rightButton == null || _leftThumb == null || _rightThumb == null || _centerThumb == null) return;
+        var change = Orientation == Orientation.Horizontal ? e.HorizontalChange : e.VerticalChange;
+        if (!IsSnapToTickEnabled)
         {
-            MoveThumb(this._leftButton, this._centerThumb, change, this.Orientation, out this._direction);
-            this.ReCalculateRangeSelected(true, false, this._direction);
-            this.CoerceLowerUpperValues();
+            MoveThumb(_leftButton, _centerThumb, change, Orientation, out _direction);
+            ReCalculateRangeSelected(true, false, _direction);
+            CoerceLowerUpperValues();
         }
         else
         {
             Direction localDirection;
-            var currentPoint = Mouse.GetPosition(this._container);
-            if (this.Orientation == Orientation.Horizontal)
+            var currentPoint = Mouse.GetPosition(_container);
+            if (Orientation == Orientation.Horizontal)
             {
-                if (currentPoint.X >= 0 && currentPoint.X < this._container.ActualWidth - (this._rightButton.ActualWidth + this._rightThumb.ActualWidth + this._centerThumb.MinWidth))
+                if (currentPoint.X >= 0 && currentPoint.X < _container.ActualWidth - (_rightButton.ActualWidth + _rightThumb.ActualWidth + _centerThumb.MinWidth))
                 {
-                    localDirection = currentPoint.X > this._basePoint.X ? Direction.Increase : Direction.Decrease;
-                    this.JumpToNextTick(localDirection, ButtonType.BottomLeft, change, this.LowerValue, false);
+                    localDirection = currentPoint.X > _basePoint.X ? Direction.Increase : Direction.Decrease;
+                    JumpToNextTick(localDirection, ButtonType.BottomLeft, change, LowerValue, false);
                 }
             }
             else
             {
-                if (currentPoint.Y <= this._container.ActualHeight && currentPoint.Y > this._rightButton.ActualHeight + this._rightThumb.ActualHeight + this._centerThumb.MinHeight)
+                if (currentPoint.Y <= _container.ActualHeight && currentPoint.Y > _rightButton.ActualHeight + _rightThumb.ActualHeight + _centerThumb.MinHeight)
                 {
-                    localDirection = currentPoint.Y < this._basePoint.Y ? Direction.Increase : Direction.Decrease;
-                    this.JumpToNextTick(localDirection, ButtonType.BottomLeft, -change, this.LowerValue, false);
+                    localDirection = currentPoint.Y < _basePoint.Y ? Direction.Increase : Direction.Decrease;
+                    JumpToNextTick(localDirection, ButtonType.BottomLeft, -change, LowerValue, false);
                 }
             }
         }
 
-        this._basePoint = Mouse.GetPosition(this._container);
-        if (this.AutoToolTipPlacement != AutoToolTipPlacement.None
-            && this._autoToolTip is not null)
+        _basePoint = Mouse.GetPosition(_container);
+        if (AutoToolTipPlacement != AutoToolTipPlacement.None
+            && _autoToolTip is not null)
         {
-            this._autoToolTip.Content = this.GetToolTipNumber(this.LowerValue);
-            this.RelocateAutoToolTip();
+            _autoToolTip.Content = GetToolTipNumber(LowerValue);
+            RelocateAutoToolTip();
         }
 
         e.RoutedEvent = LowerThumbDragDeltaEvent;
-        this.RaiseEvent(e);
+        RaiseEvent(e);
     }
 
     private void LeftThumbDragComplete(object sender, DragCompletedEventArgs e)
     {
-        if (this._autoToolTip != null)
+        if (_autoToolTip != null)
         {
-            this._autoToolTip.IsOpen = false;
-            this._autoToolTip = null;
+            _autoToolTip.IsOpen = false;
+            _autoToolTip = null;
         }
 
         e.RoutedEvent = LowerThumbDragCompletedEvent;
-        this.RaiseEvent(e);
+        RaiseEvent(e);
     }
 
     private void RightThumbDragStart(object sender, DragStartedEventArgs e)
     {
-        this._isMoved = true;
-        if (this.AutoToolTipPlacement != AutoToolTipPlacement.None)
+        _isMoved = true;
+        if (AutoToolTipPlacement != AutoToolTipPlacement.None)
         {
-            this._autoToolTip ??= new ToolTip { Placement = PlacementMode.Custom, CustomPopupPlacementCallback = this.PopupPlacementCallback };
+            _autoToolTip ??= new ToolTip { Placement = PlacementMode.Custom, CustomPopupPlacementCallback = PopupPlacementCallback };
 
-            this._autoToolTip.SetValue(ContentControl.ContentTemplateProperty, this.AutoToolTipUpperValueTemplate);
-            this._autoToolTip.Content = this.GetToolTipNumber(this.UpperValue);
-            this._autoToolTip.PlacementTarget = this._rightThumb;
-            this._autoToolTip.IsOpen = true;
+            _autoToolTip.SetValue(ContentControl.ContentTemplateProperty, AutoToolTipUpperValueTemplate);
+            _autoToolTip.Content = GetToolTipNumber(UpperValue);
+            _autoToolTip.PlacementTarget = _rightThumb;
+            _autoToolTip.IsOpen = true;
         }
 
-        this._basePoint = Mouse.GetPosition(this._container);
+        _basePoint = Mouse.GetPosition(_container);
         e.RoutedEvent = UpperThumbDragStartedEvent;
-        this.RaiseEvent(e);
+        RaiseEvent(e);
     }
 
     private void RightThumbDragDelta(object sender, DragDeltaEventArgs e)
     {
-        var change = this.Orientation == Orientation.Horizontal ? e.HorizontalChange : e.VerticalChange;
-        if (!this.IsSnapToTickEnabled)
+        if (_leftButton == null || _rightButton == null || _leftThumb == null || _rightThumb == null || _centerThumb == null) return;
+        var change = Orientation == Orientation.Horizontal ? e.HorizontalChange : e.VerticalChange;
+        if (!IsSnapToTickEnabled)
         {
-            MoveThumb(this._centerThumb, this._rightButton, change, this.Orientation, out this._direction);
-            this.ReCalculateRangeSelected(false, true, this._direction);
-            this.CoerceLowerUpperValues();
+            MoveThumb(_centerThumb, _rightButton, change, Orientation, out _direction);
+            ReCalculateRangeSelected(false, true, _direction);
+            CoerceLowerUpperValues();
         }
         else
         {
             Direction localDirection;
-            var currentPoint = Mouse.GetPosition(this._container);
-            if (this.Orientation == Orientation.Horizontal)
+            var currentPoint = Mouse.GetPosition(_container);
+            if (Orientation == Orientation.Horizontal)
             {
-                if (currentPoint.X < this._container.ActualWidth && currentPoint.X > this._leftButton.ActualWidth + this._leftThumb.ActualWidth + this._centerThumb.MinWidth)
+                if (currentPoint.X < _container.ActualWidth && currentPoint.X > _leftButton.ActualWidth + _leftThumb.ActualWidth + _centerThumb.MinWidth)
                 {
-                    localDirection = currentPoint.X > this._basePoint.X ? Direction.Increase : Direction.Decrease;
-                    this.JumpToNextTick(localDirection, ButtonType.TopRight, change, this.UpperValue, false);
+                    localDirection = currentPoint.X > _basePoint.X ? Direction.Increase : Direction.Decrease;
+                    JumpToNextTick(localDirection, ButtonType.TopRight, change, UpperValue, false);
                 }
             }
             else
             {
-                if (currentPoint.Y >= 0 && currentPoint.Y < this._container.ActualHeight - (this._leftButton.ActualHeight + this._leftThumb.ActualHeight + this._centerThumb.MinHeight))
+                if (currentPoint.Y >= 0 && currentPoint.Y < _container.ActualHeight - (_leftButton.ActualHeight + _leftThumb.ActualHeight + _centerThumb.MinHeight))
                 {
-                    localDirection = currentPoint.Y < this._basePoint.Y ? Direction.Increase : Direction.Decrease;
-                    this.JumpToNextTick(localDirection, ButtonType.TopRight, -change, this.UpperValue, false);
+                    localDirection = currentPoint.Y < _basePoint.Y ? Direction.Increase : Direction.Decrease;
+                    JumpToNextTick(localDirection, ButtonType.TopRight, -change, UpperValue, false);
                 }
             }
 
-            this._basePoint = Mouse.GetPosition(this._container);
+            _basePoint = Mouse.GetPosition(_container);
         }
 
-        if (this.AutoToolTipPlacement != AutoToolTipPlacement.None
-            && this._autoToolTip is not null)
+        if (AutoToolTipPlacement != AutoToolTipPlacement.None
+            && _autoToolTip is not null)
         {
-            this._autoToolTip.Content = this.GetToolTipNumber(this.UpperValue);
-            this.RelocateAutoToolTip();
+            _autoToolTip.Content = GetToolTipNumber(UpperValue);
+            RelocateAutoToolTip();
         }
 
         e.RoutedEvent = UpperThumbDragDeltaEvent;
-        this.RaiseEvent(e);
+        RaiseEvent(e);
     }
 
     private void RightThumbDragComplete(object sender, DragCompletedEventArgs e)
     {
-        if (this._autoToolTip != null)
+        if (_autoToolTip != null)
         {
-            this._autoToolTip.IsOpen = false;
-            this._autoToolTip = null;
+            _autoToolTip.IsOpen = false;
+            _autoToolTip = null;
         }
 
         e.RoutedEvent = UpperThumbDragCompletedEvent;
-        this.RaiseEvent(e);
+        RaiseEvent(e);
     }
 
     private void CenterThumbDragStarted(object sender, DragStartedEventArgs e)
     {
-        this._isMoved = true;
-        if (this.AutoToolTipPlacement != AutoToolTipPlacement.None)
+        _isMoved = true;
+        if (AutoToolTipPlacement != AutoToolTipPlacement.None)
         {
-            this._autoToolTip ??= new ToolTip { Placement = PlacementMode.Custom, CustomPopupPlacementCallback = this.PopupPlacementCallback };
+            _autoToolTip ??= new ToolTip { Placement = PlacementMode.Custom, CustomPopupPlacementCallback = PopupPlacementCallback };
 
-            var autoToolTipRangeValuesTemplate = this.AutoToolTipRangeValuesTemplate;
-            this._autoToolTip.SetValue(ContentControl.ContentTemplateProperty, autoToolTipRangeValuesTemplate);
+            var autoToolTipRangeValuesTemplate = AutoToolTipRangeValuesTemplate;
+            _autoToolTip.SetValue(ContentControl.ContentTemplateProperty, autoToolTipRangeValuesTemplate);
             if (autoToolTipRangeValuesTemplate != null)
-            {
-                this._autoToolTip.Content = new RangeSliderAutoTooltipValues(this);
-            }
+                _autoToolTip.Content = new RangeSliderAutoTooltipValues(this);
             else
-            {
-                this._autoToolTip.Content = this.GetToolTipNumber(this.LowerValue) + " - " + this.GetToolTipNumber(this.UpperValue);
-            }
+                _autoToolTip.Content = GetToolTipNumber(LowerValue) + " - " + GetToolTipNumber(UpperValue);
 
-            this._autoToolTip.PlacementTarget = this._centerThumb;
-            this._autoToolTip.IsOpen = true;
+            _autoToolTip.PlacementTarget = _centerThumb;
+            _autoToolTip.IsOpen = true;
         }
 
-        this._basePoint = Mouse.GetPosition(this._container);
+        _basePoint = Mouse.GetPosition(_container);
         e.RoutedEvent = CentralThumbDragStartedEvent;
-        this.RaiseEvent(e);
+        RaiseEvent(e);
     }
 
     private void CenterThumbDragDelta(object sender, DragDeltaEventArgs e)
     {
-        if (!this._centerThumbBlocked)
+        if (_leftButton == null || _rightButton == null || _leftThumb == null || _rightThumb == null || _centerThumb == null) return;
+        if (!_centerThumbBlocked)
         {
-            var change = this.Orientation == Orientation.Horizontal ? e.HorizontalChange : e.VerticalChange;
-            if (!this.IsSnapToTickEnabled)
+            var change = Orientation == Orientation.Horizontal ? e.HorizontalChange : e.VerticalChange;
+            if (!IsSnapToTickEnabled)
             {
-                MoveThumb(this._leftButton, this._rightButton, change, this.Orientation, out this._direction);
-                this.ReCalculateRangeSelected(true, true, this._direction);
-                this.CoerceLowerUpperValues();
+                MoveThumb(_leftButton, _rightButton, change, Orientation, out _direction);
+                ReCalculateRangeSelected(true, true, _direction);
+                CoerceLowerUpperValues();
             }
             else
             {
                 Direction localDirection;
-                var currentPoint = Mouse.GetPosition(this._container);
-                if (this.Orientation == Orientation.Horizontal)
+                var currentPoint = Mouse.GetPosition(_container);
+                if (Orientation == Orientation.Horizontal)
                 {
-                    if (currentPoint.X >= 0 && currentPoint.X < this._container.ActualWidth)
+                    if (currentPoint.X >= 0 && currentPoint.X < _container.ActualWidth)
                     {
-                        localDirection = currentPoint.X > this._basePoint.X ? Direction.Increase : Direction.Decrease;
-                        this.JumpToNextTick(localDirection, ButtonType.Both, change, localDirection == Direction.Increase ? this.UpperValue : this.LowerValue, false);
+                        localDirection = currentPoint.X > _basePoint.X ? Direction.Increase : Direction.Decrease;
+                        JumpToNextTick(localDirection, ButtonType.Both, change, localDirection == Direction.Increase ? UpperValue : LowerValue, false);
                     }
                 }
                 else
                 {
-                    if (currentPoint.Y >= 0 && currentPoint.Y < this._container.ActualHeight)
+                    if (currentPoint.Y >= 0 && currentPoint.Y < _container.ActualHeight)
                     {
-                        localDirection = currentPoint.Y < this._basePoint.Y ? Direction.Increase : Direction.Decrease;
-                        this.JumpToNextTick(localDirection, ButtonType.Both, -change, localDirection == Direction.Increase ? this.UpperValue : this.LowerValue, false);
+                        localDirection = currentPoint.Y < _basePoint.Y ? Direction.Increase : Direction.Decrease;
+                        JumpToNextTick(localDirection, ButtonType.Both, -change, localDirection == Direction.Increase ? UpperValue : LowerValue, false);
                     }
                 }
             }
 
-            this._basePoint = Mouse.GetPosition(this._container);
-            if (this.AutoToolTipPlacement != AutoToolTipPlacement.None
-                && this._autoToolTip is not null)
+            _basePoint = Mouse.GetPosition(_container);
+            if (AutoToolTipPlacement != AutoToolTipPlacement.None && _autoToolTip is not null)
             {
-                if (this._autoToolTip.ContentTemplate != null)
-                {
-                    (this._autoToolTip.Content as RangeSliderAutoTooltipValues)?.UpdateValues(this);
-                }
+                if (_autoToolTip.ContentTemplate != null)
+                    (_autoToolTip.Content as RangeSliderAutoTooltipValues)?.UpdateValues(this);
                 else
-                {
-                    this._autoToolTip.Content = this.GetToolTipNumber(this.LowerValue) + " - " + this.GetToolTipNumber(this.UpperValue);
-                }
+                    _autoToolTip.Content = GetToolTipNumber(LowerValue) + " - " + GetToolTipNumber(UpperValue);
 
-                this.RelocateAutoToolTip();
+                RelocateAutoToolTip();
             }
         }
 
         e.RoutedEvent = CentralThumbDragDeltaEvent;
-        this.RaiseEvent(e);
+        RaiseEvent(e);
     }
 
     private void CenterThumbDragCompleted(object sender, DragCompletedEventArgs e)
     {
-        if (this._autoToolTip != null)
+        if (_autoToolTip != null)
         {
-            this._autoToolTip.IsOpen = false;
-            this._autoToolTip = null;
+            _autoToolTip.IsOpen = false;
+            _autoToolTip = null;
         }
 
         e.RoutedEvent = CentralThumbDragCompletedEvent;
-        this.RaiseEvent(e);
+        RaiseEvent(e);
     }
 
     #endregion
 
     #region Helper methods
 
-    private static double GetChangeKeepPositive(double width, double increment)
-    {
-        return Math.Max(width + increment, 0) - width;
-    }
+    private static double GetChangeKeepPositive(double width, double increment) => Math.Max(width + increment, 0) - width;
 
     //Method updates end point, which is needed to correctly compare current position on the thumb with
     //current width of button
     private double UpdateEndPoint(ButtonType type, Direction dir)
     {
+        if (_leftButton == null || _rightButton == null || _leftThumb == null || _rightThumb == null || _centerThumb == null) return 0;
         double d = 0;
-        //if we increase value 
-        if (dir == Direction.Increase)
+        switch (dir)
         {
-            if (type == ButtonType.BottomLeft || (type == ButtonType.Both && this._isInsideRange))
+            //if we increase value 
+            case Direction.Increase when type == ButtonType.BottomLeft || (type == ButtonType.Both && _isInsideRange):
+                d = Orientation == Orientation.Horizontal
+                    ? _leftButton.ActualWidth + _leftThumb.ActualWidth
+                    : ActualHeight - (_leftButton.ActualHeight + _leftThumb.ActualHeight);
+                break;
+            case Direction.Increase:
             {
-                d = this.Orientation == Orientation.Horizontal
-                    ? this._leftButton.ActualWidth + this._leftThumb.ActualWidth
-                    : this.ActualHeight - (this._leftButton.ActualHeight + this._leftThumb.ActualHeight);
+                if (type == ButtonType.TopRight || (type == ButtonType.Both && !_isInsideRange))
+                    d = Orientation == Orientation.Horizontal ? ActualWidth - _rightButton.ActualWidth : _rightButton.ActualHeight;
+
+                break;
             }
-            else if (type == ButtonType.TopRight || (type == ButtonType.Both && !this._isInsideRange))
+            case Direction.Decrease when type == ButtonType.BottomLeft || (type == ButtonType.Both && !_isInsideRange):
+                d = Orientation == Orientation.Horizontal ? _leftButton.ActualWidth : ActualHeight - _leftButton.ActualHeight;
+                break;
+            case Direction.Decrease:
             {
-                d = this.Orientation == Orientation.Horizontal ? this.ActualWidth - this._rightButton.ActualWidth : this._rightButton.ActualHeight;
-            }
-        }
-        else if (dir == Direction.Decrease)
-        {
-            if (type == ButtonType.BottomLeft || (type == ButtonType.Both && !this._isInsideRange))
-            {
-                d = this.Orientation == Orientation.Horizontal ? this._leftButton.ActualWidth : this.ActualHeight - this._leftButton.ActualHeight;
-            }
-            else if (type == ButtonType.TopRight || (type == ButtonType.Both && this._isInsideRange))
-            {
-                d = this.Orientation == Orientation.Horizontal
-                    ? this.ActualWidth - this._rightButton.ActualWidth - this._rightThumb.ActualWidth
-                    : this._rightButton.ActualHeight + this._rightThumb.ActualHeight;
+                if (type == ButtonType.TopRight || (type == ButtonType.Both && _isInsideRange))
+                    d = Orientation == Orientation.Horizontal
+                        ? ActualWidth - _rightButton.ActualWidth - _rightThumb.ActualWidth
+                        : _rightButton.ActualHeight + _rightThumb.ActualHeight;
+
+                break;
             }
         }
 
@@ -1851,65 +1799,59 @@ public class RangeSlider2 : RangeBase
     private bool GetResult(double currentPoint, double endPoint, Direction direction)
     {
         if (direction == Direction.Increase)
-        {
-            return this.Orientation == Orientation.Horizontal && currentPoint > endPoint || this.Orientation == Orientation.Vertical && currentPoint < endPoint;
-        }
+            return Orientation == Orientation.Horizontal && currentPoint > endPoint || Orientation == Orientation.Vertical && currentPoint < endPoint;
 
-        return this.Orientation == Orientation.Horizontal && currentPoint < endPoint || this.Orientation == Orientation.Vertical && currentPoint > endPoint;
+        return Orientation == Orientation.Horizontal && currentPoint < endPoint || Orientation == Orientation.Vertical && currentPoint > endPoint;
     }
 
     //This is timer event, which starts when IsMoveToPoint = false
     //Supports IsSnapToTick option
     private void MoveToNextValue(object? sender, EventArgs e)
     {
+        if (_leftButton == null || _rightButton == null || _leftThumb == null || _rightThumb == null || _centerThumb == null) return;
         //Get updated position of cursor
-        this._position = Mouse.GetPosition(this._visualElementsContainer);
-        this._currentPoint = this.Orientation == Orientation.Horizontal ? this._position.X : this._position.Y;
-        var endpoint = this.UpdateEndPoint(this._bType, this._direction);
-        var result = this.GetResult(this._currentPoint, endpoint, this._direction);
+        _position = Mouse.GetPosition(_visualElementsContainer);
+        _currentPoint = Orientation == Orientation.Horizontal ? _position.X : _position.Y;
+        var endpoint = UpdateEndPoint(_bType, _direction);
+        var result = GetResult(_currentPoint, endpoint, _direction);
         double widthChange;
-        if (!this.IsSnapToTickEnabled)
+        if (!IsSnapToTickEnabled)
         {
-            widthChange = this.SmallChange;
-            if (this._tickCount > 5)
-            {
-                widthChange = this.LargeChange;
-            }
+            widthChange = SmallChange;
+            if (_tickCount > 5) widthChange = LargeChange;
 
-            this._roundToPrecision = true;
-            if (!widthChange.ToString(CultureInfo.InvariantCulture).ToLower().Contains("e") &&
-                widthChange.ToString(CultureInfo.InvariantCulture).Contains("."))
+            _roundToPrecision = true;
+            if (!widthChange.ToString(CultureInfo.InvariantCulture).ToLower().Contains('e') &&
+                widthChange.ToString(CultureInfo.InvariantCulture).Contains('.'))
             {
                 var array = widthChange.ToString(CultureInfo.InvariantCulture).Split('.');
-                this._precision = array[1].Length;
+                _precision = array[1].Length;
             }
             else
-            {
-                this._precision = 0;
-            }
+                _precision = 0;
 
             //Change value sign according to Horizontal or Vertical orientation
-            widthChange = this.Orientation == Orientation.Horizontal ? widthChange : -widthChange;
+            widthChange = Orientation == Orientation.Horizontal ? widthChange : -widthChange;
             //Change value sign one more time according to Increase or Decrease direction
-            widthChange = this._direction == Direction.Increase ? widthChange : -widthChange;
+            widthChange = _direction == Direction.Increase ? widthChange : -widthChange;
             if (result)
             {
-                switch (this._bType)
+                switch (_bType)
                 {
                     case ButtonType.BottomLeft:
-                        MoveThumb(this._leftButton, this._centerThumb, widthChange * this._density, this.Orientation, out this._direction);
-                        this.ReCalculateRangeSelected(true, false, this._direction);
-                        this.CoerceLowerUpperValues();
+                        MoveThumb(_leftButton, _centerThumb, widthChange * _density, Orientation, out _direction);
+                        ReCalculateRangeSelected(true, false, _direction);
+                        CoerceLowerUpperValues();
                         break;
                     case ButtonType.TopRight:
-                        MoveThumb(this._centerThumb, this._rightButton, widthChange * this._density, this.Orientation, out this._direction);
-                        this.ReCalculateRangeSelected(false, true, this._direction);
-                        this.CoerceLowerUpperValues();
+                        MoveThumb(_centerThumb, _rightButton, widthChange * _density, Orientation, out _direction);
+                        ReCalculateRangeSelected(false, true, _direction);
+                        CoerceLowerUpperValues();
                         break;
                     case ButtonType.Both:
-                        MoveThumb(this._leftButton, this._rightButton, widthChange * this._density, this.Orientation, out this._direction);
-                        this.ReCalculateRangeSelected(true, true, this._direction);
-                        this.CoerceLowerUpperValues();
+                        MoveThumb(_leftButton, _rightButton, widthChange * _density, Orientation, out _direction);
+                        ReCalculateRangeSelected(true, true, _direction);
+                        CoerceLowerUpperValues();
                         break;
                 }
             }
@@ -1917,156 +1859,153 @@ public class RangeSlider2 : RangeBase
         else
         {
             //Get the difference between current and next value
-            widthChange = this.CalculateNextTick(this._direction, this._currenValue, 0, true);
+            widthChange = CalculateNextTick(_direction, _currenValue, 0, true);
             var value = widthChange;
             //Change value sign according to Horizontal or Vertical orientation
-            widthChange = this.Orientation == Orientation.Horizontal ? widthChange : -widthChange;
-            if (this._direction == Direction.Increase)
+            widthChange = Orientation == Orientation.Horizontal ? widthChange : -widthChange;
+            switch (_direction)
             {
-                if (result)
+                case Direction.Increase:
                 {
-                    switch (this._bType)
-                    {
-                        case ButtonType.BottomLeft:
-                            MoveThumb(this._leftButton, this._centerThumb, widthChange * this._density, this.Orientation);
-                            this.ReCalculateRangeSelected(true, false, this.LowerValue + value, this._direction);
-                            this.CoerceLowerUpperValues();
-                            break;
-                        case ButtonType.TopRight:
-                            MoveThumb(this._centerThumb, this._rightButton, widthChange * this._density, this.Orientation);
-                            this.ReCalculateRangeSelected(false, true, this.UpperValue + value, this._direction);
-                            this.CoerceLowerUpperValues();
-                            break;
-                        case ButtonType.Both:
-                            MoveThumb(this._leftButton, this._rightButton, widthChange * this._density, this.Orientation);
-                            this.ReCalculateRangeSelected(this.LowerValue + value, this.UpperValue + value, this._direction);
-                            this.CoerceLowerUpperValues();
-                            break;
-                    }
+                    if (result)
+                        switch (_bType)
+                        {
+                            case ButtonType.BottomLeft:
+                                MoveThumb(_leftButton, _centerThumb, widthChange * _density, Orientation);
+                                ReCalculateRangeSelected(true, false, LowerValue + value, _direction);
+                                CoerceLowerUpperValues();
+                                break;
+                            case ButtonType.TopRight:
+                                MoveThumb(_centerThumb, _rightButton, widthChange * _density, Orientation);
+                                ReCalculateRangeSelected(false, true, UpperValue + value, _direction);
+                                CoerceLowerUpperValues();
+                                break;
+                            case ButtonType.Both:
+                                MoveThumb(_leftButton, _rightButton, widthChange * _density, Orientation);
+                                ReCalculateRangeSelected(LowerValue + value, UpperValue + value, _direction);
+                                CoerceLowerUpperValues();
+                                break;
+                        }
+
+                    break;
                 }
-            }
-            else if (this._direction == Direction.Decrease)
-            {
-                if (result)
+                case Direction.Decrease:
                 {
-                    switch (this._bType)
-                    {
-                        case ButtonType.BottomLeft:
-                            MoveThumb(this._leftButton, this._centerThumb, -widthChange * this._density, this.Orientation);
-                            this.ReCalculateRangeSelected(true, false, this.LowerValue - value, this._direction);
-                            this.CoerceLowerUpperValues();
-                            break;
-                        case ButtonType.TopRight:
-                            MoveThumb(this._centerThumb, this._rightButton, -widthChange * this._density, this.Orientation);
-                            this.ReCalculateRangeSelected(false, true, this.UpperValue - value, this._direction);
-                            this.CoerceLowerUpperValues();
-                            break;
-                        case ButtonType.Both:
-                            MoveThumb(this._leftButton, this._rightButton, -widthChange * this._density, this.Orientation);
-                            this.ReCalculateRangeSelected(this.LowerValue - value, this.UpperValue - value, this._direction);
-                            this.CoerceLowerUpperValues();
-                            break;
-                    }
+                    if (result)
+                        switch (_bType)
+                        {
+                            case ButtonType.BottomLeft:
+                                MoveThumb(_leftButton, _centerThumb, -widthChange * _density, Orientation);
+                                ReCalculateRangeSelected(true, false, LowerValue - value, _direction);
+                                CoerceLowerUpperValues();
+                                break;
+                            case ButtonType.TopRight:
+                                MoveThumb(_centerThumb, _rightButton, -widthChange * _density, Orientation);
+                                ReCalculateRangeSelected(false, true, UpperValue - value, _direction);
+                                CoerceLowerUpperValues();
+                                break;
+                            case ButtonType.Both:
+                                MoveThumb(_leftButton, _rightButton, -widthChange * _density, Orientation);
+                                ReCalculateRangeSelected(LowerValue - value, UpperValue - value, _direction);
+                                CoerceLowerUpperValues();
+                                break;
+                        }
+
+                    break;
                 }
             }
         }
 
-        this._tickCount++;
+        _tickCount++;
     }
 
     //Helper method to handle snapToTick scenario and decrease amount of code
     private void SnapToTickHandle(ButtonType type, Direction direction, double difference)
     {
+        if (_leftButton == null || _rightButton == null || _leftThumb == null || _rightThumb == null || _centerThumb == null) return;
         var value = difference;
         //change sign of "difference" variable because Horizontal and Vertical orientations has are different directions
-        difference = this.Orientation == Orientation.Horizontal ? difference : -difference;
+        difference = Orientation == Orientation.Horizontal ? difference : -difference;
         if (direction == Direction.Increase)
-        {
             switch (type)
             {
                 case ButtonType.TopRight:
-                    if (this.UpperValue < this.Maximum)
+                    if (UpperValue < Maximum)
                     {
-                        MoveThumb(this._centerThumb, this._rightButton, difference * this._density, this.Orientation);
-                        this.ReCalculateRangeSelected(false, true, this.UpperValue + value, direction);
-                        this.CoerceLowerUpperValues();
+                        MoveThumb(_centerThumb, _rightButton, difference * _density, Orientation);
+                        ReCalculateRangeSelected(false, true, UpperValue + value, direction);
+                        CoerceLowerUpperValues();
                     }
 
                     break;
                 case ButtonType.BottomLeft:
-                    if (this.LowerValue < this.UpperValue - this.MinRange)
+                    if (LowerValue < UpperValue - MinRange)
                     {
-                        MoveThumb(this._leftButton, this._centerThumb, difference * this._density, this.Orientation);
-                        this.ReCalculateRangeSelected(true, false, this.LowerValue + value, direction);
-                        this.CoerceLowerUpperValues();
+                        MoveThumb(_leftButton, _centerThumb, difference * _density, Orientation);
+                        ReCalculateRangeSelected(true, false, LowerValue + value, direction);
+                        CoerceLowerUpperValues();
                     }
 
                     break;
                 case ButtonType.Both:
-                    if (this.UpperValue < this.Maximum)
+                    if (UpperValue < Maximum)
                     {
-                        MoveThumb(this._leftButton, this._rightButton, difference * this._density, this.Orientation);
-                        this.ReCalculateRangeSelected(this.LowerValue + value, this.UpperValue + value, direction);
-                        this.CoerceLowerUpperValues();
+                        MoveThumb(_leftButton, _rightButton, difference * _density, Orientation);
+                        ReCalculateRangeSelected(LowerValue + value, UpperValue + value, direction);
+                        CoerceLowerUpperValues();
                     }
 
                     break;
             }
-        }
         else
-        {
             switch (type)
             {
                 case ButtonType.TopRight:
-                    if (this.UpperValue > this.LowerValue + this.MinRange)
+                    if (UpperValue > LowerValue + MinRange)
                     {
-                        MoveThumb(this._centerThumb, this._rightButton, -difference * this._density, this.Orientation);
-                        this.ReCalculateRangeSelected(false, true, this.UpperValue - value, direction);
-                        this.CoerceLowerUpperValues();
+                        MoveThumb(_centerThumb, _rightButton, -difference * _density, Orientation);
+                        ReCalculateRangeSelected(false, true, UpperValue - value, direction);
+                        CoerceLowerUpperValues();
                     }
 
                     break;
                 case ButtonType.BottomLeft:
-                    if (this.LowerValue > this.Minimum)
+                    if (LowerValue > Minimum)
                     {
-                        MoveThumb(this._leftButton, this._centerThumb, -difference * this._density, this.Orientation);
-                        this.ReCalculateRangeSelected(true, false, this.LowerValue - value, direction);
-                        this.CoerceLowerUpperValues();
+                        MoveThumb(_leftButton, _centerThumb, -difference * _density, Orientation);
+                        ReCalculateRangeSelected(true, false, LowerValue - value, direction);
+                        CoerceLowerUpperValues();
                     }
 
                     break;
                 case ButtonType.Both:
-                    if (this.LowerValue > this.Minimum)
+                    if (LowerValue > Minimum)
                     {
-                        MoveThumb(this._leftButton, this._rightButton, -difference * this._density, this.Orientation);
-                        this.ReCalculateRangeSelected(this.LowerValue - value, this.UpperValue - value, direction);
-                        this.CoerceLowerUpperValues();
+                        MoveThumb(_leftButton, _rightButton, -difference * _density, Orientation);
+                        ReCalculateRangeSelected(LowerValue - value, UpperValue - value, direction);
+                        CoerceLowerUpperValues();
                     }
 
                     break;
             }
-        }
     }
 
     //Calculating next value for Tick
     private double CalculateNextTick(Direction direction, double checkingValue, double distance, bool moveDirectlyToNextTick)
     {
-        var checkingValuePos = checkingValue - this.Minimum;
-        if (!this.IsMoveToPointEnabled)
+        var checkingValuePos = checkingValue - Minimum;
+        if (!IsMoveToPointEnabled)
         {
             //Check if current value is exactly Tick value or it situated between Ticks
             var checkingValueChanged = checkingValuePos; // + distance; // <-- introduced by @drayde with #2006 but it breaks the left thumb movement #2880
-            var x = checkingValueChanged / this.TickFrequency;
-            if (!this.IsDoubleCloseToInt(x))
+            var x = checkingValueChanged / TickFrequency;
+            if (!IsDoubleCloseToInt(x))
             {
-                distance = this.TickFrequency * (int)x;
-                if (direction == Direction.Increase)
-                {
-                    distance += this.TickFrequency;
-                }
+                distance = TickFrequency * (int)x;
+                if (direction == Direction.Increase) distance += TickFrequency;
 
-                distance = (distance - Math.Abs(checkingValuePos));
-                this._currenValue = 0;
+                distance -= Math.Abs(checkingValuePos);
+                _currenValue = 0;
                 return Math.Abs(distance);
             }
         }
@@ -2074,29 +2013,26 @@ public class RangeSlider2 : RangeBase
         //If we need move directly to next tick without calculating the difference between ticks
         //Use when MoveToPoint disabled
         if (moveDirectlyToNextTick)
-        {
-            distance = this.TickFrequency;
-        }
+            distance = TickFrequency;
         //If current value == tick (Value is divisible)
         else
         {
             //current value in units (exactly in the place under cursor)
-            var currentValue = checkingValuePos + (distance / this._density);
-            var x = currentValue / this.TickFrequency;
+            var currentValue = checkingValuePos + (distance / _density);
+            var x = currentValue / TickFrequency;
             if (direction == Direction.Increase)
             {
                 var nextValue = x.ToString(CultureInfo.InvariantCulture).ToLower().Contains("e+")
-                    ? (x * this.TickFrequency) + this.TickFrequency
-                    : ((int)x * this.TickFrequency) + this.TickFrequency;
-
-                distance = (nextValue - Math.Abs(checkingValuePos));
+                    ? x * TickFrequency + TickFrequency
+                    : (int)x * TickFrequency + TickFrequency;
+                distance = nextValue - Math.Abs(checkingValuePos);
             }
             else
             {
                 var previousValue = x.ToString(CultureInfo.InvariantCulture).ToLower().Contains("e+")
-                    ? x * this.TickFrequency
-                    : (int)x * this.TickFrequency;
-                distance = (Math.Abs(checkingValuePos) - previousValue);
+                    ? x * TickFrequency
+                    : (int)x * TickFrequency;
+                distance = Math.Abs(checkingValuePos) - previousValue;
             }
         }
 
@@ -2109,112 +2045,78 @@ public class RangeSlider2 : RangeBase
     private void JumpToNextTick(Direction direction, ButtonType type, double distance, double checkingValue, bool jumpDirectlyToTick)
     {
         //find the difference between current value and next value
-        var difference = this.CalculateNextTick(direction, checkingValue, distance, false);
-        var p = Mouse.GetPosition(this._visualElementsContainer);
-        var pos = this.Orientation == Orientation.Horizontal ? p.X : p.Y;
-        var widthHeight = this.Orientation == Orientation.Horizontal ? this.ActualWidth : this.ActualHeight;
+        var difference = CalculateNextTick(direction, checkingValue, distance, false);
+        var p = Mouse.GetPosition(_visualElementsContainer);
+        var pos = Orientation == Orientation.Horizontal ? p.X : p.Y;
+        var widthHeight = Orientation == Orientation.Horizontal ? ActualWidth : ActualHeight;
         var tickIntervalInPixels = direction == Direction.Increase
-            ? this.TickFrequency * this._density
-            : -this.TickFrequency * this._density;
+            ? TickFrequency * _density
+            : -TickFrequency * _density;
 
         if (jumpDirectlyToTick)
+            SnapToTickHandle(type, direction, difference);
+        else if (direction == Direction.Increase)
         {
-            this.SnapToTickHandle(type, direction, difference);
+            if (!IsDoubleCloseToInt(checkingValue / TickFrequency))
+            {
+                if (distance > difference * _density / 2 || distance >= widthHeight - pos || distance >= pos) SnapToTickHandle(type, direction, difference);
+            }
+            else if (distance > tickIntervalInPixels / 2 || distance >= widthHeight - pos || distance >= pos) SnapToTickHandle(type, direction, difference);
         }
-        else
+        else if (!IsDoubleCloseToInt(checkingValue / TickFrequency))
         {
-            if (direction == Direction.Increase)
-            {
-                if (!this.IsDoubleCloseToInt(checkingValue / this.TickFrequency))
-                {
-                    if (distance > (difference * this._density) / 2 || (distance >= (widthHeight - pos) || distance >= pos))
-                    {
-                        this.SnapToTickHandle(type, direction, difference);
-                    }
-                }
-                else
-                {
-                    if ((distance > tickIntervalInPixels / 2) || (distance >= (widthHeight - pos) || distance >= pos))
-                    {
-                        this.SnapToTickHandle(type, direction, difference);
-                    }
-                }
-            }
-            else
-            {
-                if (!this.IsDoubleCloseToInt(checkingValue / this.TickFrequency))
-                {
-                    if ((distance <= -(difference * this._density) / 2) || (this.UpperValue - this.LowerValue) < difference)
-                    {
-                        this.SnapToTickHandle(type, direction, difference);
-                    }
-                }
-                else
-                {
-                    if (distance < tickIntervalInPixels / 2 || (this.UpperValue - this.LowerValue) < difference)
-                    {
-                        this.SnapToTickHandle(type, direction, difference);
-                    }
-                }
-            }
+            if (distance <= -(difference * _density) / 2 || UpperValue - LowerValue < difference) SnapToTickHandle(type, direction, difference);
         }
+        else if (distance < tickIntervalInPixels / 2 || UpperValue - LowerValue < difference) SnapToTickHandle(type, direction, difference);
     }
 
     //Change AutotoolTip position to move sync with Thumb
     private void RelocateAutoToolTip()
     {
-        if (this._autoToolTip is null)
-        {
+        if (_autoToolTip is null)
             return;
-        }
 
-        var offset = this._autoToolTip.HorizontalOffset;
-        this._autoToolTip.HorizontalOffset = offset + 0.001;
-        this._autoToolTip.HorizontalOffset = offset;
+        var offset = _autoToolTip.HorizontalOffset;
+        _autoToolTip.HorizontalOffset = offset + 0.001;
+        _autoToolTip.HorizontalOffset = offset;
     }
 
     //CHeck if two doubles approximately equals
-    private bool ApproximatelyEquals(double value1, double value2)
-    {
-        return Math.Abs(value1 - value2) <= Epsilon;
-    }
+    private bool ApproximatelyEquals(double value1, double value2) => Math.Abs(value1 - value2) <= Epsilon;
 
-    private bool IsDoubleCloseToInt(double val)
-    {
-        return this.ApproximatelyEquals(Math.Abs(val - Math.Round(val)), 0);
-    }
+    private bool IsDoubleCloseToInt(double val) => ApproximatelyEquals(Math.Abs(val - Math.Round(val)), 0);
 
     internal string GetToolTipNumber(double value)
     {
         var numberFormatInfo = (NumberFormatInfo)NumberFormatInfo.CurrentInfo.Clone();
-        numberFormatInfo.NumberDecimalDigits = this.AutoToolTipPrecision;
+        numberFormatInfo.NumberDecimalDigits = AutoToolTipPrecision;
         return value.ToString("N", numberFormatInfo);
     }
 
     //CustomPopupPlacement callback for placing AutoToolTip int TopLeft or BottomRight position
     private CustomPopupPlacement[] PopupPlacementCallback(Size popupSize, Size targetSize, Point offset)
     {
-        switch (this.AutoToolTipPlacement)
+        switch (AutoToolTipPlacement)
         {
             case AutoToolTipPlacement.TopLeft:
-                if (this.Orientation == Orientation.Horizontal)
+                if (Orientation == Orientation.Horizontal)
                 {
                     // Place popup at top of thumb
-                    return new CustomPopupPlacement[] { new CustomPopupPlacement(new Point((targetSize.Width - popupSize.Width) * 0.5, -popupSize.Height), PopupPrimaryAxis.Horizontal) };
+                    return new[] { new CustomPopupPlacement(new Point((targetSize.Width - popupSize.Width) * 0.5, -popupSize.Height), PopupPrimaryAxis.Horizontal) };
                 }
 
                 // Place popup at left of thumb 
-                return new CustomPopupPlacement[] { new CustomPopupPlacement(new Point(-popupSize.Width, (targetSize.Height - popupSize.Height) * 0.5), PopupPrimaryAxis.Vertical) };
+                return new[] { new CustomPopupPlacement(new Point(-popupSize.Width, (targetSize.Height - popupSize.Height) * 0.5), PopupPrimaryAxis.Vertical) };
 
             case AutoToolTipPlacement.BottomRight:
-                if (this.Orientation == Orientation.Horizontal)
+                if (Orientation == Orientation.Horizontal)
                 {
                     // Place popup at bottom of thumb 
-                    return new CustomPopupPlacement[] { new CustomPopupPlacement(new Point((targetSize.Width - popupSize.Width) * 0.5, targetSize.Height), PopupPrimaryAxis.Horizontal) };
+                    return new[] { new CustomPopupPlacement(new Point((targetSize.Width - popupSize.Width) * 0.5, targetSize.Height), PopupPrimaryAxis.Horizontal) };
                 }
 
                 // Place popup at right of thumb 
-                return new CustomPopupPlacement[] { new CustomPopupPlacement(new Point(targetSize.Width, (targetSize.Height - popupSize.Height) * 0.5), PopupPrimaryAxis.Vertical) };
+                return new[] { new CustomPopupPlacement(new Point(targetSize.Width, (targetSize.Height - popupSize.Height) * 0.5), PopupPrimaryAxis.Vertical) };
 
             default:
                 return new CustomPopupPlacement[] { };
@@ -2225,20 +2127,11 @@ public class RangeSlider2 : RangeBase
 
     #region Validation methods
 
-    private static bool IsValidDoubleValue(object? value)
-    {
-        return value is double doubleValue && IsValidDouble(doubleValue);
-    }
+    private static bool IsValidDoubleValue(object? value) => value is double doubleValue && IsValidDouble(doubleValue);
 
-    private static bool IsValidDouble(double? d)
-    {
-        return d is not null && !double.IsNaN(d.Value) && !double.IsInfinity(d.Value);
-    }
+    private static bool IsValidDouble(double? d) => d is not null && !double.IsNaN(d.Value) && !double.IsInfinity(d.Value);
 
-    private static bool IsValidPrecision(object? value)
-    {
-        return value is int intValue && intValue >= 0;
-    }
+    private static bool IsValidPrecision(object? value) => value is int intValue && intValue >= 0;
 
     #endregion
 
@@ -2247,29 +2140,15 @@ public class RangeSlider2 : RangeBase
     [MustUseReturnValue]
     private static object CoerceMinimum(DependencyObject d, object? baseValue)
     {
-        if (d is RangeSlider2 RangeSlider2 && baseValue is double value)
-        {
-            if (value > RangeSlider2.Maximum)
-            {
-                return RangeSlider2.Maximum;
-            }
-        }
-
-        return baseValue ?? 0D;
+        if (d is not RangeSlider2 rangeSlider2 || baseValue is not double value) return baseValue ?? 0D;
+        return value > rangeSlider2.Maximum ? rangeSlider2.Maximum : baseValue;
     }
 
     [MustUseReturnValue]
     private static object CoerceMaximum(DependencyObject d, object? baseValue)
     {
-        if (d is RangeSlider2 RangeSlider2 && baseValue is double value)
-        {
-            if (value < RangeSlider2.Minimum)
-            {
-                return RangeSlider2.Minimum;
-            }
-        }
-
-        return baseValue ?? 0D;
+        if (d is not RangeSlider2 rangeSlider2 || baseValue is not double value) return baseValue ?? 0D;
+        return value < rangeSlider2.Minimum ? rangeSlider2.Minimum : baseValue;
     }
 
     #endregion
@@ -2304,19 +2183,13 @@ public class RangeSlider2 : RangeBase
         var upperValueEquals = Equals(slider._oldUpper, slider.UpperValue);
 
         if ((lowerValueReCalculated || upperValueReCalculated) && (!lowerValueEquals || !upperValueEquals))
-        {
             slider.RaiseEvent(new RangeSelectionChangedEventArgs<double>(slider._oldLower, slider.LowerValue, slider._oldUpper, slider.UpperValue, RangeSelectionChangedEvent));
-        }
 
-        if (lowerValueReCalculated && !lowerValueEquals)
-        {
+        if (lowerValueReCalculated && !lowerValueEquals) 
             slider.RaiseEvent(new RoutedPropertyChangedEventArgs<double>(slider._oldLower, slider.LowerValue, LowerValueChangedEvent));
-        }
 
-        if (upperValueReCalculated && !upperValueEquals)
-        {
+        if (upperValueReCalculated && !upperValueEquals) 
             slider.RaiseEvent(new RoutedPropertyChangedEventArgs<double>(slider._oldUpper, slider.UpperValue, UpperValueChangedEvent));
-        }
     }
 
     #endregion
