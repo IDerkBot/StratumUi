@@ -114,7 +114,7 @@
             Grid.Column="0"
             Width="400"
             Margin="0,10"
-            AutoToolTipPlacement="TopLeft"
+            AutoToolTipPlacement="BottomRight"
             AutoToolTipPrecision="0"
             Interval="10"
             Ticks="100"

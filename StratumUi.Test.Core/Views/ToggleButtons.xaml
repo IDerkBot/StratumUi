@@ -90,61 +90,53 @@
                 IsThreeState="True" />
         </StackPanel>
 
-        <WrapPanel Grid.Row="4" Grid.Column="0">
-            <CheckBox IsChecked="{Binding ElementName=Tg1, Path=IsChecked}" />
-            <CheckBox IsChecked="{Binding ElementName=Tg2, Path=IsChecked}" />
-            <CheckBox IsChecked="{Binding ElementName=Tg3, Path=IsChecked}" IsThreeState="True" />
-        </WrapPanel>
+        <StackPanel
+            Grid.Row="4"
+            Grid.Column="0"
+            Orientation="Horizontal">
+            <StackPanel.Resources>
+                <Style TargetType="ToggleButton" BasedOn="{StaticResource TglOutline}">
+                    <Setter Property="Margin" Value="5" />
+                    <Setter Property="Content" Value="Toggle button" />
+                    <Setter Property="IsChecked" Value="True" />
+                </Style>
+            </StackPanel.Resources>
+            <ToggleButton />
+            <ToggleButton IsEnabled="False" />
+        </StackPanel>
 
         <StackPanel
             Grid.Row="5"
             Grid.Column="0"
             Orientation="Horizontal">
-            <ToggleButton
-                Margin="5"
-                wpf:Hint.CornerRadius="1"
-                Content="Toggle button"
-                IsChecked="True"
-                Style="{DynamicResource TglOutline}" />
-            <ToggleButton
-                Margin="5"
-                Content="Toggle button"
-                IsChecked="True"
-                IsEnabled="False"
-                Style="{DynamicResource TglOutline}" />
+            <StackPanel.Resources>
+                <Style TargetType="ToggleButton" BasedOn="{StaticResource TglOutline}">
+                    <Setter Property="Margin" Value="5" />
+                    <Setter Property="Content" Value="Toggle button" />
+                    <Setter Property="IsChecked" Value="True" />
+                </Style>
+            </StackPanel.Resources>
+            <ToggleButton wpf:Button.LeftIcon="User" />
+            <ToggleButton wpf:Button.RightIcon="User" IsEnabled="False" />
         </StackPanel>
 
         <StackPanel
             Grid.Row="6"
             Grid.Column="0"
+            Margin="5,5"
             Orientation="Horizontal">
-            <ToggleButton
-                Margin="5"
-                wpf:Button.LeftIcon="User"
-                Content="Toggle button"
-                IsChecked="True"
-                Style="{DynamicResource TglOutline}" />
-            <ToggleButton
-                Margin="5"
-                wpf:Button.RightIcon="User"
-                Content="Toggle button"
-                IsChecked="True"
-                IsEnabled="False"
-                Style="{DynamicResource TglOutline}" />
+            <StackPanel.Resources>
+                <Style TargetType="ToggleButton" BasedOn="{StaticResource TglOutline}">
+                    <Setter Property="Margin" Value="5" />
+                </Style>
+            </StackPanel.Resources>
+            <ToggleButton wpf:Button.Position="First" Content="First" />
+            <ToggleButton wpf:Button.Position="Middle" Content="Middle" />
+            <ToggleButton wpf:Button.Position="Last" Content="Last" />
         </StackPanel>
 
         <StackPanel
             Grid.Row="7"
-            Grid.Column="0"
-            Margin="5,5"
-            Orientation="Horizontal">
-            <ToggleButton Content="First" Style="{DynamicResource TglOutlineFirst}" />
-            <ToggleButton Content="Middle" Style="{DynamicResource TglOutlineMiddle}" />
-            <ToggleButton Content="last" Style="{DynamicResource TglOutlineLast}" />
-        </StackPanel>
-
-        <StackPanel
-            Grid.Row="10"
             Grid.Column="0"
             Orientation="Horizontal">
             <ToggleButton
@@ -159,55 +151,16 @@
         </StackPanel>
 
         <StackPanel
-            Grid.Row="1"
-            Grid.Column="1"
+            Grid.Row="8"
+            Grid.Column="0"
             Orientation="Horizontal">
-            <ToggleButton Style="{DynamicResource TglFocalSpot}" />
-            <ToggleButton IsEnabled="False" Style="{DynamicResource TglFocalSpot}" />
+            <StackPanel.Resources>
+                <Style TargetType="ToggleButton" BasedOn="{StaticResource TglFocalSpot}">
+                    <Setter Property="Margin" Value="5" />
+                </Style>
+            </StackPanel.Resources>
+            <ToggleButton />
+            <ToggleButton IsEnabled="False" />
         </StackPanel>
-        <StackPanel
-            Grid.Row="2"
-            Grid.Column="1"
-            Orientation="Horizontal">
-            <ToggleButton Style="{DynamicResource TgOnOff}" />
-            <ToggleButton IsEnabled="False" Style="{DynamicResource TgOnOff}" />
-        </StackPanel>
-        <StackPanel
-            Grid.Row="3"
-            Grid.Column="1"
-            Orientation="Horizontal">
-            <ToggleButton Style="{DynamicResource OnOffToggle}" />
-            <ToggleButton IsEnabled="False" Style="{DynamicResource OnOffToggle}" />
-        </StackPanel>
-        <StackPanel
-            Grid.Row="4"
-            Grid.Column="1"
-            Orientation="Horizontal">
-            <ToggleButton Style="{DynamicResource ActiveUser}" />
-            <ToggleButton IsEnabled="False" Style="{DynamicResource ActiveUser}" />
-        </StackPanel>
-
-        <Border
-            Grid.Row="5"
-            Grid.RowSpan="4"
-            Grid.Column="1"
-            Padding="10"
-            Background="{StaticResource Pr200}">
-            <UniformGrid Columns="3" Rows="3">
-                <ToggleButton
-                    Margin="5"
-                    Content="Toggle Button"
-                    IsChecked="True"
-                    Style="{StaticResource TglOutline}" />
-                <ToggleButton
-                    Margin="5"
-                    Content="Toggle"
-                    Style="{StaticResource TglOutline}" />
-                <ToggleButton
-                    Margin="5"
-                    Content="1"
-                    Style="{StaticResource TglOutline}" />
-            </UniformGrid>
-        </Border>
     </Grid>
 </UserControl>

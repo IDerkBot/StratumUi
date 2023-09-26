@@ -4,7 +4,6 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:smtx="clr-namespace:ShowMeTheXAML;assembly=ShowMeTheXAML"
     d:DesignHeight="300"
     d:DesignWidth="300"
     mc:Ignorable="d">
@@ -33,44 +32,33 @@
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             Content="Label"
-            FontSize="32"
             Style="{DynamicResource Lbl}" />
 
         <Label
             Grid.Row="1"
             Grid.Column="0"
-            Content="ExtraLight"
-            FontWeight="ExtraLight" />
+            Style="{StaticResource Label.H1}"
+            Content="H1" />
         <Label
             Grid.Row="2"
             Grid.Column="0"
-            Content="Light"
-            FontWeight="Light" />
+            Style="{StaticResource Label.H2}"
+            Content="H2" />
         <Label
             Grid.Row="3"
             Grid.Column="0"
-            Content="Regular"
-            FontWeight="Regular" />
+            Content="H3"
+            Style="{StaticResource Label.H3}" />
         <Label
             Grid.Row="4"
             Grid.Column="0"
-            Content="Normal"
-            FontWeight="Normal" />
+            Content="H4"
+            Style="{StaticResource Label.H4}" />
         <Label
             Grid.Row="5"
             Grid.Column="0"
-            Content="Medium"
-            FontWeight="Medium" />
-        <Label
-            Grid.Row="6"
-            Grid.Column="0"
-            Content="Bold"
-            FontWeight="Bold" />
-        <Label
-            Grid.Row="7"
-            Grid.Column="0"
-            Content="Black"
-            FontWeight="Black" />
+            Style="{StaticResource Label.H5}"
+            Content="H5" />
 
         <Label
             Grid.Row="0"
@@ -81,43 +69,32 @@
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             Content="TextBlock"
-            FontSize="32"
             Style="{DynamicResource Lbl}" />
 
         <TextBlock
             Grid.Row="1"
             Grid.Column="1"
-            FontWeight="ExtraLight"
-            Text="ExtraLight" />
+            Style="{StaticResource TextBlock.H1}"
+            Text="H1" />
         <TextBlock
             Grid.Row="2"
             Grid.Column="1"
-            FontWeight="Light"
-            Text="Light" />
+            Style="{StaticResource TextBlock.H2}"
+            Text="H2" />
         <TextBlock
             Grid.Row="3"
             Grid.Column="1"
-            FontWeight="Regular"
-            Text="Regular" />
+            Style="{StaticResource TextBlock.H3}"
+            Text="H3" />
         <TextBlock
             Grid.Row="4"
             Grid.Column="1"
-            FontWeight="Normal"
-            Text="Normal" />
+            Style="{StaticResource TextBlock.H4}"
+            Text="H4" />
         <TextBlock
             Grid.Row="5"
             Grid.Column="1"
-            FontWeight="Medium"
-            Text="Medium" />
-        <TextBlock
-            Grid.Row="6"
-            Grid.Column="1"
-            FontWeight="Bold"
-            Text="Bold" />
-        <TextBlock
-            Grid.Row="7"
-            Grid.Column="1"
-            FontWeight="Black"
-            Text="Black" />
+            Style="{StaticResource TextBlock.H5}"
+            Text="H5" />
     </Grid>
 </UserControl>

@@ -142,6 +142,7 @@
             <Grid.Resources>
                 <Style BasedOn="{StaticResource BtnFilled}" TargetType="Button">
                     <Setter Property="Content" Value="{DynamicResource Button}" />
+                    <Setter Property="Margin" Value="5" />
                 </Style>
             </Grid.Resources>
             <StackPanel Grid.Row="0" Orientation="Horizontal">
@@ -232,6 +233,12 @@
                 <RowDefinition Height="*" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
+            <Grid.Resources>
+                <Style BasedOn="{StaticResource BtnOutline}" TargetType="Button">
+                    <Setter Property="Content" Value="{DynamicResource Button}" />
+                    <Setter Property="Margin" Value="5" />
+                </Style>
+            </Grid.Resources>
             <StackPanel Grid.Row="0" Orientation="Horizontal">
                 <smtx:XamlDisplay UniqueKey="BtnOutline1">
                     <Button Content="{DynamicResource Button}" Style="{DynamicResource BtnOutline}" />
@@ -343,6 +350,7 @@
             <Grid.Resources>
                 <Style BasedOn="{StaticResource BtnText}" TargetType="Button">
                     <Setter Property="Content" Value="{DynamicResource Button}" />
+                    <Setter Property="Margin" Value="5" />
                 </Style>
             </Grid.Resources>
 

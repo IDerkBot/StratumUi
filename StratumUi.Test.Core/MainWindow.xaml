@@ -6,7 +6,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:vm="clr-namespace:StratumUi.Test.Core.ViewModel"
     xmlns:wpf="clr-namespace:StratumUi.Wpf.Core.AttachedProperties;assembly=StratumUi.Wpf.Core"
-    xmlns:views1="clr-namespace:StratumUi.Test.Core.Views"
+    xmlns:views="clr-namespace:StratumUi.Test.Core.Views"
     Title="MainWindow"
     Width="1920"
     Height="1080"
@@ -20,7 +20,10 @@
     </Window.DataContext>
     <Grid>
         <!--  Background="{StaticResource Pr200}"  -->
-        <TabControl Name="TbMain" TabStripPlacement="Left">
+        <TabControl
+            Name="TbMain"
+            SelectedIndex="{Binding IndexSelectedTab}"
+            TabStripPlacement="Left">
             <TabControl.Resources>
                 <Style BasedOn="{StaticResource {x:Type TabItem}}" TargetType="TabItem">
                     <Setter Property="Height" Value="25" />
@@ -28,127 +31,143 @@
             </TabControl.Resources>
             <!--  HOME  -->
             <TabItem Header="Home">
-                <views1:Home />
+                <views:Home DataContext="{Binding HomeVM}" />
             </TabItem>
             <!--  BADGES  -->
             <TabItem Header="Badges">
-                <views1:Badges />
+                <views:Badges />
             </TabItem>
             <!--  BREADCRUMB  -->
             <TabItem Header="{DynamicResource Breadcrumbs}">
-                <views1:Breadcrumbs />
+                <views:Breadcrumbs />
             </TabItem>
             <!--  BUTTONS  -->
             <TabItem Header="{DynamicResource Buttons}">
-                <views1:Buttons />
+                <views:Buttons />
             </TabItem>
             <!--  CHECK BOXES  -->
             <TabItem Header="{DynamicResource CheckBoxes}">
-                <views1:CheckBoxes />
+                <views:CheckBoxes />
             </TabItem>
             <!--  COLORS  -->
             <TabItem Header="{DynamicResource Colors}">
-                <views1:Colors />
+                <views:Colors />
             </TabItem>
             <!--  COMBO BOXES  -->
             <TabItem Header="{DynamicResource ComboBoxes}">
-                <views1:ComboBoxes />
+                <views:ComboBoxes />
             </TabItem>
             <!--  DATA GRID  -->
             <TabItem Header="Data grid">
-                <views1:DataGrid />
+                <views:DataGrid />
             </TabItem>
             <!--  DATE PICKER  -->
             <TabItem Header="Date picker">
-                <views1:DatePicker />
+                <views:DatePicker />
             </TabItem>
             <!--  DIALOGS  -->
             <TabItem Header="Dialogs">
-                <views1:Dialogs />
+                <views:Dialogs />
             </TabItem>
             <!--  DISPLAY CONTROLS  -->
             <TabItem Header="{DynamicResource DisplayControls}">
-                <views1:DisplayControls />
+                <views:DisplayControls />
             </TabItem>
             <!--  DOCUMENT VIEWER  -->
             <TabItem Header="{DynamicResource DocumentViewer}">
-                <views1:DocumentViewer />
+                <views:DocumentViewer />
             </TabItem>
             <!--  EXPANDERS  -->
             <TabItem Header="{DynamicResource Expanders}">
-                <views1:Expanders />
+                <views:Expanders />
             </TabItem>
             <!--  GROUP BOX  -->
             <TabItem Header="GroupBox">
-                <views1:GroupBox />
-            </TabItem>
-            <!--  INLINE ALERTS  -->
-            <TabItem Header="{DynamicResource InlineAlerts}">
-                <views1:InlineAlerts />
-            </TabItem>
-            <!--  LABELS  -->
-            <TabItem Header="{DynamicResource Labels}">
-                <views1:Labels />
-            </TabItem>
-            <!--  LISTVIEW  -->
-            <TabItem Header="ListView">
-                <views1:ListViews />
+                <views:GroupBox />
             </TabItem>
             <!--  Pack Icon  -->
             <TabItem Header="{DynamicResource IconPack}">
-                <views1:IconPack />
+                <views:IconPack />
+            </TabItem>
+            <!--  INLINE ALERTS  -->
+            <TabItem Header="{DynamicResource InlineAlerts}">
+                <views:InlineAlerts />
+            </TabItem>
+            <!--  LABELS  -->
+            <TabItem Header="{DynamicResource Labels}">
+                <views:Labels />
+            </TabItem>
+            <!--  LISTVIEW  -->
+            <TabItem Header="ListView">
+                <views:ListViews />
+            </TabItem>
+            <!--  PASSWORD BOX  -->
+            <TabItem Header="{DynamicResource ProgressBars}">
+                <views:PasswordBox />
             </TabItem>
             <!--  PROGRESS BAR  -->
             <TabItem Header="{DynamicResource ProgressBars}">
-                <views1:ProgressBars />
+                <views:ProgressBars />
             </TabItem>
             <!--  RADIO BUTTONS  -->
             <TabItem Header="{DynamicResource RadioButtons}">
-                <views1:RadioButtons />
+                <views:RadioButtons />
             </TabItem>
             <!--  RANGERS  -->
-            <TabItem Header="{DynamicResource Rangers}" IsSelected="True">
-                <views1:Rangers />
+            <TabItem Header="{DynamicResource Rangers}">
+                <views:Rangers />
+            </TabItem>
+            <!--  RICH TEXT BOXES  -->
+            <TabItem Header="{DynamicResource Scrollbars}">
+                <views:RichTextBoxes />
             </TabItem>
             <!--  SCROLL BARS  -->
             <TabItem Header="{DynamicResource Scrollbars}">
-                <views1:ScrollBars />
+                <views:ScrollBars />
             </TabItem>
             <!--  SHADOWS  -->
             <TabItem Header="{DynamicResource Shadows}">
-                <views1:Shadows />
+                <views:Shadows />
             </TabItem>
             <!--  SLIDERS  -->
             <TabItem Header="Slider">
-                <views1:Sliders />
+                <views:Sliders />
             </TabItem>
             <!--  STEPPERS  -->
             <TabItem Header="{DynamicResource Steppers}">
-                <views1:Steppers />
+                <views:Steppers />
             </TabItem>
-            <!--  TABS  -->
+            <!--  SWITCHERS  -->
             <TabItem Header="{DynamicResource Tabs}">
-                <views1:Tabs />
+                <views:Switchers />
             </TabItem>
             <!--  TABLES  -->
             <TabItem Header="{DynamicResource Tables}">
-                <views1:Tables />
+                <views:Tables />
+            </TabItem>
+            <!--  TABS  -->
+            <TabItem Header="{DynamicResource Tabs}">
+                <views:Tabs />
             </TabItem>
             <!--  TEXT BOXES  -->
             <TabItem Header="{DynamicResource TextBoxes}">
-                <views1:TextBox />
+                <views:TextBox />
             </TabItem>
             <!--  TIME INPUT  -->
             <TabItem Header="{DynamicResource TimeInputs}">
-                <views1:TimeInputs />
+                <views:TimeInputs />
             </TabItem>
             <!--  TOGGLE BUTTONS  -->
             <TabItem Header="{DynamicResource ToggleButtons}">
-                <views1:ToggleButtons />
+                <views:ToggleButtons />
+            </TabItem>
+            <!--  TOOL BARS  -->
+            <TabItem Header="ToolBars">
+                <views:ToolBar />
             </TabItem>
             <!--  TOOLTIPS  -->
             <TabItem Header="{DynamicResource Tooltips}">
-                <views1:Tooltips />
+                <views:Tooltips />
             </TabItem>
             <!--  MODAL  -->
             <TabItem Header="Modal">
@@ -294,14 +313,6 @@
                         Style="{StaticResource Lbl}" />
 
                 </Grid>
-            </TabItem>
-            <!--  RICH TEXT BOX  -->
-            <TabItem Header="Rich Text box">
-                <views1:RichTextBoxes />
-            </TabItem>
-            <!--  TOOL BARS  -->
-            <TabItem Header="ToolBars">
-                <views1:ToolBar />
             </TabItem>
         </TabControl>
         <Button

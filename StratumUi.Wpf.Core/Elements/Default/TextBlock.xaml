@@ -10,4 +10,46 @@
         <Setter Property="TextWrapping" Value="Wrap" />
         <Setter Property="TextAlignment" Value="Center" />
     </Style>
+
+    <Style x:Key="TextBlock.Heading" TargetType="TextBlock">
+        <Setter Property="Foreground" Value="{StaticResource Dg2}" />
+        <Setter Property="Padding" Value="0" />
+        <Setter Property="Margin" Value="0" />
+    </Style>
+
+    <Style
+        x:Key="TextBlock.H1"
+        BasedOn="{StaticResource TextBlock.Heading}"
+        TargetType="{x:Type TextBlock}">
+        <Setter Property="FontSize" Value="36" />
+        <Setter Property="FontWeight" Value="Black" />
+    </Style>
+    <Style
+        x:Key="TextBlock.H2"
+        BasedOn="{StaticResource TextBlock.Heading}"
+        TargetType="{x:Type TextBlock}">
+        <Setter Property="FontSize" Value="24" />
+        <Setter Property="FontWeight" Value="Bold" />
+    </Style>
+    <Style
+        x:Key="TextBlock.H3"
+        BasedOn="{StaticResource TextBlock.Heading}"
+        TargetType="{x:Type TextBlock}">
+        <Setter Property="FontSize" Value="18" />
+        <Setter Property="FontWeight" Value="SemiBold" />
+    </Style>
+    <Style
+        x:Key="TextBlock.H4"
+        BasedOn="{StaticResource TextBlock.Heading}"
+        TargetType="{x:Type TextBlock}">
+        <Setter Property="FontSize" Value="14" />
+        <Setter Property="FontWeight" Value="SemiBold" />
+    </Style>
+    <Style
+        x:Key="TextBlock.H5"
+        BasedOn="{StaticResource TextBlock.Heading}"
+        TargetType="{x:Type TextBlock}">
+        <Setter Property="FontSize" Value="12" />
+        <Setter Property="FontWeight" Value="SemiBold" />
+    </Style>
 </ResourceDictionary>

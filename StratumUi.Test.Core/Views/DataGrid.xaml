@@ -4,15 +4,29 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    d:DesignHeight="300"
+    xmlns:vm="clr-namespace:StratumUi.Test.Core.ViewModel"
+    d:DesignHeight="500"
     d:DesignWidth="300"
     mc:Ignorable="d">
+    <UserControl.DataContext>
+        <vm:DataGridViewModel />
+    </UserControl.DataContext>
     <Grid>
-        <DataGrid>
+        <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding Persons}">
             <DataGrid.Columns>
-                <DataGridTextColumn Width="*" Header="Column 1" />
-                <DataGridTextColumn Width="*" Header="Column 2" />
-                <DataGridTextColumn Width="*" Header="Column 3" />
+                <DataGridCheckBoxColumn
+                    Width="Auto"
+                    ElementStyle="{StaticResource {x:Type CheckBox}}"
+                    Binding="{Binding IsMale}"
+                    Header="Column 1" />
+                <DataGridTextColumn
+                    Width="*"
+                    Binding="{Binding Surname}"
+                    Header="Column 2" />
+                <DataGridTextColumn
+                    Width="*"
+                    Header="Column 3"
+                    Binding="{Binding Age}" />
             </DataGrid.Columns>
         </DataGrid>
     </Grid>

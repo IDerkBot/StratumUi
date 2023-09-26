@@ -17,6 +17,8 @@ public class Badge : ContentControl
 
     public event EventHandler? Click;
 
+    #region Content
+
     public new string Content
     {
         get => (string)GetValue(ContentProperty);
@@ -25,6 +27,10 @@ public class Badge : ContentControl
 
     public new static readonly DependencyProperty ContentProperty =
         DependencyProperty.Register(nameof(Content), typeof(string), typeof(Badge), new PropertyMetadata("Badge"));
+
+    #endregion Content
+
+    #region ShowButton
 
     public bool ShowButton
     {
@@ -35,6 +41,10 @@ public class Badge : ContentControl
     public static readonly DependencyProperty ShowButtonProperty =
         DependencyProperty.Register(nameof(ShowButton), typeof(bool), typeof(Badge), new PropertyMetadata(false));
 
+    #endregion ShowButton
+
+    #region ShowIcon
+
     public bool ShowIcon
     {
         get => (bool)GetValue(ShowIconProperty);
@@ -43,6 +53,10 @@ public class Badge : ContentControl
 
     public static readonly DependencyProperty ShowIconProperty =
         DependencyProperty.Register(nameof(ShowIcon), typeof(bool), typeof(Badge), new PropertyMetadata(false));
+
+    #endregion ShowIcon
+
+    #region Icon
 
     public EIcons Icon
     {
@@ -53,6 +67,10 @@ public class Badge : ContentControl
     public static readonly DependencyProperty IconProperty =
         DependencyProperty.Register(nameof(Icon), typeof(EIcons), typeof(Badge), new PropertyMetadata(EIcons.Folder));
 
+    #endregion Icon
+
+    #region ButtonIcon
+
     public EIcons ButtonIcon
     {
         get => (EIcons)GetValue(ButtonIconProperty);
@@ -61,6 +79,10 @@ public class Badge : ContentControl
 
     public static readonly DependencyProperty ButtonIconProperty =
         DependencyProperty.Register(nameof(ButtonIcon), typeof(EIcons), typeof(Badge), new PropertyMetadata(EIcons.Close));
+
+    #endregion ButtonIcon
+
+    #region Color
 
     public BadgeColor Color
     {
@@ -71,6 +93,10 @@ public class Badge : ContentControl
     public static readonly DependencyProperty ColorProperty =
         DependencyProperty.Register(nameof(Color), typeof(BadgeColor), typeof(Badge), new PropertyMetadata(BadgeColor.White));
 
+    #endregion Color
+
+    #region Type
+
     public BadgeType Type
     {
         get => (BadgeType)GetValue(TypeProperty);
@@ -79,6 +105,8 @@ public class Badge : ContentControl
 
     public static readonly DependencyProperty TypeProperty =
         DependencyProperty.Register(nameof(Type), typeof(BadgeType), typeof(Badge), new PropertyMetadata(BadgeType.Filled));
+
+    #endregion Type
         
     private void ClickOnBtn_OnClick(object sender, RoutedEventArgs e)
     {

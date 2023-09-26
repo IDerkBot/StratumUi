@@ -4,8 +4,52 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:vm="clr-namespace:StratumUi.Test.Core.ViewModel"
     d:DesignHeight="300"
+    d:DataContext="{d:DesignInstance vm:HomeViewModel}"
     d:DesignWidth="300"
     mc:Ignorable="d">
-    <Grid />
+    <WrapPanel Orientation="Horizontal">
+        <WrapPanel.Resources>
+            <Style TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
+                <Setter Property="Margin" Value="10" />
+                <Setter Property="Width" Value="150" />
+                <Setter Property="Command" Value="{Binding MoveCommand}" />
+            </Style>
+        </WrapPanel.Resources>
+        <Button Content="Badges" CommandParameter="1" />
+        <Button Content="Breadcrumbs" CommandParameter="2" />
+        <Button Content="Buttons" CommandParameter="3" />
+        <Button Content="CheckBoxes" CommandParameter="4" />
+        <Button Content="Colors" CommandParameter="5" />
+        <Button Content="ComboBoxes" CommandParameter="6" />
+        <Button Content="DataGrid" CommandParameter="7" />
+        <Button Content="DatePicker" CommandParameter="8" />
+        <Button Content="Dialogs" CommandParameter="9" />
+        <Button Content="DisplayControls" CommandParameter="10" />
+        <Button Content="DocumentViewer" CommandParameter="11" />
+        <Button Content="Expanders" CommandParameter="12" />
+        <Button Content="GroupBox" CommandParameter="13" />
+        <Button Content="IconPack" CommandParameter="14" />
+        <Button Content="InlineAlerts" CommandParameter="15" />
+        <Button Content="Labels" CommandParameter="16" />
+        <Button Content="ListViews" CommandParameter="17" />
+        <Button Content="PasswordBox" CommandParameter="18" />
+        <Button Content="ProgressBar" CommandParameter="19" />
+        <Button Content="RadioButton" CommandParameter="20" />
+        <Button Content="Rangers" CommandParameter="21" />
+        <Button Content="RichTextBoxes" CommandParameter="22" />
+        <Button Content="ScrollsBars" CommandParameter="23" />
+        <Button Content="Shadows" CommandParameter="24" />
+        <Button Content="Sliders" CommandParameter="25" />
+        <Button Content="Steppers" CommandParameter="26" />
+        <Button Content="Switchers" CommandParameter="27" />
+        <Button Content="Tables" CommandParameter="28" />
+        <Button Content="Tabs" CommandParameter="29" />
+        <Button Content="TextBox" CommandParameter="30" />
+        <Button Content="TimeInputs" CommandParameter="31" />
+        <Button Content="ToggleButtons" CommandParameter="32" />
+        <Button Content="ToolBar" CommandParameter="33" />
+        <Button Content="Tooltips" CommandParameter="34" />
+    </WrapPanel>
 </UserControl>
