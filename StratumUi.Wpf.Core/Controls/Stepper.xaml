@@ -6,8 +6,8 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     x:Name="Root"
-    Height="40"
     MinWidth="150"
+    MinHeight="40"
     d:DesignHeight="40"
     d:DesignWidth="150"
     Background="Transparent"
@@ -22,14 +22,18 @@
     </UserControl.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="40" />
+            <ColumnDefinition Width="Auto" />
             <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="40" />
+            <ColumnDefinition Width="Auto" />
         </Grid.ColumnDefinitions>
 
         <RepeatButton
             Grid.Column="0"
+            Width="{Binding ElementName=Root, Path=Height}"
+            Height="{Binding ElementName=Root, Path=Height}"
             Padding="5"
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Stretch"
             attachedProperties:Button.Icon="Minus"
             attachedProperties:Hint.CornerRadius="6,0,0,6"
             Click="BtnMinus_OnClick"
@@ -62,7 +66,11 @@
         </Border>
         <RepeatButton
             Grid.Column="2"
+            Width="{Binding ElementName=Root, Path=Height}"
+            Height="{Binding ElementName=Root, Path=Height}"
             Padding="5"
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Stretch"
             attachedProperties:Button.Icon="Plus"
             attachedProperties:Hint.CornerRadius="0,6,6,0"
             Click="BtnPlus_OnClick"

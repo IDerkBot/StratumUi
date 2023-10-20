@@ -81,6 +81,10 @@
             <TabItem Header="{DynamicResource Expanders}">
                 <views:Expanders />
             </TabItem>
+            <!--  FLOAT PANEL  -->
+            <TabItem Header="{DynamicResource Expanders}">
+                <views:FloatPanelView />
+            </TabItem>
             <!--  GROUP BOX  -->
             <TabItem Header="GroupBox">
                 <views:GroupBox />
