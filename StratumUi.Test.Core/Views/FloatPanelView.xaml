@@ -1,0 +1,189 @@
+﻿<UserControl
+    x:Class="StratumUi.Test.Core.Views.FloatPanelView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:StratumUi.Test.Core.Views"
+    xmlns:controls="clr-namespace:StratumUi.Wpf.Core.Controls;assembly=StratumUi.Wpf.Core"
+    d:DesignHeight="500"
+    d:DesignWidth="500"
+    Loaded="FloatPanelView_OnLoaded"
+    mc:Ignorable="d">
+    <Grid>
+        <controls:FloatPanel
+            Position="TopLeft"
+            OffsetLeft="100"
+            Header="Тестовый заголовок">
+            <controls:FloatPanel.Content>
+                <StackPanel HorizontalAlignment="Center" Orientation="Vertical">
+                    <Label Content="1" Foreground="White" />
+                    <Label Content="2" Foreground="White" />
+                    <Label Content="3" Foreground="White" />
+                    <Label Content="4" Foreground="White" />
+                    <Label Content="5" Foreground="White" />
+                    <Label Content="6" Foreground="White" />
+                    <Label Content="7" Foreground="White" />
+                    <Label Content="8" Foreground="White" />
+                    <Label Content="9" Foreground="White" />
+                    <Label Content="10" Foreground="White" />
+                    <Label Content="11" Foreground="White" />
+                    <Label Content="12" Foreground="White" />
+                    <Label Content="13" Foreground="White" />
+                    <Label Content="14" Foreground="White" />
+                    <Label Content="15" Foreground="White" />
+                    <Label Content="16" Foreground="White" />
+                    <Label Content="17" Foreground="White" />
+                </StackPanel>
+            </controls:FloatPanel.Content>
+        </controls:FloatPanel>
+
+        <controls:FloatPanel
+            OffsetLeft="100"
+            Position="BottomLeft"
+            Header="Тестовый заголовок">
+            <controls:FloatPanel.Content>
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="1" Foreground="White" />
+                    <Label Content="2" Foreground="White" />
+                    <Label Content="3" Foreground="White" />
+                    <Label Content="4" Foreground="White" />
+                    <Label Content="5" Foreground="White" />
+                    <Label Content="6" Foreground="White" />
+                    <Label Content="7" Foreground="White" />
+                    <Label Content="8" Foreground="White" />
+                    <Label Content="9" Foreground="White" />
+                    <Label Content="10" Foreground="White" />
+                    <Label Content="11" Foreground="White" />
+                    <Label Content="12" Foreground="White" />
+                    <Label Content="13" Foreground="White" />
+                    <Label Content="14" Foreground="White" />
+                    <Label Content="15" Foreground="White" />
+                    <Label Content="16" Foreground="White" />
+                    <Label Content="17" Foreground="White" />
+                </StackPanel>
+            </controls:FloatPanel.Content>
+        </controls:FloatPanel>
+
+        <controls:FloatPanel
+            Position="TopRight"
+            HeaderAlignment="Right"
+            OffsetRight="100"
+            Header="Тестовый заголовок">
+            <controls:FloatPanel.Content>
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="1" Foreground="White" />
+                    <Label Content="2" Foreground="White" />
+                    <Label Content="3" Foreground="White" />
+                    <Label Content="4" Foreground="White" />
+                    <Label Content="5" Foreground="White" />
+                    <Label Content="6" Foreground="White" />
+                    <Label Content="7" Foreground="White" />
+                    <Label Content="8" Foreground="White" />
+                    <Label Content="9" Foreground="White" />
+                    <Label Content="10" Foreground="White" />
+                    <Label Content="11" Foreground="White" />
+                    <Label Content="12" Foreground="White" />
+                    <Label Content="13" Foreground="White" />
+                    <Label Content="14" Foreground="White" />
+                    <Label Content="15" Foreground="White" />
+                    <Label Content="16" Foreground="White" />
+                    <Label Content="17" Foreground="White" />
+                </StackPanel>
+            </controls:FloatPanel.Content>
+        </controls:FloatPanel>
+
+        <controls:FloatPanel
+            OffsetRight="100"
+            HeaderAlignment="Right"
+            Header="Тестовый заголовок"
+            Position="BottomRight">
+            <controls:FloatPanel.Content>
+                <StackPanel Margin="10" Orientation="Vertical">
+                    <CheckBox
+                        Margin="0,10"
+                        Content="Калибровка по смещению"
+                        Foreground="White" />
+                    <CheckBox
+                        Margin="0,10"
+                        Foreground="White"
+                        Content="Калибровка по усилению" />
+                </StackPanel>
+            </controls:FloatPanel.Content>
+        </controls:FloatPanel>
+
+        <controls:FloatPanel
+            OffsetTop="100"
+            Position="LeftTop"
+            Header="Тестовый заголовок">
+            <controls:FloatPanel.Content>
+                <StackPanel Margin="10" Orientation="Vertical">
+                    <CheckBox
+                        Margin="0,10"
+                        Content="Калибровка по смещению"
+                        Foreground="White" />
+                    <CheckBox
+                        Margin="0,10"
+                        Foreground="White"
+                        Content="Калибровка по усилению" />
+                </StackPanel>
+            </controls:FloatPanel.Content>
+        </controls:FloatPanel>
+
+        <controls:FloatPanel
+            HeaderAlignment="Right"
+            OffsetBottom="100"
+            Header="Тестовый заголовок"
+            Position="LeftBottom">
+            <controls:FloatPanel.Content>
+                <StackPanel Margin="10" Orientation="Vertical">
+                    <CheckBox
+                        Margin="0,10"
+                        Content="Калибровка по смещению"
+                        Foreground="White" />
+                    <CheckBox
+                        Margin="0,10"
+                        Foreground="White"
+                        Content="Калибровка по усилению" />
+                </StackPanel>
+            </controls:FloatPanel.Content>
+        </controls:FloatPanel>
+
+        <controls:FloatPanel
+            OffsetTop="100"
+            Position="RightTop"
+            Header="Тестовый заголовок">
+            <controls:FloatPanel.Content>
+                <StackPanel Margin="10" Orientation="Vertical">
+                    <CheckBox
+                        Margin="0,10"
+                        Content="Калибровка по смещению"
+                        Foreground="White" />
+                    <CheckBox
+                        Margin="0,10"
+                        Foreground="White"
+                        Content="Калибровка по усилению" />
+                </StackPanel>
+            </controls:FloatPanel.Content>
+        </controls:FloatPanel>
+
+        <controls:FloatPanel
+            HeaderAlignment="Right"
+            OffsetBottom="100"
+            Header="Тестовый заголовок"
+            Position="RightBottom">
+            <controls:FloatPanel.Content>
+                <StackPanel Margin="10" Orientation="Vertical">
+                    <CheckBox
+                        Margin="0,10"
+                        Content="Калибровка по смещению"
+                        Foreground="White" />
+                    <CheckBox
+                        Margin="0,10"
+                        Foreground="White"
+                        Content="Калибровка по усилению" />
+                </StackPanel>
+            </controls:FloatPanel.Content>
+        </controls:FloatPanel>
+    </Grid>
+</UserControl>
